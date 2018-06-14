@@ -12,7 +12,10 @@ import {
   MatListModule,
   MatGridListModule,
   MatCardModule,
-  MatMenuModule
+  MatMenuModule,
+  MatInputModule,
+  MatSelectModule,
+  MatFormFieldModule,
 } from '@angular/material';
 import {RouterModule,
   Routes
@@ -25,7 +28,10 @@ import { AnalyticsComponent } from './analytics/analytics.component';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
 import { LogoutComponent } from './logout/logout.component';
 import { LoginComponent } from './login/login.component';
-import { HeaderComponent } from './header/header.component';
+import {FormsModule} from '@angular/forms';
+import { CompanyListComponent } from './company-list/company-list.component';
+
+
 
 const appRoutes: Routes = [
   {
@@ -74,22 +80,29 @@ const appRoutes: Routes = [
     UserSettingsComponent,
     LogoutComponent,
     LoginComponent,
-    HeaderComponent
+    CompanyListComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     LayoutModule,
+    MatInputModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    BrowserAnimationsModule,
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
+    MatFormFieldModule,
+    MatSelectModule,
     RouterModule.forRoot(appRoutes),
-
+    FormsModule,
+    // ReactiveFormsModule,
+    // FormGroup,
+    // FormBuilder,
+    // Validators
   ],
   providers: [],
   bootstrap: [AppComponent]
