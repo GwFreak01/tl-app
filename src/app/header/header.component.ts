@@ -1,20 +1,15 @@
-// import { Component } from '@angular/core';
-// import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
-// import { Observable } from 'rxjs';
-// import { map } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
 
 import {MediaMatcher} from '@angular/cdk/layout';
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-
+import {ChangeDetectorRef, OnDestroy} from '@angular/core';
 @Component({
-  selector: 'app-navigation',
-  templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.css']
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css']
 })
-export class NavigationComponent implements OnInit, OnDestroy {
-  mobileQuery: MediaQueryList;
+export class HeaderComponent implements OnDestroy {
 
-  opened: boolean;
+  mobileQuery: MediaQueryList;
 
   fillerNav = Array(50).fill(0).map((_, i) => `Nav Item ${i + 1}`);
 
@@ -33,10 +28,8 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
-  ngOnInit() {
-    this.opened = true;
-  }
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
+
 }

@@ -4,10 +4,19 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule,
-  MatIconModule, MatListModule, MatGridListModule, MatCardModule,
-  MatMenuModule } from '@angular/material';
-import {RouterModule, Routes} from '@angular/router';
+import {
+  MatToolbarModule,
+  MatButtonModule,
+  MatSidenavModule,
+  MatIconModule,
+  MatListModule,
+  MatGridListModule,
+  MatCardModule,
+  MatMenuModule
+} from '@angular/material';
+import {RouterModule,
+  Routes
+} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CompaniesComponent } from './companies/companies.component';
@@ -16,6 +25,7 @@ import { AnalyticsComponent } from './analytics/analytics.component';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
 import { LogoutComponent } from './logout/logout.component';
 import { LoginComponent } from './login/login.component';
+import { HeaderComponent } from './header/header.component';
 
 const appRoutes: Routes = [
   {
@@ -63,7 +73,8 @@ const appRoutes: Routes = [
     AnalyticsComponent,
     UserSettingsComponent,
     LogoutComponent,
-    LoginComponent
+    LoginComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
