@@ -37,14 +37,12 @@
 <h1 class="mat-h1">Companies</h1>
 <mat-grid-list cols="2">
   <mat-grid-tile>
-    <mat-list>
-      <mat-list-item> Pepper </mat-list-item>
-      <mat-list-item> Salt </mat-list-item>
-      <mat-list-item> Paprika </mat-list-item>
-    </mat-list>
+    <mat-card class="dashboard-card">
+      <app-company-list></app-company-list>
+    </mat-card>
   </mat-grid-tile>
   <mat-grid-tile>
-    <mat-card>
+    <mat-card class="dashboard-card">
       <mat-form-field>
         <input matInput placeholder="Company Name">
       </mat-form-field>
