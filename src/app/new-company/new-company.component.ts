@@ -88,7 +88,6 @@ export class NewCompanyComponent implements OnInit {
 
   onAddCompany(form: NgForm) {
     const company: Company = {
-      _id: null,
       companyName: form.value.companyName,
       companyAddress: {
         street1: form.value.street1,
