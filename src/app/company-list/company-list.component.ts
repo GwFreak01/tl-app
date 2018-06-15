@@ -5,6 +5,7 @@ import {
 } from '@angular/core';
 
 import {Company} from '../models/company.model';
+import {CompaniesService} from '../services/companies/companies.service';
 
 @Component({
   selector: 'app-company-list',
@@ -148,9 +149,10 @@ export class CompanyListComponent implements OnInit {
 
   @Input() companies: Company[] = [];
 
-  constructor() { }
+  constructor(public companyService: CompaniesService) { }
 
   ngOnInit() {
+    this.companies = this.companyService.getCompanies();
   }
 
 }

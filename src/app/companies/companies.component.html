@@ -38,12 +38,12 @@
 <mat-grid-list [cols]="2">
   <mat-grid-tile>
     <mat-card class="dashboard-card">
-      <app-company-list [companies]="storedCompanies"></app-company-list>
+      <app-company-list></app-company-list>
     </mat-card>
   </mat-grid-tile>
   <mat-grid-tile>
     <mat-card class="dashboard-card">
-      <app-new-company (companyCreated)="onCompanyAdded($event)"></app-new-company>
+      <app-new-company></app-new-company>
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>

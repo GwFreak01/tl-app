@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import {Company} from '../models/company.model';
 @Component({
   selector: 'app-companies',
   templateUrl: './companies.component.html',
@@ -8,15 +7,11 @@ import {Company} from '../models/company.model';
 })
 export class CompaniesComponent implements OnInit {
 
-  storedCompanies: Company[] = [];
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  onCompanyAdded(company) {
-    this.storedCompanies.push(company);
-  }
 }
 

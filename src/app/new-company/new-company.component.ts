@@ -1,12 +1,13 @@
 import {
   Component,
   OnInit,
-  EventEmitter,
-  Output
+  // EventEmitter,
+  // Output
 } from '@angular/core';
 
 import {Company} from '../models/company.model';
 import {NgForm} from '@angular/forms';
+import {CompaniesService} from '../services/companies/companies.service';
 
 
 @Component({
@@ -76,9 +77,11 @@ export class NewCompanyComponent implements OnInit {
   // stateVar = '';
   // zipcodeVar = '';
 
-  @Output() companyCreated = new EventEmitter<Company>();
+  // @Output() companyCreated = new EventEmitter<Company>();
 
-  constructor() { }
+  constructor(public companiesService: CompaniesService) {
+
+  }
 
   ngOnInit() {
   }
@@ -95,8 +98,9 @@ export class NewCompanyComponent implements OnInit {
       }
 
     };
-    this.companyCreated.emit(company);
+    // this.companyCreated.emit(company);
     console.log(company);
+    this.companiesService.addCompany(company);
   }
 
 }
