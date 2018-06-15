@@ -1,7 +1,7 @@
 console.log("Serverside Start up");
 const debug = require('debug')("node-angular");
-const http = require('http');
-const app = require('./backend/app');
+const http = require("http");
+const app = require("./backend/app");
 
 const normalizePort = val => {
   var port = parseInt(val, 10);
@@ -40,8 +40,10 @@ const onListening = () => {
   debug("Listening on " + bind);
 };
 const port = normalizePort(process.env.PORT || 3000);
+console.log(port, process.env.PORT);
 app.set('port', port);
 
 const server = http.createServer(app);
-
+server.on("error", onError);
+server.on("listening", onListening);
 server.listen(port);

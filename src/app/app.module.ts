@@ -21,6 +21,7 @@ import {
 import {RouterModule,
   Routes
 } from '@angular/router';
+import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CompaniesComponent } from './companies/companies.component';
@@ -107,6 +108,7 @@ const appRoutes: Routes = [
     // FormGroup,
     // FormBuilder,
     // Validators
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

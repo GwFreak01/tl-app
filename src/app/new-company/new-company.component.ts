@@ -88,6 +88,7 @@ export class NewCompanyComponent implements OnInit {
 
   onAddCompany(form: NgForm) {
     const company: Company = {
+      _id: null,
       companyName: form.value.companyName,
       companyAddress: {
         street1: form.value.street1,
@@ -99,8 +100,12 @@ export class NewCompanyComponent implements OnInit {
 
     };
     // this.companyCreated.emit(company);
+    if (form.invalid) {
+      return;
+    }
     console.log(company);
     this.companiesService.addCompany(company);
+    form.resetForm();
   }
 
 }

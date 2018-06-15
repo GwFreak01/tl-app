@@ -1,7 +1,7 @@
 import {
   Component,
   OnInit,
-  Input, OnDestroy
+  OnDestroy
 } from '@angular/core';
 
 import {Company} from '../models/company.model';
@@ -153,9 +153,10 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   constructor(public companyService: CompaniesService) { }
 
   ngOnInit() {
-    this.companies = this.companyService.getCompanies();
-    this.companiesSub = this.companyService.getCompanyUpdateListener().subscribe((companies: Company[]) => {
-      this.companies = companies;
+    this.companyService.getCompanies();
+    this.companiesSub = this.companyService.getCompanyUpdateListener()
+      .subscribe((companies: Company[]) => {
+        this.companies = companies;
     });
   }
 
