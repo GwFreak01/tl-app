@@ -18,9 +18,9 @@ export class CompaniesService {
   getCompanies() {
     // return [...this.companies];
     this.http.get<{ message: string, companies: any }>('http://localhost:3000/api/companies')
-      .pipe(map(companyData => {
+      .pipe(map((companyData) => {
 
-        return companyData.companies.map(company => {
+        return companyData.companies.map((company) => {
           return {
             id: company._id,
             companyName: company.companyName,
@@ -46,6 +46,7 @@ export class CompaniesService {
   getCompanyUpdateListener() {
     return this.companiesUpdated.asObservable();
   }
+
   addCompany(newCompany: Company) {
     const company: Company = newCompany;
     this.http.post<{ message: string }>('http://localhost:3000/api/companies', company)
@@ -55,5 +56,15 @@ export class CompaniesService {
         this.companiesUpdated.next([...this.companies]);
       });
 
+  }
+
+  deleteCompany(companyId: string) {
+    this.http.delete('http://localhost:3000/api/companies/' + companyId)
+      .subscribe(() => {
+        const updatedCompanies = this.companies.filter(company => company.id !== companyId);
+        this.companies = updatedCompanies;
+        this.companiesUpdated.next([...this.companies]);
+        console.log('Deleted!');
+      });
   }
 }
