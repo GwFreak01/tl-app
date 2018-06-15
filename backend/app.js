@@ -4,15 +4,6 @@ const app = express();
 const bodyParser = require('body-parser');
 
 
-// app.use((req, res, next) => {
-//   console.log("First Middleware");
-//   next();
-// });
-//
-// app.use((req, res, next) => {
-//   res.send("Hello from Express");
-// });
-
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({extended: false}));
 
