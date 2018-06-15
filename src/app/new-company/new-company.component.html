@@ -1,60 +1,90 @@
-<mat-form-field>
-  <input
-    matInput
-    placeholder="Company Name"
-    [(ngModel)]="companyNameVar">
-</mat-form-field>
+<form
+  (submit)="onAddCompany(companyForm)"
+  #companyForm="ngForm">
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Company Name"
+      name="companyName"
+      #companyName="ngModel"
+      ngModel
+      required>
+    <mat-error *ngIf="companyForm.invalid">Please enter company name</mat-error>
+  </mat-form-field>
 
-<div>
-  <mat-form-field>
-    <input
-      matInput
-      placeholder="Street 1"
-      [(ngModel)]="street1Var">
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <input
-      matInput
-      placeholder="Street 2"
-      [(ngModel)]="street2Var">
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <input
-      matInput
-      placeholder="City"
-      [(ngModel)]="cityVar">
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <mat-select
-      placeholder="State"
-      [(ngModel)]="stateVar">
-      <mat-option
-        *ngFor="let state of states"
-        [value]="state.label"
-      >
-        {{state.value}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <input matInput placeholder="Zipcode" [(ngModel)]="zipcodeVar">
-  </mat-form-field>
-</div>
+  <div>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Street 1"
+        name="street1"
+        #street1="ngModel"
+        ngModel
+        required>
+      <mat-error *ngIf="companyForm.invalid">Please enter street name</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Street 2"
+        name="street2"
+        ngModel>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="City"
+        name="city"
+        #city="ngModel"
+        ngModel
+        required>
+      <mat-error *ngIf="companyForm.invalid">Please enter city name</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-select
+        placeholder="State"
+        name="state"
+        #state="ngModel"
+        ngModel
+        required>
+        <mat-option
+          *ngFor="let state of states"
+          [value]="state.label">
+          {{state.value}}
+        </mat-option>
 
-<hr>
-<button
-  mat-raised-button
-  (click)="onCancelCompany()"
-  color="warn">
-  Cancel
-</button>
-<button
-  mat-raised-button
-  (click)="onAddCompany()"
-  color="primary" >
-  Save Company
-</button>
+      </mat-select>
+      <mat-error *ngIf="companyForm.invalid">Please enter state</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Zipcode"
+        name="zipcode"
+        #zipcode="ngModel"
+        ngModel
+        required>
+      <mat-error *ngIf="companyForm.invalid">Please enter zipcode</mat-error>
+    </mat-form-field>
+  </div>
+
+  <hr>
+  <button
+    mat-raised-button
+    type="reset"
+    color="warn">
+    Cancel
+  </button>
+  <button class="submitButton"
+    mat-raised-button
+    type="submit"
+    color="primary" >
+    Save Company
+  </button>
+</form>
+
+

@@ -6,6 +6,9 @@ import {
 } from '@angular/core';
 
 import {Company} from '../models/company.model';
+import {NgForm} from '@angular/forms';
+
+
 @Component({
   selector: 'app-new-company',
   templateUrl: './new-company.component.html',
@@ -66,12 +69,12 @@ export class NewCompanyComponent implements OnInit {
     {label: 'WY', value: 'WY'}
   ];
 
-  companyNameVar = '';
-  street1Var = '';
-  street2Var = '';
-  cityVar = '';
-  stateVar = '';
-  zipcodeVar = '';
+  // companyNameVar = '';
+  // street1Var = '';
+  // street2Var = '';
+  // cityVar = '';
+  // stateVar = '';
+  // zipcodeVar = '';
 
   @Output() companyCreated = new EventEmitter<Company>();
 
@@ -80,15 +83,15 @@ export class NewCompanyComponent implements OnInit {
   ngOnInit() {
   }
 
-  onAddCompany() {
+  onAddCompany(form: NgForm) {
     const company: Company = {
-      companyName: this.companyNameVar,
+      companyName: form.value.companyName,
       companyAddress: {
-        street1: this.street1Var,
-        street2: this.street2Var,
-        city: this.cityVar,
-        state: this.stateVar,
-        zipcode: this.zipcodeVar
+        street1: form.value.street1,
+        street2: form.value.street2,
+        city: form.value.city,
+        state: form.value.state,
+        zipcode: form.value.zipcode
       }
 
     };
