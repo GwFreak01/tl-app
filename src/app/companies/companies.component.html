@@ -35,67 +35,15 @@
 <!--</form>-->
 <!--</div>-->
 <h1 class="mat-h1">Companies</h1>
-<mat-grid-list cols="2">
+<mat-grid-list [cols]="2">
   <mat-grid-tile>
     <mat-card class="dashboard-card">
-      <app-company-list></app-company-list>
+      <app-company-list [companies]="storedCompanies"></app-company-list>
     </mat-card>
   </mat-grid-tile>
   <mat-grid-tile>
     <mat-card class="dashboard-card">
-      <mat-form-field>
-        <input matInput placeholder="Company Name">
-      </mat-form-field>
-
-      <div>
-        <mat-form-field>
-          <input
-            matInput
-            placeholder="Street 1">
-        </mat-form-field>
-        <br>
-        <mat-form-field>
-          <input
-            matInput
-            placeholder="Street 2">
-        </mat-form-field>
-        <br>
-        <mat-form-field>
-          <input
-            matInput
-            placeholder="City">
-        </mat-form-field>
-        <br>
-        <mat-form-field>
-          <mat-select
-            placeholder="State">
-            <mat-option
-              *ngFor="let state of states"
-              [value]="state.label">
-              {{state.value}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <br>
-        <mat-form-field>
-          <input matInput placeholder="Zipcode">
-        </mat-form-field>
-      </div>
-
-      <hr>
-      <button
-        mat-raised-button
-        (click)="onCancelCompany()"
-        color="warn">
-        Cancel
-      </button>
-      <button
-        mat-raised-button
-        (click)="onAddCompany()"
-        color="primary" >
-        Save Company
-      </button>
-
+      <app-new-company (companyCreated)="onCompanyAdded($event)"></app-new-company>
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>

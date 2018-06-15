@@ -31,6 +31,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { LoginComponent } from './login/login.component';
 import {FormsModule} from '@angular/forms';
 import { CompanyListComponent } from './company-list/company-list.component';
+import { NewCompanyComponent } from './new-company/new-company.component';
 
 
 
@@ -82,6 +83,7 @@ const appRoutes: Routes = [
     LogoutComponent,
     LoginComponent,
     CompanyListComponent,
+    NewCompanyComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
+
 export class DashboardComponent {
   cards = [
     { title: 'Analytics', cols: 2, rows: 1 },
