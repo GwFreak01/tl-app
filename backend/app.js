@@ -9,9 +9,9 @@ mongoose.connect("mongodb+srv://gwfreak01:NfMTyV0Bg4rdaXm8@cluster0-s32lv.mongod
   .then(() => {
     console.log('Connected to database!');
   })
-  // .catch(() => {
-  //   console.log('Connection failed!');
-  // });
+  .catch(() => {
+    console.log('Connection failed!');
+  });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -49,62 +49,67 @@ app.post("/api/companies", (req, res, next) => {
 });
 
 app.get('/api/companies', (req, res, next) => {
-  const companies = [
-    {
-      _id: 'SMzgR7ptTbKB6d43v',
-      companyName: 'T&L',
-      companyAddress: {
-        street1: '265 Hollenbeck St.',
-        city: 'Rochester',
-        state: 'NY',
-        zipcode: '14621'
-      }
-    },
-    // {
-    //   _id: 'SMzgR7ptTbKB6d43v',
-    //   companyName: 'Monroe Plating',
-    //   companyAddress: {
-    //     street1: '265 Hollenbeck St.',
-    //     city: 'Rochester',
-    //     state: 'NY',
-    //     zipcode: '14621'
-    //   },
-    //   salesPerson: {
-    //     name: 'John Rowe',
-    //     email: 'jrowe@monroeplating.com',
-    //     phone: '585-544-5335',
-    //     status: true
-    //   },
-    //   qualityPerson: {
-    //     name: 'Rodney Olson',
-    //     email: 'rolson@monroeplating.com',
-    //     phone: '585-544-5335',
-    //     status: true
-    //   },
-    //   logisticsPerson: {
-    //     name: 'Cindy Poole',
-    //     email: 'cpoole@monroeplating.com',
-    //     phone: '585-544-5335',
-    //     status: true
-    //   },
-    //   itemDescription: 'Plating Services',
-    //   certification: [
-    //     {
-    //       certType: 'ISO9001',
-    //       expirationDate: '2016-09-11T00:00:00.000Z',
-    //       certNumber: 'US006178-1',
-    //       registrar: 'Bureau Veritas Certification'
-    //     }
-    //   ],
-    //   differentPerson: {
-    //     status: false
-    //   }
-    // },
-  ];
-  res.status(200).json({
-    message: 'Companies fetched successfully!',
-    companies: companies
-  });
+  // const companies = [
+  //   {
+  //     _id: 'SMzgR7ptTbKB6d43v',
+  //     companyName: 'T&L',
+  //     companyAddress: {
+  //       street1: '265 Hollenbeck St.',
+  //       city: 'Rochester',
+  //       state: 'NY',
+  //       zipcode: '14621'
+  //     }
+  //   },
+  //   // {
+  //   //   _id: 'SMzgR7ptTbKB6d43v',
+  //   //   companyName: 'Monroe Plating',
+  //   //   companyAddress: {
+  //   //     street1: '265 Hollenbeck St.',
+  //   //     city: 'Rochester',
+  //   //     state: 'NY',
+  //   //     zipcode: '14621'
+  //   //   },
+  //   //   salesPerson: {
+  //   //     name: 'John Rowe',
+  //   //     email: 'jrowe@monroeplating.com',
+  //   //     phone: '585-544-5335',
+  //   //     status: true
+  //   //   },
+  //   //   qualityPerson: {
+  //   //     name: 'Rodney Olson',
+  //   //     email: 'rolson@monroeplating.com',
+  //   //     phone: '585-544-5335',
+  //   //     status: true
+  //   //   },
+  //   //   logisticsPerson: {
+  //   //     name: 'Cindy Poole',
+  //   //     email: 'cpoole@monroeplating.com',
+  //   //     phone: '585-544-5335',
+  //   //     status: true
+  //   //   },
+  //   //   itemDescription: 'Plating Services',
+  //   //   certification: [
+  //   //     {
+  //   //       certType: 'ISO9001',
+  //   //       expirationDate: '2016-09-11T00:00:00.000Z',
+  //   //       certNumber: 'US006178-1',
+  //   //       registrar: 'Bureau Veritas Certification'
+  //   //     }
+  //   //   ],
+  //   //   differentPerson: {
+  //   //     status: false
+  //   //   }
+  //   // },
+  // ];
+  Company.find()
+    .then(documents => {
+      console.log('Server : ' , documents);
+      res.status(200).json({
+        message: 'Companies fetched successfully!',
+        companies: documents
+      });
+    });
+
 });
 
 module.exports = app;

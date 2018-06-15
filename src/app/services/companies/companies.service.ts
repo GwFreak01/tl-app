@@ -3,6 +3,8 @@ import {Company} from '../../../../backend/models/company.model';
 import {Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 
+import {map} from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,10 +17,27 @@ export class CompaniesService {
 
   getCompanies() {
     // return [...this.companies];
-    this.http.get<{ message: string, companies: Company[] }>('http://localhost:3000/api/companies')
-      .subscribe((companyData) => {
-        console.log(companyData.companies);
-        this.companies = companyData.companies;
+    this.http.get<{ message: string, companies: any }>('http://localhost:3000/api/companies')
+      .pipe(map(companyData => {
+
+        return companyData.companies.map(company => {
+          return {
+            id: company._id,
+            companyName: company.companyName,
+            companyAddress: {
+              id: company.companyAddress._id,
+              street1: company.companyAddress.street1,
+              street2: company.companyAddress.street2,
+              city: company.companyAddress.city,
+              state: company.companyAddress.state,
+              zipcode: company.companyAddress.zipcode
+            }
+          };
+        });
+      }))
+      .subscribe((transformedCompanies) => {
+        console.log('Transformed : ', transformedCompanies);
+        this.companies = transformedCompanies;
         this.companiesUpdated.next([...this.companies]);
 
       });
