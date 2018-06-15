@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Company} from '../../models/company.model';
+import {Company} from '../../../../backend/models/company.model';
 import {Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 

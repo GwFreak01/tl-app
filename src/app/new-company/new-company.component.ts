@@ -5,7 +5,7 @@ import {
   // Output
 } from '@angular/core';
 
-import {Company} from '../models/company.model';
+import {Company} from '../../../backend/models/company.model';
 import {NgForm} from '@angular/forms';
 import {CompaniesService} from '../services/companies/companies.service';
 

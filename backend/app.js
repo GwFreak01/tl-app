@@ -1,8 +1,10 @@
 const express = require("express");
 
+
 const app = express();
 const bodyParser = require('body-parser');
 
+const Company = require('./models/company');
 
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({extended: false}));
@@ -19,8 +21,17 @@ app.use((req, res, next) => {
 });
 
 app.post("/api/companies", (req, res, next) => {
-  const company = req.body;
-  console.log(company);
+  const company = new Company({
+    companyName: req.body.companyName,
+    companyAddress: {
+      street1: req.body.street1,
+      street2: req.body.street2,
+      city: req.body.city,
+      state: req.body.state,
+      zipcode: req.body.zipcode,
+    },
+  });
+  console.log(company.companyName);
   res.status(201).json({
     message: 'Company added successfully'
   });

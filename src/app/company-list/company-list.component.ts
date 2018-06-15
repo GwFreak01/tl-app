@@ -4,7 +4,7 @@ import {
   OnDestroy
 } from '@angular/core';
 
-import {Company} from '../models/company.model';
+import {Company} from '../../../backend/models/company.model';
 import {CompaniesService} from '../services/companies/companies.service';
 import {Subscription} from 'rxjs';
 @Component({
