@@ -1,18 +1,18 @@
 import {
   Component,
   OnInit,
-  Input
+  Input, OnDestroy
 } from '@angular/core';
 
 import {Company} from '../models/company.model';
 import {CompaniesService} from '../services/companies/companies.service';
-
+import {Subscription} from 'rxjs';
 @Component({
   selector: 'app-company-list',
   templateUrl: './company-list.component.html',
   styleUrls: ['./company-list.component.css']
 })
-export class CompanyListComponent implements OnInit {
+export class CompanyListComponent implements OnInit, OnDestroy {
 
   // companies = [
   //
@@ -147,12 +147,20 @@ export class CompanyListComponent implements OnInit {
   //   }
   // ];
 
-  @Input() companies: Company[] = [];
+  companies: Company[] = [];
+  private companiesSub: Subscription;
 
   constructor(public companyService: CompaniesService) { }
 
   ngOnInit() {
     this.companies = this.companyService.getCompanies();
+    this.companiesSub = this.companyService.getCompanyUpdateListener().subscribe((companies: Company[]) => {
+      this.companies = companies;
+    });
+  }
+
+  ngOnDestroy() {
+    this.companiesSub.unsubscribe();
   }
 
 }
