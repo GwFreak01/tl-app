@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 });
 
 app.post("/api/companies", (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   const company = new Company({
     companyName: req.body.companyName,
     companyAddress: {
@@ -39,19 +39,21 @@ app.post("/api/companies", (req, res, next) => {
       zipcode: req.body.companyAddress.zipcode,
     },
   });
-
-
-  console.log(req.body.companyAddress.street2, company);
-  company.save();
-  res.status(201).json({
-    message: 'Company added successfully'
+  // console.log(req.body.companyAddress.street2, company);
+  company.save().then((createdCompany) => {
+    console.log(createdCompany);
+    res.status(201).json({
+      message: 'Company added successfully',
+      companyId: createdCompany._id
+    });
   });
+
 });
 
 app.get('/api/companies', (req, res, next) => {
   Company.find()
     .then((documents) => {
-      console.log('Server : ' , documents);
+      // console.log('Server : ' , documents);
       res.status(200).json({
         message: 'Companies fetched successfully!',
         companies: documents
@@ -60,10 +62,10 @@ app.get('/api/companies', (req, res, next) => {
 });
 
 app.delete('/api/companies/:id', (req, res, next) => {
-  console.log(req.params.id);
+  // console.log(req.params.id);
   Company.deleteOne({_id: req.params.id}).then((result) => {
 
-    console.log(result);
+    // console.log(result);
     res.status(200).json({
       message: 'Post deleted!'
     })

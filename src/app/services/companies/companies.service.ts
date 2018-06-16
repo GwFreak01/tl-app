@@ -49,9 +49,11 @@ export class CompaniesService {
 
   addCompany(newCompany: Company) {
     const company: Company = newCompany;
-    this.http.post<{ message: string }>('http://localhost:3000/api/companies', company)
+    this.http.post<{ message: string , companyId: string}>('http://localhost:3000/api/companies', company)
       .subscribe((res) => {
-        console.log(res.message);
+        const companyId = res.companyId;
+        company.id = companyId;
+        // console.log(res.message);
         this.companies.push(company);
         this.companiesUpdated.next([...this.companies]);
       });
