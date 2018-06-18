@@ -1,7 +1,10 @@
 import {
   Component,
   OnInit,
-  OnDestroy
+  OnDestroy,
+  EventEmitter,
+  Input,
+  Output
 } from '@angular/core';
 
 import {Company} from '../../../backend/models/company.model';
@@ -14,8 +17,12 @@ import {Subscription} from 'rxjs';
 })
 export class CompanyListComponent implements OnInit, OnDestroy {
 
+
+  @Output() editMode =  new EventEmitter<boolean>();
   companies: Company[] = [];
   private companiesSub: Subscription;
+
+
 
   constructor(public companyService: CompaniesService) { }
 
@@ -29,6 +36,11 @@ export class CompanyListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.companiesSub.unsubscribe();
+  }
+
+  onEdit(companyId, editSelected: boolean) {
+    console.log('CompanyListEdit', companyId);
+    this.editMode.emit(editSelected);
   }
 
   onDelete(companyId: string) {

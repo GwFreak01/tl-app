@@ -9,6 +9,7 @@ import {CompaniesComponent} from '../companies/companies.component';
 import {UserSettingsComponent} from '../user-settings/user-settings.component';
 import {AnalyticsComponent} from '../analytics/analytics.component';
 import {LogoutComponent} from '../logout/logout.component';
+import {NewCompanyComponent} from '../new-company/new-company.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'companies',
     component: CompaniesComponent
+  },
+  {
+    path: 'edit/:companyId',
+    component: NewCompanyComponent
   },
   {
     path: 'events',

@@ -1,13 +1,12 @@
 import {
   Component,
   OnInit,
-  // EventEmitter,
-  // Output
 } from '@angular/core';
 
 import {Company} from '../../../backend/models/company.model';
 import {NgForm} from '@angular/forms';
 import {CompaniesService} from '../services/companies/companies.service';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 
 
 @Component({
@@ -70,23 +69,28 @@ export class NewCompanyComponent implements OnInit {
     {label: 'WY', value: 'WY'}
   ];
 
-  // companyNameVar = '';
-  // street1Var = '';
-  // street2Var = '';
-  // cityVar = '';
-  // stateVar = '';
-  // zipcodeVar = '';
+  private mode = 'create';
+  private companyId: string;
+  public company: Company;
 
-  // @Output() companyCreated = new EventEmitter<Company>();
-
-  constructor(public companiesService: CompaniesService) {
+  constructor(public companiesService: CompaniesService, public route: ActivatedRoute, public router: Router) {
 
   }
 
   ngOnInit() {
+    this.route.paramMap.subscribe((paramMap: ParamMap) => {
+      if (paramMap.has('companyId')) {
+        this.mode = 'edit';
+        this.companyId = paramMap.get('companyId');
+        this.company = this.companiesService.getCompany(this.companyId);
+      } else {
+        this.mode = 'create';
+        this.companyId = null;
+      }
+    });
   }
 
-  onAddCompany(form: NgForm) {
+  onSaveCompany(form: NgForm) {
     const company: Company = {
       id: null,
       companyName: form.value.companyName,
@@ -98,15 +102,21 @@ export class NewCompanyComponent implements OnInit {
         state: form.value.state,
         zipcode: form.value.zipcode
       }
-
     };
-    // this.companyCreated.emit(company);
     if (form.invalid) {
       return;
     }
-    console.log(company);
-    this.companiesService.addCompany(company);
+    if (this.mode === 'create') {
+      console.log(company);
+      this.companiesService.addCompany(company);
+    } else {
+      this.companiesService.updateCompany(this.companyId, company);
+
+    }
+
     form.resetForm();
   }
+
+
 
 }

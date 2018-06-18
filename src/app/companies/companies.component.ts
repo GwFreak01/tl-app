@@ -8,10 +8,22 @@ import { Component, OnInit } from '@angular/core';
 export class CompaniesComponent implements OnInit {
 
 
-  constructor() { }
+  addButtonSelect = false;
+  editButtonSelect = false;
+
+  constructor() {
+
+  }
 
   ngOnInit() {
   }
 
+  onAddButtonSelect() {
+    this.addButtonSelect = true;
+  }
+
+  onEditCompany($event) {
+    console.log('Company Comp: On Edit');
+  }
 }
 

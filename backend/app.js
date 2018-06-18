@@ -47,7 +47,28 @@ app.post("/api/companies", (req, res, next) => {
       companyId: createdCompany._id
     });
   });
+});
 
+app.put('/api/companies/:id', (req, res, next) => {
+  const company = new Company({
+    _id: req.params.id,
+    companyName: req.body.companyName,
+    companyAddress: {
+      // _id: req.body.companyAddress.id,
+      street1: req.body.companyAddress.street1,
+      street2: req.body.companyAddress.street2,
+      city: req.body.companyAddress.city,
+      state: req.body.companyAddress.state,
+      zipcode: req.body.companyAddress.zipcode,
+    },
+  });
+  console.log(company);
+  Company.updateOne({_id: req.params.id}, company).then((updatedCompany) => {
+    console.log(updatedCompany);
+    res.status(200).json({
+      message: "Update Successful"
+    })
+  })
 });
 
 app.get('/api/companies', (req, res, next) => {
@@ -59,6 +80,20 @@ app.get('/api/companies', (req, res, next) => {
         companies: documents
       });
     });
+});
+
+app.get('/api/companies/:id', (req, res, next) => {
+  Post.findById(req.params.id).then(company => {
+    if (company) {
+      res.status(200).json({
+        company
+      })
+    } else {
+      res.status(404).json({
+        message: 'Company not found!'
+      })
+    }
+  });
 });
 
 app.delete('/api/companies/:id', (req, res, next) => {

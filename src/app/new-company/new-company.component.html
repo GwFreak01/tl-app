@@ -1,5 +1,5 @@
 <form
-  (submit)="onAddCompany(companyForm)"
+  (submit)="onSaveCompany(companyForm)"
   #companyForm="ngForm">
   <mat-form-field>
     <input
@@ -7,9 +7,12 @@
       placeholder="Company Name"
       name="companyName"
       #companyName="ngModel"
-      ngModel
+      [ngModel]="company.companyName"
       required>
-    <mat-error *ngIf="companyForm.invalid">Please enter company name</mat-error>
+    <mat-error
+      *ngIf="companyForm.invalid">
+      Please enter company name
+    </mat-error>
   </mat-form-field>
 
   <div>
@@ -19,7 +22,7 @@
         placeholder="Street 1"
         name="street1"
         #street1="ngModel"
-        ngModel
+        [ngModel]="company.companyAddress.street1"
         required>
       <mat-error *ngIf="companyForm.invalid">Please enter street name</mat-error>
     </mat-form-field>
@@ -29,7 +32,7 @@
         matInput
         placeholder="Street 2"
         name="street2"
-        ngModel>
+        [ngModel]="company.companyAddress.street2">
     </mat-form-field>
     <br>
     <mat-form-field>
@@ -38,7 +41,7 @@
         placeholder="City"
         name="city"
         #city="ngModel"
-        ngModel
+        [ngModel]="company.companyAddress.city"
         required>
       <mat-error *ngIf="companyForm.invalid">Please enter city name</mat-error>
     </mat-form-field>
@@ -48,7 +51,7 @@
         placeholder="State"
         name="state"
         #state="ngModel"
-        ngModel
+        [ngModel]="company.companyAddress.state"
         required>
         <mat-option
           *ngFor="let state of states"
@@ -66,7 +69,7 @@
         placeholder="Zipcode"
         name="zipcode"
         #zipcode="ngModel"
-        ngModel
+        [ngModel]="company.companyAddress.zipcode"
         required>
       <mat-error *ngIf="companyForm.invalid">Please enter zipcode</mat-error>
     </mat-form-field>

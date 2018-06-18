@@ -47,6 +47,11 @@ export class CompaniesService {
     return this.companiesUpdated.asObservable();
   }
 
+  getCompany(id: string) {
+    return {...this.companies.find(company => company.id === id)};
+    // return this.http.get('http://localhost:3000/api/companies/' + id);
+  }
+
   addCompany(newCompany: Company) {
     const company: Company = newCompany;
     this.http.post<{ message: string , companyId: string}>('http://localhost:3000/api/companies', company)
@@ -60,6 +65,15 @@ export class CompaniesService {
 
   }
 
+  updateCompany(id: string, company: Company) {
+    const updatedCompany: Company = company;
+    this.http.put('http://localhost:3000/api/companies/' + id, company)
+      .subscribe(response => {
+        const updatedCompanies = [...this.companies];
+        console.log(response);
+
+      });
+  }
   deleteCompany(companyId: string) {
     this.http.delete('http://localhost:3000/api/companies/' + companyId)
       .subscribe(() => {

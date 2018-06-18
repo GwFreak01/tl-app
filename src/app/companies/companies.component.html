@@ -1,53 +1,25 @@
-<!--<div id="newCompanyForm">-->
-<!--<form [formGroup]="myForm">-->
-<!--Value: {{myForm.value | json}}-->
-<!--<hr>-->
-<!--<mat-form-field>-->
-<!--<input matInput placeholder="Company Name" formControlName="companyName">-->
-<!--</mat-form-field>-->
-
-<!--<div formGroupName="companyAddress">-->
-<!--<mat-form-field>-->
-<!--<input matInput placeholder="Street 1" formControlName="street1">-->
-<!--</mat-form-field>-->
-
-<!--<mat-form-field>-->
-<!--<input matInput placeholder="Street 2" formControlName="street2">-->
-<!--</mat-form-field>-->
-
-<!--<mat-form-field>-->
-<!--<input matInput placeholder="City" formControlName="city">-->
-<!--</mat-form-field>-->
-
-<!--<mat-form-field>-->
-<!--<mat-select placeholder="State" formControlName="state">-->
-<!--<mat-option *ngFor="let state of states" [value]="state.label">-->
-<!--{{state.value}}-->
-<!--</mat-option>-->
-<!--</mat-select>-->
-<!--</mat-form-field>-->
-
-<!--<mat-form-field>-->
-<!--<input matInput placeholder="Zipcode" formControlName="zipcode">-->
-<!--</mat-form-field>-->
-
-<!--</div>-->
-<!--</form>-->
-<!--</div>-->
-<h1 class="mat-h1">Companies</h1>
+<h1 class="mat-h1">Companies
+  <button class="submitButton"
+          mat-raised-button
+          color="primary" (click)="onAddButtonSelect()" >
+    ADD NEW
+  </button>
+  <button class="submitButton"
+          mat-raised-button
+          type="submit"
+          color="primary" >
+    SEND EMAIL
+  </button></h1>
 <mat-grid-list [cols]="2">
   <mat-grid-tile>
     <mat-card class="dashboard-card">
-      <app-company-list></app-company-list>
+      <app-company-list (editMode)="onEditCompany($event)"></app-company-list>
     </mat-card>
   </mat-grid-tile>
   <mat-grid-tile>
-    <mat-card class="dashboard-card">
+    <mat-card class="dashboard-card" *ngIf="addButtonSelect">
       <app-new-company></app-new-company>
     </mat-card>
+
   </mat-grid-tile>
 </mat-grid-list>
-
-
-
-<!--Value: {{myForm.value | json}}-->
