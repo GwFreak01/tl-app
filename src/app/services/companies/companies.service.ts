@@ -66,12 +66,16 @@ export class CompaniesService {
   }
 
   updateCompany(id: string, company: Company) {
+    console.log('CompaniesServe.updateCompany: ', company);
     const updatedCompany: Company = company;
     this.http.put('http://localhost:3000/api/companies/' + id, company)
       .subscribe(response => {
+        console.log('CompaniesServe.updateCompany.response: ', response);
         const updatedCompanies = [...this.companies];
-        console.log(response);
-
+        const oldCompanyIndex = updatedCompanies.findIndex(c => c.id === updatedCompany.id);
+        updatedCompanies[oldCompanyIndex] = company;
+        this.companies = updatedCompanies;
+        this.companiesUpdated.next([...this.companies]);
       });
   }
   deleteCompany(companyId: string) {
