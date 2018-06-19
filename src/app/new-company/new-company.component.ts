@@ -127,7 +127,7 @@ export class NewCompanyComponent implements OnInit {
       this.companiesService.addCompany(company);
     } else {
       this.companiesService.updateCompany(this.companyId, company);
-      this.router.navigate(['/companies']);
+      // this.router.navigate(['/companies']);
 
 
     }

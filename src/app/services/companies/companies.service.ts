@@ -4,6 +4,7 @@ import {Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 
 import {map} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class CompaniesService {
   private companies: Company[] = [];
   private companiesUpdated = new Subject<Company[]>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private router: Router) { }
 
   getCompanies() {
     // return [...this.companies];
