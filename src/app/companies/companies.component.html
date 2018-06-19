@@ -11,12 +11,12 @@
     SEND EMAIL
   </button></h1>
 <mat-grid-list [cols]="2">
-  <mat-grid-tile>
+  <mat-grid-tile [rowspan]="4">
     <mat-card class="dashboard-card">
       <app-company-list (editMode)="onEditCompany($event)"></app-company-list>
     </mat-card>
   </mat-grid-tile>
-  <mat-grid-tile>
+  <mat-grid-tile [rowspan]="4">
     <mat-card class="dashboard-card" *ngIf="addButtonSelect">
       <app-new-company></app-new-company>
     </mat-card>

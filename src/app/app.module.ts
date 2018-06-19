@@ -18,6 +18,8 @@ import {
   MatFormFieldModule,
   MatExpansionModule,
   MatProgressSpinnerModule,
+  MatCheckboxModule,
+
 } from '@angular/material';
 import {RouterModule,
   Routes
@@ -106,6 +108,7 @@ const appRoutes: Routes = [
     MatSelectModule,
     MatExpansionModule,
     MatProgressSpinnerModule,
+    MatCheckboxModule,
     // RouterModule.forRoot(appRoutes),
     FormsModule,
     // ReactiveFormsModule,

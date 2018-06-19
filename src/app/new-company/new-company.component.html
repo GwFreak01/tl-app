@@ -4,7 +4,9 @@
   (submit)="onSaveCompany(companyForm)"
   #companyForm="ngForm"
   *ngIf="!isLoading">
-  <mat-form-field>
+  <h4>Company Information</h4>
+
+  <mat-form-field class="fieldCompanyName">
     <input
       matInput
       placeholder="Company Name"
@@ -19,7 +21,7 @@
   </mat-form-field>
 
   <div>
-    <mat-form-field>
+    <mat-form-field class="fieldStreet1">
       <input
         matInput
         placeholder="Street 1"
@@ -29,8 +31,8 @@
         required>
       <mat-error *ngIf="companyForm.invalid">Please enter street name</mat-error>
     </mat-form-field>
-    <br>
-    <mat-form-field>
+    <!--<br>-->
+    <mat-form-field class="fieldStreet2">
       <input
         matInput
         placeholder="Street 2"
@@ -38,7 +40,7 @@
         [ngModel]="company?.companyAddress.street2">
     </mat-form-field>
     <br>
-    <mat-form-field>
+    <mat-form-field class="fieldCity">
       <input
         matInput
         placeholder="City"
@@ -48,8 +50,8 @@
         required>
       <mat-error *ngIf="companyForm.invalid">Please enter city name</mat-error>
     </mat-form-field>
-    <br>
-    <mat-form-field>
+    <!--<br>-->
+    <mat-form-field class="fieldState">
       <mat-select
         placeholder="State"
         name="state"
@@ -66,7 +68,7 @@
       <mat-error *ngIf="companyForm.invalid">Please enter state</mat-error>
     </mat-form-field>
     <br>
-    <mat-form-field>
+    <mat-form-field class="fieldZipcode">
       <input
         matInput
         placeholder="Zipcode"
@@ -78,6 +80,125 @@
     </mat-form-field>
   </div>
 
+  <br>
+  <div class="salesPersonSection">
+    <h4>Sales Contact</h4>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="First, Last"
+        name="salesName"
+        #zipcode="ngModel"
+        [ngModel]="company.salesPerson?.name"
+        required>
+      <mat-error *ngIf="companyForm.invalid">Please enter Sales name</mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field class="fieldSalesEmail">
+      <input
+        matInput
+        placeholder="Email"
+        name="salesEmail"
+        #zipcode="ngModel"
+        [ngModel]="company.salesPerson?.email"
+        required>
+      <mat-error *ngIf="companyForm.invalid">Please enter Sales email</mat-error>
+    </mat-form-field>
+
+    <br>
+    <mat-form-field class="fieldSalesPhone">
+      <input
+        matInput
+        placeholder="XXX-XXX-XXXX"
+        name="salesPhone"
+        #zipcode="ngModel"
+        [ngModel]="company.salesPerson?.phone"
+        required>
+      <mat-error *ngIf="companyForm.invalid">Please enter Sales phone</mat-error>
+    </mat-form-field>
+
+    <mat-checkbox class="fieldCheckbox">Receive Quarterly Performance Reports</mat-checkbox>
+  </div>
+
+  <div class="qualityPersonSection">
+    <h4>Quality Contact</h4>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="First, Last"
+        name="qualityName"
+        #zipcode="ngModel"
+        [ngModel]="company.qualityPerson?.name"
+        required>
+      <mat-error *ngIf="companyForm.invalid">Please enter Quality name</mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field class="fieldQualityEmail">
+      <input
+        matInput
+        placeholder="Email"
+        name="qualityEmail"
+        #zipcode="ngModel"
+        [ngModel]="company.qualityPerson?.email"
+        required>
+      <mat-error *ngIf="companyForm.invalid">Please enter Quality email</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="fieldQualityPhone">
+      <input
+        matInput
+        placeholder="XXX-XXX-XXXX"
+        name="qualityPhone"
+        #zipcode="ngModel"
+        [ngModel]="company.qualityPerson?.phone"
+        required>
+      <mat-error *ngIf="companyForm.invalid">Please enter Quality phone</mat-error>
+    </mat-form-field>
+
+    <mat-checkbox class="fieldCheckbox">Receive Quarterly Performance Reports</mat-checkbox>
+  </div>
+
+  <div class="logisticsPersonSection">
+    <h4>Logistics Contact</h4>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="First, Last"
+        name="qualityName"
+        #zipcode="ngModel"
+        [ngModel]="company.logisticsPerson?.name"
+        required>
+      <mat-error *ngIf="companyForm.invalid">Please enter Logistics name</mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field class="fieldLogisticsEmail">
+      <input
+        matInput
+        placeholder="Email"
+        name="logisticsEmail"
+        #zipcode="ngModel"
+        [ngModel]="company.logisticsPerson?.email"
+        required>
+      <mat-error *ngIf="companyForm.invalid">Please enter Logistics email</mat-error>
+    </mat-form-field>
+
+    <br>
+    <mat-form-field class="fieldLogisticsPhone">
+      <input
+        matInput
+        placeholder="XXX-XXX-XXXX"
+        name="logisticsPhone"
+        #zipcode="ngModel"
+        [ngModel]="company.logisticsPerson?.phone"
+        required>
+      <mat-error *ngIf="companyForm.invalid">Please enter Logistics phone</mat-error>
+    </mat-form-field>
+
+    <mat-checkbox class="fieldCheckbox">Receive Quarterly Performance Reports</mat-checkbox>
+  </div>
   <hr>
   <button
     mat-raised-button

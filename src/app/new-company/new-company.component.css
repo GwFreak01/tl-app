@@ -5,3 +5,18 @@ button.submitButton {
 mat-spinner {
   margin: auto;
 }
+
+h4 {
+  text-align: center;
+}
+
+
+
+.fieldSalesEmail,
+.fieldQualityEmail,
+.fieldLogisticsEmail,
+.fieldStreet2,
+.fieldState{
+  margin-left: 8px;
+}
+
