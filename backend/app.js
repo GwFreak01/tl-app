@@ -83,11 +83,12 @@ app.get('/api/companies', (req, res, next) => {
 });
 
 app.get('/api/companies/:id', (req, res, next) => {
-  Post.findById(req.params.id).then(company => {
+  console.log(req.params.id);
+  Company.findById(req.params.id).then(company => {
     if (company) {
-      res.status(200).json({
-        company
-      })
+      console.log("Server.Company: ", company);
+      res.status(200).json(
+        company)
     } else {
       res.status(404).json({
         message: 'Company not found!'

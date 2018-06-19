@@ -48,8 +48,19 @@ export class CompaniesService {
   }
 
   getCompany(id: string) {
-    return {...this.companies.find(company => company.id === id)};
-    // return this.http.get('http://localhost:3000/api/companies/' + id);
+    // return {...this.companies.find(company => company.id === id)};
+    return this.http.get<{
+        _id: string,
+        companyName: string,
+        companyAddress: {
+          _id: string;
+          street1: string,
+          street2: string,
+          city: string,
+          state: string,
+          zipcode: string
+        }
+    }>('http://localhost:3000/api/companies/' + id);
   }
 
   addCompany(newCompany: Company) {

@@ -82,7 +82,23 @@ export class NewCompanyComponent implements OnInit {
       if (paramMap.has('companyId')) {
         this.mode = 'edit';
         this.companyId = paramMap.get('companyId');
-        this.company = this.companiesService.getCompany(this.companyId);
+        // this.company = this.companiesService.getCompany(this.companyId);
+        console.log('OnInitCompanyID: ', this.mode, this.companyId);
+        this.companiesService.getCompany(this.companyId).subscribe(companyData => {
+          console.log('OnInit: ', companyData);
+          console.log('OnInit: ', companyData._id);
+          this.company = {
+            id: companyData._id,
+            companyName: companyData.companyName,
+            companyAddress: {
+              id: companyData.companyAddress._id,
+              street1: companyData.companyAddress.street1,
+              street2: companyData.companyAddress.street2,
+              city: companyData.companyAddress.city,
+              state: companyData.companyAddress.state,
+              zipcode: companyData.companyAddress.zipcode}
+          };
+        });
       } else {
         this.mode = 'create';
         this.companyId = null;
@@ -111,6 +127,8 @@ export class NewCompanyComponent implements OnInit {
       this.companiesService.addCompany(company);
     } else {
       this.companiesService.updateCompany(this.companyId, company);
+      this.router.navigate(['/companies']);
+
 
     }
 
