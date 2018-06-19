@@ -1,3 +1,7 @@
 button.submitButton {
   float: right;
 }
+
+mat-spinner {
+  margin: auto;
+}

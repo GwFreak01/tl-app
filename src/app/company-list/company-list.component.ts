@@ -20,6 +20,7 @@ export class CompanyListComponent implements OnInit, OnDestroy {
 
   @Output() editMode =  new EventEmitter<boolean>();
   companies: Company[] = [];
+  isLoading = false;
   private companiesSub: Subscription;
 
 
@@ -27,9 +28,11 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   constructor(public companyService: CompaniesService) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.companyService.getCompanies();
     this.companiesSub = this.companyService.getCompanyUpdateListener()
       .subscribe((companies: Company[]) => {
+        this.isLoading = false;
         this.companies = companies;
     });
   }

@@ -1,6 +1,9 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
 <form
   (submit)="onSaveCompany(companyForm)"
-  #companyForm="ngForm">
+  #companyForm="ngForm"
+  *ngIf="!isLoading">
   <mat-form-field>
     <input
       matInput
@@ -89,5 +92,4 @@
     Save Company
   </button>
 </form>
-
 

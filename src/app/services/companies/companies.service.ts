@@ -74,6 +74,7 @@ export class CompaniesService {
         // console.log(res.message);
         this.companies.push(company);
         this.companiesUpdated.next([...this.companies]);
+        this.router.navigate(['/companies']);
       });
 
   }
@@ -89,6 +90,7 @@ export class CompaniesService {
         updatedCompanies[oldCompanyIndex] = company;
         this.companies = updatedCompanies;
         this.companiesUpdated.next([...this.companies]);
+        this.router.navigate(['/companies']);
       });
   }
   deleteCompany(companyId: string) {

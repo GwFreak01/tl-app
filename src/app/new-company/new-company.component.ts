@@ -72,6 +72,7 @@ export class NewCompanyComponent implements OnInit {
   private mode = 'create';
   private companyId: string;
   public company: Company;
+  isLoading = false;
 
   constructor(public companiesService: CompaniesService, public route: ActivatedRoute, public router: Router) {
 
@@ -82,9 +83,11 @@ export class NewCompanyComponent implements OnInit {
       if (paramMap.has('companyId')) {
         this.mode = 'edit';
         this.companyId = paramMap.get('companyId');
+        this.isLoading = true;
         // this.company = this.companiesService.getCompany(this.companyId);
         console.log('OnInitCompanyID: ', this.mode, this.companyId);
         this.companiesService.getCompany(this.companyId).subscribe(companyData => {
+          this.isLoading = false;
           console.log('OnInit: ', companyData);
           console.log('OnInit: ', companyData._id);
           this.company = {
@@ -122,6 +125,7 @@ export class NewCompanyComponent implements OnInit {
     if (form.invalid) {
       return;
     }
+    this.isLoading = true;
     if (this.mode === 'create') {
       console.log(company);
       this.companiesService.addCompany(company);
