@@ -1,15 +1,51 @@
-<p>
-  login works!
-</p>
 <mat-card>
-  <mat-spinner *ngIf=""></mat-spinner>
-  <form (submit)="loginUser($event)">
-    <!--<img src="src/assets/TL_Logo.jpg">-->
-    <div class="container">
-      <input type="text" autocomplete="off" placeholder="Username" id="username">
-      <input type="password" autocomplete="off" placeholder="Password" id="password">
-      <button type="submit" id="submit">Submit</button>
-    </div>
+  <mat-spinner
+    *ngIf="isLoading"></mat-spinner>
+  <form
+    *ngIf="!isLoading"
+    (submit)="onLogin(loginForm)"
+    #loginForm="ngForm">
+    <img src="../assets/TL_Logo.png">
+    <br>
 
+    <mat-form-field
+      class="fieldUsername">
+      <input
+        matInput
+        type="text"
+        placeholder="Username"
+        name="username"
+        ngModel
+        #usernameInput="ngModel"
+        required>
+      <mat-error
+        *ngIf="usernameInput.invalid">
+        Please enter valid username
+      </mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field
+      class="fieldPassword">
+      <input
+        matInput
+        type="password"
+        placeholder="Password"
+        name="password"
+        ngModel
+        #passwordInput="ngModel"
+        required>
+      <mat-error
+        *ngIf="passwordInput.invalid">
+        Please enter valid password
+      </mat-error>
+    </mat-form-field>
+    <br>
+    <button
+      class="submitButton"
+      mat-raised-button
+      type="submit"
+      color="primary">
+      LOGIN
+    </button>
   </form>
 </mat-card>

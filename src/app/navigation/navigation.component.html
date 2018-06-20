@@ -11,18 +11,31 @@
                  [(opened)]="opened">
       <mat-nav-list>
         <div class="loggedInOptions" *ngIf="loggedInStatus">
-          <a mat-list-item href="/dashboard">DASHBOARD</a>
-          <a mat-list-item href="/companies">COMPANIES</a>
-          <a mat-list-item href="/events">EVENTS</a>
-          <a mat-list-item href="/analytics">ANALYTICS</a>
-          <a mat-list-item href="/user-settings">USER SETTINGS</a>
-          <a mat-list-item href="/logout">LOGOUT</a>
+          <a mat-button routerLink="/dashboard" routerLinkActive="mat-accent">DASHBOARD</a>
+          <br>
+          <a mat-button routerLink="/companies" routerLinkActive="mat-accent">COMPANIES</a>
+          <br>
+          <a mat-button routerLink="/events" routerLinkActive="mat-accent">EVENTS</a>
+          <br>
+          <a mat-button routerLink="/analytics" routerLinkActive="mat-accent">ANALYTICS</a>
+          <br>
+          <a mat-button routerLink="/user-settings" routerLinkActive="mat-accent">USER SETTINGS</a>
+          <br>
+          <a mat-button routerLink="/logout" routerLinkActive="mat-accent">LOGOUT</a>
+
         </div>
 
         <div class="loggedOutOptions" *ngIf="!loggedInStatus">
-          <a mat-list-item href="/login">LOGIN</a>
+          <a mat-button routerLink="/login" routerLinkActive="mat-accent">LOGIN</a>
         </div>
       </mat-nav-list>
+
+      <!--<ul>-->
+        <!--<li>-->
+          <!--<a mat-button routerLink="/login" routerLinkActive="mat-accent">LOGIN</a>-->
+        <!--</li>-->
+      <!--</ul>-->
+
     </mat-sidenav>
 
     <mat-sidenav-content>
