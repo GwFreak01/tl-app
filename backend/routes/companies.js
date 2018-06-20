@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Company = require('../models/company');
+const checkAuth = require('../middleware/check-auth');
 
 
-router.post('', (req, res, next) => {
+router.post('', checkAuth, (req, res, next) => {
   console.log(req.body);
   const company = new Company({
     companyName: req.body.companyName,
@@ -59,7 +60,7 @@ router.post('', (req, res, next) => {
   });
 });
 
-router.put('/:id', (req, res, next) => {
+router.put('/:id', checkAuth, (req, res, next) => {
   const company = new Company({
     _id: req.params.id,
     companyName: req.body.companyName,
@@ -81,7 +82,7 @@ router.put('/:id', (req, res, next) => {
   })
 });
 
-router.get('', (req, res, next) => {
+router.get('', checkAuth, (req, res, next) => {
   Company.find()
     .then((documents) => {
       // console.log('Server : ' , documents);
@@ -92,7 +93,7 @@ router.get('', (req, res, next) => {
     });
 });
 
-router.get('/:id', (req, res, next) => {
+router.get('/:id', checkAuth, (req, res, next) => {
   console.log(req.params.id);
   Company.findById(req.params.id).then(company => {
     if (company) {
@@ -107,7 +108,7 @@ router.get('/:id', (req, res, next) => {
   });
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', checkAuth, (req, res, next) => {
   // console.log(req.params.id);
   Company.deleteOne({_id: req.params.id}).then((result) => {
 
