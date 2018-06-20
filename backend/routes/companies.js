@@ -16,6 +16,40 @@ router.post('', (req, res, next) => {
       state: req.body.companyAddress.state,
       zipcode: req.body.companyAddress.zipcode,
     },
+    salesPerson: {
+      name: req.body.salesPerson.name,
+      email: req.body.salesPerson.email,
+      phone: req.body.salesPerson.phone,
+      status: req.body.salesPerson.status,
+    },
+    qualityPerson: {
+      name: req.body.qualityPerson.name,
+      email: req.body.qualityPerson.email,
+      phone: req.body.qualityPerson.phone,
+      status: req.body.qualityPerson.status,
+    },
+    logisticsPerson: {
+      name: req.body.logisticsPerson.name,
+      email: req.body.logisticsPerson.email,
+      phone: req.body.logisticsPerson.phone,
+      status: req.body.logisticsPerson.status,
+    },
+    differentPerson: {
+      name: req.body.differentPerson.name,
+      email: req.body.differentPerson.email,
+      phone: req.body.differentPerson.phone,
+      status: req.body.differentPerson.status,
+    },
+    productDescription: req.body.productDescription,
+
+    certification: {
+      certType: req.body.certification.certType,
+      expirationDate: req.body.certification.expirationDate,
+      certNumber: req.body.certification.certNumber,
+      registrar: req.body.certification.registrar,
+      other: req.body.certification.other,
+      reason: req.body.certification.reason,
+    },
   });
   // console.log(req.body.companyAddress.street2, company);
   company.save().then((createdCompany) => {

@@ -103,7 +103,7 @@ export class CompaniesService {
       }
     }>('http://localhost:3000/api/companies/' + id);
   }
-
+// TODO: Fix Infinite Spinner on Add New Company
   addCompany(newCompany: Company) {
     const company: Company = newCompany;
     console.log('CompanyService.addCompany: ', company);

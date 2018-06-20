@@ -219,8 +219,12 @@ export class NewCompanyComponent implements OnInit {
     }
     this.isLoading = true;
     if (this.mode === 'create') {
+      console.log('Form Values: ', form.value);
       console.log('Create Company: ', company);
       this.companiesService.addCompany(company);
+      // this.isLoading = false;
+      // this.router.navigate(['/companies']);
+
     } else {
       this.companiesService.updateCompany(this.companyId, company);
       // this.router.navigate(['/companies']);
