@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 
 const companyAddress = mongoose.Schema({
   street1: {
@@ -26,28 +27,29 @@ const salesPerson = mongoose.Schema({
   name: String,
   email: String,
   phone: String,
-  status: Boolean
+  status: Boolean,
+
 });
 
 const qualityPerson = mongoose.Schema({
   name: String,
   email: String,
   phone: String,
-  status: Boolean
+  status: Boolean,
 });
 
 const logisticsPerson = mongoose.Schema({
   name: String,
   email: String,
   phone: String,
-  status: Boolean
+  status: Boolean,
 });
 
 const differentPerson = mongoose.Schema({
   name: String,
   email: String,
   phone: String,
-  status: Boolean
+  status: Boolean,
 });
 
 // TODO: Verify certification schema is ideal/valid
@@ -57,12 +59,15 @@ const certification = mongoose.Schema({
   certNumber: String,
   registrar: String,
   other: String,
-  reason: String
+  reason: String,
+  // required: true,
 });
-
+// TODO: Validate unique companies
 const companySchema = mongoose.Schema({
   companyName: {
     type: String,
+    // required: true,
+    // unique: true,
   },
   companyAddress: {
     type: companyAddress
@@ -80,11 +85,14 @@ const companySchema = mongoose.Schema({
     type: differentPerson
   },
   productDescription: {
-    type: String
+    type: String,
+    // required: true,
   },
   certification: {
     type: certification
   }
 });
+
+// companySchema.plugin(uniqueValidator());
 
 module.exports = mongoose.model('Company', companySchema);
