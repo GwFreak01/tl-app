@@ -1,0 +1,86 @@
+<mat-card>
+  <mat-spinner
+    *ngIf="isLoading"></mat-spinner>
+  <form
+    *ngIf="!isLoading"
+    (submit)="onCreateUser(createUserForm)"
+    #createUserForm="ngForm">
+    <img src="../assets/TL_Logo.png">
+    <br>
+
+    <mat-form-field
+      class="fieldUsername">
+      <input
+        matInput
+        type="text"
+        placeholder="Username"
+        name="username"
+        ngModel
+        #usernameInput="ngModel"
+        required>
+      <mat-error
+        *ngIf="usernameInput.invalid">
+        Please enter valid username
+      </mat-error>
+    </mat-form-field>
+
+    <br>
+    <mat-form-field
+      class="fieldEmail">
+      <input
+        matInput
+        type="email"
+        placeholder="Email"
+        name="email"
+        ngModel
+        #emailInput="ngModel"
+        required
+        email>
+      <mat-error
+        *ngIf="emailInput.invalid">
+        Please enter valid email
+      </mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field
+      class="fieldPassword">
+      <input
+        matInput
+        type="password"
+        placeholder="Password"
+        name="password"
+        ngModel
+        #passwordInput="ngModel"
+        required>
+      <mat-error
+        *ngIf="passwordInput.invalid">
+        Please enter valid password
+      </mat-error>
+    </mat-form-field>
+
+    <br>
+
+    <!--<mat-form-field-->
+      <!--class="fieldVerifyPassword">-->
+      <!--<input-->
+        <!--matInput-->
+        <!--type="password"-->
+        <!--placeholder="Verify Password"-->
+        <!--name="verifyPassword"-->
+        <!--ngModel-->
+        <!--#verifyPasswordInput="ngModel"-->
+        <!--required>-->
+      <!--<mat-error *ngIf="passwordInput!=verifyPasswordInput">-->
+        <!--Please enter the same password-->
+      <!--</mat-error>-->
+    <!--</mat-form-field>-->
+    <br>
+    <button
+      class="submitButton"
+      mat-raised-button
+      type="submit"
+      color="primary">
+      LOGIN
+    </button>
+  </form>
+</mat-card>

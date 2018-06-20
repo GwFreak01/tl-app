@@ -10,6 +10,7 @@ import {UserSettingsComponent} from '../user-settings/user-settings.component';
 import {AnalyticsComponent} from '../analytics/analytics.component';
 import {LogoutComponent} from '../auth/logout/logout.component';
 import {NewCompanyComponent} from '../new-company/new-company.component';
+import {CreateUserComponent} from '../auth/create-user/create-user.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,10 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
+  {
+    path: 'create-user',
+    component: CreateUserComponent
+  }
 
 ];
 

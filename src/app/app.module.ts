@@ -39,6 +39,7 @@ import {FormsModule} from '@angular/forms';
 import { CompanyListComponent } from './company-list/company-list.component';
 import { NewCompanyComponent } from './new-company/new-company.component';
 import {AppRoutingModule} from './app-routing/app-routing.module';
+import { CreateUserComponent } from './auth/create-user/create-user.component';
 
 
 
@@ -91,6 +92,7 @@ const appRoutes: Routes = [
     LoginComponent,
     CompanyListComponent,
     NewCompanyComponent,
+    CreateUserComponent,
   ],
   imports: [
     AppRoutingModule,
