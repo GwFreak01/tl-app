@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-create-user',
@@ -8,13 +9,21 @@ import {NgForm} from '@angular/forms';
 })
 export class CreateUserComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
 // TODO: Verify second password
   onCreateUser(createUserForm: NgForm) {
     console.log(createUserForm.value);
+    if (createUserForm.invalid) {
+      return;
+    } else {
+      this.authService.createUser(
+        createUserForm.value.username,
+        createUserForm.value.email,
+        createUserForm.value.password);
+    }
   }
 
 }
