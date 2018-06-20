@@ -37,6 +37,7 @@
         matInput
         placeholder="Street 2"
         name="street2"
+        #street2="ngModel"
         [ngModel]="company?.companyAddress.street2">
     </mat-form-field>
     <br>
@@ -88,9 +89,8 @@
         matInput
         placeholder="First, Last"
         name="salesName"
-        #zipcode="ngModel"
-        [ngModel]="company.salesPerson?.name"
-        required>
+        #salesName="ngModel"
+        [ngModel]="company?.salesPerson.name" required>
       <mat-error *ngIf="companyForm.invalid">Please enter Sales name</mat-error>
     </mat-form-field>
 
@@ -100,9 +100,8 @@
         matInput
         placeholder="Email"
         name="salesEmail"
-        #zipcode="ngModel"
-        [ngModel]="company.salesPerson?.email"
-        required>
+        #salesEmail="ngModel"
+        [ngModel]="company?.salesPerson.email" required>
       <mat-error *ngIf="companyForm.invalid">Please enter Sales email</mat-error>
     </mat-form-field>
 
@@ -112,13 +111,12 @@
         matInput
         placeholder="XXX-XXX-XXXX"
         name="salesPhone"
-        #zipcode="ngModel"
-        [ngModel]="company.salesPerson?.phone"
-        required>
+        #salesPhone="ngModel"
+        [ngModel]="company?.salesPerson.phone" required>
       <mat-error *ngIf="companyForm.invalid">Please enter Sales phone</mat-error>
     </mat-form-field>
 
-    <mat-checkbox class="fieldCheckbox">Receive Quarterly Performance Reports</mat-checkbox>
+    <mat-checkbox class="fieldSalesCheckbox">Receive Quarterly Performance Reports</mat-checkbox>
   </div>
 
   <div class="qualityPersonSection">
@@ -128,9 +126,8 @@
         matInput
         placeholder="First, Last"
         name="qualityName"
-        #zipcode="ngModel"
-        [ngModel]="company.qualityPerson?.name"
-        required>
+        #qualityName="ngModel"
+        [ngModel]="company?.qualityPerson.name" required>
       <mat-error *ngIf="companyForm.invalid">Please enter Quality name</mat-error>
     </mat-form-field>
 
@@ -140,9 +137,8 @@
         matInput
         placeholder="Email"
         name="qualityEmail"
-        #zipcode="ngModel"
-        [ngModel]="company.qualityPerson?.email"
-        required>
+        #qualityEmail="ngModel"
+        [ngModel]="company?.qualityPerson.email" required>
       <mat-error *ngIf="companyForm.invalid">Please enter Quality email</mat-error>
     </mat-form-field>
     <br>
@@ -151,13 +147,13 @@
         matInput
         placeholder="XXX-XXX-XXXX"
         name="qualityPhone"
-        #zipcode="ngModel"
-        [ngModel]="company.qualityPerson?.phone"
-        required>
+        #qualityPhone="ngModel"
+        [ngModel]="company?.qualityPerson.phone" required>
       <mat-error *ngIf="companyForm.invalid">Please enter Quality phone</mat-error>
     </mat-form-field>
 
-    <mat-checkbox class="fieldCheckbox">Receive Quarterly Performance Reports</mat-checkbox>
+    <mat-checkbox
+      class="fieldQualityCheckbox">Receive Quarterly Performance Reports</mat-checkbox>
   </div>
 
   <div class="logisticsPersonSection">
@@ -166,10 +162,9 @@
       <input
         matInput
         placeholder="First, Last"
-        name="qualityName"
-        #zipcode="ngModel"
-        [ngModel]="company.logisticsPerson?.name"
-        required>
+        name="logisticsName"
+        #logisticsName="ngModel"
+        [ngModel]="company?.logisticsPerson.name" required>
       <mat-error *ngIf="companyForm.invalid">Please enter Logistics name</mat-error>
     </mat-form-field>
 
@@ -179,9 +174,8 @@
         matInput
         placeholder="Email"
         name="logisticsEmail"
-        #zipcode="ngModel"
-        [ngModel]="company.logisticsPerson?.email"
-        required>
+        #logisticsEmail="ngModel"
+        [ngModel]="company?.logisticsPerson.email" required>
       <mat-error *ngIf="companyForm.invalid">Please enter Logistics email</mat-error>
     </mat-form-field>
 
@@ -191,13 +185,173 @@
         matInput
         placeholder="XXX-XXX-XXXX"
         name="logisticsPhone"
-        #zipcode="ngModel"
-        [ngModel]="company.logisticsPerson?.phone"
-        required>
+        #logisticsPhone="ngModel"
+        [ngModel]="company?.logisticsPerson.phone" required>
       <mat-error *ngIf="companyForm.invalid">Please enter Logistics phone</mat-error>
     </mat-form-field>
 
-    <mat-checkbox class="fieldCheckbox">Receive Quarterly Performance Reports</mat-checkbox>
+    <mat-checkbox
+      class="fieldLogisticsCheckbox">Receive Quarterly Performance Reports</mat-checkbox>
+  </div>
+
+  <div class="differentPersonSection">
+    <h4>Different Contact</h4>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="First, Last"
+        name="qualityName"
+        #qualityName="ngModel"
+        [ngModel]="company?.differentPerson.name" required>
+      <mat-error *ngIf="companyForm.invalid">Please enter Different name</mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field class="fieldDifferentEmail">
+      <input
+        matInput
+        placeholder="Email"
+        name="differentEmail"
+        #differentEmail="ngModel"
+        [ngModel]="company?.differentPerson.email" required>
+      <mat-error *ngIf="companyForm.invalid">Please enter Different email</mat-error>
+    </mat-form-field>
+
+    <br>
+
+
+    <mat-form-field class="fieldDifferentPhone">
+      <input
+        matInput
+        placeholder="XXX-XXX-XXXX"
+        name="differentPhone"
+        #differentPhone="ngModel"
+        [ngModel]="company?.differentPerson.phone" required>
+      <mat-error *ngIf="companyForm.invalid">Please enter Different phone</mat-error>
+    </mat-form-field>
+
+    <!--TODO: Validate when checkbox appears-->
+    <mat-checkbox
+      class="fieldDifferentCheckbox">Receive Quarterly Performance Reports</mat-checkbox>
+  </div>
+
+  <div class="descriptionSection">
+    <h4>Describe Product Manufactured/Provided</h4>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Enter Description"
+        name="productDescription"
+        #productDescription="ngModel"
+        ngModel
+        required>
+        <!--[ngModel]="company.productDescription"-->
+        <!--required>-->
+      <mat-error *ngIf="companyForm.invalid">Please enter product description</mat-error>
+    </mat-form-field>
+
+  </div>
+
+  <div class="certificationSection">
+    <h4>Certification</h4>
+    <mat-form-field class="fieldCertType">
+      <mat-select
+        placeholder="Select a Certification"
+        name="certType"
+        #certType="ngModel"
+        ngModel
+        required
+        [(value)]="selected">
+        <!--[ngModel]="company?.certification.certType"-->
+        <!--required>-->
+        <mat-option
+          *ngFor="let cert of certList"
+          [value]="cert.label">
+          {{cert.value}}
+        </mat-option>
+
+      </mat-select>
+      <mat-error *ngIf="companyForm.invalid">Please enter certification</mat-error>
+    </mat-form-field>
+
+    <!--TODO: Validate cert type if other-->
+    <mat-form-field class="fieldCertType" *ngIf="selected == 'Other'">
+      <input
+        matInput
+        placeholder="Certification Type"
+        name="certType"
+        #certType="ngModel"
+        ngModel
+        required>
+      <!--[ngModel]="company.productDescription"-->
+      <!--required>-->
+      <mat-error *ngIf="companyForm.invalid">Please enter certification type</mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      class="fieldCertNumber"
+      *ngIf="selected != 'None'">
+      <input
+        matInput
+        placeholder="Certification Number"
+        name="certNumber"
+        #certNumber="ngModel"
+        ngModel
+        required>
+      <!--[ngModel]="company.productDescription"-->
+      <!--required>-->
+      <mat-error *ngIf="companyForm.invalid">Please enter certification Number</mat-error>
+    </mat-form-field>
+
+
+
+    <mat-form-field
+      class="fieldCertRegistrar"
+      *ngIf="selected != 'None'">
+      <input
+        matInput
+        placeholder="Registrar Name"
+        name="certRegistrar"
+        #certRegistrar="ngModel"
+        ngModel
+        required>
+      <!--[ngModel]="company.productDescription"-->
+      <!--required>-->
+      <mat-error *ngIf="companyForm.invalid">Please enter Registrar Number</mat-error>
+    </mat-form-field>
+
+    <!--TODO: Validate Expiration Date-->
+    <mat-form-field class="fieldExpirationDate" *ngIf="selected != 'None'">
+      <input
+        matInput
+        [matDatepicker]="picker"
+        placeholder="Choose a date"
+        name="certExpirationDate"
+        #certExpirationDate="ngModel"
+        ngModel required>
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="picker" required></mat-datepicker-toggle>
+      <mat-datepicker touchUi="true" #picker></mat-datepicker>
+    </mat-form-field>
+
+    <div class="blankCert" *ngIf="selected == 'None'">
+      <h6>Do You Plan To Pursue Certification? If So When?</h6>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Reason"
+          name="certReason"
+          #certReason="ngModel"
+          ngModel
+          required>
+        <!--[ngModel]="company.logisticsPerson?.name"-->
+        <!--required>-->
+        <mat-error *ngIf="companyForm.invalid">Please enter reason</mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-checkbox class="fieldCheckbox" *ngIf="" hidden="true">Receive Quarterly Performance Reports</mat-checkbox>
   </div>
   <hr>
   <button

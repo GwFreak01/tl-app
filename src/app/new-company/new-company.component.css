@@ -15,8 +15,12 @@ h4 {
 .fieldSalesEmail,
 .fieldQualityEmail,
 .fieldLogisticsEmail,
+.fieldDifferentEmail,
 .fieldStreet2,
-.fieldState{
+.fieldState,
+.fieldExpirationDate,
+.fieldCertNumber,
+.fieldCertRegistrar{
   margin-left: 8px;
 }
 

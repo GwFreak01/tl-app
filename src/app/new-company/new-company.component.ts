@@ -68,11 +68,24 @@ export class NewCompanyComponent implements OnInit {
     {label: 'WI', value: 'WI'},
     {label: 'WY', value: 'WY'}
   ];
+  certList = [
+    {label: 'ISO9001', value: 'ISO9001'},
+    {label: 'ISO14001', value: 'ISO14001'},
+    {label: 'TS16949', value: 'TS16949'},
+    {label: 'Other', value: 'Other'},
+    {label: 'None', value: 'None'}
+  ];
+  selected = null;
 
   private mode = 'create';
   private companyId: string;
   public company: Company;
   isLoading = false;
+  salesCheck = false;
+  qualityCheck = false;
+  logisticsCheck = false;
+  differentCheck = false;
+
 
   constructor(public companiesService: CompaniesService, public route: ActivatedRoute, public router: Router) {
 
@@ -81,6 +94,7 @@ export class NewCompanyComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('companyId')) {
+        console.log('OnInit');
         this.mode = 'edit';
         this.companyId = paramMap.get('companyId');
         this.isLoading = true;
@@ -99,7 +113,46 @@ export class NewCompanyComponent implements OnInit {
               street2: companyData.companyAddress.street2,
               city: companyData.companyAddress.city,
               state: companyData.companyAddress.state,
-              zipcode: companyData.companyAddress.zipcode}
+              zipcode: companyData.companyAddress.zipcode
+            },
+            salesPerson: {
+              id: companyData.salesPerson._id,
+              name: companyData.salesPerson.name,
+              email: companyData.salesPerson.email,
+              phone: companyData.salesPerson.phone,
+              status: companyData.salesPerson.status
+            },
+            qualityPerson: {
+              id: companyData.qualityPerson._id,
+              name: companyData.qualityPerson.name,
+              email: companyData.qualityPerson.email,
+              phone: companyData.qualityPerson.phone,
+              status: companyData.qualityPerson.status
+            },
+            logisticsPerson: {
+              id: companyData.logisticsPerson._id,
+              name: companyData.logisticsPerson.name,
+              email: companyData.logisticsPerson.email,
+              phone: companyData.logisticsPerson.phone,
+              status: companyData.logisticsPerson.status
+            },
+            differentPerson: {
+              id: companyData.differentPerson._id,
+              name: companyData.differentPerson.name,
+              email: companyData.differentPerson.email,
+              phone: companyData.differentPerson.phone,
+              status: companyData.differentPerson.status
+            },
+            productDescription: companyData.productDescription,
+            certification: {
+              id: companyData.certification._id,
+              certType: companyData.certification.certType,
+              expirationDate: companyData.certification.expirationDate,
+              certNumber: companyData.certification.certNumber,
+              registrar: companyData.certification.registrar,
+              other: companyData.certification.other,
+              reason: companyData.certification.reason
+            }
           };
         });
       } else {
@@ -119,15 +172,54 @@ export class NewCompanyComponent implements OnInit {
         street2: form.value.street2,
         city: form.value.city,
         state: form.value.state,
-        zipcode: form.value.zipcode
+        zipcode: form.value.zipcode,
+      },
+      salesPerson: {
+        id: null,
+        name: form.value.salesName,
+        email: form.value.salesEmail,
+        phone: form.value.salesPhone,
+        status: form.value.salesCheck
+      },
+      qualityPerson: {
+        id: null,
+        name: form.value.qualityName,
+        email: form.value.qualityEmail,
+        phone: form.value.qualityPhone,
+        status: form.value.qualityCheck
+      },
+      logisticsPerson: {
+        id: null,
+        name: form.value.logisticsName,
+        email: form.value.logisticsEmail,
+        phone: form.value.logisticsPhone,
+        status: form.value.logisticsCheck
+      },
+      differentPerson: {
+        id: null,
+        name: form.value.differentName,
+        email: form.value.differentEmail,
+        phone: form.value.differentPhone,
+        status: form.value.differentCheck
+      },
+      productDescription: form.value.productDescription,
+      certification: {
+        id: null,
+        certType: form.value.certType,
+        certNumber: form.value.certNumber,
+        registrar: form.value.certRegistrar,
+        expirationDate: form.value.certExpirationDate,
+        other: form.value.certType,
+        reason: form.value.certReason
       }
+
     };
     if (form.invalid) {
       return;
     }
     this.isLoading = true;
     if (this.mode === 'create') {
-      console.log(company);
+      console.log('Create Company: ', company);
       this.companiesService.addCompany(company);
     } else {
       this.companiesService.updateCompany(this.companyId, company);
@@ -139,6 +231,8 @@ export class NewCompanyComponent implements OnInit {
     form.resetForm();
   }
 
-
+  certSelect() {
+    console.log('Cert Select: ', );
+  }
 
 }

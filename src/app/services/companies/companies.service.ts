@@ -52,21 +52,61 @@ export class CompaniesService {
   getCompany(id: string) {
     // return {...this.companies.find(company => company.id === id)};
     return this.http.get<{
+      _id: string,
+      companyName: string,
+      companyAddress: {
+        _id: string;
+        street1: string,
+        street2: string,
+        city: string,
+        state: string,
+        zipcode: string
+      },
+      salesPerson: {
         _id: string,
-        companyName: string,
-        companyAddress: {
-          _id: string;
-          street1: string,
-          street2: string,
-          city: string,
-          state: string,
-          zipcode: string
-        }
+        name: string,
+        email: string,
+        phone: string,
+        status: boolean
+      },
+      qualityPerson: {
+        _id: string,
+        name: string,
+        email: string,
+        phone: string,
+        status: boolean
+      },
+      logisticsPerson: {
+        _id: string,
+        name: string,
+        email: string,
+        phone: string,
+        status: boolean
+      },
+      differentPerson: {
+        _id: string,
+        name: string,
+        email: string,
+        phone: string,
+        status: boolean
+      },
+      productDescription: string,
+
+      certification: {
+        _id: string,
+        certType: string,
+        expirationDate: string,
+        certNumber: string,
+        registrar: string,
+        other: string,
+        reason: string
+      }
     }>('http://localhost:3000/api/companies/' + id);
   }
 
   addCompany(newCompany: Company) {
     const company: Company = newCompany;
+    console.log('CompanyService.addCompany: ', company);
     this.http.post<{ message: string , companyId: string}>('http://localhost:3000/api/companies', company)
       .subscribe((res) => {
         const companyId = res.companyId;

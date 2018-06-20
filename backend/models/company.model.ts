@@ -9,6 +9,45 @@ export interface Company {
     street2: string,
     city: string,
     state: string,
-    zipcode: string
+    zipcode: string;
+  };
+  salesPerson: {
+    id: string;
+    name: string;
+    email: string;
+    phone: string;
+    status: boolean;
+  };
+  qualityPerson: {
+    id: string;
+    name: string;
+    email: string;
+    phone: string;
+    status: boolean;
+  };
+  logisticsPerson: {
+    id: string;
+    name: string;
+    email: string;
+    phone: string;
+    status: boolean;
+  };
+  differentPerson: {
+    id: string;
+    name: string;
+    email: string;
+    phone: string;
+    status: boolean;
+  };
+  productDescription: string;
+
+  certification: {
+    id: string;
+    certType: string;
+    expirationDate: string;
+    certNumber: string;
+    registrar: string;
+    other: string;
+    reason: string;
   };
 }
