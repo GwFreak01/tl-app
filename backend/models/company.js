@@ -4,22 +4,22 @@ const uniqueValidator = require('mongoose-unique-validator');
 const companyAddress = mongoose.Schema({
   street1: {
     type: String,
-    // required: true,
+    required: true,
   },
   street2: {
     type: String,
   },
   city: {
     type: String,
-    // required: true,
+    required: true,
   },
   state: {
     type: String,
-    // required: true,
+    required: true,
   },
   zipcode: {
     type: String,
-    // required: true,
+    required: true,
   }
 });
 
@@ -60,14 +60,13 @@ const certification = mongoose.Schema({
   registrar: String,
   other: String,
   reason: String,
-  // required: true,
 });
 // TODO: Validate unique companies
 const companySchema = mongoose.Schema({
   companyName: {
     type: String,
-    // required: true,
-    // unique: true,
+    required: true,
+    unique: true,
   },
   companyAddress: {
     type: companyAddress
@@ -86,13 +85,15 @@ const companySchema = mongoose.Schema({
   },
   productDescription: {
     type: String,
-    // required: true,
+    required: true,
   },
   certification: {
-    type: certification
+    type: certification,
+    required: true
   }
 });
-
+// companySchema.set('autoIndex', false);
+//
 // companySchema.plugin(uniqueValidator());
 
 module.exports = mongoose.model('Company', companySchema);
