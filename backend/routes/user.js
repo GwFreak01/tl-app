@@ -28,16 +28,21 @@ router.post('/create-user', (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
+  let fetchedUser;
+  console.log(req.body.email);
   User.findOne({email: req.body.email})
     .then(user => {
+      console.log('Server.User.login: ', user);
       if (!user) {
         return res.status(404).json({
           message: 'Auth Failed'
         });
       }
+      fetchedUser = user;
       return bcrypt.compare(req.body.password, user.password);
     })
     .then(result => {
+      console.log('Server.login.result', result);
       if (!result) {
         return res.status(404).json({
           message: 'Auth Failed'
@@ -45,15 +50,22 @@ router.post('/login', (req, res, next) => {
       }
       const token = jwt.sign(
         {
-          username: user.username,
-          userId: user._id
+          username: fetchedUser.username,
+          email: fetchedUser.email,
+          userId: fetchedUser._id
         },
         'dfavhakdjlvahslkda',
         {
           expiresIn: '1h'
-        });
+        }
+      );
+      console.log('Server.login.token: ', token);
+      res.status(200).json({
+        token: token
+      })
     })
     .catch(err => {
+      console.log(err)
       return res.status(404).json({
         message: 'Auth Failed'
       });
