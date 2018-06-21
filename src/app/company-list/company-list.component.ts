@@ -24,7 +24,7 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   isLoading = false;
   private companiesSub: Subscription;
   private authStatusSub = new Subscription();
-  userIsAuthenicated = false;
+  userIsAuthenticated = false;
 
 
   constructor(public companyService: CompaniesService,
@@ -38,10 +38,13 @@ export class CompanyListComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         this.companies = companies;
     });
-    this.userIsAuthenicated = this.authService.getIsAuth();
+    this.userIsAuthenticated = this.authService.getIsAuth();
+    console.log('CompanyList.userIsAuthenicated: ', this.userIsAuthenticated);
+
     this.authStatusSub = this.authService.getAuthStatusListener()
       .subscribe(isAuthenticated => {
-        this.userIsAuthenicated = isAuthenticated;
+        console.log('CompanyList.Auth: ', isAuthenticated);
+        this.userIsAuthenticated = isAuthenticated;
       });
   }
 

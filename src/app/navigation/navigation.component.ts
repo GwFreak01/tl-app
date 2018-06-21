@@ -47,7 +47,13 @@ export class NavigationComponent implements OnInit, OnDestroy {
       });
 
   }
+  onLogout() {
+    this.authService.logout();
+  }
+
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
+
+
 }

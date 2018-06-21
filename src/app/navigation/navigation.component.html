@@ -23,7 +23,7 @@
           <br>
           <a mat-button routerLink="/user-settings" routerLinkActive="mat-accent">USER SETTINGS</a>
           <br>
-          <a mat-button>LOGOUT</a>
+          <a mat-button (click)="onLogout()">LOGOUT</a>
 
         </div>
         <div class="loggedOutOptions" *ngIf="!userIsAuthenticated">
@@ -42,8 +42,11 @@
     <mat-sidenav-content>
       <div class="grid-container">
 
-      <router-outlet></router-outlet>
+        <router-outlet></router-outlet>
+
+
       </div>
+      <!--GET OUT YOURE NOT LOGGED IN-->
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
