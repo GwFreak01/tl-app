@@ -4,20 +4,44 @@
   (submit)="onSaveCompany(companyForm)"
   #companyForm="ngForm"
   *ngIf="!isLoading">
-  <h4>Company Information</h4>
+  <h4>Event Information</h4>
 
   <mat-form-field class="fieldCompanyName">
-    <input
-      matInput
-      placeholder="Company Name"
-      name="companyName"
-      #companyName="ngModel"
-      [ngModel]="company?.companyName"
-      required>
+    <mat-select placeholder="Company Name">
+      <mat-option *ngFor="let company of companies" [value]="company.companyName">
+        {{ company.companyName }}
+      </mat-option>
+    </mat-select>
     <mat-error
       *ngIf="companyForm.invalid">
       Please enter company name
     </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="fieldEventType">
+    <mat-select placeholder="Event Type">
+      <mat-option *ngFor="let eventType of eventTypes" [value]="eventType">
+        {{ eventType }}
+      </mat-option>
+    </mat-select>
+    <mat-error
+      *ngIf="companyForm.invalid">
+      Please enter company name
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="fieldExpirationDate" *ngIf="selected != 'None'">
+    <input
+      matInput
+      [matDatepicker]="picker"
+      placeholder="Event Date"
+      name="certExpirationDate"
+      #certExpirationDate="ngModel"
+      [ngModel]="company?.certification.expirationDate" required>
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="picker" required></mat-datepicker-toggle>
+    <mat-datepicker touchUi="true" #picker></mat-datepicker>
   </mat-form-field>
 
   <div>
