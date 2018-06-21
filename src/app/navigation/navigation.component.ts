@@ -35,6 +35,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.userIsAuthenticated = this.authService.getIsAuth();
     console.log(this.mobileQuery);
     if (this.mobileQuery.matches === false) {
       this.opened = true;
