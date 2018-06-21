@@ -16,6 +16,7 @@ export class CompaniesComponent implements OnInit {
   }
 
   ngOnInit() {
+    // this.addButtonSelect = false;
   }
 
   onAddButtonSelect() {

@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./events.component.css']
 })
 export class EventsComponent implements OnInit {
+  addButtonSelect = false;
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  onAddButtonSelect() {
+    console.log('onAddButtonSelect');
+    this.addButtonSelect = true;
+  }
 }
