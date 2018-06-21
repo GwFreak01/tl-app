@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
     if (!loginForm) {
       return;
     }
+    this.isLoading = true;
     this.authService.loginUser(loginForm.value.username, loginForm.value.password);
 
   }

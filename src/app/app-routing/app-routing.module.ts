@@ -11,6 +11,7 @@ import {AnalyticsComponent} from '../analytics/analytics.component';
 import {LogoutComponent} from '../auth/logout/logout.component';
 import {NewCompanyComponent} from '../new-company/new-company.component';
 import {CreateUserComponent} from '../auth/create-user/create-user.component';
+import {AuthGuard} from '../auth/auth.guard';
 
 const routes: Routes = [
   {
@@ -19,27 +20,33 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'companies',
-    component: CompaniesComponent
+    component: CompaniesComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'edit/:companyId',
-    component: NewCompanyComponent
+    component: NewCompanyComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'events',
-    component: EventsComponent
+    component: EventsComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'analytics',
-    component: AnalyticsComponent
+    component: AnalyticsComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'user-settings',
-    component: UserSettingsComponent
+    component: UserSettingsComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'logout',
@@ -51,7 +58,8 @@ const routes: Routes = [
   },
   {
     path: 'create-user',
-    component: CreateUserComponent
+    component: CreateUserComponent,
+    canActivate: [AuthGuard],
   }
 
 ];
@@ -65,6 +73,7 @@ const routes: Routes = [
   exports: [
     RouterModule
   ],
+  providers: [AuthGuard],
   declarations: []
 })
 export class AppRoutingModule { }
