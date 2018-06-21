@@ -41,6 +41,8 @@ import { NewCompanyComponent } from './new-company/new-company.component';
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import { CreateUserComponent } from './auth/create-user/create-user.component';
 import {AuthInterceptor} from './auth/auth-interceptor';
+import { NewEventComponent } from './new-event/new-event.component';
+import { EventListComponent } from './event-list/event-list.component';
 
 
 
@@ -94,6 +96,8 @@ const appRoutes: Routes = [
     CompanyListComponent,
     NewCompanyComponent,
     CreateUserComponent,
+    NewEventComponent,
+    EventListComponent,
   ],
   imports: [
     AppRoutingModule,
