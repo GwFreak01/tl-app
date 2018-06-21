@@ -26,7 +26,7 @@ import {
 import {RouterModule,
   Routes
 } from '@angular/router';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CompaniesComponent } from './companies/companies.component';
@@ -40,6 +40,7 @@ import { CompanyListComponent } from './company-list/company-list.component';
 import { NewCompanyComponent } from './new-company/new-company.component';
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import { CreateUserComponent } from './auth/create-user/create-user.component';
+import {AuthInterceptor} from './auth/auth-interceptor';
 
 
 
@@ -123,7 +124,7 @@ const appRoutes: Routes = [
     // Validators
     HttpClientModule,
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
