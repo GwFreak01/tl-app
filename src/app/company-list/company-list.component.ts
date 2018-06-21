@@ -10,6 +10,7 @@ import {
 import {Company} from '../../../backend/models/company.model';
 import {CompaniesService} from '../services/companies/companies.service';
 import {Subscription} from 'rxjs';
+import {AuthService} from '../auth/auth.service';
 @Component({
   selector: 'app-company-list',
   templateUrl: './company-list.component.html',
@@ -22,10 +23,12 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   companies: Company[] = [];
   isLoading = false;
   private companiesSub: Subscription;
+  private authStatusSub = new Subscription();
+  userIsAuthenicated = false;
 
 
-
-  constructor(public companyService: CompaniesService) { }
+  constructor(public companyService: CompaniesService,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.isLoading = true;
@@ -35,10 +38,16 @@ export class CompanyListComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         this.companies = companies;
     });
+    this.userIsAuthenicated = this.authService.getIsAuth();
+    this.authStatusSub = this.authService.getAuthStatusListener()
+      .subscribe(isAuthenticated => {
+        this.userIsAuthenicated = isAuthenticated;
+      });
   }
 
   ngOnDestroy() {
     this.companiesSub.unsubscribe();
+    this.authStatusSub.unsubscribe();
   }
 
   onEdit(companyId, editSelected: boolean) {

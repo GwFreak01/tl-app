@@ -22,7 +22,7 @@
       <br>
       {{company.companyAddress.zipcode}}
     </p>
-    <mat-action-row>
+    <mat-action-row *ngIf="userIsAuthenticated">
       <button
         mat-button color="primary" [routerLink]="['/edit', company.id]">
         EDIT

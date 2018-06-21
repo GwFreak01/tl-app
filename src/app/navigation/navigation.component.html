@@ -10,7 +10,7 @@
                  [fixedInViewport]="mobileQuery.matches" fixedTopGap="56"
                  [(opened)]="opened">
       <mat-nav-list>
-        <div class="loggedInOptions" *ngIf="loggedInStatus">
+        <div class="loggedInOptions" *ngIf="userIsAuthenticated">
           <a mat-button routerLink="/dashboard" routerLinkActive="mat-accent">DASHBOARD</a>
           <br>
           <a mat-button routerLink="/companies" routerLinkActive="mat-accent">COMPANIES</a>
@@ -23,11 +23,10 @@
           <br>
           <a mat-button routerLink="/user-settings" routerLinkActive="mat-accent">USER SETTINGS</a>
           <br>
-          <a mat-button routerLink="/logout" routerLinkActive="mat-accent">LOGOUT</a>
+          <a mat-button>LOGOUT</a>
 
         </div>
-
-        <div class="loggedOutOptions" *ngIf="!loggedInStatus">
+        <div class="loggedOutOptions" *ngIf="!userIsAuthenticated">
           <a mat-button routerLink="/login" routerLinkActive="mat-accent">LOGIN</a>
         </div>
       </mat-nav-list>

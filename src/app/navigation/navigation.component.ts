@@ -1,5 +1,7 @@
 import {MediaMatcher} from '@angular/cdk/layout';
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {AuthService} from '../auth/auth.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-navigation',
@@ -8,8 +10,9 @@ import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 })
 export class NavigationComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
-
   opened: boolean;
+  private authListenerSubs: Subscription;
+  userIsAuthenticated = false;
 
   fillerNav = Array(50).fill(0).map((_, i) => `Nav Item ${i + 1}`);
 
@@ -23,7 +26,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
   private _mobileQueryListener: () => void;
   loggedInStatus = true;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+  constructor(changeDetectorRef: ChangeDetectorRef,
+              media: MediaMatcher,
+              private authService: AuthService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -36,6 +41,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
     } else {
       this.opened = false;
     }
+    this.authListenerSubs = this.authService.getAuthStatusListener()
+      .subscribe(isAuthenticated => {
+        this.userIsAuthenticated = isAuthenticated;
+      });
 
   }
   ngOnDestroy(): void {
