@@ -11,7 +11,8 @@
       placeholder="Company Name"
       name="companyName"
       #companyName="ngModel"
-      [ngModel]="event?.companyName">
+      [ngModel]="event?.companyName"
+      required>
       <mat-option
         *ngFor="let company of companies"
         [value]="company.companyName">
@@ -31,7 +32,8 @@
       name="eventType"
       #eventType="ngModel"
       [ngModel]="event?.eventType"
-      [(value)]="selectedEventType">
+      [(value)]="selectedEventType"
+      required>
       <mat-option
         *ngFor="let eventType of eventTypes"
         [value]="eventType" >
@@ -44,14 +46,15 @@
     </mat-error>
   </mat-form-field>
 
-  <mat-form-field class="fieldExpirationDate" *ngIf="selected != 'None'">
+  <mat-form-field class="fieldEventDate">
     <input
       matInput
       [matDatepicker]="picker"
       placeholder="Event Date"
-      name="certExpirationDate"
-      #certExpirationDate="ngModel"
-      [ngModel]="company?.certification.expirationDate" required>
+      name="eventDate"
+      #eventDate="ngModel"
+      [ngModel]="event?.eventDate"
+      required>
     <mat-datepicker-toggle
       matSuffix
       [for]="picker" required></mat-datepicker-toggle>
@@ -65,7 +68,7 @@
         placeholder="T&L Part Number"
         name="tlPartNumber"
         #tlPartNumber="ngModel"
-        [ngModel]="company?.companyAddress.street1"
+        [ngModel]="event?.tlPartNumber"
         required>
       <mat-error *ngIf="eventForm.invalid">Please enter a T&L Part Number</mat-error>
     </mat-form-field>
@@ -73,10 +76,11 @@
     <mat-form-field class="fieldPurchaseOrderNumber">
       <input
         matInput
-        placeholder="Purchase Order Number "
+        placeholder="Purchase Order Number"
         name="purchaseOrderNumber"
         #purchaseOrderNumber="ngModel"
-        [ngModel]="company?.companyAddress.street2">
+        [ngModel]="event?.purchaseOrderNumber"
+        required>
     </mat-form-field>
     <br>
     <mat-form-field class="fieldLotNumber">
@@ -85,7 +89,7 @@
         placeholder="Lot Number"
         name="lotNumber"
         #lotNumber="ngModel"
-        [ngModel]="company?.companyAddress.city"
+        [ngModel]="event?.lotNumber"
         required>
       <mat-error *ngIf="eventForm.invalid">Please enter a Lot Number</mat-error>
     </mat-form-field>
@@ -96,7 +100,7 @@
         placeholder="CAR Number"
         name="carNumber"
         #carNumber="ngModel"
-        [ngModel]="company?.companyAddress.zipcode"
+        [ngModel]="event?.carNumber"
         required>
       <mat-error *ngIf="eventForm.invalid">Please enter a CAR Number</mat-error>
     </mat-form-field>
@@ -118,9 +122,10 @@
         matInput
         [matDatepicker]="picker"
         placeholder="Required Delivery Date"
-        name="certExpirationDate"
-        #certExpirationDate="ngModel"
-        [ngModel]="company?.certification.expirationDate" required>
+        name="requiredDate"
+        #requiredDate="ngModel"
+        [ngModel]="event?.requiredDate"
+        required>
       <mat-datepicker-toggle
         matSuffix
         [for]="picker" required></mat-datepicker-toggle>
@@ -133,9 +138,10 @@
         matInput
         [matDatepicker]="picker"
         placeholder="Actual Delivery Date"
-        name="certExpirationDate"
-        #certExpirationDate="ngModel"
-        [ngModel]="company?.certification.expirationDate" required>
+        name="actualDate"
+        #actualDate="ngModel"
+        [ngModel]="event?.actualDate"
+        required>
       <mat-datepicker-toggle
         matSuffix
         [for]="picker" required></mat-datepicker-toggle>
@@ -149,10 +155,32 @@
         placeholder="Root Cause"
         name="rootCause"
         #rootCause="ngModel"
-        [ngModel]="company?.companyAddress.zipcode"
+        [ngModel]="event?.rootCause"
         required></textarea>
       <mat-error *ngIf="eventForm.invalid">Please enter a root cause</mat-error>
     </mat-form-field>
+
+    <mat-form-field
+      class="fieldStatusOption" *ngIf="selectedStatusOption !== 'Open'">
+      <mat-select
+        placeholder="Status"
+        name="statusOption"
+        #statusOption="ngModel"
+        [ngModel]="event?.statusOption"
+        [(value)]="selectedStatusOption">
+        <mat-option
+          *ngFor="let option of statusOptions"
+          [value]="option" >
+          {{ option }}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="eventForm.invalid">
+        Please select an event type
+      </mat-error>
+    </mat-form-field>
+
+
   </div>
 
 

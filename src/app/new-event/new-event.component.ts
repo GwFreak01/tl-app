@@ -4,6 +4,7 @@ import {CompaniesService} from '../services/companies/companies.service';
 import {Subscription} from 'rxjs';
 import {NgForm} from '@angular/forms';
 import {Event} from '../../../backend/models/event.model';
+import {EventsService} from '../services/events/events.service';
 
 
 @Component({
@@ -14,19 +15,23 @@ import {Event} from '../../../backend/models/event.model';
 export class NewEventComponent implements OnInit, OnDestroy {
 
   eventTypes = ['Quality', 'Delivery'];
+  statusOptions = ['Open', 'Pending', 'Closed'];
   companies: Company[] = [];
   events: Event[] = [];
+  event: Event = null;
   private companiesSub: Subscription;
   selectedEventType = null;
+  selectedStatusOption = 'Open';
 
 
   mode = 'create';
 
-  constructor(private  companyService: CompaniesService) { }
+  constructor(private  companiesService: CompaniesService,
+              private eventsService: EventsService) { }
 
   ngOnInit() {
-    this.companyService.getCompanies();
-    this.companiesSub = this.companyService.getCompanyUpdateListener()
+    this.companiesService.getCompanies();
+    this.companiesSub = this.companiesService.getCompanyUpdateListener()
       .subscribe((companies: Company[]) => {
         this.companies = companies;
       });
@@ -37,6 +42,7 @@ export class NewEventComponent implements OnInit, OnDestroy {
 
     if (this.mode === 'create') {
       console.log('Form Values: ', eventForm.value);
+      this.eventsService.addEvent(eventForm.value);
     }
   }
   updateEventTypeForm(event) {
