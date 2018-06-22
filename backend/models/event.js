@@ -56,4 +56,4 @@ eventSchema.set('autoIndex', false);
 eventSchema.plugin(uniqueValidator);
 
 
-module.exports = mongoose.model('User', eventSchema);
+module.exports = mongoose.model('Event', eventSchema);
