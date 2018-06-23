@@ -50,6 +50,16 @@ router.post('', checkAuth, (req, res, next) => {
   }
 });
 
+router.put('/:id', checkAuth, (req, res, next) => {
+  console.log('ServerEventId: ', req.body, req.params.id);
+  Event.updateOne({_id: req.params.id}, req.body).then(updatedCompany => {
+    console.log(updatedCompany);
+    res.status(200).json({
+      message: 'Update Successful'
+    })
+  });
+});
+
 router.get('', checkAuth, (req, res, next) => {
   Event.find()
     .then(documents => {
@@ -58,6 +68,20 @@ router.get('', checkAuth, (req, res, next) => {
         events: documents
       });
     });
+});
+
+router.get('/:id', checkAuth, (req, res, next) => {
+  console.log(req.params.id);
+  Event.findById(req.params.id).then(event => {
+    if (event) {
+      console.log('Server.Event: ', event);
+      res.status(200).json(event);
+    } else {
+      res.status(400).json({
+        message: 'Event not found!'
+      })
+    }
+  });
 });
 
 router.delete('/:id', checkAuth, (req, res, next) => {

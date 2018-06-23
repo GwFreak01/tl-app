@@ -161,7 +161,7 @@
     </mat-form-field>
 
     <mat-form-field
-      class="fieldStatusOption" *ngIf="selectedStatusOption !== 'Open'">
+      class="fieldStatusOption" *ngIf="mode == 'edit'">
       <mat-select
         placeholder="Status"
         name="statusOption"
@@ -195,7 +195,7 @@
           mat-raised-button
           type="submit"
           color="primary" >
-    Save Company
+    Save Event
   </button>
 </form>
 

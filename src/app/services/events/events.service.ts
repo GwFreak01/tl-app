@@ -63,6 +63,24 @@ export class EventsService {
   getEventUpdateListener() {
     return this.eventsUpdated.asObservable();
   }
+
+  getEvent(id: string) {
+    return this.http.get<{
+      id: string,
+      companyName: string,
+      eventType: string,
+      eventDate: string,
+      tlPartNumber: string,
+      purchaseOrderNumber: string,
+      lotNumber: string,
+      carNumber: string,
+      quantityReject: number,
+      requiredDate: string,
+      actualDate: string,
+      rootCause: string,
+      statusOption: number,
+    }>('http://localhost:3000/api/events/' + id);
+  }
   addEvent(eventForm) {
     const event: Event = eventForm;
     console.log('EventService.add: ', eventForm);
@@ -82,6 +100,21 @@ export class EventsService {
 
   }
 
+  updateEvent(id: string, event) {
+    console.log('EventsService.updateEvent: ', event);
+    const updatedEvent: Event = event;
+    this.http.put('http://localhost:3000/api/events/' + id, event)
+      .subscribe(response => {
+        console.log('EventsService.updateEvent.response: ', response);
+        const updatedEvents = [...this.events];
+        console.log('EventService.updatedEvents: ', updatedEvents);
+        const oldEventIndex = updatedEvents.findIndex(e => e.id === updatedEvent.id);
+        updatedEvents[oldEventIndex] = event;
+        this.events = updatedEvents;
+        this.eventsUpdated.next([...this.events]);
+        this.router.navigate(['/events']);
+      });
+  }
   deleteEvent(eventId: string) {
     this.http.delete('http://localhost:3000/api/events/' + eventId)
       .subscribe(() => {

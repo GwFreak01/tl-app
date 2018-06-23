@@ -5,6 +5,7 @@ import {Subscription} from 'rxjs';
 import {NgForm} from '@angular/forms';
 import {Event} from '../../../backend/models/event.model';
 import {EventsService} from '../services/events/events.service';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 
 
 @Component({
@@ -14,22 +15,82 @@ import {EventsService} from '../services/events/events.service';
 })
 export class NewEventComponent implements OnInit, OnDestroy {
 
+  private mode = 'create';
+  private eventId: string;
   eventTypes = ['Quality', 'Delivery'];
   statusOptions = ['Open', 'Pending', 'Closed'];
   companies: Company[] = [];
   events: Event[] = [];
-  event: Event = null;
+  public event: Event;
+  isLoading = false;
   private companiesSub: Subscription;
   selectedEventType = null;
   selectedStatusOption = 'Open';
 
 
-  mode = 'create';
 
   constructor(private  companiesService: CompaniesService,
-              private eventsService: EventsService) { }
+              private eventsService: EventsService,
+              public route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
+    this.route.paramMap.subscribe((paramMap: ParamMap) => {
+      if (paramMap.has('eventId')) {
+        console.log('Event OnInit');
+        this.mode = 'edit';
+        this.eventId = paramMap.get('eventId');
+        this.isLoading = true;
+        console.log('OnInitEventID: ', this.mode, this.eventId);
+        this.eventsService.getEvent(this.eventId).subscribe(eventData => {
+          this.isLoading = false;
+          console.log('OnInitEventData: ', eventData);
+
+          // console.log('OnInitEvent: ', this.event = eventData.companyName);
+          const qualityEvent: Event = {
+            id: this.eventId,
+            companyName: eventData.companyName,
+            eventType: eventData.eventType,
+            eventDate: eventData.eventDate,
+            tlPartNumber: eventData.tlPartNumber,
+            purchaseOrderNumber: eventData.purchaseOrderNumber,
+            lotNumber: eventData.lotNumber,
+            carNumber: eventData.carNumber,
+            quantityReject: eventData.quantityReject,
+            requiredDate: null,
+            actualDate: null,
+            rootCause: eventData.rootCause,
+            statusOption: eventData.statusOption,
+          };
+
+          const deliveryEvent: Event = {
+            id: this.eventId,
+            companyName: eventData.companyName,
+            eventType: eventData.eventType,
+            eventDate: eventData.eventDate,
+            tlPartNumber: eventData.tlPartNumber,
+            purchaseOrderNumber: eventData.purchaseOrderNumber,
+            lotNumber: eventData.lotNumber,
+            carNumber: eventData.carNumber,
+            quantityReject: null,
+            requiredDate: eventData.requiredDate,
+            actualDate: eventData.actualDate,
+            rootCause: eventData.rootCause,
+            statusOption: eventData.statusOption,
+          };
+          if (eventData.eventType === 'Quality') {
+            this.event = qualityEvent;
+          } else {
+            this.event = deliveryEvent;
+          }
+          console.log('AfterInit: ', this.event);
+
+        });
+      } else {
+        this.mode = 'create';
+        this.eventId = null;
+      }
+    });
     this.companiesService.getCompanies();
     this.companiesSub = this.companiesService.getCompanyUpdateListener()
       .subscribe((companies: Company[]) => {
@@ -43,10 +104,10 @@ export class NewEventComponent implements OnInit, OnDestroy {
     if (this.mode === 'create') {
       console.log('Form Values: ', eventForm.value);
       this.eventsService.addEvent(eventForm.value);
+    } else {
+      console.log('EditEvent: ', eventForm.value);
+      this.eventsService.updateEvent(this.eventId, eventForm.value);
     }
-  }
-  updateEventTypeForm(event) {
-    console.log('UpdateEventTypeForm: ', event);
   }
 
   ngOnDestroy() {

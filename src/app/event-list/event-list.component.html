@@ -11,15 +11,32 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <p class="info-text mat-body-1">
-      {{event.eventType}}
+    <p class="info-text mat-body-1"></p>
+    Type: {{event.eventType}}
+    <br>
+    Date: {{event.eventDate}}
+    <br>
+    CAR Number: {{event.carNumber}}
+    <br>
+    Lot Number: {{event.lotNumber}}
+    <br>
+    T&L Part Number: {{event.tlPartNumber}}
+    <div *ngIf="event.eventType == 'Quality'">
       <br>
-      {{event.eventType}}
+      Quantity Rejected: {{event.quantityReject}}
+    </div>
+    <div *ngIf="event.eventType == 'Delivery'">
       <br>
-      {{event.eventType}}
+      Required Date: {{event.requiredDate}}
       <br>
-      <br>
-    </p>
+      Actual Date: {{event.actualDate}}
+    </div>
+    <br>
+    Reason: {{event.rootCause}}
+    <br>
+    Status: {{event.statusOption}}
+    <br>
+
     <mat-action-row *ngIf="userIsAuthenticated">
       <button
         mat-button color="primary" [routerLink]="['/edit-event', event.id]">
