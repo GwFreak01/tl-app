@@ -1,33 +1,43 @@
-<mat-accordion>
-  <mat-expansion-panel>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
+<mat-accordion *ngIf="events.length > 0 && !isLoading">
+  <mat-expansion-panel *ngFor="let event of events">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Personal data
+        <h3> {{ event.companyName}} </h3>
       </mat-panel-title>
       <mat-panel-description>
-        Type your name and age
+        <h4> {{ event.eventType}} </h4>
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <mat-form-field>
-      <input matInput placeholder="First name">
-    </mat-form-field>
+    <p class="info-text mat-body-1">
+      {{event.eventType}}
+      <br>
+      {{event.eventType}}
+      <br>
+      {{event.eventType}}
+      <br>
+      <br>
+    </p>
+    <mat-action-row *ngIf="userIsAuthenticated">
+      <button
+        mat-button color="primary" [routerLink]="['/edit', event.id]">
+        EDIT
+      </button>
+      <button
+        mat-button color="warn"
+        (click)="onDelete(event.id)">DELETE</button>
+    </mat-action-row>
 
-    <mat-form-field>
-      <input matInput placeholder="Age">
-    </mat-form-field>
   </mat-expansion-panel>
+  <!--<mat-list-item> Pepper </mat-list-item>-->
+  <!--<mat-list-item> Salt </mat-list-item>-->
+  <!--<mat-list-item> Paprika </mat-list-item>-->
+  <!--<mat-list-item> Paprika </mat-list-item>-->
 
-  <mat-expansion-panel (opened)="panelOpenState = true"
-                       (closed)="panelOpenState = false">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Self aware panel
-      </mat-panel-title>
-      <mat-panel-description>
-        Currently I am {{panelOpenState ? 'open' : 'closed'}}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <p>I'm visible because I am open</p>
-  </mat-expansion-panel>
 </mat-accordion>
+
+<h1 class="mat-h1" *ngIf="events.length <= 0 && !isLoading">
+  No companies added!
+</h1>

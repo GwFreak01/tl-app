@@ -1,15 +1,54 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Event} from '../../../backend/models/event.model';
+import {Subscription} from 'rxjs';
+import {EventsService} from '../services/events/events.service';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-event-list',
   templateUrl: './event-list.component.html',
   styleUrls: ['./event-list.component.css']
 })
-export class EventListComponent implements OnInit {
+export class EventListComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  events: Event[] = [];
+  isLoading = false;
+  private eventsSub: Subscription;
+  private authStatusSub = new Subscription();
+
+
+  userIsAuthenticated = false;
+
+  constructor(private eventsService: EventsService,
+              private authService: AuthService) { }
 
   ngOnInit() {
+    this.isLoading = true;
+    this.eventsService.getEvents();
+    this.eventsSub = this.eventsService.getEventUpdateListener()
+      .subscribe((events: Event[]) => {
+        this.isLoading = false;
+        this.events = events;
+        console.log('EventSub: ', events);
+      });
+    console.log('Event List: ', this.events);
+    this.userIsAuthenticated = this.authService.getIsAuth();
+    console.log('EventList.userIsAuthenicated: ', this.userIsAuthenticated);
+
+    this.authStatusSub = this.authService.getAuthStatusListener()
+      .subscribe(isAuthenticated => {
+        console.log('EventList.Ath: ', isAuthenticated);
+        this.userIsAuthenticated = isAuthenticated;
+      });
   }
 
+  ngOnDestroy() {
+    this.eventsSub.unsubscribe();
+    this.authStatusSub.unsubscribe();
+  }
+
+  onDelete(eventId: string) {
+    console.log('Delete: ', eventId);
+    this.eventsService.deleteEvent(eventId);
+  }
 }

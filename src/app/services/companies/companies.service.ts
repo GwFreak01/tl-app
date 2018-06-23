@@ -21,7 +21,6 @@ export class CompaniesService {
     // return [...this.companies];
     this.http.get<{ message: string, companies: any }>('http://localhost:3000/api/companies')
       .pipe(map((companyData) => {
-
         return companyData.companies.map((company) => {
           return {
             id: company._id,

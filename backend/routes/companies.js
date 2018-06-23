@@ -114,7 +114,7 @@ router.delete('/:id', checkAuth, (req, res, next) => {
 
     // console.log(result);
     res.status(200).json({
-      message: 'Post deleted!'
+      message: 'Company deleted!'
     })
   });
 });
