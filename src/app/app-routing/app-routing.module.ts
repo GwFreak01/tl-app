@@ -12,6 +12,8 @@ import {LogoutComponent} from '../auth/logout/logout.component';
 import {NewCompanyComponent} from '../new-company/new-company.component';
 import {CreateUserComponent} from '../auth/create-user/create-user.component';
 import {AuthGuard} from '../auth/auth.guard';
+import {EditCompanyComponent} from '../edit-company/edit-company.component';
+import {EditEventComponent} from '../edit-event/edit-event.component';
 
 const routes: Routes = [
   {
@@ -29,10 +31,20 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'edit/:companyId',
-    component: NewCompanyComponent,
+    path: 'edit-company/:companyId',
+    component: EditCompanyComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'edit-event/:eventId',
+    component: EditEventComponent,
+    canActivate: [AuthGuard],
+  },
+  // {
+  //   path: 'edit',
+  //   component: EditComponent,
+  //   canActivate: [AuthGuard],
+  // },
   {
     path: 'events',
     component: EventsComponent,

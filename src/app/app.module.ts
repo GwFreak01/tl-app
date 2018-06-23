@@ -43,6 +43,8 @@ import { CreateUserComponent } from './auth/create-user/create-user.component';
 import {AuthInterceptor} from './auth/auth-interceptor';
 import { NewEventComponent } from './new-event/new-event.component';
 import { EventListComponent } from './event-list/event-list.component';
+import { EditCompanyComponent } from './edit-company/edit-company.component';
+import { EditEventComponent } from './edit-event/edit-event.component';
 
 
 
@@ -98,6 +100,8 @@ const appRoutes: Routes = [
     CreateUserComponent,
     NewEventComponent,
     EventListComponent,
+    EditCompanyComponent,
+    EditEventComponent,
   ],
   imports: [
     AppRoutingModule,
