@@ -48,10 +48,15 @@ const eventSchema = mongoose.Schema({
   statusOption: {
     type: String,
     required: true,
+  },
+  creator: {
+    type: mongoose.Schema.ObjectId,
+    ref: "Company",
+    // required: true,
   }
 });
 
-eventSchema.set('autoIndex', false);
+// eventSchema.set('autoIndex', false);
 
 eventSchema.plugin(uniqueValidator);
 

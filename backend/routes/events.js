@@ -17,7 +17,8 @@ router.post('', checkAuth, (req, res, next) => {
       carNumber: req.body.carNumber,
       rootCause: req.body.rootCause,
       quantityReject: req.body.quantityReject,
-      statusOption: 'Open'
+      statusOption: 'Open',
+      // creator:
     });
     qualityEvent.save().then(createdEvent => {
       console.log('Events.save: ', createdEvent);

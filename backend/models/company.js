@@ -90,10 +90,10 @@ const companySchema = mongoose.Schema({
   certification: {
     type: certification,
     required: true
-  }
+  },
 });
 // companySchema.set('autoIndex', false);
 //
-// companySchema.plugin(uniqueValidator());
+companySchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model('Company', companySchema);

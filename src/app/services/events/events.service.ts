@@ -126,4 +126,8 @@ export class EventsService {
         console.log('Deleted!');
       });
   }
+
+  getCompanyEvents(companyName: string) {
+
+  }
 }
