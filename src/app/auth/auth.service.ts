@@ -33,10 +33,7 @@ export class AuthService {
       email: email,
       password: password
     };
-    this.http.post('http://localhost:3000/api/user/create-user', authData)
-      .subscribe(response => {
-        console.log(response);
-      });
+    return this.http.post('http://localhost:3000/api/user/create-user', authData);
   }
 
   loginUser(email: string, password: string) {

@@ -45,6 +45,7 @@ import { NewEventComponent } from './new-event/new-event.component';
 import { EventListComponent } from './event-list/event-list.component';
 import { EditCompanyComponent } from './edit-company/edit-company.component';
 import { EditEventComponent } from './edit-event/edit-event.component';
+import {ErrorInterceptor} from './error-interceptor';
 
 
 
@@ -132,7 +133,10 @@ const appRoutes: Routes = [
     // Validators
     HttpClientModule,
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
