@@ -85,7 +85,8 @@ export class NewCompanyComponent implements OnInit {
   qualityCheck = false;
   logisticsCheck = false;
   differentCheck = false;
-
+  // differentOption = !(this.qualityCheck );
+  noneSelect = true;
 
   constructor(public companiesService: CompaniesService, public route: ActivatedRoute, public router: Router) {
 
@@ -237,6 +238,20 @@ export class NewCompanyComponent implements OnInit {
 
   certSelect() {
     console.log('Cert Select: ', );
+  }
+
+  statusSelect(person, event) {
+    if (person === 'sales') {
+      this.salesCheck = event.checked;
+    } else if (person === 'quality') {
+      this.qualityCheck = event.checked;
+    } else if (person === 'logistics') {
+      this.logisticsCheck = event.checked;
+    } else if (person === 'different') {
+      this.differentCheck = event.checked;
+    }
+    this.noneSelect = !(this.salesCheck || this.qualityCheck || this.logisticsCheck);
+    console.log(this.salesCheck, this.qualityCheck, this.logisticsCheck, this.noneSelect);
   }
 
 }

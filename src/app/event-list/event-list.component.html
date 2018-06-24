@@ -12,29 +12,29 @@
     </mat-expansion-panel-header>
 
     <p class="info-text mat-body-1"></p>
-    Type: {{event.eventType}}
+    <h4>Type:</h4> {{event.eventType}}
     <br>
-    Date: {{event.eventDate}}
+    <h4>Date:</h4> {{event.eventDate | date}}
     <br>
-    CAR Number: {{event.carNumber}}
+    <h4>CAR Number:</h4> {{event.carNumber}}
     <br>
-    Lot Number: {{event.lotNumber}}
+    <h4>Lot Number:</h4> {{event.lotNumber}}
     <br>
-    T&L Part Number: {{event.tlPartNumber}}
+    <h4>T&L Part Number:</h4> {{event.tlPartNumber}}
     <div *ngIf="event.eventType == 'Quality'">
       <br>
-      Quantity Rejected: {{event.quantityReject}}
+      <h4>Quantity Rejected:</h4> {{event.quantityReject}}
     </div>
     <div *ngIf="event.eventType == 'Delivery'">
       <br>
-      Required Date: {{event.requiredDate}}
+      <h4>Required Date:</h4> {{event.requiredDate}}
       <br>
-      Actual Date: {{event.actualDate}}
+      <h4>Actual Date:</h4> {{event.actualDate}}
     </div>
     <br>
-    Reason: {{event.rootCause}}
+    <h4>Reason:</h4> {{event.rootCause}}
     <br>
-    Status: {{event.statusOption}}
+    <h4>Status:</h4> {{event.statusOption}}
     <br>
 
     <mat-action-row *ngIf="userIsAuthenticated">

@@ -117,7 +117,12 @@
         <mat-error *ngIf="companyForm.invalid">Please enter Sales phone</mat-error>
       </mat-form-field>
 
-      <mat-checkbox class="fieldSalesCheckbox" name="salesCheck" #salesCheck="ngModel" [ngModel]="company?.salesPerson.status">Receive Quarterly Performance Reports</mat-checkbox>
+      <mat-checkbox
+        class="fieldSalesCheckbox"
+        name="salesCheck"
+        #salesCheck="ngModel"
+        [ngModel]="company?.salesPerson.status"
+        (change)="statusSelect('sales', $event)">Receive Quarterly Performance Reports</mat-checkbox>
     </div>
 
     <div class="qualityPersonSection">
@@ -154,7 +159,11 @@
       </mat-form-field>
 
       <mat-checkbox
-        class="fieldQualityCheckbox" name="qualityCheck" #qualityCheck="ngModel" [ngModel]="company?.qualityPerson.status">Receive Quarterly Performance Reports</mat-checkbox>
+        class="fieldQualityCheckbox"
+        name="qualityCheck"
+        #qualityCheck="ngModel"
+        [ngModel]="company?.qualityPerson.status"
+        (change)="statusSelect('quality', $event)">Receive Quarterly Performance Reports</mat-checkbox>
     </div>
 
     <div class="logisticsPersonSection">
@@ -192,7 +201,10 @@
       </mat-form-field>
 
       <mat-checkbox
-        class="fieldLogisticsCheckbox" name="logisticsCheck" #logisticsCheck="ngModel" [ngModel]="company?.logisticsPerson.status">Receive Quarterly Performance Reports</mat-checkbox>
+        class="fieldLogisticsCheckbox"
+        name="logisticsCheck"
+        #logisticsCheck="ngModel"
+        [ngModel]="company?.logisticsPerson.status" (change)="statusSelect('logistics', $event)">Receive Quarterly Performance Reports</mat-checkbox>
     </div>
 
     <div class="differentPersonSection">
@@ -233,7 +245,13 @@
 
       <!--TODO: Validate when checkbox appears-->
       <mat-checkbox
-        class="fieldDifferentCheckbox" name="differentCheck" #differentCheck="ngModel" [ngModel]="company?.differentPerson.status">Receive Quarterly Performance Reports</mat-checkbox>
+        class="fieldDifferentCheckbox"
+        name="differentCheck"
+        #differentCheck="ngModel"
+        [ngModel]="company?.differentPerson.status"
+        *ngIf="noneSelect"
+        Receive Quarterly Performance Reports
+        (change)="statusSelect('different', $event)">Receive Quarterly Performance Reports</mat-checkbox>
     </div>
 
     <div class="descriptionSection">
