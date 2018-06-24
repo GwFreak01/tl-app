@@ -51,13 +51,19 @@ router.post('', checkAuth, (req, res, next) => {
     },
   });
   // console.log(req.body.companyAddress.street2, company);
-  company.save().then((createdCompany) => {
-    console.log(createdCompany);
-    res.status(201).json({
-      message: 'Company added successfully',
-      companyId: createdCompany._id
+  company.save()
+    .then((createdCompany) => {
+      console.log(createdCompany);
+      res.status(201).json({
+        message: 'Company added successfully',
+        companyId: createdCompany._id
+      });
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: 'Company creation failed!'
+      })
     });
-  });
 });
 
 router.put('/:id', checkAuth, (req, res, next) => {
@@ -74,12 +80,18 @@ router.put('/:id', checkAuth, (req, res, next) => {
     },
   });
   console.log(company);
-  Company.updateOne({_id: req.params.id}, company).then((updatedCompany) => {
-    console.log(updatedCompany);
-    res.status(200).json({
-      message: "Update Successful"
+  Company.updateOne({_id: req.params.id}, company)
+    .then(updatedCompany => {
+      console.log(updatedCompany);
+      res.status(200).json({
+        message: "Update Successful"
+      })
     })
-  })
+    .catch(error => {
+      res.status(500).json({
+        message: 'Update Company failed!'
+      })
+    });
 });
 
 router.get('', checkAuth, (req, res, next) => {
@@ -90,33 +102,49 @@ router.get('', checkAuth, (req, res, next) => {
         message: 'Companies fetched successfully!',
         companies: documents
       });
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: 'Fetching Companies failed!'
+      })
     });
 });
 
 router.get('/:id', checkAuth, (req, res, next) => {
   console.log(req.params.id);
-  Company.findById(req.params.id).then(company => {
-    if (company) {
-      console.log("Server.Company: ", company);
-      res.status(200).json(
-        company)
-    } else {
-      res.status(404).json({
-        message: 'Company not found!'
-      })
-    }
-  });
+  Company.findById(req.params.id)
+    .then(company => {
+      if (company) {
+        console.log("Server.Company: ", company);
+        res.status(200).json(
+          company)
+      } else {
+        res.status(404).json({
+          message: 'Company not found!'
+        });
+      }
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: 'Fetching Company failed!'
+      });
+    });
 });
 
 router.delete('/:id', checkAuth, (req, res, next) => {
   // console.log(req.params.id);
-  Company.deleteOne({_id: req.params.id}).then((result) => {
-
-    // console.log(result);
-    res.status(200).json({
-      message: 'Company deleted!'
+  Company.deleteOne({_id: req.params.id})
+    .then((result) => {
+      // console.log(result);
+      res.status(200).json({
+        message: 'Company deleted!'
+      })
     })
-  });
+    .catch(error => {
+      res.status(500).json({
+        message: 'Delete Company failed!'
+      });
+    });
 });
 
 module.exports = router;

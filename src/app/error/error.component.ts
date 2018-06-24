@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-error',
@@ -7,8 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ErrorComponent implements OnInit {
 
-  message = 'An unknown error occurred!';
-  constructor() { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {message: string}) { }
 
   ngOnInit() {
   }

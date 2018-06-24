@@ -1,5 +1,5 @@
 import {
-  Component,
+  Component, OnDestroy,
   OnInit,
 } from '@angular/core';
 
@@ -7,6 +7,8 @@ import {Company} from '../../../backend/models/company.model';
 import {NgForm} from '@angular/forms';
 import {CompaniesService} from '../services/companies/companies.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {Subscription} from 'rxjs';
+import {AuthService} from '../auth/auth.service';
 
 
 @Component({
@@ -14,7 +16,7 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
   templateUrl: './new-company.component.html',
   styleUrls: ['./new-company.component.css']
 })
-export class NewCompanyComponent implements OnInit {
+export class NewCompanyComponent implements OnInit, OnDestroy {
 
   states = [
     {label: 'AL', value: 'AL'},
@@ -88,11 +90,17 @@ export class NewCompanyComponent implements OnInit {
   // differentOption = !(this.qualityCheck );
   noneSelect = true;
 
-  constructor(public companiesService: CompaniesService, public route: ActivatedRoute, public router: Router) {
+  private authStatusSub: Subscription;
+
+  constructor(public companiesService: CompaniesService,
+              public route: ActivatedRoute,
+              public router: Router,
+              private authService: AuthService) {
 
   }
 
   ngOnInit() {
+
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('companyId')) {
         console.log('OnInit');
@@ -225,6 +233,10 @@ export class NewCompanyComponent implements OnInit {
       this.companiesService.addCompany(company);
       // this.isLoading = false;
       // this.router.navigate(['/companies']);
+      // this.authStatusSub = this.authService.getAuthStatusListener()
+      //   .subscribe(authStatus => {
+      //     this.isLoading = false;
+      //   });
 
     } else {
       this.companiesService.updateCompany(this.companyId, company);
@@ -254,4 +266,7 @@ export class NewCompanyComponent implements OnInit {
     console.log(this.salesCheck, this.qualityCheck, this.logisticsCheck, this.noneSelect);
   }
 
+  ngOnDestroy() {
+    this.authStatusSub.unsubscribe();
+  }
 }

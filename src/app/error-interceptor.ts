@@ -20,7 +20,16 @@ export class ErrorInterceptor implements HttpInterceptor {
 
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
-        this.dialog.open(ErrorComponent);
+        let errorMessage = 'An unknown error occurred!';
+        if (error.error.error.message) {
+          errorMessage = error.error.error.message;
+          console.log(errorMessage);
+        }
+        this.dialog.open(ErrorComponent, {
+          data: {
+            message: errorMessage
+          }
+        });
         return throwError(error);
       })
     );
