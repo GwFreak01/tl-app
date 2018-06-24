@@ -21,6 +21,7 @@ import {
   MatCheckboxModule,
   MatDatepickerModule,
   MatNativeDateModule,
+  MatDialogModule,
 
 } from '@angular/material';
 import {RouterModule,
@@ -46,6 +47,7 @@ import { EventListComponent } from './event-list/event-list.component';
 import { EditCompanyComponent } from './edit-company/edit-company.component';
 import { EditEventComponent } from './edit-event/edit-event.component';
 import {ErrorInterceptor} from './error-interceptor';
+import { ErrorComponent } from './error/error.component';
 
 
 
@@ -103,6 +105,7 @@ const appRoutes: Routes = [
     EventListComponent,
     EditCompanyComponent,
     EditEventComponent,
+    ErrorComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -125,6 +128,7 @@ const appRoutes: Routes = [
     MatCheckboxModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatDialogModule,
     // RouterModule.forRoot(appRoutes),
     FormsModule,
     // ReactiveFormsModule,
@@ -137,6 +141,7 @@ const appRoutes: Routes = [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ErrorComponent]
 })
 export class AppModule { }
