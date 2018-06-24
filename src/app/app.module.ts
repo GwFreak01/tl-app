@@ -48,6 +48,7 @@ import { EditCompanyComponent } from './edit-company/edit-company.component';
 import { EditEventComponent } from './edit-event/edit-event.component';
 import {ErrorInterceptor} from './error-interceptor';
 import { ErrorComponent } from './error/error.component';
+import {AngularMaterialModule} from './angular-material/angular-material.module';
 
 
 
@@ -112,23 +113,7 @@ const appRoutes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     LayoutModule,
-    MatInputModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatGridListModule,
-    MatCardModule,
-    MatMenuModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatExpansionModule,
-    MatProgressSpinnerModule,
-    MatCheckboxModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatDialogModule,
+    AngularMaterialModule,
     // RouterModule.forRoot(appRoutes),
     FormsModule,
     // ReactiveFormsModule,
