@@ -6,6 +6,9 @@ import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
 
+import {environment} from '../../../environments/environment';
+
+const BACKEND_URL = environment.apiUrl + '/companies/';
 @Injectable({
   providedIn: 'root'
 })
@@ -100,13 +103,13 @@ export class CompaniesService {
         other: string,
         reason: string
       }
-    }>('http://localhost:3000/api/companies/' + id);
+    }>(BACKEND_URL + id);
   }
 // TODO: Fix Infinite Spinner on Add New Company
   addCompany(newCompany: Company) {
     const company: Company = newCompany;
     console.log('CompanyService.addCompany: ', company);
-    this.http.post<{ message: string , companyId: string}>('http://localhost:3000/api/companies', company)
+    this.http.post<{ message: string , companyId: string}>(BACKEND_URL, company)
       .subscribe((res) => {
         const companyId = res.companyId;
         company.id = companyId;
@@ -121,7 +124,7 @@ export class CompaniesService {
   updateCompany(id: string, company: Company) {
     console.log('CompaniesServe.updateCompany: ', company);
     const updatedCompany: Company = company;
-    this.http.put('http://localhost:3000/api/companies/' + id, company)
+    this.http.put(BACKEND_URL + id, company)
       .subscribe(response => {
         console.log('CompaniesServe.updateCompany.response: ', response);
         const updatedCompanies = [...this.companies];
@@ -133,7 +136,7 @@ export class CompaniesService {
       });
   }
   deleteCompany(companyId: string) {
-    this.http.delete('http://localhost:3000/api/companies/' + companyId)
+    this.http.delete(BACKEND_URL + companyId)
       .subscribe(() => {
         const updatedCompanies = this.companies.filter(company => company.id !== companyId);
         this.companies = updatedCompanies;

@@ -6,7 +6,9 @@ import {Subject} from 'rxjs';
 import {Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 
+import {environment} from '../../../environments/environment';
 
+const BACKEND_URL = environment.apiUrl + '/events/';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,7 +18,7 @@ export class EventsService {
   constructor(private http: HttpClient, private router: Router) { }
 
   getEvents() {
-    this.http.get<{ message: string, events: any }>('http://localhost:3000/api/events')
+    this.http.get<{ message: string, events: any }>(BACKEND_URL)
       .pipe(map(eventData => {
         return eventData.events.map(event => {
           console.log('GetEvents: ', event);
@@ -79,13 +81,13 @@ export class EventsService {
       actualDate: string,
       rootCause: string,
       statusOption: number,
-    }>('http://localhost:3000/api/events/' + id);
+    }>(BACKEND_URL + id);
   }
   addEvent(eventForm) {
     const event: Event = eventForm;
     console.log('EventService.add: ', eventForm);
 
-    this.http.post<{message: string, eventId: string}>('http://localhost:3000/api/events', event)
+    this.http.post<{message: string, eventId: string}>(BACKEND_URL, event)
       .subscribe(response => {
         const eventId = response.eventId;
         event.id = eventId;
@@ -103,7 +105,7 @@ export class EventsService {
   updateEvent(id: string, event) {
     console.log('EventsService.updateEvent: ', event);
     const updatedEvent: Event = event;
-    this.http.put('http://localhost:3000/api/events/' + id, event)
+    this.http.put(BACKEND_URL + id, event)
       .subscribe(response => {
         console.log('EventsService.updateEvent.response: ', response);
         const updatedEvents = [...this.events];
@@ -116,7 +118,7 @@ export class EventsService {
       });
   }
   deleteEvent(eventId: string) {
-    this.http.delete('http://localhost:3000/api/events/' + eventId)
+    this.http.delete(BACKEND_URL + eventId)
       .subscribe(() => {
         const updatedEvents = this.events.filter(event => event.id !== eventId);
         this.events = updatedEvents;

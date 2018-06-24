@@ -9,7 +9,7 @@ const eventsRoutes = require('./routes/events');
 
 const app = express();
 
-mongoose.connect("mongodb+srv://gwfreak01:NfMTyV0Bg4rdaXm8@cluster0-s32lv.mongodb.net/tl-sms")
+mongoose.connect("mongodb+srv://gwfreak01:" + process.env.MONGO_ATLAS_PW + "@cluster0-s32lv.mongodb.net/tl-sms")
   .then(() => {
     console.log('Connected to database!');
   })
