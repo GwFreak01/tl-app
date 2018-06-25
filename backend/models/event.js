@@ -8,6 +8,9 @@ const eventSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  companyId: {
+    type: String,
+  },
   eventDate: {
     type: Date,
     required: true,

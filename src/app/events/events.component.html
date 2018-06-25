@@ -1,74 +1,16 @@
-<!--<h1 class="mat-h1">Events-->
-<!--<button-->
-  <!--class="submitButton"-->
-  <!--mat-raised-button-->
-  <!--color="primary"-->
-  <!--(click)="onAddButtonSelect()" >-->
-  <!--ADD NEW-->
-<!--</button>-->
-<!--<button class="submitButton"-->
-        <!--mat-raised-button-->
-        <!--type="submit"-->
-        <!--color="primary" >-->
-  <!--SEND EMAIL-->
-<!--</button>-->
-<!--</h1>-->
-<!--&lt;!&ndash;<mat-grid-list [cols]="2">&ndash;&gt;-->
-  <!--&lt;!&ndash;<p>&ndash;&gt;-->
-    <!--&lt;!&ndash;events works!&ndash;&gt;-->
-  <!--&lt;!&ndash;</p>&ndash;&gt;-->
-<!--&lt;!&ndash;</mat-grid-list>&ndash;&gt;-->
-<!--<mat-grid-list [cols]="2">-->
-  <!--<mat-grid-tile class="eventListSection">-->
-    <!--<mat-accordion>-->
-      <!--<mat-expansion-panel>-->
-        <!--<mat-expansion-panel-header>-->
-          <!--<mat-panel-title>-->
-            <!--Personal data-->
-          <!--</mat-panel-title>-->
-          <!--<mat-panel-description>-->
-            <!--Type your name and age-->
-          <!--</mat-panel-description>-->
-        <!--</mat-expansion-panel-header>-->
+<h1 class="mat-h1">Events</h1>
 
-        <!--<mat-form-field>-->
-          <!--<input matInput placeholder="First name">-->
-        <!--</mat-form-field>-->
-
-        <!--<mat-form-field>-->
-          <!--<input matInput placeholder="Age">-->
-        <!--</mat-form-field>-->
-      <!--</mat-expansion-panel>-->
-
-      <!--<mat-expansion-panel (opened)="panelOpenState = true"-->
-                           <!--(closed)="panelOpenState = false">-->
-        <!--<mat-expansion-panel-header>-->
-          <!--<mat-panel-title>-->
-            <!--Self aware panel-->
-          <!--</mat-panel-title>-->
-          <!--<mat-panel-description>-->
-            <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
-          <!--</mat-panel-description>-->
-        <!--</mat-expansion-panel-header>-->
-        <!--<p>I'm visible because I am open</p>-->
-      <!--</mat-expansion-panel>-->
-    <!--</mat-accordion>-->
-  <!--</mat-grid-tile>-->
-<!--</mat-grid-list>-->
-
-<h1 class="mat-h1">Events
-  <button class="submitButton"
+<button class="addButton"
           mat-raised-button
           color="primary" (click)="onAddButtonSelect()" >
     ADD NEW
   </button>
-  <button class="submitButton"
-          mat-raised-button
-          type="submit"
-          color="primary" >
-    SEND EMAIL
-  </button>
-</h1>
+  <!--<button class="emailButton"-->
+          <!--mat-raised-button-->
+          <!--type="submit"-->
+          <!--color="primary" >-->
+    <!--SEND EMAIL-->
+  <!--</button>-->
 <mat-grid-list [cols]="2">
   <mat-grid-tile [rowspan]="6" [colspan]="1">
     <app-event-list></app-event-list>

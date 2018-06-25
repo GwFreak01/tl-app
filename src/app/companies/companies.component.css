@@ -9,3 +9,7 @@ mat-card {
   right: 15px;
   bottom: 15px;
 }
+
+.emailbutton {
+  margin-left: 8px;
+}

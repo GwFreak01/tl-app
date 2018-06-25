@@ -1,25 +1,26 @@
-<h1 class="mat-h1">Companies
-  <button class="submitButton"
-          mat-raised-button
-          color="primary" (click)="onAddButtonSelect()" >
-    ADD NEW
-  </button>
-  <button class="submitButton"
-          mat-raised-button
-          type="submit"
-          color="primary" >
-    SEND EMAIL
-  </button>
-</h1>
+<h1 class="mat-h1">Companies</h1>
+
+<button class="addButton"
+        mat-raised-button
+        color="primary" (click)="onAddButtonSelect()" >
+  ADD NEW
+</button>
+<button class="emailbutton"
+        mat-raised-button
+        type="submit"
+        color="primary" >
+  SEND EMAIL
+</button>
+<br>
 <mat-grid-list [cols]="2">
   <mat-grid-tile>
     <!--<mat-card class="dashboard-card">-->
-      <app-company-list (editMode)="onEditCompany($event)"></app-company-list>
+    <app-company-list (editMode)="onEditCompany($event)"></app-company-list>
     <!--</mat-card>-->
   </mat-grid-tile>
   <mat-grid-tile [rowspan]="3">
     <mat-card class="dashboard-card" *ngIf="addButtonSelect">
-        <app-new-company></app-new-company>
+      <app-new-company></app-new-company>
     </mat-card>
 
   </mat-grid-tile>

@@ -83,11 +83,12 @@ export class EventsService {
       statusOption: number,
     }>(BACKEND_URL + id);
   }
-  addEvent(eventForm) {
+  addEvent(eventForm, companyId) {
     const event: Event = eventForm;
     console.log('EventService.add: ', eventForm);
 
-    this.http.post<{message: string, eventId: string}>(BACKEND_URL, event)
+
+    this.http.post<{message: string, eventId: string}>(BACKEND_URL, {event: event, companyId: companyId})
       .subscribe(response => {
         const eventId = response.eventId;
         event.id = eventId;

@@ -1,5 +1,6 @@
 .grid-container {
   margin: 50px;
+  top: 0;
 }
 
 .app-container {
@@ -35,7 +36,7 @@ h1.app-name {
 }
 
 .mat-accent {
-  color: #3f51b5;
+  color: #757de8;
 }
 
 .mat-button {
@@ -44,4 +45,10 @@ h1.app-name {
 
 mat-nav-list {
   width: 160px;
+}
+
+mat-sidenav {
+  background-color: #3f51b5;
+  color: white;
+  border-top: solid black;
 }

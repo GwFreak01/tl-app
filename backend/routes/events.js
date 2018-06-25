@@ -1,3 +1,5 @@
+const Company = require("../models/company");
+
 const express = require('express');
 const router = express.Router();
 const Event = require('../models/event');
@@ -6,17 +8,20 @@ const checkAuth = require('../middleware/check-auth');
 // TODO: Add New Event on API call
 router.post('', checkAuth, (req, res, next) => {
   console.log('Server.Events.post: ', req.body);
-  if (req.body.eventType === 'Quality') {
+
+  if (req.body.event.eventType === 'Quality') {
+    console.log(req.body.companyId);
     const qualityEvent = new Event({
-      companyName: req.body.companyName,
-      eventType: req.body.eventType,
-      eventDate: req.body.eventDate,
-      tlPartNumber: req.body.tlPartNumber,
-      purchaseOrderNumber: req.body.purchaseOrderNumber,
-      lotNumber: req.body.lotNumber,
-      carNumber: req.body.carNumber,
-      rootCause: req.body.rootCause,
-      quantityReject: req.body.quantityReject,
+      companyName: req.body.event.companyName,
+      companyId: req.body.companyId,
+      eventType: req.body.event.eventType,
+      eventDate: req.body.event.eventDate,
+      tlPartNumber: req.body.event.tlPartNumber,
+      purchaseOrderNumber: req.body.event.purchaseOrderNumber,
+      lotNumber: req.body.event.lotNumber,
+      carNumber: req.body.event.carNumber,
+      rootCause: req.body.event.rootCause,
+      quantityReject: req.body.event.quantityReject,
       statusOption: 'Open',
       // creator:
     });
@@ -27,18 +32,18 @@ router.post('', checkAuth, (req, res, next) => {
         eventId: createdEvent._id
       });
     })
-  } else if (req.body.eventType === 'Delivery') {
+  } else if (req.body.event.eventType === 'Delivery') {
     const deliveryEvent = new Event({
-      companyName: req.body.companyName,
-      eventType: req.body.eventType,
-      eventDate: req.body.eventDate,
-      tlPartNumber: req.body.tlPartNumber,
-      purchaseOrderNumber: req.body.purchaseOrderNumber,
-      lotNumber: req.body.lotNumber,
-      carNumber: req.body.carNumber,
-      rootCause: req.body.rootCause,
-      requiredDate: req.body.requiredDate,
-      actualDate: req.body.actualDate,
+      companyName: req.body.event.companyName,
+      eventType: req.body.event.eventType,
+      eventDate: req.body.event.eventDate,
+      tlPartNumber: req.body.event.tlPartNumber,
+      purchaseOrderNumber: req.body.event.purchaseOrderNumber,
+      lotNumber: req.body.event.lotNumber,
+      carNumber: req.body.event.carNumber,
+      rootCause: req.body.event.rootCause,
+      requiredDate: req.body.event.requiredDate,
+      actualDate: req.body.event.actualDate,
       statusOption: 'Open'
     });
 
