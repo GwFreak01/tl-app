@@ -1,7 +1,7 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
 
 <mat-accordion *ngIf="events.length > 0 && !isLoading">
-  <mat-expansion-panel *ngFor="let event of events">
+  <mat-expansion-panel *ngFor="let event of events" [style.background-color]="getColor(event.statusOption)">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <h3> {{ event.companyName}} </h3>

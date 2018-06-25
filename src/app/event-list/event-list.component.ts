@@ -51,4 +51,13 @@ export class EventListComponent implements OnInit, OnDestroy {
     console.log('Delete: ', eventId);
     this.eventsService.deleteEvent(eventId);
   }
+  getColor(status: string) {
+    if (status === 'Open') {
+      return 'red';
+    } else if (status === 'Pending') {
+      return 'yellow';
+    } else if (status === 'Closed') {
+      return 'green';
+    }
+  }
 }

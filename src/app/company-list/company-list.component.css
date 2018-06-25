@@ -18,3 +18,6 @@ mat-accordion {
   right: 15px;
   bottom: 15px;
 }
+table {
+  width: 100%;
+}

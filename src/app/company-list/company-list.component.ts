@@ -31,7 +31,7 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
 
   // dataSource = new EventDataSource(this.eventsService);
-  columnsToDisplay = ['eventDate'];
+  columnsToDisplay = ['eventDate', 'eventType', 'carNumber', 'status'];
 
   private events: Event[];
   private eventsSub: Subscription;
@@ -86,6 +86,16 @@ export class CompanyListComponent implements OnInit, OnDestroy {
     // console.log('GetEventTable: ', companyEvents);
     return companyEvents;
   }
+
+  getColor(status: string) {
+    if (status === 'Open') {
+      return 'red';
+    } else if (status === 'Pending') {
+      return 'yellow';
+    } else if (status === 'Closed') {
+      return 'green';
+    }
+  }
 }
 
 // export class EventDataSource extends DataSource<any> {
@@ -93,7 +103,7 @@ export class CompanyListComponent implements OnInit, OnDestroy {
 //     super();
 //   }
 //   connect(): Observable<Event[]> {
-//     return this.userService.getUser();
+//     return this.eventsService.getEvents();
 //   }
 //   disconnect() {}
 // }
