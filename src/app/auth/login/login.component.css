@@ -1,4 +1,16 @@
-img {
-  align-items: center;
+.loginContainer {
 }
 
+.createButton {
+  margin-left: 8px;
+}
+
+mat-spinner {
+  margin: 0 auto;
+  justify-content: center;
+}
+
+mat-card {
+  text-align: center;
+
+}
