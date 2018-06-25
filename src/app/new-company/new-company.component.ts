@@ -9,6 +9,7 @@ import {CompaniesService} from '../services/companies/companies.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {AuthService} from '../auth/auth.service';
+import {EventsService} from '../services/events/events.service';
 
 
 @Component({
@@ -93,6 +94,7 @@ export class NewCompanyComponent implements OnInit, OnDestroy {
   private authStatusSub: Subscription;
 
   constructor(public companiesService: CompaniesService,
+              public eventsService: EventsService,
               public route: ActivatedRoute,
               public router: Router,
               private authService: AuthService) {
@@ -240,6 +242,8 @@ export class NewCompanyComponent implements OnInit, OnDestroy {
 
     } else {
       this.companiesService.updateCompany(this.companyId, company);
+      this.eventsService.updateEvents(this.companyId, company.companyName);
+      console.log('End Save');
       // this.router.navigate(['/companies']);
 
 

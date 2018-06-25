@@ -35,6 +35,7 @@ router.post('', checkAuth, (req, res, next) => {
   } else if (req.body.event.eventType === 'Delivery') {
     const deliveryEvent = new Event({
       companyName: req.body.event.companyName,
+      companyId: req.body.companyId,
       eventType: req.body.event.eventType,
       eventDate: req.body.event.eventDate,
       tlPartNumber: req.body.event.tlPartNumber,
@@ -64,6 +65,49 @@ router.put('/:id', checkAuth, (req, res, next) => {
       message: 'Update Successful'
     })
   });
+});
+
+router.put('', checkAuth, (req, res, next) => {
+  // Req.Body = {companyId, companyName}
+  console.log('ServerEventCompanyId: ', req.body);
+  // const effectedEvents = [];
+  const updatedEvents = [];
+  Event.updateMany({companyId: req.body.companyId}, {companyName: req.body.companyName}, function (err, response) {
+    if (err) {
+      res.status(500).json({
+        message: 'Update events failed!'
+      });
+      console.log('UpdateManyRes: ', response);
+      res.status(200).json({
+        message: 'Updated events successfully'
+      });
+    }
+  });
+  // Event.find({companyId: req.body.companyId}).then(events => {
+  //   console.log('EffectedEvents: ', events, events.length);
+  //   this.effectedEvents = events;
+  //
+  //   for (let i = 0; i < this.effectedEvents.length; i++) {
+  //     Event.findByIdAndUpdate({companyId: this.effectedEvents[i].companyId}, {companyName: req.body.companyName}, {
+  //       new: true,
+  //       multi: true
+  //     }, function (err, model) {
+  //       if (err) {
+  //         res.status(400).json({
+  //           message: 'Update Failed'
+  //         })
+  //       }
+  //       console.log(model);
+  //
+  //     });
+  //
+  //   }
+
+    // console.log('UpdatedEvents: ', updatedEvents);
+
+  // });
+
+
 });
 
 router.get('', checkAuth, (req, res, next) => {

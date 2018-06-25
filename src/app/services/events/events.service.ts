@@ -70,6 +70,7 @@ export class EventsService {
     return this.http.get<{
       id: string,
       companyName: string,
+      companyId: string,
       eventType: string,
       eventDate: string,
       tlPartNumber: string,
@@ -118,6 +119,30 @@ export class EventsService {
         this.router.navigate(['/events']);
       });
   }
+
+  updateEvents(companyId: string, companyName: string) {
+    const effectedEvents = this.events.filter(effectedEvent => effectedEvent.companyId !== companyId);
+
+    // for (let i = 0; i < effectedEvents.length; i++) {
+      // console.log('updateEvents.effectedEvents, NewCompanyName: ', effectedEvents[i], companyName);
+
+      // this.updateEvent()
+    // }
+    console.log('updateEvents.effectedEvents,OldCompanyName: ', effectedEvents, companyName);
+    // const updatedCompanies = this.companies.filter(company => company.id !== companyId);
+    //
+    this.http.put(BACKEND_URL, {companyId: companyId, companyName: companyName}).subscribe(response => {
+      this.getEvents();
+    //   console.log('EventsService.updateEvents.response: ', response);
+    //   const updatedEvents = [...this.events];
+    //   console.log('EventService.updatedEvents: ', updatedEvents);
+    //   const oldEventIndex = updatedEvents.findIndex(e => e.id === updatedEvents.id);
+    //   updatedEvents[oldEventIndex] = event;
+    //   this.events = updatedEvents;
+    //   this.eventsUpdated.next([...this.events]);
+    //   this.router.navigate(['/events']);
+    });
+  }
   deleteEvent(eventId: string) {
     this.http.delete(BACKEND_URL + eventId)
       .subscribe(() => {
@@ -131,4 +156,6 @@ export class EventsService {
   getCompanyEvents(companyName: string) {
 
   }
+
+
 }

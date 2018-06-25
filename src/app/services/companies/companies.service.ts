@@ -22,7 +22,7 @@ export class CompaniesService {
 
   getCompanies() {
     // return [...this.companies];
-    this.http.get<{ message: string, companies: any }>('http://localhost:3000/api/companies')
+    this.http.get<{ message: string, companies: any }>(BACKEND_URL)
       .pipe(map((companyData) => {
         return companyData.companies.map((company) => {
           return {
@@ -132,8 +132,10 @@ export class CompaniesService {
         updatedCompanies[oldCompanyIndex] = company;
         this.companies = updatedCompanies;
         this.companiesUpdated.next([...this.companies]);
+
         this.router.navigate(['/companies']);
       });
+
   }
   deleteCompany(companyId: string) {
     this.http.delete(BACKEND_URL + companyId)

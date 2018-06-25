@@ -1,6 +1,7 @@
 export interface Event {
   id: string;
   companyName: string;
+  companyId: string;
   eventType: string;
   eventDate: string;
   tlPartNumber: string;

@@ -50,6 +50,7 @@ export class NewEventComponent implements OnInit, OnDestroy {
           const qualityEvent: Event = {
             id: this.eventId,
             companyName: eventData.companyName,
+            companyId: eventData.companyId,
             eventType: eventData.eventType,
             eventDate: eventData.eventDate,
             tlPartNumber: eventData.tlPartNumber,
@@ -66,6 +67,7 @@ export class NewEventComponent implements OnInit, OnDestroy {
           const deliveryEvent: Event = {
             id: this.eventId,
             companyName: eventData.companyName,
+            companyId: eventData.companyId,
             eventType: eventData.eventType,
             eventDate: eventData.eventDate,
             tlPartNumber: eventData.tlPartNumber,
