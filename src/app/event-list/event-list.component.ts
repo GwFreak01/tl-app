@@ -33,7 +33,7 @@ export class EventListComponent implements OnInit, OnDestroy {
       });
     console.log('Event List: ', this.events);
     this.userIsAuthenticated = this.authService.getIsAuth();
-    console.log('EventList.userIsAuthenicated: ', this.userIsAuthenticated);
+    console.log('EventList.userIsAuthenticated: ', this.userIsAuthenticated);
 
     this.authStatusSub = this.authService.getAuthStatusListener()
       .subscribe(isAuthenticated => {
