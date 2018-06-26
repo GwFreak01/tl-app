@@ -11,30 +11,30 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <table mat-table [dataSource]="getEventTable(company)">
-      <ng-container matColumnDef="eventDate">
-        <th mat-header-cell *matHeaderCellDef>Date</th>
-        <td mat-cell *matCellDef="let event"> {{event.eventDate | date :'shortDate'}} </td>
-      </ng-container>
+    <!--<table mat-table [dataSource]="getEventTable(company)">-->
+      <!--<ng-container matColumnDef="eventDate">-->
+        <!--<th mat-header-cell *matHeaderCellDef>Date</th>-->
+        <!--<td mat-cell *matCellDef="let event"> {{event.eventDate | date :'shortDate'}} </td>-->
+      <!--</ng-container>-->
 
-      <ng-container matColumnDef="eventType">
-        <th mat-header-cell *matHeaderCellDef>Type</th>
-        <td mat-cell *matCellDef="let event"> {{event.eventType}} </td>
-      </ng-container>
+      <!--<ng-container matColumnDef="eventType">-->
+        <!--<th mat-header-cell *matHeaderCellDef>Type</th>-->
+        <!--<td mat-cell *matCellDef="let event"> {{event.eventType}} </td>-->
+      <!--</ng-container>-->
 
-      <ng-container matColumnDef="carNumber">
-        <th mat-header-cell *matHeaderCellDef>CAR #</th>
-        <td mat-cell *matCellDef="let event"> {{event.carNumber}} </td>
-      </ng-container>
+      <!--<ng-container matColumnDef="carNumber">-->
+        <!--<th mat-header-cell *matHeaderCellDef>CAR #</th>-->
+        <!--<td mat-cell *matCellDef="let event"> {{event.carNumber}} </td>-->
+      <!--</ng-container>-->
 
-      <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef>Status</th>
-        <td mat-cell *matCellDef="let event"> {{event.statusOption}} </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-      <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay" [style.background-color]="getColor(myRowData.statusOption)"></tr>
+      <!--<ng-container matColumnDef="status">-->
+        <!--<th mat-header-cell *matHeaderCellDef>Status</th>-->
+        <!--<td mat-cell *matCellDef="let event"> {{event.statusOption}} </td>-->
+      <!--</ng-container>-->
+      <!--<tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>-->
+      <!--<tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay" [style.background-color]="getColor(myRowData.statusOption)"></tr>-->
 
-    </table>
+    <!--</table>-->
 
 
     <mat-action-row *ngIf="userIsAuthenticated">
