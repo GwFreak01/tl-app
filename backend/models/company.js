@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
+const Event = require('./event');
+var EventSchema = mongoose.model('Event').schema
 
 const companyAddress = mongoose.Schema({
   street1: {
@@ -90,7 +92,7 @@ const companySchema = mongoose.Schema({
   certification: {
     type: certification,
     required: true
-  },
+  }
 });
 // companySchema.set('autoIndex', false);
 //

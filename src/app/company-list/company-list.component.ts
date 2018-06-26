@@ -49,19 +49,21 @@ export class CompanyListComponent implements OnInit, OnDestroy {
     console.log('DataSource: ', this.dataSource);
 
     this.isLoading = true;
+    this.eventsService.getEvents();
+    this.eventsSub = this.eventsService.getEventUpdateListener()
+      .subscribe((events: Event[]) => {
+        this.isLoading = false;
+        this.events = events;
+        console.log('CompanyEvents: ', events);
+      });
+
     this.companiesService.getCompanies();
     this.companiesSub = this.companiesService.getCompanyUpdateListener()
       .subscribe((companies: Company[]) => {
         this.isLoading = false;
         this.companies = companies;
-        this.eventsService.getEvents();
-        this.eventsSub = this.eventsService.getEventUpdateListener()
-          .subscribe((events: Event[]) => {
-            this.isLoading = false;
-            this.events = events;
-            console.log('CompanyEvents: ', events);
-          });
-    });
+
+      });
     this.userIsAuthenticated = this.authService.getIsAuth();
     console.log('CompanyList.userIsAuthenicated: ', this.userIsAuthenticated);
 

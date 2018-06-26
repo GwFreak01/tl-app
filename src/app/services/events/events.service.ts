@@ -69,88 +69,7 @@ export class EventsService {
   }
 
   getAllEvents(): Observable<Event[]> {
-    // console.log('getAllEvents');
     return this.http.get<Event[]>(BACKEND_URL + '/getAll');
-    // this.http.get<{ events: any }>(BACKEND_URL + '/getAll')
-    //   .pipe(map(eventData => {
-    //     if (eventData.events.eventType === 'Quality') {
-    //       return {
-    //         id: eventData.events._id,
-    //         companyName: eventData.events.companyName,
-    //         companyId: eventData.events.companyId,
-    //         eventType: eventData.events.eventType,
-    //         eventDate: eventData.events.eventDate,
-    //         tlPartNumber: eventData.events.tlPartNumber,
-    //         purchaseOrderNumber: eventData.events.purchaseOrderNumber,
-    //         lotNumber: eventData.events.lotNumber,
-    //         carNumber: eventData.events.carNumber,
-    //         quantityReject: eventData.events.quantityReject,
-    //         rootCause: eventData.events.rootCause,
-    //         statusOption: eventData.events.statusOption,
-    //       };
-    //     } else {
-    //       return {
-    //         id: eventData.events._id,
-    //         companyName: eventData.events.companyName,
-    //         companyId: eventData.events.companyId,
-    //         eventType: eventData.events.eventType,
-    //         eventDate: eventData.events.eventDate,
-    //         tlPartNumber: eventData.events.tlPartNumber,
-    //         purchaseOrderNumber: eventData.events.purchaseOrderNumber,
-    //         lotNumber: eventData.events.lotNumber,
-    //         carNumber: eventData.events.carNumber,
-    //         requiredDate: eventData.events.requiredDate,
-    //         actualDate: eventData.events.actualDate,
-    //         rootCause: eventData.events.rootCause,
-    //         statusOption: eventData.events.statusOption,
-    //       };
-    //     }
-    //   }))
-    //   .subscribe(transformedEvents => {
-    //     // this.events = transformedEvents;
-    //     this.eventsUpdated.next([...this.events]);
-    //   });
-    // return this.eventsUpdated;
-  // )
-  //   })
-
-    //   .pipe(map(eventData => {
-    //   return eventData.events.map(event => {
-    //     if (event.eventType === 'Quality') {
-    //       return {
-    //         id: event._id,
-    //         companyName: event.companyName,
-    //         companyId: event.companyId,
-    //         eventType: event.eventType,
-    //         eventDate: event.eventDate,
-    //         tlPartNumber: event.tlPartNumber,
-    //         purchaseOrderNumber: event.purchaseOrderNumber,
-    //         lotNumber: event.lotNumber,
-    //         carNumber: event.carNumber,
-    //         quantityReject: event.quantityReject,
-    //         rootCause: event.rootCause,
-    //         statusOption: event.statusOption,
-    //       };
-    //     } else {
-    //       return {
-    //         id: event.event._id,
-    //         companyName: event.companyName,
-    //         companyId: event.companyId,
-    //         eventType: event.eventType,
-    //         eventDate: event.eventDate,
-    //         tlPartNumber: event.tlPartNumber,
-    //         purchaseOrderNumber: event.purchaseOrderNumber,
-    //         lotNumber: event.lotNumber,
-    //         carNumber: event.carNumber,
-    //         requiredDate: event.requiredDate,
-    //         actualDate: event.actualDate,
-    //         rootCause: event.rootCause,
-    //         statusOption: event.statusOption,
-    //       };
-    //     }
-    //   });
-    //
-    // }));
   }
   getEventUpdateListener() {
     return this.eventsUpdated.asObservable();
@@ -182,7 +101,7 @@ export class EventsService {
   updateEvent(id: string, event) {
     console.log('EventsService.updateEvent: ', event);
     const updatedEvent: Event = event;
-    this.http.put(BACKEND_URL + id, event)
+    this.http.post(BACKEND_URL + id, event)
       .subscribe(response => {
         console.log('EventsService.updateEvent.response: ', response);
         const updatedEvents = [...this.events];

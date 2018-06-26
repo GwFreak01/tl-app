@@ -3,6 +3,10 @@ const debug = require('debug')("node-angular");
 const http = require("http");
 const app = require("./app");
 
+// import {environment} from '../../environments/environment';
+
+
+
 const normalizePort = val => {
   var port = parseInt(val, 10);
 
