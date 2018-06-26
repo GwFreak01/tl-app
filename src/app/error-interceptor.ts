@@ -25,11 +25,11 @@ export class ErrorInterceptor implements HttpInterceptor {
           errorMessage = error.error.message;
           console.log(errorMessage);
         }
-        // this.dialog.open(ErrorComponent, {
-        //   data: {
-        //     message: errorMessage
-        //   }
-        // });
+        this.dialog.open(ErrorComponent, {
+          data: {
+            message: errorMessage
+          }
+        });
         return throwError(error);
       })
     );
