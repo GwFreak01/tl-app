@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
-exports.userCreate = (req, res, next) => {
+exports.createUser = (req, res, next) => {
   bcrypt.hash(req.body.password, 10).then(hash => {
     const user = new User({
       username: req.body.username,
@@ -25,7 +25,7 @@ exports.userCreate = (req, res, next) => {
   });
 };
 
-exports.userLogin = (req, res, next) => {
+exports.loginUser = (req, res, next) => {
   let fetchedUser;
   console.log(req.body.email);
   User.findOne({email: req.body.email})
