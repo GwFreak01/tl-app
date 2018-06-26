@@ -41,7 +41,7 @@ export class AuthService {
   }
 
   loginUser(username: string, password: string) {
-    const sanitizeUsername = username.trim();
+    const sanitizeUsername = username.trim().toLowerCase();
     const authData: AuthData = {
       username: sanitizeUsername,
       email: sanitizeUsername,
