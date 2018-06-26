@@ -41,9 +41,10 @@ export class AuthService {
   }
 
   loginUser(username: string, password: string) {
+    const sanitizeUsername = username.trim();
     const authData: AuthData = {
-      username: username,
-      email: username,
+      username: sanitizeUsername,
+      email: sanitizeUsername,
       password: password
     };
     this.http.post<{ message: string, token: string, expiresIn: number }>(BACKEND_URL + '/login', authData)
