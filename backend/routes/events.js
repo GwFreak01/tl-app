@@ -15,6 +15,8 @@ router.post('/all', checkAuth, EventController.updateEvents);
 
 router.get('', checkAuth, EventController.getEvents);
 
+router.get('/getAll', checkAuth, EventController.getAllEvents);
+
 router.get('/:id', checkAuth, EventController.getEvent);
 
 router.delete('/:id', checkAuth, EventController.deleteEvent);

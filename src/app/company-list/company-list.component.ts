@@ -10,10 +10,12 @@ import {
 import {Company} from '../../../backend/models/company.model';
 import {Event} from '../../../backend/models/event.model';
 import {CompaniesService} from '../services/companies/companies.service';
-import {Observable, Subscription} from 'rxjs';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {AuthService} from '../auth/auth.service';
 import {DataSource} from '@angular/cdk/table';
 import {EventsService} from '../services/events/events.service';
+// import {EventsDataSource} from '../events/EventsDataSource';
+import {MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-company-list',
@@ -31,6 +33,8 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
 
   // dataSource = new EventDataSource(this.eventsService);
+
+  dataSource: EventsDataSource;
   columnsToDisplay = ['eventDate', 'eventType', 'carNumber', 'status'];
 
   private events: Event[];
@@ -41,6 +45,9 @@ export class CompanyListComponent implements OnInit, OnDestroy {
               private authService: AuthService) { }
 
   ngOnInit() {
+    this.dataSource = new EventsDataSource(this.eventsService);
+    console.log('DataSource: ', this.dataSource);
+
     this.isLoading = true;
     this.companiesService.getCompanies();
     this.companiesSub = this.companiesService.getCompanyUpdateListener()
@@ -81,11 +88,12 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   }
 
   getEventTable(company) {
-    let companyEvents: Event[] = [];
-    if (!company) {
+    const companyEvents: Event[]  = this.events.filter(event => event.companyName === company.companyName);
+    if (companyEvents == null) {
       return companyEvents;
+    } else {
+      // console.log()
     }
-    companyEvents = this.events.filter(event => event.companyName === company.companyName);
     // console.log(company);
     // console.log('GetEventTable: ', companyEvents);
     return companyEvents;
@@ -111,3 +119,20 @@ export class CompanyListComponent implements OnInit, OnDestroy {
 //   }
 //   disconnect() {}
 // }
+
+
+export class EventsDataSource extends DataSource<any> {
+
+  constructor(private eventsService: EventsService) {
+    super();
+  }
+
+  connect(): Observable<Event[]> {
+    return this.eventsService.getAllEvents();
+  }
+
+  disconnect(): void {
+  }
+
+
+}

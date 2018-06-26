@@ -32,19 +32,21 @@ export class AuthService {
   }
 
   createUser(user) {
+    const sanitizedUsername = user.username.trim().toLowerCase();
+    const sanitizedEmail = user.email.trim().toLowerCase();
     const authData: AuthData = {
-      username: user.username,
-      email: user.email,
+      username: sanitizedUsername,
+      email: sanitizedEmail,
       password: user.password
     };
     return this.http.post(BACKEND_URL + '/create-user', authData);
   }
 
   loginUser(username: string, password: string) {
-    const sanitizeUsername = username.trim().toLowerCase();
+    const sanitizedUsername = username.trim().toLowerCase();
     const authData: AuthData = {
-      username: sanitizeUsername,
-      email: sanitizeUsername,
+      username: sanitizedUsername,
+      email: sanitizedUsername,
       password: password
     };
     this.http.post<{ message: string, token: string, expiresIn: number }>(BACKEND_URL + '/login', authData)

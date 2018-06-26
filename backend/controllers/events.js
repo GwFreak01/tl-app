@@ -125,6 +125,16 @@ exports.getEvents = (req, res, next) => {
     });
 };
 
+exports.getAllEvents = (req, res, next) => {
+  Event.find()
+    .then(documents => {
+        // console.log('Documents: ', documents);
+        // return documents;
+      return res.status(200).json(documents);
+      }
+    )
+};
+
 exports.getEvent = (req, res, next) => {
   console.log(req.params.id);
   Event.findById(req.params.id).then(event => {
