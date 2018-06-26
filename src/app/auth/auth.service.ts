@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AuthData} from './auth-data.model';
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {Router} from '@angular/router';
 
 import {environment} from '../../environments/environment';
@@ -31,24 +31,24 @@ export class AuthService {
     return this.authStatusListener.asObservable();
   }
 
-  createUser(username: string, email: string, password: string) {
+  createUser(user) {
     const authData: AuthData = {
-      username: username,
-      email: email,
-      password: password
+      username: user.username,
+      email: user.email,
+      password: user.password
     };
     return this.http.post(BACKEND_URL + '/create-user', authData);
   }
 
-  loginUser(email: string, password: string) {
+  loginUser(username: string, password: string) {
     const authData: AuthData = {
-      username: '',
-      email: email,
+      username: username,
+      email: username,
       password: password
     };
-    this.http.post<{token: string, expiresIn: number}>(BACKEND_URL + '/login', authData)
+    this.http.post<{ message: string, token: string, expiresIn: number }>(BACKEND_URL + '/login', authData)
       .subscribe(response => {
-        console.log(response);
+        console.log(response.message);
         const token = response.token;
         this.token = token;
         if (token) {
@@ -62,8 +62,16 @@ export class AuthService {
           console.log(expirationDate);
           this.saveAuthData(token, expirationDate);
           this.router.navigate(['/companies']);
+        } else {
+          console.log('loginService Fail');
         }
 
+      }, error => {
+        // console.log(error.message);
+        return error.message;
+      }, () => {
+        // return;
+        // this.router.navigate(['/login']);
       });
   }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {AuthService} from '../auth.service';
+import {Router} from '@angular/router';
 import {log} from 'util';
 
 @Component({
@@ -11,7 +12,7 @@ import {log} from 'util';
 export class LoginComponent implements OnInit {
 
   isLoading = false;
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -23,6 +24,8 @@ export class LoginComponent implements OnInit {
     }
     this.isLoading = true;
     this.authService.loginUser(loginForm.value.username, loginForm.value.password);
+    this.isLoading = false;
+    loginForm.resetForm();
 
   }
 

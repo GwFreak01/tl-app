@@ -19,26 +19,25 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.authStatusSub = this.authService.getAuthStatusListener()
       .subscribe(authStatus => {
-        this.isLoading = false;
-      }
-    );
+          this.isLoading = false;
+        }
+      );
   }
 // TODO: Verify second password
   onCreateUser(createUserForm: NgForm) {
-    console.log(createUserForm.value);
+    // console.log(createUserForm.value);
     if (createUserForm.invalid) {
       return;
     } else {
       this.isLoading = true;
-      this.authService.createUser(
-        createUserForm.value.username,
-        createUserForm.value.email,
-        createUserForm.value.password).subscribe(() => {
-        this.router.navigate(['/dashboard']);
-      }, error => {
-        // console.log(error);
-        this.isLoading = false;
-      });
+      this.authService.createUser(createUserForm.value)
+        .subscribe((response) => {
+          // console.log('onCreateUser.response: ', response);
+          this.router.navigate(['/dashboard']);
+        }, error => {
+          // console.log(error);
+          this.isLoading = false;
+        });
     }
   }
 

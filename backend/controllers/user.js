@@ -15,10 +15,9 @@ exports.createUser = (req, res, next) => {
         result: result
       });
     }).catch(err => {
+      console.log(err.message);
       res.status(500).json({
-        error: {
-          message: 'Invalid authentication credentials!'
-        }
+        message: err.message
       });
     });
 
@@ -27,11 +26,11 @@ exports.createUser = (req, res, next) => {
 
 exports.loginUser = (req, res, next) => {
   let fetchedUser;
-  User.findOne({email: req.body.email})
+  User.findOne({$or:[{username: req.body.username}, {email: req.body.email}]})
     .then(user => {
       if (!user) {
         return res.status(404).json({
-          message: 'Auth Failed'
+          message: 'No user found'
         });
       }
       fetchedUser = user;
@@ -40,7 +39,7 @@ exports.loginUser = (req, res, next) => {
     .then(result => {
       if (!result) {
         return res.status(404).json({
-          message: 'Auth Failed'
+          message: 'Password incorrect!'
         });
       }
       const token = jwt.sign(
@@ -54,15 +53,19 @@ exports.loginUser = (req, res, next) => {
           expiresIn: '1h'
         }
       );
-      console.log('Server.login.token: ', token);
-      res.status(200).json({
+      // console.log('Server.login.token: ', token);
+      return res.status(200).json({
         token: token,
         expiresIn: 3600
       })
+    }, error => {
+      return res.status(404).json({
+        message: error.message
+      });
     })
     .catch(err => {
       return res.status(404).json({
-        message: 'Invalid authentication credentials!'
+        message: err.message
       });
     })
 };
