@@ -49,7 +49,7 @@ export class AuthService {
     };
     this.http.post<{ message: string, token: string, expiresIn: number }>(BACKEND_URL + '/login', authData)
       .subscribe(response => {
-        console.log(response.message);
+        // console.log(response.message);
         const token = response.token;
         this.token = token;
         if (token) {
@@ -83,7 +83,7 @@ export class AuthService {
     }
     const now = new Date();
     const expiresIn = authInformation.expirationDate.getTime() - now.getTime();
-    console.log(authInformation, expiresIn);
+    // console.log(authInformation, expiresIn);
     if (expiresIn > 0) {
       this.token = authInformation.token;
       this.isAuthenticated = true;
@@ -102,7 +102,7 @@ export class AuthService {
   }
 
   private setAuthTimer(duration: number) {
-    console.log('Setting Auth Timer: ', duration);
+    // console.log('Setting Auth Timer: ', duration);
     this.tokenTimer = setTimeout(() => {
       this.logout();
     }, duration * 1000);
@@ -110,9 +110,8 @@ export class AuthService {
   private saveAuthData(token: string, expirationDate: Date) {
     localStorage.setItem('token', token);
     const tokenVar = localStorage.getItem('token');
-    console.log('saveAuthData.token: ', tokenVar);
+    // console.log('saveAuthData.token: ', tokenVar);
     localStorage.setItem('expirationDate', expirationDate.toISOString());
-    // localStorage.setItem('test', 'TESTAWDFASDFAS');
   }
 
   private clearAuthData() {

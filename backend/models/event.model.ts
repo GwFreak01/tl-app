@@ -12,6 +12,6 @@ export interface Event {
   requiredDate: string;
   actualDate: string;
   rootCause: string;
-  statusOption: number;
+  statusOption: string;
 }
 

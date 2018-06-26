@@ -24,22 +24,22 @@ export class EventListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoading = true;
+    this.userIsAuthenticated = this.authService.getIsAuth();
+    console.log('EventList.userIsAuthenticated: ', this.userIsAuthenticated);
+    this.authStatusSub = this.authService.getAuthStatusListener()
+      .subscribe(isAuthenticated => {
+        // console.log('EventList.Ath: ', isAuthenticated);
+        this.userIsAuthenticated = isAuthenticated;
+      });
     this.eventsService.getEvents();
     this.eventsSub = this.eventsService.getEventUpdateListener()
       .subscribe((events: Event[]) => {
-        this.isLoading = false;
         this.events = events;
-        console.log('EventSub: ', events);
+        this.isLoading = false;
+        // console.log('EventSub: ', events);
+        console.log('Event List: ', this.events);
       });
-    console.log('Event List: ', this.events);
-    this.userIsAuthenticated = this.authService.getIsAuth();
-    console.log('EventList.userIsAuthenticated: ', this.userIsAuthenticated);
 
-    this.authStatusSub = this.authService.getAuthStatusListener()
-      .subscribe(isAuthenticated => {
-        console.log('EventList.Ath: ', isAuthenticated);
-        this.userIsAuthenticated = isAuthenticated;
-      });
   }
 
   ngOnDestroy() {

@@ -8,24 +8,26 @@ import {map} from 'rxjs/operators';
 
 import {environment} from '../../../environments/environment';
 
-const BACKEND_URL = environment.apiUrl + '/events/';
+const BACKEND_URL = environment.apiUrl + '/events';
 @Injectable({
   providedIn: 'root'
 })
 export class EventsService {
   private events: Event[] = [];
   private eventsUpdated = new Subject<Event[]>();
+
   constructor(private http: HttpClient, private router: Router) { }
 
   getEvents() {
     this.http.get<{ message: string, events: any }>(BACKEND_URL)
       .pipe(map(eventData => {
         return eventData.events.map(event => {
-          console.log('GetEvents: ', event);
+          // console.log('GetEvents: ', event);
           if (event.eventType === 'Quality') {
             return {
               id: event._id,
               companyName: event.companyName,
+              companyId: event.companyId,
               eventType: event.eventType,
               eventDate: event.eventDate,
               tlPartNumber: event.tlPartNumber,
@@ -40,6 +42,7 @@ export class EventsService {
             return {
               id: event._id,
               companyName: event.companyName,
+              companyId: event.companyId,
               eventType: event.eventType,
               eventDate: event.eventDate,
               tlPartNumber: event.tlPartNumber,
@@ -56,7 +59,7 @@ export class EventsService {
         });
       }))
       .subscribe(transformedEvents => {
-        console.log('Transformed Events: ', transformedEvents);
+        // console.log('Transformed Events: ', transformedEvents);
         this.events = transformedEvents;
         this.eventsUpdated.next([...this.events]);
       });
@@ -67,22 +70,7 @@ export class EventsService {
   }
 
   getEvent(id: string) {
-    return this.http.get<{
-      id: string,
-      companyName: string,
-      companyId: string,
-      eventType: string,
-      eventDate: string,
-      tlPartNumber: string,
-      purchaseOrderNumber: string,
-      lotNumber: string,
-      carNumber: string,
-      quantityReject: number,
-      requiredDate: string,
-      actualDate: string,
-      rootCause: string,
-      statusOption: number,
-    }>(BACKEND_URL + id);
+    return this.http.get<{event: any}>(BACKEND_URL + id);
   }
   addEvent(eventForm, companyId) {
     const event: Event = eventForm;
@@ -121,27 +109,15 @@ export class EventsService {
   }
 
   updateEvents(companyId: string, companyName: string) {
-    const effectedEvents = this.events.filter(effectedEvent => effectedEvent.companyId !== companyId);
-
-    // for (let i = 0; i < effectedEvents.length; i++) {
-      // console.log('updateEvents.effectedEvents, NewCompanyName: ', effectedEvents[i], companyName);
-
-      // this.updateEvent()
-    // }
+    const effectedEvents = this.events.filter(effectedEvent => effectedEvent.companyId === companyId);
     console.log('updateEvents.effectedEvents,OldCompanyName: ', effectedEvents, companyName);
-    // const updatedCompanies = this.companies.filter(company => company.id !== companyId);
-    //
-    this.http.put(BACKEND_URL, {companyId: companyId, companyName: companyName}).subscribe(response => {
-      this.getEvents();
-    //   console.log('EventsService.updateEvents.response: ', response);
-    //   const updatedEvents = [...this.events];
-    //   console.log('EventService.updatedEvents: ', updatedEvents);
-    //   const oldEventIndex = updatedEvents.findIndex(e => e.id === updatedEvents.id);
-    //   updatedEvents[oldEventIndex] = event;
-    //   this.events = updatedEvents;
-    //   this.eventsUpdated.next([...this.events]);
-    //   this.router.navigate(['/events']);
-    });
+
+    this.http.post<{message: string}>(BACKEND_URL + '/all', {companyId: companyId, companyName: companyName})
+      .subscribe(response => {
+        this.getEvents();
+      }, error => {
+        console.log(error.message);
+      });
   }
   deleteEvent(eventId: string) {
     this.http.delete(BACKEND_URL + eventId)

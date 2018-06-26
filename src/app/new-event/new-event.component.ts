@@ -42,52 +42,53 @@ export class NewEventComponent implements OnInit, OnDestroy {
         this.eventId = paramMap.get('eventId');
         this.isLoading = true;
         console.log('OnInitEventID: ', this.mode, this.eventId);
-        this.eventsService.getEvent(this.eventId).subscribe(eventData => {
-          this.isLoading = false;
-          console.log('OnInitEventData: ', eventData);
+        this.eventsService.getEvent(this.eventId)
+          .subscribe(eventData => {
+            this.isLoading = false;
+            console.log('OnInitEventData: ', eventData);
 
-          // console.log('OnInitEvent: ', this.event = eventData.companyName);
-          const qualityEvent: Event = {
-            id: this.eventId,
-            companyName: eventData.companyName,
-            companyId: eventData.companyId,
-            eventType: eventData.eventType,
-            eventDate: eventData.eventDate,
-            tlPartNumber: eventData.tlPartNumber,
-            purchaseOrderNumber: eventData.purchaseOrderNumber,
-            lotNumber: eventData.lotNumber,
-            carNumber: eventData.carNumber,
-            quantityReject: eventData.quantityReject,
-            requiredDate: null,
-            actualDate: null,
-            rootCause: eventData.rootCause,
-            statusOption: eventData.statusOption,
-          };
+            // console.log('OnInitEvent: ', this.event = eventData.companyName);
+            const qualityEvent: Event = {
+              id: this.eventId,
+              companyName: eventData.event.companyName,
+              companyId: eventData.event.companyId,
+              eventType: eventData.event.eventType,
+              eventDate: eventData.event.eventDate,
+              tlPartNumber: eventData.event.tlPartNumber,
+              purchaseOrderNumber: eventData.event.purchaseOrderNumber,
+              lotNumber: eventData.event.lotNumber,
+              carNumber: eventData.event.carNumber,
+              quantityReject: eventData.event.quantityReject,
+              requiredDate: null,
+              actualDate: null,
+              rootCause: eventData.event.rootCause,
+              statusOption: eventData.event.statusOption,
+            };
 
-          const deliveryEvent: Event = {
-            id: this.eventId,
-            companyName: eventData.companyName,
-            companyId: eventData.companyId,
-            eventType: eventData.eventType,
-            eventDate: eventData.eventDate,
-            tlPartNumber: eventData.tlPartNumber,
-            purchaseOrderNumber: eventData.purchaseOrderNumber,
-            lotNumber: eventData.lotNumber,
-            carNumber: eventData.carNumber,
-            quantityReject: null,
-            requiredDate: eventData.requiredDate,
-            actualDate: eventData.actualDate,
-            rootCause: eventData.rootCause,
-            statusOption: eventData.statusOption,
-          };
-          if (eventData.eventType === 'Quality') {
-            this.event = qualityEvent;
-          } else {
-            this.event = deliveryEvent;
-          }
-          console.log('AfterInit: ', this.event);
+            const deliveryEvent: Event = {
+              id: this.eventId,
+              companyName: eventData.event.companyName,
+              companyId: eventData.event.companyId,
+              eventType: eventData.event.eventType,
+              eventDate: eventData.event.eventDate,
+              tlPartNumber: eventData.event.tlPartNumber,
+              purchaseOrderNumber: eventData.event.purchaseOrderNumber,
+              lotNumber: eventData.event.lotNumber,
+              carNumber: eventData.event.carNumber,
+              quantityReject: null,
+              requiredDate: eventData.event.requiredDate,
+              actualDate: eventData.event.actualDate,
+              rootCause: eventData.event.rootCause,
+              statusOption: eventData.event.statusOption,
+            };
+            if (eventData.event.eventType === 'Quality') {
+              this.event = qualityEvent;
+            } else {
+              this.event = deliveryEvent;
+            }
+            console.log('AfterInit: ', this.event);
 
-        });
+          });
       } else {
         this.mode = 'create';
         this.eventId = null;

@@ -67,17 +67,27 @@ exports.updateEvents = (req, res, next) => {
   console.log('ServerEventCompanyId: ', req.body);
   // const effectedEvents = [];
   const updatedEvents = [];
-  Event.updateMany({companyId: req.body.companyId}, {companyName: req.body.companyName}, function (err, response) {
-    if (err) {
-      res.status(500).json({
-        message: 'Update events failed!'
-      });
-      console.log('UpdateManyRes: ', response);
-      res.status(200).json({
-        message: 'Updated events successfully'
-      });
-    }
-  });
+  Event.updateMany({companyId: req.body.companyId}, {companyName: req.body.companyName})
+    .then()
+
+  // ,
+  //   function (err, response) {
+  //     if (err) {
+  //       res.status(500).json({
+  //         message: 'Update events failed!'
+  //       });
+  //
+  //     }
+  //     // console.log('UpdateManyRes: ', response);
+  //     // Event.find().then(events => {
+  //       return res.status(200).json({
+  //         message: 'Updated events successfully',
+  //         // events: events
+  //       });
+  //     // });
+  //   });
+
+
   // Event.find({companyId: req.body.companyId}).then(events => {
   //   console.log('EffectedEvents: ', events, events.length);
   //   this.effectedEvents = events;
@@ -120,7 +130,9 @@ exports.getEvent = (req, res, next) => {
   Event.findById(req.params.id).then(event => {
     if (event) {
       console.log('Server.Event: ', event);
-      res.status(200).json(event);
+      return res.status(200).json({
+        event: event
+      });
     } else {
       res.status(400).json({
         message: 'Event not found!'

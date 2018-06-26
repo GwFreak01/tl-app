@@ -78,7 +78,7 @@ exports.updateCompany = (req, res, next) => {
   console.log(company);
   Company.updateOne({_id: req.params.id}, company)
     .then(updatedCompany => {
-      console.log(updatedCompany);
+      // console.log(updatedCompany);
       res.status(200).json({
         message: "Update Successful"
       })

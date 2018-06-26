@@ -11,7 +11,7 @@ router.post('', checkAuth, EventController.createEvent);
 
 router.put('/:id', checkAuth, EventController.updateEvent);
 
-router.put('', checkAuth, EventController.updateEvents);
+router.post('/all', checkAuth, EventController.updateEvents);
 
 router.get('', checkAuth, EventController.getEvents);
 

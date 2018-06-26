@@ -122,11 +122,11 @@ export class CompaniesService {
   }
 
   updateCompany(id: string, company: Company) {
-    console.log('CompaniesServe.updateCompany: ', company);
+    // console.log('CompaniesServe.updateCompany: ', company);
     const updatedCompany: Company = company;
     this.http.put(BACKEND_URL + id, company)
       .subscribe(response => {
-        console.log('CompaniesServe.updateCompany.response: ', response);
+        // console.log('CompaniesServe.updateCompany.response: ', response);
         const updatedCompanies = [...this.companies];
         const oldCompanyIndex = updatedCompanies.findIndex(c => c.id === updatedCompany.id);
         updatedCompanies[oldCompanyIndex] = company;
