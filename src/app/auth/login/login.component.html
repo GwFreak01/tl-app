@@ -7,7 +7,7 @@
 
 
     <mat-card-content>
-      <img *ngIf="!isLoading" src="../assets/TL_Logo.png">
+      <img *ngIf="!isLoading" src="../assets/TL_Logo.png" >
       <form
         *ngIf="!isLoading"
         (submit)="onLogin(loginForm)"
@@ -15,7 +15,8 @@
         <br>
 
         <mat-form-field
-          class="fieldUsername">
+          class="fieldUsername" appearance="outline">
+          <mat-label>Username</mat-label>
           <input
             matInput
             type="text"
@@ -31,7 +32,8 @@
         </mat-form-field>
         <br>
         <mat-form-field
-          class="fieldPassword">
+          class="fieldPassword" appearance="outline">
+          <mat-label>Password</mat-label>
           <input
             matInput
             type="password"
