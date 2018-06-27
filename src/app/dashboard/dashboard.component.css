@@ -17,3 +17,39 @@
 
 }
 
+.companyLabel {
+  position: absolute;
+  width: 50%;
+  left: 0px;
+  margin-top: 350px;
+  text-align: center;
+}
+
+.companySection {
+  position: absolute;
+  width: 50%;
+  left: 0px;
+  margin-top: 380px;
+  margin-bottom: 30px;
+
+}
+
+.eventLabel {
+  position: absolute;
+  width: 50%;
+  right: 0px;
+  margin-top: 350px;
+  text-align: center;
+}
+
+.eventSection {
+  position: absolute;
+  width: 50%;
+  right: 0;
+  margin-top: 380px;
+  margin-bottom: 30px;
+}
+
+h1.mat-display-1 {
+  margin-bottom: 0;
+}

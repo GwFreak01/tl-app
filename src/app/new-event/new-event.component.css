@@ -1,0 +1,38 @@
+.mat-form-field {
+  margin-left: 16px;
+}
+
+.fieldEventType {
+  width: 85px;
+}
+
+.fieldEventDate {
+  width: 120px;
+}
+
+.fieldCarNumber {
+  width: 150px;
+}
+
+.fieldStatusOption {
+  width: 75px;
+}
+
+.fieldLotNumber {
+  width: 150px;
+}
+
+.fieldQuantityReject {
+  width: 120px;
+}
+
+h4 {
+  text-align: center;
+}
+
+mat-spinner {
+  margin: auto;
+}
+button.submitButton {
+  float: right;
+}

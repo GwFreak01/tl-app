@@ -11,31 +11,80 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <p class="info-text mat-body-1"></p>
-    <h4>Type:</h4> {{event.eventType}}
-    <br>
-    <h4>Date:</h4> {{event.eventDate | date}}
-    <br>
-    <h4>CAR Number:</h4> {{event.carNumber}}
-    <br>
-    <h4>Lot Number:</h4> {{event.lotNumber}}
-    <br>
-    <h4>T&L Part Number:</h4> {{event.tlPartNumber}}
-    <div *ngIf="event.eventType == 'Quality'">
-      <br>
-      <h4>Quantity Rejected:</h4> {{event.quantityReject}}
-    </div>
-    <div *ngIf="event.eventType == 'Delivery'">
-      <br>
-      <h4>Required Date:</h4> {{event.requiredDate}}
-      <br>
-      <h4>Actual Date:</h4> {{event.actualDate}}
-    </div>
-    <br>
-    <h4>Reason:</h4> {{event.rootCause}}
-    <br>
-    <h4>Status:</h4> {{event.statusOption}}
-    <br>
+    <form>
+      <mat-form-field class="fieldEventType" appearance="outline">
+        <mat-label>Type</mat-label>
+        <input
+          matInput
+          value="{{event.eventType}}" disabled>
+      </mat-form-field>
+
+      <mat-form-field class="fieldEventDate" appearance="outline">
+        <mat-label>Event Date</mat-label>
+        <input
+          matInput
+          value="{{event.eventDate | date}}" disabled>
+      </mat-form-field>
+
+      <mat-form-field class="fieldCarNumber" appearance="outline">
+        <mat-label>CAR Number</mat-label>
+        <input
+          matInput
+          value="{{event.carNumber}}" disabled>
+      </mat-form-field>
+
+      <mat-form-field class="fieldLotNumber" appearance="outline">
+        <mat-label>Lot Number</mat-label>
+        <input
+          matInput
+          value="{{event.lotNumber}}" disabled>
+      </mat-form-field>
+
+      <mat-form-field class="fieldTlPartNumber" appearance="outline">
+        <mat-label>T&L Part Number</mat-label>
+        <input
+          matInput
+          value="{{event.tlPartNumber}}" disabled>
+      </mat-form-field>
+
+      <div *ngIf="event.eventType == 'Quality'">
+        <mat-form-field class="fieldQuantityReject" appearance="outline">
+          <mat-label>Quantity Rejected</mat-label>
+          <input
+            matInput
+            value="{{event.quantityReject}}" disabled>
+        </mat-form-field>
+      </div>
+      <div *ngIf="event.eventType == 'Delivery'">
+        <mat-form-field class="fieldRequiredDate" appearance="outline">
+          <mat-label>Required Delivery Date</mat-label>
+          <input
+            matInput
+            value="{{event.requiredDate | date}}" disabled>
+        </mat-form-field>
+
+        <mat-form-field class="fieldActualDate" appearance="outline">
+          <mat-label>Actual Delivery Date</mat-label>
+          <input
+            matInput
+            value="{{event.actualDate | date}}" disabled>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field class="fieldRootCause" appearance="outline">
+        <mat-label>Root Cause</mat-label>
+        <input
+          matInput
+          value="{{event.rootCause}}" disabled>
+      </mat-form-field>
+
+      <mat-form-field class="fieldStatusOption" appearance="outline">
+        <mat-label>Status</mat-label>
+        <input
+          matInput
+          value="{{event.statusOption}}" disabled>
+      </mat-form-field>
+    </form>
 
     <mat-action-row *ngIf="userIsAuthenticated">
       <button

@@ -1,177 +1,46 @@
-<mat-spinner *ngIf="isLoading"></mat-spinner>
+<!--<div newCompanyContainer>-->
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
 
-<form
-  (submit)="onSaveEvent(eventForm)"
-  #eventForm="ngForm"
-  *ngIf="!isLoading">
-  <h4>Event Information</h4>
+  <form
+    (submit)="onSaveEvent(eventForm)"
+    #eventForm="ngForm"
+    *ngIf="!isLoading">
+    <h4>Event Information</h4>
 
-  <mat-form-field class="fieldCompanyName">
-    <mat-select
-      placeholder="Company Name"
-      name="companyName"
-      #companyName="ngModel"
-      [ngModel]="event?.companyName"
-      required>
-      <mat-option
-        *ngFor="let company of companies"
-        [value]="company.companyName">
-        {{ company.companyName }}
-      </mat-option>
-    </mat-select>
-    <mat-error
-      *ngIf="eventForm.invalid">
-      Please select a company
-    </mat-error>
-  </mat-form-field>
-
-  <mat-form-field
-    class="fieldEventType">
-    <mat-select
-      placeholder="Event Type"
-      name="eventType"
-      #eventType="ngModel"
-      [ngModel]="event?.eventType"
-      [(value)]="selectedEventType"
-      required>
-      <mat-option
-        *ngFor="let eventType of eventTypes"
-        [value]="eventType" >
-        {{ eventType }}
-      </mat-option>
-    </mat-select>
-    <mat-error
-      *ngIf="eventForm.invalid">
-      Please select an event type
-    </mat-error>
-  </mat-form-field>
-
-  <mat-form-field class="fieldEventDate">
-    <input
-      matInput
-      [matDatepicker]="picker"
-      placeholder="Event Date"
-      name="eventDate"
-      #eventDate="ngModel"
-      [ngModel]="event?.eventDate"
-      required>
-    <mat-datepicker-toggle
-      matSuffix
-      [for]="picker" required></mat-datepicker-toggle>
-    <mat-datepicker touchUi="true" #picker></mat-datepicker>
-  </mat-form-field>
-
-  <div>
-    <mat-form-field class="fieldtlPartNumber">
-      <input
-        matInput
-        placeholder="T&L Part Number"
-        name="tlPartNumber"
-        #tlPartNumber="ngModel"
-        [ngModel]="event?.tlPartNumber"
+    <mat-form-field class="fieldCompanyName" appearance="outline">
+      <mat-label>Company Name</mat-label>
+      <mat-select
+        placeholder="Company Name"
+        name="companyName"
+        #companyName="ngModel"
+        [ngModel]="event?.companyName"
         required>
-      <mat-error *ngIf="eventForm.invalid">Please enter a T&L Part Number</mat-error>
-    </mat-form-field>
-    <!--<br>-->
-    <mat-form-field class="fieldPurchaseOrderNumber">
-      <input
-        matInput
-        placeholder="Purchase Order Number"
-        name="purchaseOrderNumber"
-        #purchaseOrderNumber="ngModel"
-        [ngModel]="event?.purchaseOrderNumber"
-        required>
-    </mat-form-field>
-    <br>
-    <mat-form-field class="fieldLotNumber">
-      <input
-        matInput
-        placeholder="Lot Number"
-        name="lotNumber"
-        #lotNumber="ngModel"
-        [ngModel]="event?.lotNumber"
-        required>
-      <mat-error *ngIf="eventForm.invalid">Please enter a Lot Number</mat-error>
-    </mat-form-field>
-    <!--<br>-->
-    <mat-form-field class="fieldCarNumber">
-      <input
-        matInput
-        placeholder="CAR Number"
-        name="carNumber"
-        #carNumber="ngModel"
-        [ngModel]="event?.carNumber"
-        required>
-      <mat-error *ngIf="eventForm.invalid">Please enter a CAR Number</mat-error>
-    </mat-form-field>
-    <br>
-    <mat-form-field class="fieldQuantityReject" *ngIf="selectedEventType == 'Quality'">
-      <input
-        matInput
-        type="number"
-        placeholder="Quantity Rejected"
-        name="quantityReject"
-        #quantityReject="ngModel"
-        [ngModel]="event?.quantityReject"
-        required>
-      <mat-error *ngIf="eventForm.invalid">Please enter the rejected quantity</mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="fieldRequiredDate" *ngIf="selectedEventType == 'Delivery'">
-      <input
-        matInput
-        [matDatepicker]="picker"
-        placeholder="Required Delivery Date"
-        name="requiredDate"
-        #requiredDate="ngModel"
-        [ngModel]="event?.requiredDate"
-        required>
-      <mat-datepicker-toggle
-        matSuffix
-        [for]="picker" required></mat-datepicker-toggle>
-      <mat-datepicker touchUi="true" #picker></mat-datepicker>
-      <mat-error *ngIf="eventForm.invalid">Please enter a required delivery date</mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="fieldActualDate" *ngIf="selectedEventType == 'Delivery'">
-      <input
-        matInput
-        [matDatepicker]="picker"
-        placeholder="Actual Delivery Date"
-        name="actualDate"
-        #actualDate="ngModel"
-        [ngModel]="event?.actualDate"
-        required>
-      <mat-datepicker-toggle
-        matSuffix
-        [for]="picker" required></mat-datepicker-toggle>
-      <mat-datepicker touchUi="true" #picker></mat-datepicker>
-      <mat-error *ngIf="eventForm.invalid">Please enter the actual delivery date</mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="fieldRootCause">
-      <textarea
-        matInput
-        placeholder="Root Cause"
-        name="rootCause"
-        #rootCause="ngModel"
-        [ngModel]="event?.rootCause"
-        required></textarea>
-      <mat-error *ngIf="eventForm.invalid">Please enter a root cause</mat-error>
+        <mat-option
+          *ngFor="let company of companies"
+          [value]="company.companyName">
+          {{ company.companyName }}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="eventForm.invalid">
+        Please select a company
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field
-      class="fieldStatusOption" *ngIf="mode == 'edit'">
+      class="fieldEventType" appearance="outline">
+      <mat-label>Event Type</mat-label>
       <mat-select
-        placeholder="Status"
-        name="statusOption"
-        #statusOption="ngModel"
-        [ngModel]="event?.statusOption"
-        [(value)]="selectedStatusOption">
+        placeholder="Event Type"
+        name="eventType"
+        #eventType="ngModel"
+        [ngModel]="event?.eventType"
+        [(value)]="selectedEventType"
+        required>
         <mat-option
-          *ngFor="let option of statusOptions"
-          [value]="option" >
-          {{ option }}
+          *ngFor="let eventType of eventTypes"
+          [value]="eventType" >
+          {{ eventType }}
         </mat-option>
       </mat-select>
       <mat-error
@@ -180,22 +49,167 @@
       </mat-error>
     </mat-form-field>
 
+    <mat-form-field class="fieldEventDate" appearance="outline">
+      <mat-label>Event Date</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        placeholder="Event Date"
+        name="eventDate"
+        #eventDate="ngModel"
+        [ngModel]="event?.eventDate"
+        required>
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="picker" required></mat-datepicker-toggle>
+      <mat-datepicker touchUi="true" #picker></mat-datepicker>
+    </mat-form-field>
 
-  </div>
+    <div>
+      <mat-form-field class="fieldtlPartNumber" appearance="outline">
+        <mat-label>T&L Part Number</mat-label>
+        <input
+          matInput
+          placeholder="T&L Part Number"
+          name="tlPartNumber"
+          #tlPartNumber="ngModel"
+          [ngModel]="event?.tlPartNumber"
+          required>
+        <mat-error *ngIf="eventForm.invalid">Please enter a T&L Part Number</mat-error>
+      </mat-form-field>
+      <!--<br>-->
+      <mat-form-field class="fieldPurchaseOrderNumber" appearance="outline">
+        <mat-label>P.O. Number</mat-label>
+        <input
+          matInput
+          placeholder="Purchase Order Number"
+          name="purchaseOrderNumber"
+          #purchaseOrderNumber="ngModel"
+          [ngModel]="event?.purchaseOrderNumber"
+          required>
+        <mat-error *ngIf="eventForm.invalid">Please enter a P.O Number</mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field class="fieldLotNumber" appearance="outline">
+        <mat-label>Lot Number</mat-label>
+        <input
+          matInput
+          placeholder="Lot Number"
+          name="lotNumber"
+          #lotNumber="ngModel"
+          [ngModel]="event?.lotNumber"
+          required>
+        <mat-error *ngIf="eventForm.invalid">Please enter a Lot Number</mat-error>
+      </mat-form-field>
+      <!--<br>-->
+      <mat-form-field class="fieldCarNumber" appearance="outline">
+        <mat-label>CAR Number</mat-label>
+        <input
+          matInput
+          placeholder="CAR Number"
+          name="carNumber"
+          #carNumber="ngModel"
+          [ngModel]="event?.carNumber"
+          required>
+        <mat-error *ngIf="eventForm.invalid">Please enter a CAR Number</mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field class="fieldQuantityReject" *ngIf="selectedEventType == 'Quality'" appearance="outline">
+        <mat-label>Quantity Rejected</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="Quantity Rejected"
+          name="quantityReject"
+          #quantityReject="ngModel"
+          [ngModel]="event?.quantityReject"
+          required>
+        <mat-error *ngIf="eventForm.invalid">Please enter the rejected quantity</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="fieldRequiredDate" *ngIf="selectedEventType == 'Delivery'" appearance="outline">
+        <mat-label>Required Delivery Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          placeholder="Required Delivery Date"
+          name="requiredDate"
+          #requiredDate="ngModel"
+          [ngModel]="event?.requiredDate"
+          required>
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker" required></mat-datepicker-toggle>
+        <mat-datepicker touchUi="true" #picker></mat-datepicker>
+        <mat-error *ngIf="eventForm.invalid">Please enter a required delivery date</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="fieldActualDate" *ngIf="selectedEventType == 'Delivery'" appearance="outline">
+        <mat-label>Received Delivery Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          placeholder="Actual Delivery Date"
+          name="actualDate"
+          #actualDate="ngModel"
+          [ngModel]="event?.actualDate"
+          required>
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker" required></mat-datepicker-toggle>
+        <mat-datepicker touchUi="true" #picker></mat-datepicker>
+        <mat-error *ngIf="eventForm.invalid">Please enter the actual delivery date</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="fieldRootCause" appearance="outline">
+        <mat-label>Root Cause</mat-label>
+        <textarea
+          matInput
+          placeholder="Root Cause"
+          name="rootCause"
+          #rootCause="ngModel"
+          [ngModel]="event?.rootCause"
+          required></textarea>
+        <mat-error *ngIf="eventForm.invalid">Please enter a root cause</mat-error>
+      </mat-form-field>
+
+      <mat-form-field
+        class="fieldStatusOption" *ngIf="mode == 'edit'">
+        <mat-select
+          placeholder="Status"
+          name="statusOption"
+          #statusOption="ngModel"
+          [ngModel]="event?.statusOption"
+          [(value)]="selectedStatusOption">
+          <mat-option
+            *ngFor="let option of statusOptions"
+            [value]="option" >
+            {{ option }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="eventForm.invalid">
+          Please select an event type
+        </mat-error>
+      </mat-form-field>
 
 
-  <hr>
-  <button
-    mat-raised-button
-    type="reset"
-    color="warn">
-    Cancel
-  </button>
-  <button class="submitButton"
-          mat-raised-button
-          type="submit"
-          color="primary" >
-    Save Event
-  </button>
-</form>
+    </div>
 
+
+    <hr>
+    <button
+      mat-raised-button
+      type="reset"
+      color="warn">
+      Cancel
+    </button>
+    <button class="submitButton"
+            mat-raised-button
+            type="submit"
+            color="primary" >
+      Save Event
+    </button>
+  </form>
+
+<!--</div>-->

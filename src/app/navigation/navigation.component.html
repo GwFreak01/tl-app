@@ -42,11 +42,16 @@
     <mat-sidenav-content>
       <div class="grid-container">
 
-        <router-outlet></router-outlet>
-
+        <router-outlet (activate)="onActivate($event)"></router-outlet>
 
       </div>
       <!--GET OUT YOURE NOT LOGGED IN-->
+
     </mat-sidenav-content>
+
   </mat-sidenav-container>
+  <!--<footer class="footerContainer">-->
+    <!--<div class="footText">Copyright 2015-2016</div>-->
+  <!--</footer>-->
 </div>
+

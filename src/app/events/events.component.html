@@ -1,27 +1,31 @@
-<h1 class="mat-h1">Events</h1>
+<div class="eventsMainContainer">
+  <h1 class="mat-display-1">Events</h1>
 
-<button class="addButton"
+  <button class="addButton"
           mat-raised-button
           color="primary" (click)="onAddButtonSelect()" >
     ADD NEW
   </button>
   <!--<button class="emailButton"-->
-          <!--mat-raised-button-->
-          <!--type="submit"-->
-          <!--color="primary" >-->
-    <!--SEND EMAIL-->
+  <!--mat-raised-button-->
+  <!--type="submit"-->
+  <!--color="primary" >-->
+  <!--SEND EMAIL-->
   <!--</button>-->
-<mat-grid-list [cols]="2">
-  <mat-grid-tile [rowspan]="6" [colspan]="1">
-    <app-event-list></app-event-list>
-  </mat-grid-tile>
-  <mat-grid-tile [rowspan]="1">
-    <mat-card class="dashboard-card" *ngIf="addButtonSelect">
-      <app-new-event></app-new-event>
-    </mat-card>
+  <mat-grid-list [cols]="2">
+    <!--<mat-grid-tile [rowspan]="6" [colspan]="1">-->
 
-  </mat-grid-tile>
-</mat-grid-list>
+      <div class="dashboard-card eventListDisplay">
+      <app-event-list></app-event-list>
+      </div>
+    <!--</mat-grid-tile>-->
+    <!--<mat-grid-tile [rowspan]="1">-->
+      <mat-card class="dashboard-card eventFormDisplay" *ngIf="addButtonSelect">
+        <app-new-event></app-new-event>
+      </mat-card>
 
+    <!--</mat-grid-tile>-->
+  </mat-grid-list>
 
+</div>
 
