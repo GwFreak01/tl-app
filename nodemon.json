@@ -1,6 +1,8 @@
 {
   "env": {
     "MONGO_ATLAS_PW": "NfMTyV0Bg4rdaXm8",
-    "JWT_KEY": "dfavhakdjlvahslkda"
+    "JWT_KEY": "dfavhakdjlvahslkda",
+    "MAILGUN_ACTIVE_API_KEY": "key-29b212bd844608ac78863e3228296294",
+    "MAILGUN_DOMAIN": "sandbox9a11769c25e04579a3d65d9e8f4e20cd.mailgun.org"
   }
 }

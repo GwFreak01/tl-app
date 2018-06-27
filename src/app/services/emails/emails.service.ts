@@ -12,7 +12,7 @@ const BACKEND_URL = environment.apiUrl + '/emails/';
 export class EmailsService {
 
   constructor(private http: HttpClient) { }
-
+// TODO: Paramers need email and all events associated to company
   sendEmail(emailId: string) {
     this.http.post<{message: string}>(BACKEND_URL, emailId).subscribe(response => {
       console.log(response.message);

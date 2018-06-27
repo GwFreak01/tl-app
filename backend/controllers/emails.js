@@ -1,41 +1,38 @@
 const nodemailer = require('nodemailer');
+const mailgunTransport = require('nodemailer-mailgun-transport');
 
+const mailgunOptions = {
+  auth: {
+    api_key: process.env.MAILGUN_ACTIVE_API_KEY,
+    domain: process.env.MAILGUN_DOMAIN,
+  }
+};
 
-const EMAIL_USERNAME = 'j4p6qp5oazzzwvn5@ethereal.email';
-const  EMAIL_PASSWORD = 'CvKn8bTg64FpxqtFPd';
+const transport = mailgunTransport(mailgunOptions);
 
 exports.sendEmail = (req, res, next) => {
-  nodemailer.createTestAccount((err, account) => {
-    let transporter = nodemailer.createTransport({
-      host: 'smtp.ethereal.email',
-      port: 587,
-      secure: false,
-      auth: {
-        user: EMAIL_USERNAME,
-        pass: EMAIL_PASSWORD
-      }
-    });
+  this.emailClient = nodemailer.createTransport(transport);
+  const mailContents = {
+    from: 'office@yourdomain.com',
+    to: 'gwfreak01@gmail.com',
+    subject: 'test subject',
+    text : 'test message form mailgun',
+    html : '<b>test message form mailgun</b>'
+  };
 
-    let mailOptions = {
-      from: '"Fred Foo 👻" <foo@example.com>', // sender address
-      to: 'gwfreak01@gmail.com, thp9884@rit.edu', // list of receivers
-      subject: 'Hello ✔', // Subject line
-      text: 'Hello world?', // plain text body
-      html: '<b>Hello world?</b>' // html body
-    };
-
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        return console.log(error);
-      }
+  this.emailClient.sendMail(mailContents, function (err, info) {
+    if (err) {
+      return res.status(404).json({
+        message: 'Email unable to send!'
+      });
+    } else {
       console.log('Message sent: %s', info.messageId);
       // Preview only available when sending through an Ethereal account
-      console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-    })
-  });
+      // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+      return res.status(200).json({
+        message: 'Email sent successfully!'
+      });
+    }
 
-  // console.log('SendEmail: ', req.body);
-  return res.status(200).json({
-    message: 'Email Sent!'
   });
 };
