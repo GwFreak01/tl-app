@@ -52,11 +52,6 @@ const eventSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  creator: {
-    type: mongoose.Schema.ObjectId,
-    ref: "Company",
-    // required: true,
-  }
 });
 
 // eventSchema.set('autoIndex', false);

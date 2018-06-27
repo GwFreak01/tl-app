@@ -107,11 +107,11 @@ exports.getCompanies = (req, res, next) => {
 };
 
 exports.getCompany = (req, res, next) => {
-  console.log(req.params.id);
+  // console.log(req.params.id);
   Company.findById(req.params.id)
     .then(company => {
       if (company) {
-        console.log("Server.Company: ", company);
+        // console.log("Server.Company: ", company);
         res.status(200).json(
           company)
       } else {

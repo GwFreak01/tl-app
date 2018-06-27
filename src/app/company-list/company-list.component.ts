@@ -45,8 +45,7 @@ export class CompanyListComponent implements OnInit, OnDestroy {
               private authService: AuthService) { }
 
   ngOnInit() {
-    this.dataSource = new EventsDataSource(this.eventsService);
-    console.log('DataSource: ', this.dataSource);
+
 
     this.isLoading = true;
     this.eventsService.getEvents();
@@ -56,7 +55,6 @@ export class CompanyListComponent implements OnInit, OnDestroy {
         this.events = events;
         console.log('CompanyEvents: ', events);
       });
-
     this.companiesService.getCompanies();
     this.companiesSub = this.companiesService.getCompanyUpdateListener()
       .subscribe((companies: Company[]) => {
@@ -72,6 +70,9 @@ export class CompanyListComponent implements OnInit, OnDestroy {
         console.log('CompanyList.Auth: ', isAuthenticated);
         this.userIsAuthenticated = isAuthenticated;
       });
+    this.dataSource = new EventsDataSource(this.eventsService);
+    console.log('DataSource: ', this.dataSource);
+
   }
 
   ngOnDestroy() {
@@ -90,7 +91,8 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   }
 
   getEventTable(company) {
-    const companyEvents: Event[]  = this.events.filter(event => event.companyName === company.companyName);
+    let companyEvents: Event[] = [];
+      companyEvents = this.events.filter(event => event.companyName === company.companyName);
     if (companyEvents == null) {
       return companyEvents;
     } else {

@@ -55,7 +55,7 @@ exports.createEvent = (req, res, next) => {
 exports.updateEvent = (req, res, next) => {
   console.log('ServerEventId: ', req.body, req.params.id);
   Event.updateOne({_id: req.params.id}, req.body).then(updatedCompany => {
-    console.log(updatedCompany);
+    console.log('UpdatedCompany: ', updatedCompany);
     res.status(200).json({
       message: 'Update Successful'
     })
@@ -67,7 +67,58 @@ exports.updateEvents = (req, res, next) => {
   console.log('ServerEventCompanyId: ', req.body);
   // const effectedEvents = [];
   const updatedEvents = [];
-  Event.updateMany({companyId: req.body.companyId}, {companyName: req.body.companyName})};
+  Event.updateMany({companyId: req.body.companyId}, {companyName: req.body.companyName}
+    // .then(response => {
+    //   console.log(response);
+    //   return res.status(200).json({
+    //     message: 'Update events successful!'
+    //   })
+    // })
+
+  ,
+    function (err, response) {
+      if (err) {
+        res.status(500).json({
+          message: 'Update events failed!'
+        });
+
+      }
+      // console.log('UpdateManyRes: ', response);
+      Event.find().then(events => {
+        return res.status(200).json({
+          message: 'Updated events successfully',
+          events: events
+        });
+      });
+    });
+
+
+  // Event.find({companyId: req.body.companyId}).then(events => {
+  //   console.log('EffectedEvents: ', events, events.length);
+  //   this.effectedEvents = events;
+  //
+  //   for (let i = 0; i < this.effectedEvents.length; i++) {
+  //     Event.findByIdAndUpdate({companyId: this.effectedEvents[i].companyId}, {companyName: req.body.companyName}, {
+  //       new: true,
+  //       multi: true
+  //     }, function (err, model) {
+  //       if (err) {
+  //         res.status(400).json({
+  //           message: 'Update Failed'
+  //         })
+  //       }
+  //       console.log(model);
+  //
+  //     });
+  //
+  //   }
+
+  // console.log('UpdatedEvents: ', updatedEvents);
+
+  // });
+
+
+};
 
 exports.getEvents = (req, res, next) => {
   Event.find()

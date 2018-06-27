@@ -8,7 +8,7 @@ import {map} from 'rxjs/operators';
 
 import {environment} from '../../../environments/environment';
 
-const BACKEND_URL = environment.apiUrl + '/events';
+const BACKEND_URL = environment.apiUrl + '/events/';
 @Injectable({
   providedIn: 'root'
 })
@@ -69,7 +69,7 @@ export class EventsService {
   }
 
   getAllEvents(): Observable<Event[]> {
-    return this.http.get<Event[]>(BACKEND_URL + '/getAll');
+    return this.http.get<Event[]>(BACKEND_URL + 'getAll');
   }
   getEventUpdateListener() {
     return this.eventsUpdated.asObservable();
@@ -118,11 +118,14 @@ export class EventsService {
     const effectedEvents = this.events.filter(effectedEvent => effectedEvent.companyId === companyId);
     console.log('updateEvents.effectedEvents,OldCompanyName: ', effectedEvents, companyName);
 
-    this.http.post<{message: string}>(BACKEND_URL + '/all', {companyId: companyId, companyName: companyName})
+    this.http.put<{message: string, events: Event[]}>(BACKEND_URL + '/all', {companyId: companyId, companyName: companyName})
       .subscribe(response => {
+        console.log('updateEvents.res: ', response.events);
         this.getEvents();
       }, error => {
         console.log(error.message);
+      }, () => {
+        this.getEvents();
       });
   }
   deleteEvent(eventId: string) {

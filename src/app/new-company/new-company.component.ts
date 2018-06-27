@@ -243,6 +243,7 @@ export class NewCompanyComponent implements OnInit, OnDestroy {
     } else {
       this.eventsService.updateEvents(this.companyId, company.companyName);
       this.companiesService.updateCompany(this.companyId, company);
+
       this.isLoading = false;
       console.log('End Save');
       // this.router.navigate(['/companies']);
