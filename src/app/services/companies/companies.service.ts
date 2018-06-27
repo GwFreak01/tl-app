@@ -116,7 +116,7 @@ export class CompaniesService {
         // console.log(res.message);
         this.companies.push(company);
         this.companiesUpdated.next([...this.companies]);
-        this.router.navigate(['/companies']);
+        // this.router.navigate(['/companies']);
       });
 
   }

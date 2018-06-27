@@ -39,19 +39,32 @@
     </div>
 
     <mat-action-row *ngIf="userIsAuthenticated">
+
       <button
-        mat-button color="primary" [routerLink]="['/edit-company', company.id]">
+        class="deleteButton"
+        mat-button color="warn"
+        (click)="onDelete(company.id)">
+        DELETE
+      </button>
+
+      <span class="buttonSpace"></span>
+      <button
+        class="editCompanyButton"
+        mat-stroked-button color="primary" [routerLink]="['/edit-company', company.id]">
         EDIT INFO
       </button>
+
       <button
-        mat-button color="warn"
-        (click)="onDelete(company.id)">DELETE</button>
+        class="sendEmailButton"
+        mat-raised-button color="primary">
+        EMAIL REPORT
+      </button>
     </mat-action-row>
 
   </mat-expansion-panel>
 
 </mat-accordion>
 
-<h1 class="mat-h1" *ngIf="companies.length <= 0 && !isLoading">
+<h1 class="blankCompanies mat-h1" *ngIf="companies.length <= 0 && !isLoading">
   No companies added!
 </h1>

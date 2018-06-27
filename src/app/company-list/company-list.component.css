@@ -21,3 +21,16 @@ mat-accordion {
 table {
   width: 100%;
 }
+
+.blankCompanies {
+  text-align: center;
+  margin: 16px;
+}
+
+.buttonSpace {
+  flex: 1 1 0;
+}
+
+button {
+  margin-left: 16px;
+}

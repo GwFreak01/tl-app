@@ -1,6 +1,6 @@
 import {
-  Component, OnDestroy,
-  OnInit,
+  Component, EventEmitter, OnDestroy,
+  OnInit, Output,
 } from '@angular/core';
 
 import {Company} from '../../../backend/models/company.model';
@@ -19,6 +19,7 @@ import {EventsService} from '../services/events/events.service';
 })
 export class NewCompanyComponent implements OnInit, OnDestroy {
 
+  @Output() hideNewForm: EventEmitter<boolean>;
   states = [
     {label: 'AL', value: 'AL'},
     {label: 'AK', value: 'AK'},
@@ -102,6 +103,7 @@ export class NewCompanyComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.hideNewForm = new EventEmitter<boolean>();
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('companyId')) {
         // console.log('OnInit');
@@ -233,6 +235,7 @@ export class NewCompanyComponent implements OnInit, OnDestroy {
       // console.log('Form Values: ', form.value);
       // console.log('Create Company: ', company);
       this.companiesService.addCompany(company);
+      // form.resetForm();
       // this.isLoading = false;
       // this.router.navigate(['/companies']);
       // this.authStatusSub = this.authService.getAuthStatusListener()
@@ -250,8 +253,10 @@ export class NewCompanyComponent implements OnInit, OnDestroy {
 
 
     }
-
+    this.isLoading = false;
     form.resetForm();
+    this.hideNewForm.emit(false);
+
   }
 
   certSelect() {

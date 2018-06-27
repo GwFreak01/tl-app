@@ -26,5 +26,10 @@ export class CompaniesComponent implements OnInit {
   onEditCompany($event) {
     console.log('Company Comp: On Edit');
   }
+
+  onHideForm(event) {
+    console.log('OnHide: ', event);
+    this.addButtonSelect = event;
+  }
 }
 

@@ -3,7 +3,8 @@
 
   <button class="addButton"
           mat-raised-button
-          color="primary" (click)="onAddButtonSelect()" >
+          color="primary"
+          (click)="onAddButtonSelect()" >
     ADD NEW
   </button>
   <button class="emailbutton"
@@ -14,16 +15,15 @@
   </button>
   <br>
   <mat-grid-list [cols]="2">
-  <!--<mat-grid-tile>-->
-  <div class="dashboard-card companyListDisplay">
-    <app-company-list (editMode)="onEditCompany($event)"></app-company-list>
+  <div
+    class="dashboard-card companyListDisplay">
+    <app-company-list (editMode)="onEditCompany($event)" ></app-company-list>
   </div>
-  <!--</mat-grid-tile>-->
-  <!--<mat-grid-tile [rowspan]="3">-->
-  <mat-card class="dashboard-card companyFormDisplay" *ngIf="addButtonSelect">
+  <mat-card
+    class="dashboard-card companyFormDisplay"
+    *ngIf="addButtonSelect" (hideNewForm)="onHideForm($event)">
     <app-new-company></app-new-company>
   </mat-card>
 
-  <!--</mat-grid-tile>-->
   </mat-grid-list>
 </div>

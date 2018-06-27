@@ -23,7 +23,15 @@
 }
 
 .fieldQuantityReject {
-  width: 120px;
+  width: 180px;
+}
+.fieldTlPartNumber {
+  /*width: 180px;*/
+
+}
+
+textarea {
+  height: 43.5px;
 }
 
 h4 {
