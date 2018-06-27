@@ -5,6 +5,10 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:3000/api',
+  EMAIL_ACCOUNT: {
+    EMAIL_USERNAME: 'j4p6qp5oazzzwvn5@ethereal.email',
+    EMAIL_PASSWORD: 'CvKn8bTg64FpxqtFPd'
+  }
 };
 
 /*

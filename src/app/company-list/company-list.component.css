@@ -34,3 +34,11 @@ table {
 button {
   margin-left: 16px;
 }
+
+mat-panel-description {
+  text-align: right;
+}
+
+.descriptionSpan {
+  text-align: right;
+}

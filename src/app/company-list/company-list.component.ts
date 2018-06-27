@@ -16,6 +16,7 @@ import {DataSource} from '@angular/cdk/table';
 import {EventsService} from '../services/events/events.service';
 // import {EventsDataSource} from '../events/EventsDataSource';
 import {MatTableDataSource} from '@angular/material';
+import {EmailsService} from '../services/emails/emails.service';
 
 @Component({
   selector: 'app-company-list',
@@ -42,7 +43,8 @@ export class CompanyListComponent implements OnInit, OnDestroy {
 
   constructor(public companiesService: CompaniesService,
               private eventsService: EventsService,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private emailsService: EmailsService) { }
 
   ngOnInit() {
 
@@ -96,10 +98,7 @@ export class CompanyListComponent implements OnInit, OnDestroy {
     if (companyEvents == null) {
       return companyEvents;
     } else {
-      // console.log()
     }
-    // console.log(company);
-    // console.log('GetEventTable: ', companyEvents);
     return companyEvents;
   }
 
@@ -112,17 +111,13 @@ export class CompanyListComponent implements OnInit, OnDestroy {
       return '#66BB6A';
     }
   }
-}
 
-// export class EventDataSource extends DataSource<any> {
-//   constructor(private eventsService: EventsService) {
-//     super();
-//   }
-//   connect(): Observable<Event[]> {
-//     return this.eventsService.getEvents();
-//   }
-//   disconnect() {}
-// }
+  sendEmail(companyId: string) {
+    console.log(companyId);
+    this.emailsService.sendEmail(companyId);
+
+  }
+}
 
 
 export class EventsDataSource extends DataSource<any> {

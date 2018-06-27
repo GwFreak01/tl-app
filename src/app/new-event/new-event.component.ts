@@ -105,12 +105,13 @@ export class NewEventComponent implements OnInit, OnDestroy {
   onSaveEvent(eventForm: NgForm) {
 
     if (this.mode === 'create') {
-
+      this.isLoading = true;
       console.log('Form Values: ', eventForm.value);
       console.log(this.companies);
       const companyId = this.companies.filter(company => company.companyName === eventForm.value.companyName);
       console.log('Specific CompanyId: ', companyId[0].id);
       this.eventsService.addEvent(eventForm.value, companyId[0].id);
+      this.router.navigate(['/dashboard']);
       // this.companiesService.updateCompany(companyId[0].id, )
     } else {
       console.log('EditEvent: ', eventForm.value);

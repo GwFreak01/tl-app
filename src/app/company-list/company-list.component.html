@@ -7,7 +7,12 @@
         <h3> {{ company.companyName}} </h3>
       </mat-panel-title>
       <mat-panel-description>
-        <h4> {{ company.companyAddress.street1}} </h4>
+
+        <span class="descriptionSpan">
+          <h4 class="panelDescription">
+          {{ company.companyAddress.street1}}
+          </h4>
+        </span>
       </mat-panel-description>
     </mat-expansion-panel-header>
 
@@ -56,7 +61,7 @@
 
       <button
         class="sendEmailButton"
-        mat-raised-button color="primary">
+        mat-raised-button color="primary" (click)="sendEmail(company.id)">
         EMAIL REPORT
       </button>
     </mat-action-row>
