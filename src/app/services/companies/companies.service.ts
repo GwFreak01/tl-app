@@ -58,23 +58,29 @@ export class CompaniesService {
 // TODO: Fix Infinite Spinner on Add New Company
   addCompany(newCompany: Company) {
     const company: Company = newCompany;
-    console.log('CompanyService.addCompany: ', company);
-    this.http.post<{ message: string , companyId: string}>(BACKEND_URL, company)
-      .subscribe((res) => {
-        const companyId = res.companyId;
-        company.id = companyId;
-        // console.log(res.message);
+    this.http.post<{ message: string , companyObject: any}>(BACKEND_URL, company)
+      .subscribe(response => {
+        company.id = response.companyObject._id;
+        company.companyAddress.id = response.companyObject.companyAddress._id;
+        company.salesPerson.id = response.companyObject.salesPerson._id;
+        company.qualityPerson.id = response.companyObject.qualityPerson._id;
+        company.logisticsPerson.id = response.companyObject.logisticsPerson._id;
+        company.differentPerson.id = response.companyObject.differentPerson._id;
+        company.certification.id = response.companyObject.certification._id;
+        // console.log('CompanyService.addCompany: ', company);
+        // this.router.navigate(['/companies']);
+      }, error => {
+        console.log(error.message);
+      }, () => {
         this.companies.push(company);
         this.companiesUpdated.next([...this.companies]);
-        // this.router.navigate(['/companies']);
       });
 
   }
 
   updateCompany(id: string, company: Company) {
-    // console.log('CompaniesServe.updateCompany: ', company);
     const updatedCompany: Company = company;
-    this.http.put<{}>(BACKEND_URL + id, company)
+    this.http.put(BACKEND_URL + id, company)
       .subscribe(response => {
         // console.log('CompaniesServe.updateCompany.response: ', response);
         const updatedCompanies = [...this.companies];

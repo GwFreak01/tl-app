@@ -138,8 +138,8 @@ export class EventsService {
       });
   }
 
-  getCompanyEvents(companyName: string) {
-
+  getCompanyEvents(companyId: string) {
+    // this.http.get<Event[]>(BACKEND_URL + );
   }
 
 

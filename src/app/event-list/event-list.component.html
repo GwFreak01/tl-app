@@ -16,35 +16,35 @@
         <mat-label>Type</mat-label>
         <input
           matInput
-          value="{{event.eventType}}" disabled>
+          value="{{event.eventType}}" readonly>
       </mat-form-field>
 
       <mat-form-field class="fieldEventDate" appearance="outline">
         <mat-label>Event Date</mat-label>
         <input
           matInput
-          value="{{event.eventDate | date}}" disabled>
+          value="{{event.eventDate | date}}" readonly>
       </mat-form-field>
 
       <mat-form-field class="fieldCarNumber" appearance="outline">
         <mat-label>CAR Number</mat-label>
         <input
           matInput
-          value="{{event.carNumber}}" disabled>
+          value="{{event.carNumber}}" readonly>
       </mat-form-field>
 
       <mat-form-field class="fieldLotNumber" appearance="outline">
         <mat-label>Lot Number</mat-label>
         <input
           matInput
-          value="{{event.lotNumber}}" disabled>
+          value="{{event.lotNumber}}" readonly>
       </mat-form-field>
 
       <mat-form-field class="fieldTlPartNumber" appearance="outline">
         <mat-label>T&L Part Number</mat-label>
         <input
           matInput
-          value="{{event.tlPartNumber}}" disabled>
+          value="{{event.tlPartNumber}}" readonly>
       </mat-form-field>
 
       <div *ngIf="event.eventType == 'Quality'">
@@ -52,7 +52,7 @@
           <mat-label>Quantity Rejected</mat-label>
           <input
             matInput
-            value="{{event.quantityReject}}" disabled>
+            value="{{event.quantityReject}}" readonly>
         </mat-form-field>
       </div>
       <div *ngIf="event.eventType == 'Delivery'">
@@ -60,14 +60,14 @@
           <mat-label>Required Delivery Date</mat-label>
           <input
             matInput
-            value="{{event.requiredDate | date}}" disabled>
+            value="{{event.requiredDate | date}}" readonly>
         </mat-form-field>
 
         <mat-form-field class="fieldActualDate" appearance="outline">
           <mat-label>Actual Delivery Date</mat-label>
           <input
             matInput
-            value="{{event.actualDate | date}}" disabled>
+            value="{{event.actualDate | date}}" readonly>
         </mat-form-field>
       </div>
 
@@ -75,14 +75,14 @@
         <mat-label>Root Cause</mat-label>
         <input
           matInput
-          value="{{event.rootCause}}" disabled>
+          value="{{event.rootCause}}" readonly>
       </mat-form-field>
 
       <mat-form-field class="fieldStatusOption" appearance="outline">
         <mat-label>Status</mat-label>
         <input
           matInput
-          value="{{event.statusOption}}" disabled>
+          value="{{event.statusOption}}" readonly>
       </mat-form-field>
     </form>
 

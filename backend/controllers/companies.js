@@ -47,19 +47,18 @@ exports.createCompany = (req, res, next) => {
     },
   });
   // console.log(req.body.companyAddress.street2, company);
-  company.save()
-    .then((createdCompany) => {
-      console.log(createdCompany);
-      res.status(201).json({
-        message: 'Company added successfully',
-        companyId: createdCompany._id
-      });
-    })
-    .catch(error => {
+  company.save(function (error, company) {
+    if (error) {
       res.status(500).json({
         message: 'Company creation failed!'
-      })
+      });
+    }
+    console.log('createdCompany: ', company);
+    res.status(201).json({
+      message: 'Company added successfully',
+      companyObject: company
     });
+  });
 };
 
 exports.updateCompany = (req, res, next) => {
@@ -75,6 +74,8 @@ exports.updateCompany = (req, res, next) => {
       zipcode: req.body.companyAddress.zipcode,
     },
   });
+
+  // const const
   console.log(company);
   Company.updateOne({_id: req.params.id}, company)
     .then(updatedCompany => {

@@ -11,13 +11,31 @@ const mailgunOptions = {
 const transport = mailgunTransport(mailgunOptions);
 
 exports.sendEmail = (req, res, next) => {
+
+  // console.log('ReqBodyEmails: ', req.body.company);
+
+  const emailList = [];
+  if (req.body.company.salesPerson.status) {
+    emailList.push(req.body.company.salesPerson.email);
+  }
+  if (req.body.company.qualityPerson.status) {
+    emailList.push(req.body.company.qualityPerson.email);
+  }
+  if (req.body.company.logisticsPerson.status) {
+    emailList.push(req.body.company.logisticsPerson.email);
+  }
+  if (req.body.company.differentPerson.status) {
+    emailList.push(req.body.company.differentPerson.email);
+  }
   this.emailClient = nodemailer.createTransport(transport);
+
+  console.log('emailList: ', emailList);
   const mailContents = {
     from: 'office@yourdomain.com',
-    to: 'gwfreak01@gmail.com',
+    to: req.body.company.salesPerson.email,
     subject: 'test subject',
     text : 'test message form mailgun',
-    html : '<b>test message form mailgun</b>'
+    html : '<b>test message form mailgun</b>' + req.body.events[0].rootCause
   };
 
   this.emailClient.sendMail(mailContents, function (err, info) {
