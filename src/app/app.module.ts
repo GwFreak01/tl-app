@@ -49,6 +49,10 @@ import { EditEventComponent } from './edit-event/edit-event.component';
 import {ErrorInterceptor} from './error-interceptor';
 import { ErrorComponent } from './error/error.component';
 import {AngularMaterialModule} from './angular-material/angular-material.module';
+import {AuthService} from './auth/auth.service';
+import {CompaniesService} from './services/companies/companies.service';
+import {EventsService} from './services/events/events.service';
+import {EmailsService} from './services/emails/emails.service';
 
 
 

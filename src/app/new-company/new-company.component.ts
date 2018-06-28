@@ -113,60 +113,10 @@ export class NewCompanyComponent implements OnInit, OnDestroy {
         // this.company = this.companiesService.getCompany(this.companyId);
         // console.log('OnInitCompanyID: ', this.mode, this.companyId);
         this.companiesService.getCompany(this.companyId)
-          .subscribe(companyData => {
+          .subscribe(company => {
             this.isLoading = false;
-            console.log('OnInit: ', companyData);
-            // console.log('OnInit: ', companyData._id);
-            this.company = {
-              id: companyData._id,
-              companyName: companyData.companyName,
-              companyAddress: {
-                id: companyData.companyAddress._id,
-                street1: companyData.companyAddress.street1,
-                street2: companyData.companyAddress.street2,
-                city: companyData.companyAddress.city,
-                state: companyData.companyAddress.state,
-                zipcode: companyData.companyAddress.zipcode
-              },
-              salesPerson: {
-                id: companyData.salesPerson._id,
-                name: companyData.salesPerson.name,
-                email: companyData.salesPerson.email,
-                phone: companyData.salesPerson.phone,
-                status: companyData.salesPerson.status
-              },
-              qualityPerson: {
-                id: companyData.qualityPerson._id,
-                name: companyData.qualityPerson.name,
-                email: companyData.qualityPerson.email,
-                phone: companyData.qualityPerson.phone,
-                status: companyData.qualityPerson.status
-              },
-              logisticsPerson: {
-                id: companyData.logisticsPerson._id,
-                name: companyData.logisticsPerson.name,
-                email: companyData.logisticsPerson.email,
-                phone: companyData.logisticsPerson.phone,
-                status: companyData.logisticsPerson.status
-              },
-              differentPerson: {
-                id: companyData.differentPerson._id,
-                name: companyData.differentPerson.name,
-                email: companyData.differentPerson.email,
-                phone: companyData.differentPerson.phone,
-                status: companyData.differentPerson.status
-              },
-              productDescription: companyData.productDescription,
-              certification: {
-                id: companyData.certification._id,
-                certType: companyData.certification.certType,
-                expirationDate: companyData.certification.expirationDate,
-                certNumber: companyData.certification.certNumber,
-                registrar: companyData.certification.registrar,
-                other: companyData.certification.other,
-                reason: companyData.certification.reason
-              }
-            };
+            console.log('OnInit: ', company);
+            this.company = company.company;
           });
       } else {
         this.mode = 'create';

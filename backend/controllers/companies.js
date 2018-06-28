@@ -107,24 +107,67 @@ exports.getCompanies = (req, res, next) => {
 };
 
 exports.getCompany = (req, res, next) => {
-  // console.log(req.params.id);
-  Company.findById(req.params.id)
-    .then(company => {
-      if (company) {
-        // console.log("Server.Company: ", company);
-        res.status(200).json(
-          company)
-      } else {
-        res.status(404).json({
-          message: 'Company not found!'
-        });
-      }
-    })
-    .catch(error => {
-      res.status(500).json({
-        message: 'Fetching Company failed!'
+  Company.findById(req.params.id, function (err, document) {
+    if (err) {
+      console.log(err);
+    } else {
+      const company = {
+        id: document._id,
+        companyName: document.companyName,
+        companyAddress: {
+          id: document.companyAddress._id,
+          street1: document.companyAddress.street1,
+          street2: document.companyAddress.street2,
+          city: document.companyAddress.city,
+          state: document.companyAddress.state,
+          zipcode: document.companyAddress.zipcode
+        },
+        salesPerson: {
+          id: document.salesPerson._id,
+          name: document.salesPerson.name,
+          email: document.salesPerson.email,
+          phone: document.salesPerson.phone,
+          status: document.salesPerson.status
+        },
+        qualityPerson: {
+          id: document.qualityPerson._id,
+          name: document.qualityPerson.name,
+          email: document.qualityPerson.email,
+          phone: document.qualityPerson.phone,
+          status: document.qualityPerson.status
+        },
+        logisticsPerson: {
+          id: document.logisticsPerson._id,
+          name: document.logisticsPerson.name,
+          email: document.logisticsPerson.email,
+          phone: document.logisticsPerson.phone,
+          status: document.logisticsPerson.status
+        },
+        differentPerson: {
+          id: document.differentPerson._id,
+          name: document.differentPerson.name,
+          email: document.differentPerson.email,
+          phone: document.differentPerson.phone,
+          status: document.differentPerson.status
+        },
+        productDescription: document.productDescription,
+
+        certification: {
+          id: document.certification._id,
+          certType: document.certification.certType,
+          expirationDate: document.certification.expirationDate,
+          certNumber: document.certification.certNumber,
+          registrar: document.certification.registrar,
+          other: document.certification.other,
+          reason: document.certification.reason
+        },
+      };
+
+      return res.status(200).json({
+        company: company
       });
-    });
+    }
+  });
 };
 
 exports.deleteCompany = (req, res, next) => {

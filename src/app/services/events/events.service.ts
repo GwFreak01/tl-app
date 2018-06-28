@@ -76,7 +76,7 @@ export class EventsService {
   }
 
   getEvent(id: string) {
-    return this.http.get<{event: any}>(BACKEND_URL + id);
+    return this.http.get<{event: Event}>(BACKEND_URL + id);
   }
   addEvent(eventForm, companyId) {
     const event: Event = eventForm;
