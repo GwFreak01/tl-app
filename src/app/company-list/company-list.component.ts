@@ -14,7 +14,6 @@ import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {AuthService} from '../auth/auth.service';
 import {DataSource} from '@angular/cdk/table';
 import {EventsService} from '../services/events/events.service';
-// import {EventsDataSource} from '../events/EventsDataSource';
 import {MatTableDataSource} from '@angular/material';
 import {EmailsService} from '../services/emails/emails.service';
 

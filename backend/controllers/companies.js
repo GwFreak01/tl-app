@@ -109,7 +109,9 @@ exports.getCompanies = (req, res, next) => {
 exports.getCompany = (req, res, next) => {
   Company.findById(req.params.id, function (err, document) {
     if (err) {
-      console.log(err);
+      return res.status(404).json({
+        message: 'Find company failed!'
+      });
     } else {
       const company = {
         id: document._id,
@@ -164,6 +166,7 @@ exports.getCompany = (req, res, next) => {
       };
 
       return res.status(200).json({
+        message: 'Find company successful!',
         company: company
       });
     }

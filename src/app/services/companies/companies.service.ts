@@ -53,7 +53,7 @@ export class CompaniesService {
 
   getCompany(id: string) {
     // return {...this.companies.find(company => company.id === id)};
-    return this.http.get<{company: Company}>(BACKEND_URL + id);
+    return this.http.get<{message: string, company: Company}>(BACKEND_URL + id);
   }
 // TODO: Fix Infinite Spinner on Add New Company
   addCompany(newCompany: Company) {
@@ -74,7 +74,7 @@ export class CompaniesService {
   updateCompany(id: string, company: Company) {
     // console.log('CompaniesServe.updateCompany: ', company);
     const updatedCompany: Company = company;
-    this.http.put(BACKEND_URL + id, company)
+    this.http.put<{}>(BACKEND_URL + id, company)
       .subscribe(response => {
         // console.log('CompaniesServe.updateCompany.response: ', response);
         const updatedCompanies = [...this.companies];

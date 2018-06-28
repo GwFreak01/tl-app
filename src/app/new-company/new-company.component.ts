@@ -113,10 +113,12 @@ export class NewCompanyComponent implements OnInit, OnDestroy {
         // this.company = this.companiesService.getCompany(this.companyId);
         // console.log('OnInitCompanyID: ', this.mode, this.companyId);
         this.companiesService.getCompany(this.companyId)
-          .subscribe(company => {
+          .subscribe(response => {
             this.isLoading = false;
-            console.log('OnInit: ', company);
-            this.company = company.company;
+            console.log('OnInit: ', response);
+            this.company = response.company;
+          }, error => {
+            console.log(error);
           });
       } else {
         this.mode = 'create';
