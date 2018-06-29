@@ -1,10 +1,10 @@
 import {st} from '@angular/core/src/render3';
 
 export interface Company {
-  id: string;
+  _id: string;
   companyName: string;
   companyAddress: {
-    id: string;
+    _id: string;
     street1: string,
     street2: string,
     city: string,
@@ -12,28 +12,28 @@ export interface Company {
     zipcode: string;
   };
   salesPerson: {
-    id: string;
+    _id: string;
     name: string;
     email: string;
     phone: string;
     status: boolean;
   };
   qualityPerson: {
-    id: string;
+    _id: string;
     name: string;
     email: string;
     phone: string;
     status: boolean;
   };
   logisticsPerson: {
-    id: string;
+    _id: string;
     name: string;
     email: string;
     phone: string;
     status: boolean;
   };
   differentPerson: {
-    id: string;
+    _id: string;
     name: string;
     email: string;
     phone: string;
@@ -42,7 +42,7 @@ export interface Company {
   productDescription: string;
 
   certification: {
-    id: string;
+    _id: string;
     certType: string;
     expirationDate: string;
     certNumber: string;

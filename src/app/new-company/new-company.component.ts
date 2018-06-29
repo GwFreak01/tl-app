@@ -90,6 +90,8 @@ export class NewCompanyComponent implements OnInit, OnDestroy {
   logisticsCheck = false;
   differentCheck = false;
   // differentOption = !(this.qualityCheck );
+  private companiesSub: Subscription;
+
   noneSelect = true;
 
   private authStatusSub: Subscription;
@@ -104,18 +106,17 @@ export class NewCompanyComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.hideNewForm = new EventEmitter<boolean>();
+
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('companyId')) {
         // console.log('OnInit');
         this.mode = 'edit';
         this.companyId = paramMap.get('companyId');
         this.isLoading = true;
-        // this.company = this.companiesService.getCompany(this.companyId);
-        // console.log('OnInitCompanyID: ', this.mode, this.companyId);
         this.companiesService.getCompany(this.companyId)
           .subscribe(response => {
             this.isLoading = false;
-            console.log('OnInit: ', response);
+            // console.log('OnInit: ', response);
             this.company = response.company;
           }, error => {
             console.log(error);
@@ -125,79 +126,20 @@ export class NewCompanyComponent implements OnInit, OnDestroy {
         this.companyId = null;
       }
     });
+
   }
 
   onSaveCompany(form: NgForm) {
-    const company: Company = {
-      id: null,
-      companyName: form.value.companyName,
-      companyAddress: {
-        id: null,
-        street1: form.value.street1,
-        street2: form.value.street2,
-        city: form.value.city,
-        state: form.value.state,
-        zipcode: form.value.zipcode,
-      },
-      salesPerson: {
-        id: null,
-        name: form.value.salesName,
-        email: form.value.salesEmail,
-        phone: form.value.salesPhone,
-        status: form.value.salesCheck
-      },
-      qualityPerson: {
-        id: null,
-        name: form.value.qualityName,
-        email: form.value.qualityEmail,
-        phone: form.value.qualityPhone,
-        status: form.value.qualityCheck
-      },
-      logisticsPerson: {
-        id: null,
-        name: form.value.logisticsName,
-        email: form.value.logisticsEmail,
-        phone: form.value.logisticsPhone,
-        status: form.value.logisticsCheck
-      },
-      differentPerson: {
-        id: null,
-        name: form.value.differentName,
-        email: form.value.differentEmail,
-        phone: form.value.differentPhone,
-        status: form.value.differentCheck
-      },
-      productDescription: form.value.productDescription,
-      certification: {
-        id: null,
-        certType: form.value.certType,
-        certNumber: form.value.certNumber,
-        registrar: form.value.certRegistrar,
-        expirationDate: form.value.certExpirationDate,
-        other: form.value.certType,
-        reason: form.value.certReason
-      }
-
-    };
     if (form.invalid) {
       return;
     }
     this.isLoading = true;
     if (this.mode === 'create') {
-      // console.log('Form Values: ', form.value);
-      // console.log('Create Company: ', company);
-      this.companiesService.addCompany(company);
-      // form.resetForm();
-      // this.isLoading = false;
-      // this.router.navigate(['/companies']);
-      // this.authStatusSub = this.authService.getAuthStatusListener()
-      //   .subscribe(authStatus => {
-      //     this.isLoading = false;
-      //   });
+      this.companiesService.addCompany(form.value);
 
     } else {
-      this.eventsService.updateEvents(this.companyId, company.companyName);
-      this.companiesService.updateCompany(this.companyId, company);
+      this.eventsService.updateEvents(this.companyId, form.value.companyName);
+      this.companiesService.updateCompany(this.companyId, form.value);
 
       // this.isLoading = false;
       // console.log('End Save');
@@ -207,7 +149,7 @@ export class NewCompanyComponent implements OnInit, OnDestroy {
     }
     this.isLoading = false;
     form.resetForm();
-    this.hideNewForm.emit(false);
+    // this.hideNewForm.emit(false);
 
   }
 

@@ -48,20 +48,20 @@
       <button
         class="deleteButton"
         mat-button color="warn"
-        (click)="onDelete(company.id)">
+        (click)="onDelete(company._id)">
         DELETE
       </button>
 
       <span class="buttonSpace"></span>
       <button
         class="editCompanyButton"
-        mat-stroked-button color="primary" [routerLink]="['/edit-company', company.id]">
+        mat-stroked-button color="primary" [routerLink]="['/edit-company', company._id]">
         EDIT INFO
       </button>
 
       <button
         class="sendEmailButton"
-        mat-raised-button color="primary" (click)="sendEmail(company.id)">
+        mat-raised-button color="primary" (click)="sendEmail(company._id)">
         EMAIL REPORT
       </button>
     </mat-action-row>

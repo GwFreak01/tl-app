@@ -4,9 +4,9 @@ const CompanyController = require('../controllers/companies');
 const checkAuth = require('../middleware/check-auth');
 
 
-router.post('', checkAuth, CompanyController.createCompany);
+router.put('', checkAuth, CompanyController.createCompany);
 
-router.put('/:id', checkAuth, CompanyController.updateCompany);
+router.post('/:id', checkAuth, CompanyController.updateCompany);
 
 router.get('', checkAuth, CompanyController.getCompanies);
 

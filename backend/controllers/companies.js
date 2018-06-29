@@ -5,56 +5,56 @@ exports.createCompany = (req, res, next) => {
   const company = new Company({
     companyName: req.body.companyName,
     companyAddress: {
-      street1: req.body.companyAddress.street1,
-      street2: req.body.companyAddress.street2,
-      city: req.body.companyAddress.city,
-      state: req.body.companyAddress.state,
-      zipcode: req.body.companyAddress.zipcode,
+      street1: req.body.street1,
+      street2: req.body.street2,
+      city: req.body.city,
+      state: req.body.state,
+      zipcode: req.body.zipcode,
     },
     salesPerson: {
-      name: req.body.salesPerson.name,
-      email: req.body.salesPerson.email,
-      phone: req.body.salesPerson.phone,
-      status: req.body.salesPerson.status,
+      name: req.body.salesName,
+      email: req.body.salesEmail,
+      phone: req.body.salesPhone,
+      status: req.body.salesCheck,
     },
     qualityPerson: {
-      name: req.body.qualityPerson.name,
-      email: req.body.qualityPerson.email,
-      phone: req.body.qualityPerson.phone,
-      status: req.body.qualityPerson.status,
+      name: req.body.qualityName,
+      email: req.body.qualityEmail,
+      phone: req.body.qualityPhone,
+      status: req.body.qualityCheck,
     },
     logisticsPerson: {
-      name: req.body.logisticsPerson.name,
-      email: req.body.logisticsPerson.email,
-      phone: req.body.logisticsPerson.phone,
-      status: req.body.logisticsPerson.status,
+      name: req.body.logisticsName,
+      email: req.body.logisticsEmail,
+      phone: req.body.logisticsPhone,
+      status: req.body.logisticsCheck,
     },
     differentPerson: {
-      name: req.body.differentPerson.name,
-      email: req.body.differentPerson.email,
-      phone: req.body.differentPerson.phone,
-      status: req.body.differentPerson.status,
+      name: req.body.differentName,
+      email: req.body.differentEmail,
+      phone: req.body.differentPhone,
+      status: req.body.differentCheck,
     },
     productDescription: req.body.productDescription,
 
     certification: {
-      certType: req.body.certification.certType,
-      expirationDate: req.body.certification.expirationDate,
-      certNumber: req.body.certification.certNumber,
-      registrar: req.body.certification.registrar,
-      other: req.body.certification.other,
-      reason: req.body.certification.reason,
+      certType: req.body.certType,
+      expirationDate: req.body.certExpirationDate,
+      certNumber: req.body.certNumber,
+      registrar: req.body.certRegistrar,
+      other: req.body.certTypeOther,
+      reason: req.body.certReason,
     },
   });
   // console.log(req.body.companyAddress.street2, company);
   company.save(function (error, company) {
     if (error) {
-      res.status(500).json({
+      return res.status(500).json({
         message: 'Company creation failed!'
       });
     }
     console.log('createdCompany: ', company);
-    res.status(201).json({
+    return res.status(201).json({
       message: 'Company added successfully',
       companyObject: company
     });
@@ -62,49 +62,78 @@ exports.createCompany = (req, res, next) => {
 };
 
 exports.updateCompany = (req, res, next) => {
-  const company = new Company({
-    _id: req.params.id,
+  // console.log(req.body);
+  const company = {
     companyName: req.body.companyName,
     companyAddress: {
-      // _id: req.body.companyAddress.id,
-      street1: req.body.companyAddress.street1,
-      street2: req.body.companyAddress.street2,
-      city: req.body.companyAddress.city,
-      state: req.body.companyAddress.state,
-      zipcode: req.body.companyAddress.zipcode,
+      street1: req.body.street1,
+      street2: req.body.street2,
+      city: req.body.city,
+      state: req.body.state,
+      zipcode: req.body.zipcode,
     },
-  });
+    salesPerson: {
+      name: req.body.salesName,
+      email: req.body.salesEmail,
+      phone: req.body.salesPhone,
+      status: req.body.salesCheck,
+    },
+    qualityPerson: {
+      name: req.body.qualityName,
+      email: req.body.qualityEmail,
+      phone: req.body.qualityPhone,
+      status: req.body.qualityCheck,
+    },
+    logisticsPerson: {
+      name: req.body.logisticsName,
+      email: req.body.logisticsEmail,
+      phone: req.body.logisticsPhone,
+      status: req.body.logisticsCheck,
+    },
+    differentPerson: {
+      name: req.body.differentName,
+      email: req.body.differentEmail,
+      phone: req.body.differentPhone,
+      status: req.body.differentCheck,
+    },
+    productDescription: req.body.productDescription,
 
-  // const const
-  console.log(company);
-  Company.updateOne({_id: req.params.id}, company)
-    .then(updatedCompany => {
-      // console.log(updatedCompany);
-      res.status(200).json({
-        message: "Update Successful"
-      })
-    })
-    .catch(error => {
-      res.status(500).json({
-        message: 'Update Company failed!'
+    certification: {
+      certType: req.body.certType,
+      expirationDate: req.body.certExpirationDate,
+      certNumber: req.body.certNumber,
+      registrar: req.body.certRegistrar,
+      other: req.body.certTypeOther,
+      reason: req.body.certReason,
+    },
+  };
+
+  Company.findByIdAndUpdate({_id: req.params.id}, company,
+    function (error, document) {
+      if (error) {
+        return res.status(500).json({
+          message: 'Update Company failed!'
+        });
+      }
+      return res.status(200).json({
+        message: "Update Successful",
+        company: document
       })
     });
 };
 
 exports.getCompanies = (req, res, next) => {
-  Company.find()
-    .then((documents) => {
-      // console.log('Server : ' , documents);
-      res.status(200).json({
-        message: 'Companies fetched successfully!',
-        companies: documents
-      });
-    })
-    .catch(error => {
+  Company.find(function (err, documents) {
+    if (err) {
       res.status(500).json({
         message: 'Fetching Companies failed!'
       })
+    }
+    res.status(200).json({
+      message: 'Companies fetched successfully!',
+      companies: documents
     });
+  })
 };
 
 exports.getCompany = (req, res, next) => {
@@ -175,10 +204,8 @@ exports.getCompany = (req, res, next) => {
 };
 
 exports.deleteCompany = (req, res, next) => {
-  // console.log(req.params.id);
   Company.deleteOne({_id: req.params.id})
     .then((result) => {
-      // console.log(result);
       res.status(200).json({
         message: 'Company deleted!'
       })

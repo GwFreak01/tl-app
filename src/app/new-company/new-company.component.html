@@ -315,9 +315,9 @@
       <input
         matInput
         placeholder="Certification Type"
-        name="certType"
-        #certType="ngModel"
-        [ngModel]="company?.certification.certType"
+        name="certTypeOther"
+        #certTypeOther="ngModel"
+        [ngModel]="company?.certification.other"
         required>
       <mat-error *ngIf="companyForm.invalid">Please enter certification type</mat-error>
     </mat-form-field>

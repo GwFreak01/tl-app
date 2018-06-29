@@ -109,8 +109,8 @@ export class NewEventComponent implements OnInit, OnDestroy {
       console.log('Form Values: ', eventForm.value);
       console.log(this.companies);
       const companyId = this.companies.filter(company => company.companyName === eventForm.value.companyName);
-      console.log('Specific CompanyId: ', companyId[0].id);
-      this.eventsService.addEvent(eventForm.value, companyId[0].id);
+      console.log('Specific CompanyId: ', companyId[0]._id);
+      this.eventsService.addEvent(eventForm.value, companyId[0]._id);
       this.router.navigate(['/events']);
       // this.companiesService.updateCompany(companyId[0].id, )
     } else {

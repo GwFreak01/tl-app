@@ -21,29 +21,10 @@ export class CompaniesService {
               private router: Router) { }
 
   getCompanies() {
-    // return [...this.companies];
     this.http.get<{ message: string, companies: any }>(BACKEND_URL)
-      .pipe(map((companyData) => {
-        return companyData.companies.map((company) => {
-          return {
-            id: company._id,
-            companyName: company.companyName,
-            companyAddress: {
-              id: company.companyAddress._id,
-              street1: company.companyAddress.street1,
-              street2: company.companyAddress.street2,
-              city: company.companyAddress.city,
-              state: company.companyAddress.state,
-              zipcode: company.companyAddress.zipcode
-            }
-          };
-        });
-      }))
-      .subscribe((transformedCompanies) => {
-        console.log('Transformed : ', transformedCompanies);
-        this.companies = transformedCompanies;
+      .subscribe(response => {
+        this.companies = response.companies;
         this.companiesUpdated.next([...this.companies]);
-
       });
   }
 
@@ -51,52 +32,42 @@ export class CompaniesService {
     return this.companiesUpdated.asObservable();
   }
 
-  getCompany(id: string) {
-    // return {...this.companies.find(company => company.id === id)};
-    return this.http.get<{message: string, company: Company}>(BACKEND_URL + id);
+  getCompany(companyId: string) {
+    return this.http.get<{message: string, company: any}>(BACKEND_URL + companyId);
   }
 // TODO: Fix Infinite Spinner on Add New Company
-  addCompany(newCompany: Company) {
-    const company: Company = newCompany;
-    this.http.post<{ message: string , companyObject: any}>(BACKEND_URL, company)
+  addCompany(formValues) {
+    this.http.put<{ message: string , companyObject: any}>(BACKEND_URL, formValues)
       .subscribe(response => {
-        company.id = response.companyObject._id;
-        company.companyAddress.id = response.companyObject.companyAddress._id;
-        company.salesPerson.id = response.companyObject.salesPerson._id;
-        company.qualityPerson.id = response.companyObject.qualityPerson._id;
-        company.logisticsPerson.id = response.companyObject.logisticsPerson._id;
-        company.differentPerson.id = response.companyObject.differentPerson._id;
-        company.certification.id = response.companyObject.certification._id;
-        // console.log('CompanyService.addCompany: ', company);
+        this.companies.push(response.companyObject);
+        this.companiesUpdated.next([...this.companies]);
+        console.log('CompanyList: ', this.companies);
         // this.router.navigate(['/companies']);
       }, error => {
         console.log(error.message);
       }, () => {
-        this.companies.push(company);
-        this.companiesUpdated.next([...this.companies]);
+        // this.companies.push(company);
       });
 
   }
 
-  updateCompany(id: string, company: Company) {
-    const updatedCompany: Company = company;
-    this.http.put(BACKEND_URL + id, company)
+  updateCompany(companyId: string, formValues) {
+    this.http.post<{message: string, company: any}>(BACKEND_URL + companyId, formValues)
       .subscribe(response => {
-        // console.log('CompaniesServe.updateCompany.response: ', response);
         const updatedCompanies = [...this.companies];
-        const oldCompanyIndex = updatedCompanies.findIndex(c => c.id === updatedCompany.id);
-        updatedCompanies[oldCompanyIndex] = company;
+        const oldCompanyIndex = updatedCompanies.findIndex(c => c._id === response.company._id);
+        updatedCompanies[oldCompanyIndex] = response.company;
         this.companies = updatedCompanies;
         this.companiesUpdated.next([...this.companies]);
-
-        this.router.navigate(['/companies']);
+        //
+        // this.router.navigate(['/companies']);
       });
 
   }
   deleteCompany(companyId: string) {
     this.http.delete(BACKEND_URL + companyId)
-      .subscribe(() => {
-        const updatedCompanies = this.companies.filter(company => company.id !== companyId);
+      .subscribe(response => {
+        const updatedCompanies = this.companies.filter(company => company._id !== companyId);
         this.companies = updatedCompanies;
         this.companiesUpdated.next([...this.companies]);
         console.log('Deleted!');
