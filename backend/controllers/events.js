@@ -2,60 +2,58 @@ const Event = require('../models/event');
 
 
 exports.createEvent = (req, res, next) => {
-  console.log('Server.Events.post: ', req.body);
-
-  if (req.body.event.eventType === 'Quality') {
-    console.log(req.body.companyId);
+  if (req.body.formValues.eventType === 'Quality') {
     const qualityEvent = new Event({
-      companyName: req.body.event.companyName,
-      companyId: req.body.companyId,
-      eventType: req.body.event.eventType,
-      eventDate: req.body.event.eventDate,
-      tlPartNumber: req.body.event.tlPartNumber,
-      purchaseOrderNumber: req.body.event.purchaseOrderNumber,
-      lotNumber: req.body.event.lotNumber,
-      carNumber: req.body.event.carNumber,
-      rootCause: req.body.event.rootCause,
-      quantityReject: req.body.event.quantityReject,
+      companyName: req.body.formValues.companyName,
+      companyId: req.body.company._id,
+      eventType: req.body.formValues.eventType,
+      eventDate: req.body.formValues.eventDate,
+      tlPartNumber: req.body.formValues.tlPartNumber,
+      purchaseOrderNumber: req.body.formValues.purchaseOrderNumber,
+      lotNumber: req.body.formValues.lotNumber,
+      carNumber: req.body.formValues.carNumber,
+      rootCause: req.body.formValues.rootCause,
+      quantityReject: req.body.formValues.quantityReject,
       statusOption: 'Open',
-      // creator:
     });
     qualityEvent.save().then(createdEvent => {
       console.log('Events.save: ', createdEvent);
       return res.status(201).json({
         message: 'Event added successfully',
-        eventId: createdEvent._id
+        event: createdEvent
       });
     })
-  } else if (req.body.event.eventType === 'Delivery') {
+  } else if (req.body.formValues.eventType === 'Delivery') {
     const deliveryEvent = new Event({
-      companyName: req.body.event.companyName,
-      companyId: req.body.companyId,
-      eventType: req.body.event.eventType,
-      eventDate: req.body.event.eventDate,
-      tlPartNumber: req.body.event.tlPartNumber,
-      purchaseOrderNumber: req.body.event.purchaseOrderNumber,
-      lotNumber: req.body.event.lotNumber,
-      carNumber: req.body.event.carNumber,
-      rootCause: req.body.event.rootCause,
-      requiredDate: req.body.event.requiredDate,
-      actualDate: req.body.event.actualDate,
+      companyName: req.body.formValues.companyName,
+      companyId: req.body.company._id,
+      eventType: req.body.formValues.eventType,
+      eventDate: req.body.formValues.eventDate,
+      tlPartNumber: req.body.formValues.tlPartNumber,
+      purchaseOrderNumber: req.body.formValues.purchaseOrderNumber,
+      lotNumber: req.body.formValues.lotNumber,
+      carNumber: req.body.formValues.carNumber,
+      rootCause: req.body.formValues.rootCause,
+      requiredDate: req.body.formValues.requiredDate,
+      actualDate: req.body.formValues.actualDate,
       statusOption: 'Open'
     });
 
     deliveryEvent.save().then(createdEvent => {
       console.log('Events.save: ', createdEvent);
       return res.status(201).json({
-        message: 'Event added successfully'
+        message: 'Event added successfully',
+        event: createdEvent
       });
     })
   }
 };
 
 exports.updateEvent = (req, res, next) => {
-  console.log('ServerEventId: ', req.body, req.params.id);
+  // console.log('ServerEventId: ', req.body, req.params.id);
+  // console.log('EventId: ', req.params.id);
   Event.updateOne({_id: req.params.id}, req.body).then(updatedCompany => {
-    console.log('UpdatedCompany: ', updatedCompany);
+    // console.log('UpdatedCompany: ', updatedCompany);
     res.status(200).json({
       message: 'Update Successful'
     })
@@ -64,43 +62,35 @@ exports.updateEvent = (req, res, next) => {
 
 exports.updateEvents = (req, res, next) => {
   // Req.Body = {companyId, companyName}
-  console.log('ServerEventCompanyId: ', req.body);
-  // const effectedEvents = [];
-  const updatedEvents = [];
-  Event.updateMany({companyId: req.body.companyId}, {companyName: req.body.companyName}
-    // .then(response => {
-    //   console.log(response);
-    //   return res.status(200).json({
-    //     message: 'Update events successful!'
-    //   })
-    // })
-
-  ,
-    function (err, response) {
-      if (err) {
+  // console.log('ServerEventCompanyId: ', req.body);
+  // console.log('CompanyId: ', req.body.companyId);
+  Event.update({companyId: req.body.companyId}, {companyName: req.body.companyName}, {multi: true},
+    function (error, documents) {
+      if (error) {
         res.status(500).json({
           message: 'Update events failed!'
         });
-
       }
-      // console.log('UpdateManyRes: ', response);
-      Event.find().then(events => {
-        return res.status(200).json({
-          message: 'Updated events successfully',
-          events: events
-        });
-      });
+      res.status(200).json({
+        message: 'Updated events successfully!',
+        events: documents
     });
+  });
 };
 
 exports.getEvents = (req, res, next) => {
-  Event.find()
-    .then(documents => {
-      res.status(200).json({
-        message: 'Events fetched successfully',
-        events: documents
-      });
+  Event.find(function (err, documents) {
+    if (err) {
+      res.status(500).json({
+        message: 'Fetching Companies failed!'
+      })
+    }
+    // console.log('getEvents: ', documents);
+    res.status(200).json({
+      message: 'Companies fetched successfully!',
+      events: documents
     });
+  });
 };
 
 exports.getAllEvents = (req, res, next) => {
@@ -108,7 +98,7 @@ exports.getAllEvents = (req, res, next) => {
     .then(documents => {
         // console.log('Documents: ', documents);
         // return documents;
-      return res.status(200).json(documents);
+        return res.status(200).json(documents);
       }
     )
 };
@@ -119,6 +109,7 @@ exports.getEvent = (req, res, next) => {
     if (event) {
       console.log('Server.Event: ', event);
       return res.status(200).json({
+        message: 'Event found!',
         event: event
       });
     } else {

@@ -41,8 +41,8 @@ export class CompaniesService {
       .subscribe(response => {
         this.companies.push(response.companyObject);
         this.companiesUpdated.next([...this.companies]);
-        console.log('CompanyList: ', this.companies);
-        // this.router.navigate(['/companies']);
+        // console.log('CompanyList: ', this.companies);
+        this.router.navigate(['/companies']);
       }, error => {
         console.log(error.message);
       }, () => {

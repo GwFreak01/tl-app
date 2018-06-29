@@ -20,52 +20,12 @@ export class EventsService {
 
   getEvents() {
     this.http.get<{ message: string, events: any }>(BACKEND_URL)
-      .pipe(map(eventData => {
-        return eventData.events.map(event => {
-          // console.log('GetEvents: ', event);
-          if (event.eventType === 'Quality') {
-            return {
-              id: event._id,
-              companyName: event.companyName,
-              companyId: event.companyId,
-              eventType: event.eventType,
-              eventDate: event.eventDate,
-              tlPartNumber: event.tlPartNumber,
-              purchaseOrderNumber: event.purchaseOrderNumber,
-              lotNumber: event.lotNumber,
-              carNumber: event.carNumber,
-              quantityReject: event.quantityReject,
-              rootCause: event.rootCause,
-              statusOption: event.statusOption,
-            };
-          } else {
-            return {
-              id: event._id,
-              companyName: event.companyName,
-              companyId: event.companyId,
-              eventType: event.eventType,
-              eventDate: event.eventDate,
-              tlPartNumber: event.tlPartNumber,
-              purchaseOrderNumber: event.purchaseOrderNumber,
-              lotNumber: event.lotNumber,
-              carNumber: event.carNumber,
-              requiredDate: event.requiredDate,
-              actualDate: event.actualDate,
-              rootCause: event.rootCause,
-              statusOption: event.statusOption,
-            };
-          }
-
-        });
-      }))
-      .subscribe(transformedEvents => {
-        // console.log('Transformed Events: ', transformedEvents);
-        this.events = transformedEvents;
+      .subscribe(response => {
+        this.events = response.events;
         this.eventsUpdated.next([...this.events]);
-        // return transformedEvents;
-
+      }, error => {
+        console.log(error.message);
       });
-    return this.events;
   }
 
   getAllEvents(): Observable<Event[]> {
@@ -76,24 +36,17 @@ export class EventsService {
   }
 
   getEvent(id: string) {
-    return this.http.get<{event: Event}>(BACKEND_URL + id);
+    return this.http.get<{message: string, event: Event}>(BACKEND_URL + id);
   }
-  addEvent(eventForm, companyId) {
-    const event: Event = eventForm;
-    console.log('EventService.add: ', eventForm);
+  addEvent(formValues, company) {
+    // const event: Event = eventForm;
+    // console.log('formValues: ', formValues);
 
-
-    this.http.post<{message: string, eventId: string}>(BACKEND_URL, {event: event, companyId: companyId})
+    this.http.post<{message: string, event: any}>(BACKEND_URL, {formValues: formValues, company: company})
       .subscribe(response => {
-        const eventId = response.eventId;
-        event.id = eventId;
+        const event = response.event;
         this.events.push(event);
         this.eventsUpdated.next([...this.events]);
-        console.log(response);
-        console.log(this.events);
-        console.log(this.eventsUpdated);
-
-        console.log('EventServ done');
       });
 
   }
@@ -106,7 +59,7 @@ export class EventsService {
         console.log('EventsService.updateEvent.response: ', response);
         const updatedEvents = [...this.events];
         console.log('EventService.updatedEvents: ', updatedEvents);
-        const oldEventIndex = updatedEvents.findIndex(e => e.id === updatedEvent.id);
+        const oldEventIndex = updatedEvents.findIndex(e => e._id === updatedEvent._id);
         updatedEvents[oldEventIndex] = event;
         this.events = updatedEvents;
         this.eventsUpdated.next([...this.events]);
@@ -116,22 +69,22 @@ export class EventsService {
 
   updateEvents(companyId: string, companyName: string) {
     const effectedEvents = this.events.filter(effectedEvent => effectedEvent.companyId === companyId);
-    console.log('updateEvents.effectedEvents,OldCompanyName: ', effectedEvents, companyName);
+    // console.log('updateEvents.effectedEvents,OldCompanyName: ', effectedEvents, companyName);
 
-    this.http.put<{message: string, events: Event[]}>(BACKEND_URL + '/all', {companyId: companyId, companyName: companyName})
+    this.http.post<{message: string, events: any}>(BACKEND_URL + 'all',
+      {companyId: companyId, companyName: companyName, effectedEvents: effectedEvents})
       .subscribe(response => {
-        console.log('updateEvents.res: ', response.events);
         this.getEvents();
+        this.eventsUpdated.next([...this.events]);
       }, error => {
         console.log(error.message);
       }, () => {
-        this.getEvents();
       });
   }
   deleteEvent(eventId: string) {
     this.http.delete(BACKEND_URL + eventId)
       .subscribe(() => {
-        const updatedEvents = this.events.filter(event => event.id !== eventId);
+        const updatedEvents = this.events.filter(event => event._id !== eventId);
         this.events = updatedEvents;
         this.eventsUpdated.next([...this.events]);
         console.log('Deleted!');

@@ -112,11 +112,11 @@ exports.updateCompany = (req, res, next) => {
     function (error, document) {
       if (error) {
         return res.status(500).json({
-          message: 'Update Company failed!'
+          message: 'Update company failed!'
         });
       }
       return res.status(200).json({
-        message: "Update Successful",
+        message: "Update company successful!",
         company: document
       })
     });

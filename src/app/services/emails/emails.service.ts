@@ -5,6 +5,7 @@ import {EventsService} from '../events/events.service';
 import {CompaniesService} from '../companies/companies.service';
 import {Company} from '../../../../backend/models/company.model';
 import {Event} from '../../../../backend/models/event.model';
+import {Subscription} from 'rxjs';
 
 
 
@@ -18,24 +19,42 @@ export class EmailsService {
   private events: Event[] = [];
   private company: Company;
 
+  private eventsSub: Subscription;
+
+
+
   constructor(private http: HttpClient,
               private eventsService: EventsService,
-              private companiesService: CompaniesService) { }
+              private companiesService: CompaniesService) {
+  }
 // TODO: Paramers need email and all events associated to company
   sendEmail(companyId: string) {
+
     this.companiesService.getCompany(companyId)
       .subscribe(response => {
         this.company = response.company;
         // console.log('Company: ', this.company);
-        this.events = this.eventsService.getEvents()
-          .filter(event => event.companyId === companyId);
-        this.http.post<{message: string}>(BACKEND_URL, {company: this.company, events: this.events})
-          .subscribe(response => {
-            // console.log(response.message);
+        // .filter(event => event.companyId === companyId);
+      }, error => {
+        console.log(error.message);
+      }, () => {
+        this.eventsService.getEvents();
+        this.eventsSub = this.eventsService.getEventUpdateListener()
+          .subscribe((events: Event[]) => {
+            const associatedEvents = events.filter(event => event.companyId === companyId);
+            this.events = associatedEvents;
+            console.log('associatedEvents: ', associatedEvents);
+            console.log('EmailService.events: ', this.events);
+
           }, error => {
-            return error.message;
+            console.log(error.message);
+          }, () => {
           });
+
+
       });
+
+
 
 
 

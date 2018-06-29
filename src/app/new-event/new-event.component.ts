@@ -37,57 +37,16 @@ export class NewEventComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('eventId')) {
-        console.log('Event OnInit');
+        // console.log('Event OnInit');
         this.mode = 'edit';
         this.eventId = paramMap.get('eventId');
         this.isLoading = true;
-        console.log('OnInitEventID: ', this.mode, this.eventId);
+        // console.log('OnInitEventID: ', this.mode, this.eventId);
         this.eventsService.getEvent(this.eventId)
           .subscribe(eventData => {
             this.isLoading = false;
-            console.log('OnInitEventData: ', eventData);
-
-            // console.log('OnInitEvent: ', this.event = eventData.companyName);
-            const qualityEvent: Event = {
-              id: this.eventId,
-              companyName: eventData.event.companyName,
-              companyId: eventData.event.companyId,
-              eventType: eventData.event.eventType,
-              eventDate: eventData.event.eventDate,
-              tlPartNumber: eventData.event.tlPartNumber,
-              purchaseOrderNumber: eventData.event.purchaseOrderNumber,
-              lotNumber: eventData.event.lotNumber,
-              carNumber: eventData.event.carNumber,
-              quantityReject: eventData.event.quantityReject,
-              requiredDate: null,
-              actualDate: null,
-              rootCause: eventData.event.rootCause,
-              statusOption: eventData.event.statusOption,
-            };
-
-            const deliveryEvent: Event = {
-              id: this.eventId,
-              companyName: eventData.event.companyName,
-              companyId: eventData.event.companyId,
-              eventType: eventData.event.eventType,
-              eventDate: eventData.event.eventDate,
-              tlPartNumber: eventData.event.tlPartNumber,
-              purchaseOrderNumber: eventData.event.purchaseOrderNumber,
-              lotNumber: eventData.event.lotNumber,
-              carNumber: eventData.event.carNumber,
-              quantityReject: null,
-              requiredDate: eventData.event.requiredDate,
-              actualDate: eventData.event.actualDate,
-              rootCause: eventData.event.rootCause,
-              statusOption: eventData.event.statusOption,
-            };
-            if (eventData.event.eventType === 'Quality') {
-              this.event = qualityEvent;
-            } else {
-              this.event = deliveryEvent;
-            }
-            console.log('AfterInit: ', this.event);
-
+            // console.log('OnInitEventData: ', eventData);
+            this.event = eventData.event;
           });
       } else {
         this.mode = 'create';
@@ -99,19 +58,19 @@ export class NewEventComponent implements OnInit, OnDestroy {
       .subscribe((companies: Company[]) => {
         this.companies = companies;
       });
-    // getCompaniesList()
   }
 
   onSaveEvent(eventForm: NgForm) {
 
     if (this.mode === 'create') {
       this.isLoading = true;
-      console.log('Form Values: ', eventForm.value);
-      console.log(this.companies);
-      const companyId = this.companies.filter(company => company.companyName === eventForm.value.companyName);
-      console.log('Specific CompanyId: ', companyId[0]._id);
-      this.eventsService.addEvent(eventForm.value, companyId[0]._id);
-      this.router.navigate(['/events']);
+      // console.log('Form Values: ', eventForm.value);
+      // console.log(this.companies);
+      const associatedCompany = this.companies.filter(company => company.companyName === eventForm.value.companyName);
+      // console.log(associatedCompany);
+      // console.log('Specific CompanyId: ', companyId[0]._id);
+      this.eventsService.addEvent(eventForm.value, associatedCompany);
+      // this.router.navigate(['/events']);
       // this.companiesService.updateCompany(companyId[0].id, )
     } else {
       console.log('EditEvent: ', eventForm.value);
