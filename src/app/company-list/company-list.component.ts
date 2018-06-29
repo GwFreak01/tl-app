@@ -26,16 +26,18 @@ export class CompanyListComponent implements OnInit, OnDestroy {
 
 
   @Output() editMode =  new EventEmitter<boolean>();
-  companies: Company[] = [];
+
   isLoading = false;
-  private companiesSub: Subscription;
-  private authStatusSub = new Subscription();
   userIsAuthenticated = false;
 
   // dataSource = new EventDataSource(this.eventsService);
 
   dataSource: EventsDataSource;
   columnsToDisplay = ['eventDate', 'eventType', 'carNumber', 'status'];
+  private authStatusSub = new Subscription();
+
+  companies: Company[] = [];
+  private companiesSub: Subscription;
 
   private events: Event[];
   private eventsSub: Subscription;
@@ -113,7 +115,10 @@ export class CompanyListComponent implements OnInit, OnDestroy {
 
   sendEmail(companyId: string) {
     console.log(companyId);
-    this.emailsService.sendEmail(companyId);
+    const associatedCompany = this.companies.filter(company => company._id === companyId);
+    const associatedEvents = this.events.filter(event => event.companyId === companyId);
+
+    this.emailsService.sendEmail(associatedCompany[0], associatedEvents);
 
   }
 }

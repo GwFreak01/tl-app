@@ -73,7 +73,7 @@ export class NewEventComponent implements OnInit, OnDestroy {
       // this.router.navigate(['/events']);
       // this.companiesService.updateCompany(companyId[0].id, )
     } else {
-      console.log('EditEvent: ', eventForm.value);
+      // console.log('EditEvent: ', eventForm.value);
       this.eventsService.updateEvent(this.eventId, eventForm.value);
     }
   }

@@ -41,7 +41,7 @@ export class EventsService {
   addEvent(formValues, company) {
     // const event: Event = eventForm;
     // console.log('formValues: ', formValues);
-
+    // console.log('EventsService.addEvent.company: ', company);
     this.http.post<{message: string, event: any}>(BACKEND_URL, {formValues: formValues, company: company})
       .subscribe(response => {
         const event = response.event;
@@ -52,13 +52,13 @@ export class EventsService {
   }
 
   updateEvent(id: string, event) {
-    console.log('EventsService.updateEvent: ', event);
+    // console.log('EventsService.updateEvent: ', event);
     const updatedEvent: Event = event;
     this.http.post(BACKEND_URL + id, event)
       .subscribe(response => {
-        console.log('EventsService.updateEvent.response: ', response);
+        // console.log('EventsService.updateEvent.response: ', response);
         const updatedEvents = [...this.events];
-        console.log('EventService.updatedEvents: ', updatedEvents);
+        // console.log('EventService.updatedEvents: ', updatedEvents);
         const oldEventIndex = updatedEvents.findIndex(e => e._id === updatedEvent._id);
         updatedEvents[oldEventIndex] = event;
         this.events = updatedEvents;

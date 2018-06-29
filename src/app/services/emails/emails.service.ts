@@ -20,45 +20,22 @@ export class EmailsService {
   private company: Company;
 
   private eventsSub: Subscription;
-
+  private companiesSub: Subscription;
 
 
   constructor(private http: HttpClient,
               private eventsService: EventsService,
               private companiesService: CompaniesService) {
   }
+
 // TODO: Paramers need email and all events associated to company
-  sendEmail(companyId: string) {
-
-    this.companiesService.getCompany(companyId)
-      .subscribe(response => {
-        this.company = response.company;
-        // console.log('Company: ', this.company);
-        // .filter(event => event.companyId === companyId);
+  sendEmail(company: Company, events: Event[]) {
+    console.log(company);
+    this.http.post<{ message: string }>(BACKEND_URL + '/emailCompany', {company: company, events: events})
+      .subscribe(emailResponse => {
+        console.log(emailResponse.message);
       }, error => {
-        console.log(error.message);
-      }, () => {
-        this.eventsService.getEvents();
-        this.eventsSub = this.eventsService.getEventUpdateListener()
-          .subscribe((events: Event[]) => {
-            const associatedEvents = events.filter(event => event.companyId === companyId);
-            this.events = associatedEvents;
-            console.log('associatedEvents: ', associatedEvents);
-            console.log('EmailService.events: ', this.events);
-
-          }, error => {
-            console.log(error.message);
-          }, () => {
-          });
-
-
+        return error.message;
       });
-
-
-
-
-
-    // console.log(this.company);
-
   }
 }

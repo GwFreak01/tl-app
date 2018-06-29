@@ -12,7 +12,6 @@ const transport = mailgunTransport(mailgunOptions);
 
 exports.sendEmail = (req, res, next) => {
 
-
   console.log('ReqBodyEmails: ', req.body.company);
   const emailList = [];
   if (req.body.company.salesPerson.status) {
@@ -27,38 +26,40 @@ exports.sendEmail = (req, res, next) => {
   if (req.body.company.differentPerson.status) {
     emailList.push(req.body.company.differentPerson.email);
   }
-  this.emailClient = nodemailer.createTransport(transport);
+   const emailClient = nodemailer.createTransport(transport);
 
   console.log('emailList: ', emailList);
   console.log('affectedEvents: ', req.body.events);
 
-  for (i = 0; i < emailList.length; i++) {
-    const mailContents = {
-      from: 'office@yourdomain.com',
-      to: emailList[i],
-      subject: 'test subject',
-      text: 'test message form mailgun',
-      html: '<b>test message form mailgun</b>' + req.body.events
-    };
-    this.emailClient.sendMail(mailContents, function (err, info) {
+  const mailContents = {
+    from: 'office@yourdomain.com',
+    text: 'test message form mailgun',
+    html: '<b>test message form mailgun</b>' + req.body.events
+  };
+
+  emailList.forEach(function (email, i, array) {
+    mailContents.to = email;
+    mailContents.subject = 'test subject: ' + i;
+    console.log(mailContents);
+
+    emailClient.sendMail(mailContents, function (err, info) {
       if (err) {
-        return res.status(404).json({
-          message: 'Email unable to send!'
-        });
+        console.log(err);
+        return;
       } else {
-        console.log('Message sent: %s', info.messageId);
+        console.log(i);
+        console.log('Message sent: %s %s', info.messageId, i);
         // Preview only available when sending through an Ethereal account
         // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 
       }
-    }).then(() => {
-      return res.status(200).json({
-        message: 'Email sent successfully!'
-      });
+
+      if (i === emailList.length - 1) {
+        // mailContents.transport.close();
+        return res.status(200).json({
+          message: 'Emails sent successfully!'
+        });
       }
-    );
-  }
-
-
-
+    });
+  });
 };

@@ -2,10 +2,11 @@ const Event = require('../models/event');
 
 
 exports.createEvent = (req, res, next) => {
+  // console.log('ReqBody: ', req.body);
   if (req.body.formValues.eventType === 'Quality') {
     const qualityEvent = new Event({
       companyName: req.body.formValues.companyName,
-      companyId: req.body.company._id,
+      companyId: req.body.company[0]._id,
       eventType: req.body.formValues.eventType,
       eventDate: req.body.formValues.eventDate,
       tlPartNumber: req.body.formValues.tlPartNumber,
@@ -16,6 +17,7 @@ exports.createEvent = (req, res, next) => {
       quantityReject: req.body.formValues.quantityReject,
       statusOption: 'Open',
     });
+    // console.log('qualityEvent: ', qualityEvent);
     qualityEvent.save().then(createdEvent => {
       console.log('Events.save: ', createdEvent);
       return res.status(201).json({
@@ -26,7 +28,7 @@ exports.createEvent = (req, res, next) => {
   } else if (req.body.formValues.eventType === 'Delivery') {
     const deliveryEvent = new Event({
       companyName: req.body.formValues.companyName,
-      companyId: req.body.company._id,
+      companyId: req.body.company[0]._id,
       eventType: req.body.formValues.eventType,
       eventDate: req.body.formValues.eventDate,
       tlPartNumber: req.body.formValues.tlPartNumber,
@@ -38,9 +40,9 @@ exports.createEvent = (req, res, next) => {
       actualDate: req.body.formValues.actualDate,
       statusOption: 'Open'
     });
-
+    // console.log('deliveryEvent: ', deliveryEvent);
     deliveryEvent.save().then(createdEvent => {
-      console.log('Events.save: ', createdEvent);
+      // console.log('Events.save: ', createdEvent);
       return res.status(201).json({
         message: 'Event added successfully',
         event: createdEvent
