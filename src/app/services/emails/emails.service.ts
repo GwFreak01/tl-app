@@ -29,13 +29,29 @@ export class EmailsService {
   }
 
 // TODO: Paramers need email and all events associated to company
-  sendEmail(company: Company, events: Event[]) {
-    console.log(company);
-    this.http.post<{ message: string }>(BACKEND_URL + '/emailCompany', {company: company, events: events})
-      .subscribe(emailResponse => {
-        console.log(emailResponse.message);
+//   sendEmail(company: Company, events: Event[]) {
+  sendEmail(companyId: string) {
+    console.log(companyId);
+
+    // this.eventsService.getEvent(company.companyId)
+    this.companiesService.getCompany(companyId)
+      .subscribe(response => {
+        this.company = response.company;
+        console.log();
       }, error => {
-        return error.message;
+        if (error) {
+          console.log(error);
+        }
+      }, () => {
+        this.events = this.eventsService.getCompanyEvents(companyId);
+        console.log('sendEmailEvents: ', this.events);
+        this.http.post<{ message: string }>(BACKEND_URL + '/emailCompany', {company: this.company, events: this.events})
+          .subscribe(emailResponse => {
+            console.log(emailResponse.message);
+          }, error => {
+            return error.message;
+          });
       });
+
   }
 }

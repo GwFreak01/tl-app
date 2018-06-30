@@ -48,7 +48,7 @@ export class CompanyListComponent implements OnInit, OnDestroy {
               private emailsService: EmailsService) { }
 
   ngOnInit() {
-
+    // this.dataSource = new EventsDataSource(this.eventsService);
 
     this.isLoading = true;
     this.eventsService.getEvents();
@@ -56,7 +56,13 @@ export class CompanyListComponent implements OnInit, OnDestroy {
       .subscribe((events: Event[]) => {
         this.isLoading = false;
         this.events = events;
-        console.log('CompanyEvents: ', events);
+        console.log('AllCompanyEvents: ', events);
+      }, error => {
+        if (error) {
+          console.log(error);
+        }
+      }, () => {
+
       });
     this.companiesService.getCompanies();
     this.companiesSub = this.companiesService.getCompanyUpdateListener()
@@ -73,8 +79,7 @@ export class CompanyListComponent implements OnInit, OnDestroy {
         console.log('CompanyList.Auth: ', isAuthenticated);
         this.userIsAuthenticated = isAuthenticated;
       });
-    this.dataSource = new EventsDataSource(this.eventsService);
-    console.log('DataSource: ', this.dataSource);
+    // console.log('DataSource: ', this.dataSource);
 
   }
 
@@ -94,8 +99,11 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   }
 
   getEventTable(company) {
+    // console.log('getEventTable: ', this.events);
     let companyEvents: Event[] = [];
-      companyEvents = this.events.filter(event => event.companyName === company.companyName);
+    companyEvents = this.eventsService.getCompanyEvents(company._id);
+    console.log('companyEvents: ', companyEvents);
+
     if (companyEvents == null) {
       return companyEvents;
     } else {
@@ -114,11 +122,14 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   }
 
   sendEmail(companyId: string) {
-    console.log(companyId);
-    const associatedCompany = this.companies.filter(company => company._id === companyId);
-    const associatedEvents = this.events.filter(event => event.companyId === companyId);
+    // console.log(companyId);
+    // const associatedCompany = this.companies.filter(company => company._id === companyId);
+    // const associatedEvents = this.events.filter(event => event.companyId === companyId);
 
-    this.emailsService.sendEmail(associatedCompany[0], associatedEvents);
+    // this.emailsService.sendEmail(associatedCompany[0], associatedEvents);
+
+    this.emailsService.sendEmail(companyId);
+
 
   }
 }

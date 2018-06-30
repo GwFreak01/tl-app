@@ -7,7 +7,13 @@
         <h3> {{ event.companyName}} </h3>
       </mat-panel-title>
       <mat-panel-description>
+        <div class="eventTypePanelDescription">
         <h4> {{ event.eventType}} </h4>
+        </div>
+        <span class="descriptionSpace"></span>
+        <div class="eventDatePanelDescription">
+        <h4> {{ event.eventDate | date}} </h4>
+        </div>
       </mat-panel-description>
     </mat-expansion-panel-header>
 
@@ -45,6 +51,13 @@
         <input
           matInput
           value="{{event.tlPartNumber}}" readonly>
+      </mat-form-field>
+
+      <mat-form-field class="fieldPurchaseOrder" appearance="outline">
+        <mat-label>P.O. Number</mat-label>
+        <input
+          matInput
+          value="{{event.purchaseOrderNumber}}" readonly>
       </mat-form-field>
 
       <div *ngIf="event.eventType == 'Quality'">

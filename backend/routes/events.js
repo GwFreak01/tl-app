@@ -13,11 +13,15 @@ router.post('/all', checkAuth, EventController.updateEvents);
 
 router.post('/:id', checkAuth, EventController.updateEvent);
 
-router.get('', checkAuth, EventController.getEvents);
+
 
 router.get('/getAll', checkAuth, EventController.getAllEvents);
 
+router.get('/companyEvents', checkAuth, EventController.getCompanyEvents);
+
 router.get('/:id', checkAuth, EventController.getEvent);
+
+router.get('', checkAuth, EventController.getEvents);
 
 router.delete('/:id', checkAuth, EventController.deleteEvent);
 

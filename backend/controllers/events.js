@@ -105,6 +105,20 @@ exports.getAllEvents = (req, res, next) => {
     )
 };
 
+exports.getCompanyEvents = (req, res, next) => {
+  Event.find({companyId: req.body.companyId}, function (error, documents) {
+    if (error) {
+      return res.status(404).json({
+        message: 'Company Events not found!'
+      });
+    }
+    return res.status(200).json({
+      message: 'Company Events found!',
+      events: documents
+    });
+  })
+};
+
 exports.getEvent = (req, res, next) => {
   console.log(req.params.id);
   Event.findById(req.params.id).then(event => {

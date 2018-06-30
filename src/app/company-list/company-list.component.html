@@ -8,15 +8,15 @@
       </mat-panel-title>
       <mat-panel-description>
 
-        <span class="descriptionSpan">
+        <div class="descriptionSpan">
           <h4 class="panelDescription">
           {{ company.companyAddress.street1}}
           </h4>
-        </span>
+        </div>
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <div class="eventsTable" *ngIf="dataSource">
+    <div class="eventsTable" >
       <table mat-table [dataSource]="getEventTable(company)">
         <ng-container matColumnDef="eventDate">
           <th mat-header-cell *matHeaderCellDef>Date</th>

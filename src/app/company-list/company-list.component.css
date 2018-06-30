@@ -40,5 +40,5 @@ mat-panel-description {
 }
 
 .descriptionSpan {
-  text-align: right;
+  float: right;
 }

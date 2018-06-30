@@ -45,3 +45,20 @@ mat-spinner {
   text-align: center;
   margin: 16px;
 }
+
+.eventTypePanelDescription {
+  float: right;
+
+}
+.eventDatePanelDescription {
+  /*text-align: right;*/
+  float: right;
+}
+
+.eventPanelDescription {
+  clear: both;
+}
+
+.descriptionSpace {
+  flex: 1 1 0;
+}

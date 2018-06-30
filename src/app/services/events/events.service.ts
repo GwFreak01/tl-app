@@ -35,8 +35,12 @@ export class EventsService {
     return this.eventsUpdated.asObservable();
   }
 
-  getEvent(id: string) {
-    return this.http.get<{message: string, event: Event}>(BACKEND_URL + id);
+  getEvent(eventId: string) {
+    return this.http.get<{message: string, event: Event}>(BACKEND_URL + eventId);
+  }
+
+  getCompanyEvents(companyId: string) {
+    return this.events.filter(event => event.companyId === companyId);
   }
   addEvent(formValues, company) {
     // const event: Event = eventForm;
@@ -90,10 +94,4 @@ export class EventsService {
         console.log('Deleted!');
       });
   }
-
-  getCompanyEvents(companyId: string) {
-    // this.http.get<Event[]>(BACKEND_URL + );
-  }
-
-
 }
