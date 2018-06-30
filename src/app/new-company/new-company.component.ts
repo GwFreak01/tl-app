@@ -1,5 +1,5 @@
 import {
-  Component, EventEmitter, OnDestroy,
+  Component, EventEmitter, Input, OnDestroy,
   OnInit, Output,
 } from '@angular/core';
 
@@ -19,6 +19,7 @@ import {EventsService} from '../services/events/events.service';
 })
 export class NewCompanyComponent implements OnInit, OnDestroy {
 
+  @Input() editMode: string;
   @Output() hideNewForm: EventEmitter<boolean> = new EventEmitter<boolean>();
   states = [
     {label: 'AL', value: 'AL'},
@@ -176,6 +177,10 @@ export class NewCompanyComponent implements OnInit, OnDestroy {
     console.log('Cancel Company');
     this.hideNewForm.emit(false);
 
+  }
+
+  onEditMode(modifyOption: string) {
+    this.mode = modifyOption;
   }
   ngOnDestroy() {
     // this.authStatusSub.unsubscribe();

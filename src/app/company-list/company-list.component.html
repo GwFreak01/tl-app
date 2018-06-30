@@ -55,7 +55,7 @@
       <span class="buttonSpace"></span>
       <button
         class="editCompanyButton"
-        mat-stroked-button color="primary" [routerLink]="['/edit-company', company._id]">
+        mat-stroked-button color="primary" [routerLink]="['/edit-company', company._id]" (click)="onEditCompany(company._id)">
         EDIT INFO
       </button>
 

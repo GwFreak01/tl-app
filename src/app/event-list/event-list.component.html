@@ -101,20 +101,21 @@
 
     <mat-action-row *ngIf="userIsAuthenticated">
       <button
-        mat-button color="primary" [routerLink]="['/edit-event', event._id]">
+        class="deleteEventButton"
+        mat-button color="warn"
+        (click)="onDelete(event._id)">
+        DELETE
+      </button>
+      <span class="buttonSpace"></span>
+
+      <button
+        class="editCompanyButton"
+        mat-raised-button color="primary" [routerLink]="['/edit-event', event._id]">
         EDIT
       </button>
-      <button
-        mat-button color="warn"
-        (click)="onDelete(event._id)">DELETE</button>
     </mat-action-row>
 
   </mat-expansion-panel>
-  <!--<mat-list-item> Pepper </mat-list-item>-->
-  <!--<mat-list-item> Salt </mat-list-item>-->
-  <!--<mat-list-item> Paprika </mat-list-item>-->
-  <!--<mat-list-item> Paprika </mat-list-item>-->
-
 </mat-accordion>
 
 <h1 class="blankEvents mat-h1" *ngIf="events.length <= 0 && !isLoading">

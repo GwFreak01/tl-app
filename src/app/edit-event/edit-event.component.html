@@ -1,7 +1,5 @@
 <mat-grid-list [cols]="2">
-  <mat-grid-tile [colspan]="1" [rowspan]="3">
-    <mat-card>
-      <app-new-event></app-new-event>
-    </mat-card>
-  </mat-grid-tile>
+  <mat-card>
+    <app-new-event (hideNewForm)="goToEvents()"></app-new-event>
+  </mat-card>
 </mat-grid-list>

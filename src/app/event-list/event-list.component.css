@@ -62,3 +62,11 @@ mat-spinner {
 .descriptionSpace {
   flex: 1 1 0;
 }
+
+.buttonSpace {
+  flex: 1 1 0;
+}
+
+.deleteEventButton {
+  margin-left: 0px;
+}

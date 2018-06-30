@@ -67,7 +67,7 @@ export class EventsService {
         updatedEvents[oldEventIndex] = event;
         this.events = updatedEvents;
         this.eventsUpdated.next([...this.events]);
-        this.router.navigate(['/events']);
+        // this.router.navigate(['/events']);
       });
   }
 

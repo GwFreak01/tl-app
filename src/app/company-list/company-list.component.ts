@@ -25,7 +25,7 @@ import {EmailsService} from '../services/emails/emails.service';
 export class CompanyListComponent implements OnInit, OnDestroy {
 
 
-  @Output() editMode =  new EventEmitter<boolean>();
+  @Output() editMode: EventEmitter<string> =  new EventEmitter<string>();
 
   isLoading = false;
   userIsAuthenticated = false;
@@ -89,9 +89,9 @@ export class CompanyListComponent implements OnInit, OnDestroy {
     this.authStatusSub.unsubscribe();
   }
 
-  onEdit(companyId, editSelected: boolean) {
+  onEditCompany(companyId: string) {
     console.log('CompanyListEdit', companyId);
-    this.editMode.emit(editSelected);
+    this.editMode.emit('edit');
   }
 
   onDelete(companyId: string) {

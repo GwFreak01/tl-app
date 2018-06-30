@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
 
 @Component({
@@ -8,7 +8,7 @@ import {Subject} from 'rxjs';
 })
 export class CompaniesComponent implements OnInit {
 
-  // @Input()
+  @Input() modifyOption: EventEmitter<string> = new EventEmitter<string>();
   // hideForm = new Subject<o>();
 
   addButtonSelect = false;
@@ -26,8 +26,10 @@ export class CompaniesComponent implements OnInit {
     this.addButtonSelect = true;
   }
 
-  onEditCompany($event) {
-    console.log('Company Comp: On Edit');
+  onEditCompany(mode: string) {
+    console.log('Company Comp.edit: ', mode);
+    this.addButtonSelect = true;
+    this.modifyOption.emit(mode);
   }
 
   onHideForm(hide: boolean) {
