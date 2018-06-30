@@ -48,7 +48,6 @@ exports.loginUser = (req, res, next) => {
               message: err.message
             });
           });
-
         });
       } else {
         User.findOne({$or: [{username: req.body.username}, {email: req.body.email}]})
