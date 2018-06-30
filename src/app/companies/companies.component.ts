@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-companies',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompaniesComponent implements OnInit {
 
+  // @Input()
+  // hideForm = new Subject<o>();
 
   addButtonSelect = false;
   editButtonSelect = false;
@@ -27,9 +30,9 @@ export class CompaniesComponent implements OnInit {
     console.log('Company Comp: On Edit');
   }
 
-  onHideForm(event) {
-    console.log('OnHide: ', event);
-    this.addButtonSelect = event;
+  onHideForm(hide: boolean) {
+    console.log('OnHide: ', hide);
+    this.addButtonSelect = hide;
   }
 }
 

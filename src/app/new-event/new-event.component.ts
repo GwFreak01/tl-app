@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {Company} from '../../../backend/models/company.model';
 import {CompaniesService} from '../services/companies/companies.service';
 import {Subscription} from 'rxjs';
@@ -15,6 +15,7 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 })
 export class NewEventComponent implements OnInit, OnDestroy {
 
+  @Output() hideNewForm: EventEmitter<boolean> = new EventEmitter<boolean>();
   private mode = 'create';
   private eventId: string;
   eventTypes = ['Quality', 'Delivery'];
@@ -76,8 +77,15 @@ export class NewEventComponent implements OnInit, OnDestroy {
       // console.log('EditEvent: ', eventForm.value);
       this.eventsService.updateEvent(this.eventId, eventForm.value);
     }
+
+    this.hideNewForm.emit(false);
+
   }
 
+  onCancelEvent() {
+    console.log('onCancelEvent');
+    this.hideNewForm.emit(false);
+  }
   ngOnDestroy() {
     this.companiesSub.unsubscribe();
   }

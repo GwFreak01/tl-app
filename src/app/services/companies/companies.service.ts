@@ -42,7 +42,7 @@ export class CompaniesService {
         this.companies.push(response.companyObject);
         this.companiesUpdated.next([...this.companies]);
         // console.log('CompanyList: ', this.companies);
-        this.router.navigate(['/companies']);
+        // this.router.navigate(['/companies']);
       }, error => {
         console.log(error.message);
       }, () => {

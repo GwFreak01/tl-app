@@ -17,4 +17,9 @@ export class EventsComponent implements OnInit {
     console.log('onAddButtonSelect');
     this.addButtonSelect = true;
   }
+
+  onHideForm(hide: boolean) {
+    console.log('OnHide: ', hide);
+    this.addButtonSelect = hide;
+  }
 }

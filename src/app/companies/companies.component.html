@@ -21,8 +21,8 @@
   </div>
   <mat-card
     class="dashboard-card companyFormDisplay"
-    *ngIf="addButtonSelect" (hideNewForm)="onHideForm($event)">
-    <app-new-company></app-new-company>
+    *ngIf="addButtonSelect">
+    <app-new-company (hideNewForm)="onHideForm($event)"></app-new-company>
   </mat-card>
 
   </mat-grid-list>

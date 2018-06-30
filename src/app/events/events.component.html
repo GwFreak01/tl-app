@@ -21,7 +21,7 @@
     <!--</mat-grid-tile>-->
     <!--<mat-grid-tile [rowspan]="1">-->
       <mat-card class="dashboard-card eventFormDisplay" *ngIf="addButtonSelect">
-        <app-new-event></app-new-event>
+        <app-new-event (hideNewForm)="onHideForm($event)"></app-new-event>
       </mat-card>
 
     <!--</mat-grid-tile>-->

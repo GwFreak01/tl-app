@@ -99,10 +99,8 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   }
 
   getEventTable(company) {
-    // console.log('getEventTable: ', this.events);
-    let companyEvents: Event[] = [];
-    companyEvents = this.eventsService.getCompanyEvents(company._id);
-    console.log('companyEvents: ', companyEvents);
+    const companyEvents = this.eventsService.getCompanyEvents(company._id);
+    // console.log('companyEvents: ', companyEvents);
 
     if (companyEvents == null) {
       return companyEvents;

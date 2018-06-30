@@ -19,7 +19,7 @@ import {EventsService} from '../services/events/events.service';
 })
 export class NewCompanyComponent implements OnInit, OnDestroy {
 
-  @Output() hideNewForm: EventEmitter<boolean>;
+  @Output() hideNewForm: EventEmitter<boolean> = new EventEmitter<boolean>();
   states = [
     {label: 'AL', value: 'AL'},
     {label: 'AK', value: 'AK'},
@@ -105,7 +105,6 @@ export class NewCompanyComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.hideNewForm = new EventEmitter<boolean>();
 
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('companyId')) {
@@ -136,6 +135,7 @@ export class NewCompanyComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     if (this.mode === 'create') {
       this.companiesService.addCompany(form.value);
+      // this.hideNewForm.emit(false);
 
     } else {
       this.eventsService.updateEvents(this.companyId, form.value.companyName);
@@ -147,8 +147,9 @@ export class NewCompanyComponent implements OnInit, OnDestroy {
 
 
     }
-    this.isLoading = false;
+    this.hideNewForm.emit(false);
     form.resetForm();
+    this.isLoading = false;
     // this.hideNewForm.emit(false);
 
   }
@@ -171,6 +172,11 @@ export class NewCompanyComponent implements OnInit, OnDestroy {
     console.log(this.salesCheck, this.qualityCheck, this.logisticsCheck, this.noneSelect);
   }
 
+  onCancelCompany() {
+    console.log('Cancel Company');
+    this.hideNewForm.emit(false);
+
+  }
   ngOnDestroy() {
     // this.authStatusSub.unsubscribe();
   }
