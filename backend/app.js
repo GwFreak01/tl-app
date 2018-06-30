@@ -10,21 +10,21 @@ const emailsRoutes = require('./routes/emails');
 
 const app = express();
 
-// mongoose.connect("mongodb+srv://gwfreak01:" + process.env.MONGO_ATLAS_PW + "@cluster0-s32lv.mongodb.net/tl-sms")
-//   .then(() => {
-//     console.log('Connected to database!');
-//   })
-//   .catch(() => {
-//     console.log('Connection failed!');
-//   });
-
-mongoose.connect('mongodb://localhost:27017/tlsmsdb_test')
+mongoose.connect("mongodb+srv://gwfreak01:" + process.env.MONGO_ATLAS_PW + "@cluster0-s32lv.mongodb.net/tl-sms")
   .then(() => {
-    console.log('Connected to database!');
+    console.log('Connected to cloud database!');
   })
   .catch(() => {
     console.log('Connection failed!');
   });
+
+// mongoose.connect('mongodb://localhost:27017/tlsmsdb_test')
+//   .then(() => {
+//     console.log('Connected to local database!');
+//   })
+//   .catch(() => {
+//     console.log('Connection failed!');
+//   });
 
 
 app.use(bodyParser.json());

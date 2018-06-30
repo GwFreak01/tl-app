@@ -99,10 +99,11 @@
       </mat-form-field>
     </form>
 
+    <hr>
     <mat-action-row *ngIf="userIsAuthenticated">
       <button
         class="deleteEventButton"
-        mat-button color="warn"
+        mat-stroked-button color="warn"
         (click)="onDelete(event._id)">
         DELETE
       </button>
