@@ -53,6 +53,8 @@ import {AuthService} from './auth/auth.service';
 import {CompaniesService} from './services/companies/companies.service';
 import {EventsService} from './services/events/events.service';
 import {EmailsService} from './services/emails/emails.service';
+import { CompanyRegistrationModalComponent } from './modals/company-registration-modal/company-registration-modal.component';
+import { NewCompanyRegistrationModalComponent } from './modals/new-company-registration-modal/new-company-registration-modal.component';
 
 
 
@@ -111,6 +113,8 @@ const appRoutes: Routes = [
     EditCompanyComponent,
     EditEventComponent,
     ErrorComponent,
+    CompanyRegistrationModalComponent,
+    NewCompanyRegistrationModalComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -131,6 +135,6 @@ const appRoutes: Routes = [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ErrorComponent]
+  entryComponents: [ErrorComponent, CompanyRegistrationModalComponent]
 })
 export class AppModule { }

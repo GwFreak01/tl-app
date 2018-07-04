@@ -54,4 +54,14 @@ export class EmailsService {
       });
 
   }
+
+  sendCompanyRegistration(email: string) {
+    // console.log(email);
+    this.http.post<{ message: string }>(BACKEND_URL + '/emailCompanyRegistration', {email: email})
+      .subscribe(response => {
+        console.log(response.message);
+      });
+
+  }
+
 }

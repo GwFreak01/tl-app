@@ -10,9 +10,13 @@
   <button class="emailbutton"
           mat-raised-button
           type="submit"
-          color="primary" >
-    SEND EMAIL
+          color="primary" (click)="onSendCompanyRegistration()">
+    SEND COMPANY REGISTRATION
   </button>
+  <!--<mat-form-field class="example-full-width" appearance="outline">-->
+    <!--<mat-label>Company Email</mat-label>-->
+    <!--<input matInput placeholder="Email">-->
+  <!--</mat-form-field>-->
   <br>
   <mat-grid-list [cols]="2">
   <div

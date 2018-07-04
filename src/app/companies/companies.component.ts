@@ -1,5 +1,7 @@
-import {Component, EventEmitter, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
+import {CompanyRegistrationModalComponent} from '../modals/company-registration-modal/company-registration-modal.component';
 
 @Component({
   selector: 'app-companies',
@@ -14,7 +16,8 @@ export class CompaniesComponent implements OnInit {
   addButtonSelect = false;
   editButtonSelect = false;
 
-  constructor() {
+  dialogResult = '';
+  constructor(private dialog: MatDialog) {
 
   }
 
@@ -35,6 +38,19 @@ export class CompaniesComponent implements OnInit {
   onHideForm(hide: boolean) {
     console.log('OnHide: ', hide);
     this.addButtonSelect = hide;
+  }
+
+  onSendCompanyRegistration() {
+    const dialogRef = this.dialog.open(CompanyRegistrationModalComponent, {
+      // height: '400px',
+      width: '600px',
+      data: 'This text was passed into the dialog'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      this.dialogResult = result;
+    });
   }
 }
 

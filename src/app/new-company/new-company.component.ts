@@ -82,6 +82,7 @@ export class NewCompanyComponent implements OnInit, OnDestroy {
   ];
   selected = null;
 
+  userIsAuthenticated = false;
   private mode = 'create';
   private companyId: string;
   public company: Company;
@@ -127,6 +128,16 @@ export class NewCompanyComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.userIsAuthenticated = this.authService.getIsAuth();
+
+    console.log('CompanyList.userIsAuthenicated: ', this.userIsAuthenticated);
+
+    this.authStatusSub = this.authService.getAuthStatusListener()
+      .subscribe(isAuthenticated => {
+        console.log('CompanyList.Auth: ', isAuthenticated);
+        this.userIsAuthenticated = isAuthenticated;
+      });
+
   }
 
   onSaveCompany(form: NgForm) {
@@ -134,24 +145,33 @@ export class NewCompanyComponent implements OnInit, OnDestroy {
       return;
     }
     this.isLoading = true;
-    if (this.mode === 'create') {
-      this.companiesService.addCompany(form.value);
-      // this.hideNewForm.emit(false);
+    if (this.userIsAuthenticated === false) {
+      if (this.mode === 'create') {
+        this.companiesService.addCompany(form.value);
 
+        this.router.navigate(['/login']);
+      }
     } else {
-      this.eventsService.updateEvents(this.companyId, form.value.companyName);
-      this.companiesService.updateCompany(this.companyId, form.value);
+      if (this.mode === 'create') {
+        this.companiesService.addCompany(form.value);
+        // this.hideNewForm.emit(false);
 
-      // this.isLoading = false;
-      // console.log('End Save');
-      this.router.navigate(['/dashboard']);
+      } else {
+        this.eventsService.updateEvents(this.companyId, form.value.companyName);
+        this.companiesService.updateCompany(this.companyId, form.value);
+
+        // this.isLoading = false;
+        // console.log('End Save');
+        this.router.navigate(['/dashboard']);
 
 
+      }
+      this.hideNewForm.emit(false);
+      form.resetForm();
+      this.isLoading = false;
+      // this.hideNewForm.emit(false);
     }
-    this.hideNewForm.emit(false);
-    form.resetForm();
-    this.isLoading = false;
-    // this.hideNewForm.emit(false);
+
 
   }
 

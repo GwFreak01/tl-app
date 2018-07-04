@@ -72,6 +72,11 @@ const routes: Routes = [
     path: 'create-user',
     component: CreateUserComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'new-company',
+    component: NewCompanyComponent,
+    // canActivate: [AuthGuard],
   }
 
 ];
