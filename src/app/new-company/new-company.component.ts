@@ -147,14 +147,18 @@ export class NewCompanyComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     if (this.userIsAuthenticated === false) {
       if (this.mode === 'create') {
-        this.companiesService.addCompany(form.value);
-
-        this.router.navigate(['/login']);
+        // this.companiesService.addCompany(form.value);
+        this.companiesService.addCompanyTemp(form.value);
+        this.router.navigate(['/login']).then(() => {
+          alert('Company created successfully!');
+        });
       }
     } else {
       if (this.mode === 'create') {
         this.companiesService.addCompany(form.value);
         // this.hideNewForm.emit(false);
+        alert('Company created successfully!');
+
 
       } else {
         this.eventsService.updateEvents(this.companyId, form.value.companyName);
@@ -162,7 +166,11 @@ export class NewCompanyComponent implements OnInit, OnDestroy {
 
         // this.isLoading = false;
         // console.log('End Save');
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/dashboard']).then(() => {
+          alert('Company updated successfully!');
+        });
+
+
 
 
       }

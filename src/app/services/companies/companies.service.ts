@@ -51,6 +51,22 @@ export class CompaniesService {
 
   }
 
+  addCompanyTemp(formValues) {
+    this.http.put<{ message: string , companyObject: any}>(BACKEND_URL + '/companyTemp', formValues)
+      .subscribe(response => {
+        this.companies.push(response.companyObject);
+        this.companiesUpdated.next([...this.companies]);
+        // console.log('CompanyList: ', this.companies);
+        // this.router.navigate(['/companies']);
+      }, error => {
+        console.log(error.message);
+      }, () => {
+        // this.companies.push(company);
+      });
+
+  }
+
+
   updateCompany(companyId: string, formValues) {
     this.http.post<{message: string, company: any}>(BACKEND_URL + companyId, formValues)
       .subscribe(response => {

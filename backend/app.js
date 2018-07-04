@@ -27,6 +27,7 @@ mongoose.connect("mongodb+srv://gwfreak01:" + process.env.MONGO_ATLAS_PW + "@clu
 //   });
 
 
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
