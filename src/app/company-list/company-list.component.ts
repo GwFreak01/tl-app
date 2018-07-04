@@ -14,8 +14,9 @@ import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {AuthService} from '../auth/auth.service';
 import {DataSource} from '@angular/cdk/table';
 import {EventsService} from '../services/events/events.service';
-import {MatTableDataSource} from '@angular/material';
+import {MatDialog, MatTableDataSource} from '@angular/material';
 import {EmailsService} from '../services/emails/emails.service';
+import {CompanyReportModalComponent} from '../modals/company-report-modal/company-report-modal.component';
 
 @Component({
   selector: 'app-company-list',
@@ -45,7 +46,8 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   constructor(public companiesService: CompaniesService,
               private eventsService: EventsService,
               private authService: AuthService,
-              private emailsService: EmailsService) { }
+              private emailsService: EmailsService,
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     // this.dataSource = new EventsDataSource(this.eventsService);
@@ -126,9 +128,15 @@ export class CompanyListComponent implements OnInit, OnDestroy {
 
     // this.emailsService.sendEmail(associatedCompany[0], associatedEvents);
 
-    this.emailsService.sendEmail(companyId);
+    const dialogRef = this.dialog.open(CompanyReportModalComponent, {
+      width: '600px',
 
+    });
 
+    dialogRef.afterOpen().subscribe(result => {
+      console.log('Dialog opened!');
+      this.emailsService.sendEmail(companyId);
+    });
   }
 }
 

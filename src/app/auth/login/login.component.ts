@@ -12,7 +12,8 @@ import {log} from 'util';
 export class LoginComponent implements OnInit {
 
   isLoading = false;
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService,
+              private router: Router) { }
 
   ngOnInit() {
   }
