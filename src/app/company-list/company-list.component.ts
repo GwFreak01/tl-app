@@ -70,7 +70,18 @@ export class CompanyListComponent implements OnInit, OnDestroy {
     this.companiesSub = this.companiesService.getCompanyUpdateListener()
       .subscribe((companies: Company[]) => {
         this.isLoading = false;
-        this.companies = companies;
+        this.companies = companies
+          .sort(function (a, b) {
+            const nameA = a.companyName.toUpperCase();
+            const nameB = b.companyName.toUpperCase();
+            if (nameA < nameB) {
+              return - 1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
+            return 0;
+          });
 
       });
     this.userIsAuthenticated = this.authService.getIsAuth();
@@ -101,8 +112,17 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   }
 
   getEventTable(company) {
-    const companyEvents = this.eventsService.getCompanyEvents(company._id);
-    // console.log('companyEvents: ', companyEvents);
+    const sortOrder = ['Open', 'Pending', 'Closed'];
+
+    const companyEvents = this.eventsService.getCompanyEvents(company._id)
+      .sort(function (a, b) {
+        return sortOrder.indexOf(a.statusOption) - sortOrder.indexOf(b.statusOption);
+      })
+      .sort(function (a, b) {
+        return Date.parse(a.eventDate) - Date.parse(b.eventDate);
+      })
+    ;
+    console.log('companyEvents: ', companyEvents);
 
     if (companyEvents == null) {
       return companyEvents;

@@ -34,7 +34,25 @@ export class EventListComponent implements OnInit, OnDestroy {
     this.eventsService.getEvents();
     this.eventsSub = this.eventsService.getEventUpdateListener()
       .subscribe((events: Event[]) => {
-        this.events = events;
+        const sortOrder = ['Open', 'Pending', 'Closed'];
+        this.events = events
+          .sort(function (a, b) {
+            return sortOrder.indexOf(a.statusOption) - sortOrder.indexOf(b.statusOption);
+          })
+          .sort(function (a, b) {
+            return Date.parse(a.eventDate) - Date.parse(b.eventDate);
+          })
+          .sort(function (a, b) {
+            const nameA = a.companyName.toUpperCase();
+            const nameB = b.companyName.toUpperCase();
+            if (nameA < nameB) {
+              return - 1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
+            return 0;
+        });
         this.isLoading = false;
         // console.log('EventSub: ', events);
         console.log('Event List: ', this.events);
