@@ -113,7 +113,7 @@ export class CompanyListComponent implements OnInit, OnDestroy {
 
   getColor(status: string) {
     if (status === 'Open') {
-      return '#ef5350';
+      return '#EF5350';
     } else if (status === 'Pending') {
       return '#FFEE58';
     } else if (status === 'Closed') {

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+Dear Valued T&L Supplier,
+<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Attached, you will find your delivery and quality performance summary report for the
+prior quarter. Please review the information and contact Dan Barnhoorn if you have any questions.
+<br><br>
+
+<div class="row">
+  <div class="col-md-10">
+    <table class="table table-striped table-hover" align="center">
+      <thead>
+      <tr>
+        <th><u>Date</u></th>
+        <th><u>CAR #</u></th>
+        <th><u>Type</u></th>
+        <th><u>Status</u></th>
+        <th><u>Problem Description</u></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr></tr>
+      {{#each eventItems}}
+      {{#ifEventBad this 'Open'}}
+      <tr class="event danger" bgcolor="#EF5350">
+        <td>{{formatTime this.eventDate "MM-DD-YYYY"}}</td>
+        <td>{{this.carNumber}}</td>
+        <td>{{this.eventType}}</td>
+        <td>{{this.statusOption}}</td>
+        <td>{{this.rootCause}}</td>
+      </tr>
+      {{/ifEventBad}}
+      {{#ifEventMid this 'Pending'}}
+      <tr class="event warning" bgcolor="#FFEE58">
+        <td>{{formatTime this.eventDate "MM-DD-YYYY"}}</td>
+        <td>{{this.carNumber}}</td>
+        <td>{{this.eventType}}</td>
+        <td>{{this.statusOption}}</td>
+        <td>{{this.rootCause}}</td>
+      </tr>
+      {{/ifEventMid}}
+
+      {{#ifEventGood this 'Closed'}}
+      <tr class="event success" bgcolor="#66BB6A">
+        <td>{{formatTime this.eventDate "MM-DD-YYYY"}}</td>
+        <td>{{this.carNumber}}</td>
+        <td>{{this.eventType}}</td>
+        <td>{{this.statusOption}}</td>
+        <td>{{this.rootCause}}</td>
+      </tr>
+      {{/ifEventGood}}
+      {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+<br><br>
+
+<center>
+  <b><u>Status Legend</u></b><br><br>
+  <font color="#66BB6A"><b>GREEN</b></font> | 0 to 1 Open/Pending Events <br><br>
+  <font color="#FFEE58"><b>YELLOW</b></font> | 2 to 4 Open/Pending Events <br><br>
+  <font color="#EF5350"><b>RED</b></font> | 5+ Open/Pending Events <br><br>
+</center>
+
+Your current status is
+{{#ifGreen}}
+{{/ifGreen}}
+
+<br><br>
+Sincerely,<br>
+<b>William J. Green</b><br>
+Vice President - Sales and Marketing<br>
+<img src="http://i.imgur.com/p4NrWee.png" alt="Logo" height="95" width="144"><br>
+
+<p><i><b>Improving….Never done!!</b></i></p><br>
+770 Emerson Street<br>
+Rochester, NY 14613<br>
+Office 585 647-3717<br>
+Fax 585 647-1126<br>
+<a href="www.tandlautomatics.com">www.tandlautomatics.com</a><br>
+
+
+</body>
+</html>
