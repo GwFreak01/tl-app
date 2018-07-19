@@ -160,7 +160,6 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   }
 }
 
-
 export class EventsDataSource extends DataSource<any> {
 
   constructor(private eventsService: EventsService) {
