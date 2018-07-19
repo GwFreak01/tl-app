@@ -59,6 +59,9 @@ mat-spinner {
   clear: both;
 }
 
+.eventTypeDescription {
+  width: 60px;
+}
 .descriptionSpace {
   flex: 1 1 0;
 }
@@ -73,4 +76,9 @@ mat-spinner {
 
 .editCompanyButton {
   margin-right: 16px;
+}
+
+
+mat-panel-title {
+  width: 260px;
 }

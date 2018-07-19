@@ -2,24 +2,29 @@
   <h2 mat-dialog-title>NEW COMPANY REGISTRATION</h2>
   <hr>
   <mat-dialog-content>
-    <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>Company Email</mat-label>
-      <input
-        matInput
-        type="email"
-        #emailInput
-        name="emailInput"
-        placeholder="Email">
-    </mat-form-field>
+    <form>
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Company Email</mat-label>
+        <input
+          matInput
+          email
+          type="email"
+          #emailInput
+          name="emailInput"
+          placeholder="Email" required>
+        <mat-error *ngIf="emailInput.invalid">Please enter Company Email</mat-error>
+      </mat-form-field>
+    </form>
     <br>
-    <strong>{{data}}</strong>
+    <!--<strong>{{data}}</strong>-->
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button mat-raised-button (click)="onCloseConfirm(emailInput.value)">
-      CONFIRM
-    </button>
-    <button mat-raised-button (click)="onCloseCancel()">
+    <button mat-raised-button type="reset" color="warn" (click)="onCloseCancel()">
       CANCEL
     </button>
+    <button mat-raised-button type="submit" color="primary" (click)="onCloseConfirm(emailInput.value)">
+      CONFIRM
+    </button>
+
   </mat-dialog-actions>
 </div>
