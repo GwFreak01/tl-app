@@ -38,6 +38,11 @@ table {
 
 mat-panel-description {
   text-align: right;
+
+}
+
+mat-panel-title {
+  width: 280px;
 }
 
 .descriptionSpan {
