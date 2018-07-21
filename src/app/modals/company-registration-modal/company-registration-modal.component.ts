@@ -20,6 +20,7 @@ export class CompanyRegistrationModalComponent implements OnInit {
     // console.log(email);
     this.emailService.sendCompanyRegistration(email);
     this.dialogRef.close('Confirm');
+    alert('Email Registration Sent!');
   }
 
   onCloseCancel() {

@@ -20,6 +20,7 @@ import {
   MatNativeDateModule,
   MatDialogModule,
   MatTableModule,
+  MatSnackBarModule,
 } from '@angular/material';
 
 @NgModule({
@@ -42,6 +43,7 @@ import {
     MatNativeDateModule,
     MatDialogModule,
     MatTableModule,
+    MatSnackBarModule,
   ],
   declarations: [
 

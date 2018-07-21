@@ -2,6 +2,20 @@ const express = require("express");
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+const CronJob = require('cron').CronJob;
+
+const emailJob = new CronJob({
+  // cronTime: '00 00 20 * * 0-6'
+  cronTime: '* * * * * 0-6',
+  onTick: function () {
+    console.log('emailJob tick at: ', new Date());
+  },
+  start: false,
+  timezone: 'America/New_York'
+
+});
+emailJob.start();
+
 const companiesRoutes = require('./routes/companies');
 const userRoutes = require('./routes/user');
 const eventsRoutes = require('./routes/events');

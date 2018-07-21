@@ -2,6 +2,7 @@ import {Component, EventEmitter, Inject, Input, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {CompanyRegistrationModalComponent} from '../modals/company-registration-modal/company-registration-modal.component';
+import {duration} from 'moment';
 
 @Component({
   selector: 'app-companies',
@@ -50,6 +51,7 @@ export class CompaniesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog closed: ${result}`);
       this.dialogResult = result;
+      duration(500);
     });
   }
 }
