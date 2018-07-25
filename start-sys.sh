@@ -9,8 +9,8 @@
 
 #
 
-mate-terminal --geometry=80x24+20+20 --zoom=1 --hide-menubar - e /home/tl/Documents/tl-app/Backend.sh &
-mate-terminal --geometry=80x24+20+400 --zoom=1 --hide-menubar - e /home/tl/Documents/tl-app/Frontend.sh &
+mate-terminal --geometry=80x24+20+20 --zoom=1 --hide-menubar -e /home/tl/Documents/tl-app/Backend.sh &
+mate-terminal --geometry=80x24+20+400 --zoom=1 --hide-menubar -e /home/tl/Documents/tl-app/Frontend.sh &
 
 
 
