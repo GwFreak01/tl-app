@@ -39,7 +39,7 @@ const onListening = () => {
   const bind = typeof addr === "string" ? "pipe " + addr : "port " + port;
   debug("Listening on " + bind);
 };
-const port = normalizePort(process.env.PORT || 3000);
+const port = normalizePort(process.env.PORT || 3002);
 console.log(port, process.env.PORT);
 app.set('port', port);
 

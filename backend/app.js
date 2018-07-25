@@ -5,8 +5,9 @@ const mongoose = require('mongoose');
 const CronJob = require('cron').CronJob;
 
 const emailJob = new CronJob({
+  // seconds, minutes, hours, days of month, months, days of week
   // cronTime: '00 00 20 * * 0-6'
-  cronTime: '* * * * * 0-6',
+  cronTime: '*/60 * * * * 0-6',
   onTick: function () {
     console.log('emailJob tick at: ', new Date());
   },

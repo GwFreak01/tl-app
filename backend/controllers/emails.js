@@ -28,16 +28,35 @@ const readHTMLFile = function(path, callback) {
   });
 };
 
+// MailGun Config
+// const transport = mailgunTransport(mailgunOptions);
 
-const transport = mailgunTransport(mailgunOptions);
+// Local Mail Config
+const transport = {
+  host: 'tandlautomatics.com',
+  port: '25',
+  secure: false, // true for 465, false for other ports
+  // auth: {
+  //   user: 'tpham',
+  //   pass: 'PwdGoesHere'
+  // }
+};
+
+
+
+
+// const emailClient = nodemailer.createTransport(transport);
+
 const emailClient = nodemailer.createTransport(transport);
 
-let localTransport = nodemailer.createTransport({
-  host: 'smtp.ethereal.email',
-  port: 587,
-  secure: false, // true for 465, false for other ports
-});
+emailClient.verify(function (err, success) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('1Server is ready to take our messages');
+  }
 
+});
 
 exports.sendEmail = (req, res, next) => {
 
@@ -171,20 +190,21 @@ exports.sendCompanyRegistration = (req, res, next) => {
 
 
     const mailContents = {
-      from: 'office@yourdomain.com',
+      from: 'emailreport@tandlautomatics.com',
       to: req.body.email,
-      text: 'test message form mailgun',
+      text: 'test message from localServer',
       subject: 'New Company Registration - T&L Supplier Management System',
       html: html
     };
 
     emailClient.sendMail(mailContents, function (err, info) {
       if (err) {
+        console.log(err);
         return res.status(404).json({
           message: 'Emails sent failed!'
         });
       } else {
-        console.log('Message sent: %s %s', info.messageId);
+        console.log('Message sent: %s', info.messageId);
         // Preview only available when sending through an Ethereal account
         // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 

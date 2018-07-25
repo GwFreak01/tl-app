@@ -18,8 +18,38 @@
               </mat-menu>
             </mat-card-title>
           </mat-card-header>
-          <mat-card-content class="dashboard-card-content">
-            <div>Card Content Here</div>
+          <mat-card-content class="dashboard-card-content analytics-dashboard-card">
+            <form>
+              <div>
+                <mat-label>Q1 End Date: </mat-label>
+                <input
+                  name="Q1Date"
+                  [matDatepicker]="myDatepickerQ1"
+                  [value]="myDatepickerQ1"
+                  #Q1Date
+                >
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="myDatepickerQ1"></mat-datepicker-toggle>
+                <mat-datepicker [touchUi]="true" #myDatepickerQ1></mat-datepicker>
+                <!--<br>-->
+                <!--<mat-label>Q2 End Date: </mat-label>-->
+                <!--<input [matDatepicker]="myDatepickerQ2">-->
+                <!--<mat-datepicker-toggle [for]="myDatepickerQ2"></mat-datepicker-toggle>-->
+                <!--<mat-datepicker #myDatepickerQ2></mat-datepicker>-->
+                <!--<br>-->
+                <!--<mat-label>Q3 End Date: </mat-label>-->
+                <!--<input [matDatepicker]="myDatepickerQ3">-->
+                <!--<mat-datepicker-toggle [for]="myDatepickerQ3"></mat-datepicker-toggle>-->
+                <!--<mat-datepicker #myDatepickerQ3></mat-datepicker>-->
+                <!--<br>-->
+                <!--<mat-label>Q4 End Date: </mat-label>-->
+                <!--<input [matDatepicker]="myDatepickerQ4">-->
+                <!--<mat-datepicker-toggle [for]="myDatepickerQ4"></mat-datepicker-toggle>-->
+                <!--<mat-datepicker #myDatepickerQ4></mat-datepicker>-->
+              </div>
+            </form>
+            <button mat-stroked-button="accent" (click)="updateEmailDates(Q1Date)">Update Quarterly Email Dates</button>
           </mat-card-content>
         </mat-card>
       </mat-grid-tile>
@@ -37,7 +67,7 @@
 
 
     <div class="eventSection">
-    <app-event-list></app-event-list>
+      <app-event-list></app-event-list>
     </div>
 
   </mat-grid-list>

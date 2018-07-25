@@ -17,6 +17,9 @@
 
 }
 
+.analytics-dashboard-card {
+  text-align: left;
+}
 .companyLabel {
   position: absolute;
   width: 50%;
