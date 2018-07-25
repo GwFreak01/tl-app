@@ -36,10 +36,6 @@ const transport = {
   host: 'tandlautomatics.com',
   port: '25',
   secure: false, // true for 465, false for other ports
-  // auth: {
-  //   user: 'tpham',
-  //   pass: 'PwdGoesHere'
-  // }
 };
 
 
@@ -53,7 +49,7 @@ emailClient.verify(function (err, success) {
   if (err) {
     console.log(err);
   } else {
-    console.log('1Server is ready to take our messages');
+    console.log('Server is ready to take our messages');
   }
 
 });
@@ -144,15 +140,15 @@ exports.sendEmail = (req, res, next) => {
     const htmlToSend = template(replacements);
 
     const mailContents = {
-      from: 'office@yourdomain.com',
-      text: 'test message form mailgun',
+      from: 'bill@tandlautomatics.com',
+      text: 'Email Reports from T&L Automatics',
       html: htmlToSend
     };
 
 
     emailList.forEach(function (email, i, array) {
       mailContents.to = email;
-      mailContents.subject = 'test subject: ' + i;
+      mailContents.subject = 'Quarterly Supplier Report';
       // console.log(mailContents);
 
       emailClient.sendMail(mailContents, function (err, info) {
@@ -190,9 +186,9 @@ exports.sendCompanyRegistration = (req, res, next) => {
 
 
     const mailContents = {
-      from: 'emailreport@tandlautomatics.com',
+      from: 'bill@tandlautomatics.com',
       to: req.body.email,
-      text: 'test message from localServer',
+      text: 'Company Registration Email from T&L Automatics',
       subject: 'New Company Registration - T&L Supplier Management System',
       html: html
     };
