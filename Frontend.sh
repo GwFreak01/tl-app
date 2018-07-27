@@ -1,3 +1,4 @@
 #!/bin/sh
 
-ng serve --host 0.0.0.0
+cd /home/tl/Documents/tl-app/dist/tl-app
+python -m SimpleHTTPServer 4200
