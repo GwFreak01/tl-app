@@ -9,6 +9,7 @@ import {Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
 
 const BACKEND_URL = environment.apiUrl + '/companies/';
+// const BACKEND_URL = location.origin + '/companies/';
 @Injectable({
   providedIn: 'root'
 })

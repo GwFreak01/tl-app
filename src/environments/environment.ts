@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   // apiUrl: 'http://localhost:3002/api',
-  apiUrl: 'http://10.220.36.12:3002/api',
+  // apiUrl: 'http://localhost:4199/api',
+  // apiUrl: 'http://10.220.36.12:3002/api',
+  apiUrl: 'http://' + location.hostname + ':' + (parseInt(location.port, 10) - 1) + '/api',
 };
 
 /*

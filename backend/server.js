@@ -36,15 +36,17 @@ const onError = error => {
 
 const onListening = () => {
   const addr = server.address();
+  console.log(addr);
   const bind = typeof addr === "string" ? "pipe " + addr : "port " + port;
   debug("Listening on " + bind);
 };
-const port = normalizePort(process.env.PORT || 3002);
+// const port = normalizePort(process.env.PORT || 3002);
+const port = normalizePort(process.env.PORT || 4199);
 console.log(port, process.env.PORT);
 app.set('port', port);
 
 const server = http.createServer(app);
 server.on("error", onError);
 server.on("listening", onListening);
-// server.listen(port);
-server.listen(port, '10.220.36.12');
+server.listen(port);
+// server.listen(port, '10.220.36.12');
