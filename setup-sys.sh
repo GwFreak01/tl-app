@@ -1,7 +1,6 @@
 #!/bin/sh
 
 cd /tmp/
-rm master.zip
 wget https://github.com/GwFreak01/tl-app/archive/master.zip
 unzip master.zip
 rm master.zip
