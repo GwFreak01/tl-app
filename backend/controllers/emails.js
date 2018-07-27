@@ -36,137 +36,137 @@ const emailQuarterlyJob = new CronJob({
 
 
     // console.log('ReqBodyEmails: ', req.body.company);
-    const emailList = ['gwfreak01@gmail.com'];
-    // if (req.body.company.salesPerson.status) {
-    //   emailList.push(req.body.company.salesPerson.email);
-    // }
-    // if (req.body.company.qualityPerson.status) {
-    //   emailList.push(req.body.company.qualityPerson.email);
-    // }
-    // if (req.body.company.logisticsPerson.status) {
-    //   emailList.push(req.body.company.logisticsPerson.email);
-    // }
-    // if (req.body.company.differentPerson.status) {
-    //   emailList.push(req.body.company.differentPerson.email);
-    // }
-
-    console.log('emailList: ', emailList);
-    // console.log('affectedEvents: ', req.body.events);
-
-
-    readHTMLFile(path.join(__dirname, '../models/html_templates/companyReport.html'), function (err, html) {
-
-
-      const eventReplacements = [
-        { _id: '5b37dd9935a249659c59b49c',
-        companyName: 'RIT',
-        companyId: '5b37dd7d35a249659c59b48f',
-        eventType: 'Quality',
-        eventDate: '2018-06-23T04:00:00.000Z',
-        tlPartNumber: 'lkhl',
-        purchaseOrderNumber: 'hoiu',
-        lotNumber: 'uigio',
-        carNumber: 'iugio',
-        rootCause: 'hjkfj\n',
-        quantityReject: 7687,
-        statusOption: 'Open',
-        __v: 0 }
-        ];
-      // ;
-
-      handlebars.registerHelper('ifEventBad', function (a,b, options) {
-        console.log('event', a);
-        if (a.statusOption === b) {
-          return options.fn(this);
-        }
-      });
-      handlebars.registerHelper('ifEventMid', function (a,b, options) {
-        console.log('event', a);
-        if (a.statusOption === b) {
-          return options.fn(this);
-        }
-      });
-
-      handlebars.registerHelper('ifEventGood', function (a,b, options) {
-        console.log('event', a);
-        if (a.statusOption === b) {
-          return options.fn(this);
-        }
-      });
-
-      handlebars.registerHelper('ifGreen', function (a,b, options) {
-        const start = new Date();
-        const end = new Date(new Date(start).setMonth(start.getMonth() - 12));
-        console.log('startDate: ', start);
-        console.log('endDate: ', end);
-
-        console.log('eventDate', Date.parse(eventReplacements[0].eventDate) <= start);
-        let num = eventReplacements
-          .filter(events => Date.parse(events.eventDate) <= start || Date.parse(events.eventDate) >= end)
-          .filter(events => events.statusOption === 'Open' || events.statusOption === 'Pending');
-        console.log(num, num.length);
-
-        if (num.length < 2) {
-          console.log('GREEN');
-          return '<font color="#66BB6A"><b>GREEN</b></font>.<br><br>\n' +
-            'Thank you for your ongoing support.';
-        } else if (num.length >= 2 || num.length <= 4) {
-          console.log('YELLOW');
-          return '<font color="#FFEE58"><b>YELLOW</b></font>.<br><br>\n' +
-            'Please review all corrective actions on past issues and proactively look for common issues.\n';
-        } else if (num.length > 4) {
-          console.log('RED');
-          return '<font color="#EF5350"><b>RED</b></font>.<br><br>\n' +
-            'T&L QA will be contacting you to discuss an improvement plan.\n';
-        }
-      });
-
-      handlebars.registerHelper('formatTime', function (date, format) {
-        const mmnt = moment(date);
-        return mmnt.format(format);
-      });
-
-
-      const template = handlebars.compile(html);
-
-      const htmlToSend = template(eventReplacements);
-
-      const mailContents = {
-        from: 'bill@tandlautomatics.com',
-        text: 'Email Reports from T&L Automatics',
-        bcc: 'gwfreak01@gmail.com',
-        html: htmlToSend
-      };
-
-
-      emailList.forEach(function (email, i, array) {
-        mailContents.to = email;
-        mailContents.subject = 'Quarterly Supplier Report';
-        // console.log(mailContents);
-
-        emailClient.sendMail(mailContents, function (err, info) {
-          if (err) {
-            console.log(err);
-            return;
-          } else {
-            console.log(i);
-            console.log('Message sent: %s %s', info.messageId, i);
-            // Preview only available when sending through an Ethereal account
-            // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-
-          }
-
-          if (i === emailList.length - 1) {
-            // mailContents.transport.close();
-            // return res.status(200).json({
-            //   message: 'Emails sent successfully!'
-            // });
-
-          }
-        });
-      });
-
-    });
+    // const emailList = ['gwfreak01@gmail.com'];
+    // // if (req.body.company.salesPerson.status) {
+    // //   emailList.push(req.body.company.salesPerson.email);
+    // // }
+    // // if (req.body.company.qualityPerson.status) {
+    // //   emailList.push(req.body.company.qualityPerson.email);
+    // // }
+    // // if (req.body.company.logisticsPerson.status) {
+    // //   emailList.push(req.body.company.logisticsPerson.email);
+    // // }
+    // // if (req.body.company.differentPerson.status) {
+    // //   emailList.push(req.body.company.differentPerson.email);
+    // // }
+    //
+    // console.log('emailList: ', emailList);
+    // // console.log('affectedEvents: ', req.body.events);
+    //
+    //
+    // readHTMLFile(path.join(__dirname, '../models/html_templates/companyReport.html'), function (err, html) {
+    //
+    //
+    //   const eventReplacements = [
+    //     { _id: '5b37dd9935a249659c59b49c',
+    //     companyName: 'RIT',
+    //     companyId: '5b37dd7d35a249659c59b48f',
+    //     eventType: 'Quality',
+    //     eventDate: '2018-06-23T04:00:00.000Z',
+    //     tlPartNumber: 'lkhl',
+    //     purchaseOrderNumber: 'hoiu',
+    //     lotNumber: 'uigio',
+    //     carNumber: 'iugio',
+    //     rootCause: 'hjkfj\n',
+    //     quantityReject: 7687,
+    //     statusOption: 'Open',
+    //     __v: 0 }
+    //     ];
+    //   // ;
+    //
+    //   handlebars.registerHelper('ifEventBad', function (a,b, options) {
+    //     console.log('event', a);
+    //     if (a.statusOption === b) {
+    //       return options.fn(this);
+    //     }
+    //   });
+    //   handlebars.registerHelper('ifEventMid', function (a,b, options) {
+    //     console.log('event', a);
+    //     if (a.statusOption === b) {
+    //       return options.fn(this);
+    //     }
+    //   });
+    //
+    //   handlebars.registerHelper('ifEventGood', function (a,b, options) {
+    //     console.log('event', a);
+    //     if (a.statusOption === b) {
+    //       return options.fn(this);
+    //     }
+    //   });
+    //
+    //   handlebars.registerHelper('ifGreen', function (a,b, options) {
+    //     const start = new Date();
+    //     const end = new Date(new Date(start).setMonth(start.getMonth() - 12));
+    //     console.log('startDate: ', start);
+    //     console.log('endDate: ', end);
+    //
+    //     console.log('eventDate', Date.parse(eventReplacements[0].eventDate) <= start);
+    //     let num = eventReplacements
+    //       .filter(events => Date.parse(events.eventDate) <= start || Date.parse(events.eventDate) >= end)
+    //       .filter(events => events.statusOption === 'Open' || events.statusOption === 'Pending');
+    //     console.log(num, num.length);
+    //
+    //     if (num.length < 2) {
+    //       console.log('GREEN');
+    //       return '<font color="#66BB6A"><b>GREEN</b></font>.<br><br>\n' +
+    //         'Thank you for your ongoing support.';
+    //     } else if (num.length >= 2 || num.length <= 4) {
+    //       console.log('YELLOW');
+    //       return '<font color="#FFEE58"><b>YELLOW</b></font>.<br><br>\n' +
+    //         'Please review all corrective actions on past issues and proactively look for common issues.\n';
+    //     } else if (num.length > 4) {
+    //       console.log('RED');
+    //       return '<font color="#EF5350"><b>RED</b></font>.<br><br>\n' +
+    //         'T&L QA will be contacting you to discuss an improvement plan.\n';
+    //     }
+    //   });
+    //
+    //   handlebars.registerHelper('formatTime', function (date, format) {
+    //     const mmnt = moment(date);
+    //     return mmnt.format(format);
+    //   });
+    //
+    //
+    //   const template = handlebars.compile(html);
+    //
+    //   const htmlToSend = template(eventReplacements);
+    //
+    //   const mailContents = {
+    //     from: 'bill@tandlautomatics.com',
+    //     text: 'Email Reports from T&L Automatics',
+    //     bcc: 'gwfreak01@gmail.com',
+    //     html: htmlToSend
+    //   };
+    //
+    //
+    //   emailList.forEach(function (email, i, array) {
+    //     mailContents.to = email;
+    //     mailContents.subject = 'Quarterly Supplier Report';
+    //     // console.log(mailContents);
+    //
+    //     emailClient.sendMail(mailContents, function (err, info) {
+    //       if (err) {
+    //         console.log(err);
+    //         return;
+    //       } else {
+    //         console.log(i);
+    //         console.log('Message sent: %s %s', info.messageId, i);
+    //         // Preview only available when sending through an Ethereal account
+    //         // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+    //
+    //       }
+    //
+    //       if (i === emailList.length - 1) {
+    //         // mailContents.transport.close();
+    //         // return res.status(200).json({
+    //         //   message: 'Emails sent successfully!'
+    //         // });
+    //
+    //       }
+    //     });
+    //   });
+    //
+    // });
 
   },
   start: false,
