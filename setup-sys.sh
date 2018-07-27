@@ -6,7 +6,7 @@ wget https://github.com/GwFreak01/tl-app/archive/master.zip
 unzip master.zip -y
 rm master.zip
 
-mv -f tl-app-master/* /home/tl/Documents/tl-app
+cp -rf tl-app-master/* /home/tl/Documents/tl-app
 rm -rf tl-app-master
 
 cd /home/tl/Documents/tl-app/
