@@ -3,6 +3,8 @@ import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../auth/auth.service';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
+import {AppComponent} from '../app.component';
+// import * as jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-navigation',
@@ -27,10 +29,12 @@ export class NavigationComponent implements OnInit, OnDestroy {
   private _mobileQueryListener: () => void;
   loggedInStatus = true;
 
+  accountType = false;
   constructor(changeDetectorRef: ChangeDetectorRef,
               media: MediaMatcher,
               private authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              public app: AppComponent) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -47,8 +51,19 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.authListenerSubs = this.authService.getAuthStatusListener()
       .subscribe(isAuthenticated => {
         this.userIsAuthenticated = isAuthenticated;
+        const token = this.authService.getToken();
+        // const tokenPayload = jwt_decode(token);
+
+        // console.log('Token: ', tokenPayload);
+        if (localStorage.getItem('username') === 'tl_employee') {
+          this.accountType = false;
+        } else if (localStorage.getItem('username') === 'tl_admin') {
+          this.accountType = true;
+        }
       });
+
     this.router.navigate(['login']);
+
   }
   onLogout() {
     this.authService.logout();

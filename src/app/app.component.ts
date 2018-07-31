@@ -15,6 +15,10 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService) {
 
   }
+
+  public localStorageItem(id: string): string {
+    return localStorage.getItem(id);
+  }
   ngOnInit() {
     this.authService.autoAuthUser();
 

@@ -22,4 +22,8 @@ export class EventsComponent implements OnInit {
     console.log('OnHide: ', hide);
     this.addButtonSelect = hide;
   }
+
+  onSendAllFeedback() {
+    alert('All company emails sent!');
+  }
 }
