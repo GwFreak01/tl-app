@@ -72,10 +72,14 @@ export class EmailsService {
     this.eventsService.getAllEvents().subscribe(events => {
       this.events = events;
 
+    }, err => {
+      console.log(err);
+    } , () => {
+      console.log('AllFeedbackCompanies: ', this.companies);
+      console.log('AllFeedbackEvents: ', this.events);
     });
 
-    console.log('AllFeedbackCompanies: ', this.companies);
-    console.log('AllFeedbackEvents: ', this.events);
+
 
   }
 
