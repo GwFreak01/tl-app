@@ -306,7 +306,7 @@ exports.sendEmail = (req, res, next) => {
 
     const template = handlebars.compile(html);
 
-    const htmlToSend = template(replacements);
+    const htmlToSend = template(emailReplacements);
 
     const mailContents = {
       from: 'bill@tandlautomatics.com',
