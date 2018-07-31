@@ -64,4 +64,11 @@ export class EmailsService {
 
   }
 
+  sendAllFeedback() {
+    console.log('AllFeedbackCompanies: ', this.companiesService.getCompanies());
+    console.log('AllFeedbackEvents: ', this.eventsService.getAllEvents().subscribe(events => {
+      return events;
+    }));
+  }
+
 }

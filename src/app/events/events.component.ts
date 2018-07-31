@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {EmailsService} from '../services/emails/emails.service';
 
 @Component({
   selector: 'app-events',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class EventsComponent implements OnInit {
   addButtonSelect = false;
 
-  constructor() { }
+  constructor(private emailsService: EmailsService) { }
 
   ngOnInit() {
   }
@@ -25,5 +26,6 @@ export class EventsComponent implements OnInit {
 
   onSendAllFeedback() {
     alert('All company emails sent!');
+    this.emailsService.sendAllFeedback();
   }
 }
