@@ -9,6 +9,8 @@ router.put('/companyTemp', CompanyController.createCompany);
 
 router.post('/:id', checkAuth, CompanyController.updateCompany);
 
+router.get('/getAll', checkAuth, CompanyController.getAllCompanies);
+
 
 router.get('/:id', checkAuth, CompanyController.getCompany);
 

@@ -66,17 +66,18 @@ export class EmailsService {
   }
 
   sendAllFeedback() {
-    this.companiesService.getCompanyUpdateListener().subscribe(companies => {
+    this.companiesService.getAllCompanies().subscribe(companies => {
       this.companies = companies;
     });
     this.eventsService.getAllEvents().subscribe(events => {
       this.events = events;
-
     }, err => {
       console.log(err);
     } , () => {
       console.log('AllFeedbackCompanies: ', this.companies);
       console.log('AllFeedbackEvents: ', this.events);
+      // localStorage.setItem('companies');
+      // window.events = this.events;
     });
 
 

@@ -136,6 +136,17 @@ exports.getCompanies = (req, res, next) => {
   })
 };
 
+exports.getAllCompanies = (req, res, next) => {
+  Company.find()
+    .then(documents => {
+        // console.log('Documents: ', documents);
+        // return documents;
+        return res.status(200).json(documents);
+      }
+    )
+};
+
+
 exports.getCompany = (req, res, next) => {
   Company.findById(req.params.id, function (err, document) {
     if (err) {

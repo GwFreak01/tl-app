@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import {Company} from '../../../../backend/models/company.model';
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
 
 import {environment} from '../../../environments/environment';
+import {Event} from '../../../../backend/models/event.model';
 
 const BACKEND_URL = environment.apiUrl + '/companies/';
 // const BACKEND_URL = location.origin + '/companies/';
@@ -27,6 +28,10 @@ export class CompaniesService {
         this.companies = response.companies;
         this.companiesUpdated.next([...this.companies]);
       });
+  }
+
+  getAllCompanies(): Observable<Company[]> {
+    return this.http.get<Company[]>(BACKEND_URL + 'getAll');
   }
 
   getCompanyUpdateListener() {
