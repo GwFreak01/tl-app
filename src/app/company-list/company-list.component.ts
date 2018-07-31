@@ -122,7 +122,7 @@ export class CompanyListComponent implements OnInit, OnDestroy {
         return Date.parse(a.eventDate) - Date.parse(b.eventDate);
       })
     ;
-    console.log('companyEvents: ', companyEvents);
+    // console.log('companyEvents: ', companyEvents);
 
     // window.companyEvt = companyEvents;
 
