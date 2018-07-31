@@ -198,14 +198,15 @@ const readHTMLFile = function(path, callback) {
 };
 
 // MailGun Config
-const transport = mailgunTransport(mailgunOptions);
+
+// const transport = mailgunTransport(mailgunOptions);
 
 // Local Mail Config
-// const transport = {
-//   host: 'tandlautomatics.com',
-//   port: '25',
-//   secure: false, // true for 465, false for other ports
-// };
+const transport = {
+  host: '10.220.36.5',
+  port: '25',
+  secure: false, // true for 465, false for other ports
+};
 
 
 
@@ -249,7 +250,7 @@ exports.sendEmail = (req, res, next) => {
 
     const emailReplacements = req.body.events;
 
-    console.log('replacements: ', replacements);
+    console.log('replacements: ', emailReplacements);
     handlebars.registerHelper('ifEventBad', function (a,b, options) {
       console.log('event', a);
       if (a.statusOption === b) {
