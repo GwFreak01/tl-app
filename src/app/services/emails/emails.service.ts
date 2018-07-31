@@ -65,7 +65,9 @@ export class EmailsService {
   }
 
   sendAllFeedback() {
-    console.log('AllFeedbackCompanies: ', this.companiesService.getCompanies());
+    console.log('AllFeedbackCompanies: ', this.companiesService.getCompanyUpdateListener().subscribe(companies => {
+      return companies;
+    }));
     console.log('AllFeedbackEvents: ', this.eventsService.getAllEvents().subscribe(events => {
       return events;
     }));

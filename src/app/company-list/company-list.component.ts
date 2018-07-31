@@ -124,6 +124,8 @@ export class CompanyListComponent implements OnInit, OnDestroy {
     ;
     console.log('companyEvents: ', companyEvents);
 
+    // window.companyEvt = companyEvents;
+
     if (companyEvents == null) {
       return companyEvents;
     } else {
