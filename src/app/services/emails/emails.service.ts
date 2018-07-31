@@ -17,6 +17,7 @@ const BACKEND_URL = environment.apiUrl + '/emails/';
 export class EmailsService {
 
   private events: Event[] = [];
+  private companies: Company[] = [];
   private company: Company;
 
   private eventsSub: Subscription;
@@ -65,12 +66,17 @@ export class EmailsService {
   }
 
   sendAllFeedback() {
-    console.log('AllFeedbackCompanies: ', this.companiesService.getCompanyUpdateListener().subscribe(companies => {
-      return companies;
-    }));
-    console.log('AllFeedbackEvents: ', this.eventsService.getAllEvents().subscribe(events => {
-      return events;
-    }));
+    this.companiesService.getCompanyUpdateListener().subscribe(companies => {
+      this.companies = companies;
+    });
+    this.eventsService.getAllEvents().subscribe(events => {
+      this.events = events;
+
+    });
+
+    console.log('AllFeedbackCompanies: ', this.companies);
+    console.log('AllFeedbackEvents: ', this.events);
+
   }
 
 }
