@@ -12,7 +12,6 @@ cd /home/tl/Documents/tl-app/
 
 ng build --prod --build-optimizer
 
-read -p "Press [Enter] key to end..."
-
-exec sh
+# Enable if there is an error
+#exec sh
 
