@@ -387,3 +387,21 @@ exports.sendCompanyRegistration = (req, res, next) => {
 
 
 };
+
+exports.sendAllFeedbackEmails = (req, res, next) => {
+  // console.log(req.body);
+
+  const companies = req.body.companies;
+  const events = req.body.events;
+  let emailList = [];
+  let eventsList = [];
+
+  companies.forEach((company, index, array) => {
+    const companyEmails = [];
+    companyEmails.push(company.filter(c => c.salesPerson.email));
+    console.log('companyEmails: ', companyEmails);
+    emailList.push('emailList: ', companyEmails);
+
+  })
+
+};

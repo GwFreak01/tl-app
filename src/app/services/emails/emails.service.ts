@@ -86,7 +86,7 @@ export class EmailsService {
       // window.events = this.events;
     });
 
-
+    this.http.post<{ message: string }>(BACKEND_URL + '/emailAllCompanies', {companies: this.companies, events: this.events});
 
   }
 

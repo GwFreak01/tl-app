@@ -7,5 +7,6 @@ router.post('/emailCompanyRegistration', checkAuth, EmailController.sendCompanyR
 
 router.post('/emailCompany', checkAuth, EmailController.sendEmail);
 
+router.post('/emailAllCompanies', checkAuth, EmailController.sendAllFeedbackEmails);
 module.exports = router;
 
