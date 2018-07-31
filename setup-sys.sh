@@ -1,5 +1,7 @@
 #!/bin/sh
 
+killall node
+killall python
 cd /tmp/
 wget https://github.com/GwFreak01/tl-app/archive/master.zip
 unzip master.zip
