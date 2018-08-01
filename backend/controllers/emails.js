@@ -432,9 +432,8 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
     readHTMLFile(path.join(__dirname, '../models/html_templates/companyReport.html'), function (err, html) {
 
 
-      const emailReplacements = companyEvents[1];
+      const emailReplacements = companyEvents;
 
-      console.log('replacements: ', emailReplacements);
       handlebars.registerHelper('ifEventBad', function (a,b, options) {
         // console.log('event', a);
         if (a.statusOption === b) {
@@ -502,6 +501,7 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
 
       companyEmails[1].forEach(function (email, i, array) {
         console.log('sending to: ', email);
+        console.log('emailReplacements: ', emailReplacements);
         // console.log('emailList: ', emailList);
         mailContents.to = email;
         mailContents.subject = 'Quarterly Supplier Report';
