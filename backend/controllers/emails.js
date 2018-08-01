@@ -429,6 +429,8 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
     emailList.push(companyEmails);
     eventsList.push(companyEvents);
 
+    setTimeout(() => {}, 5000);
+
     readHTMLFile(path.join(__dirname, '../models/html_templates/companyReport.html'), function (err, html) {
 
 
