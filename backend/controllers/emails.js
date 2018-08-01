@@ -417,7 +417,7 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
     if (company.differentPerson.status) {
       companyEmails.push(company.differentPerson.email);
     }
-    companyEvents.push(events.filter(event => event.companyName));
+    companyEvents.push(events.filter(event => event.companyName == company.companyName));
     // companyEmails.push(company.filter(c => c.salesPerson.email));
     // console.log('companyEmails: ', companyEmails);
     // emailList.push(companyEmails);
