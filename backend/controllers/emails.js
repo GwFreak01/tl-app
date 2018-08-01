@@ -514,6 +514,7 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
 
 
         emailList.forEach(function (email, i, array) {
+          console.log('sending to: ', email);
           mailContents.to = email[1];
           mailContents.subject = 'Quarterly Supplier Report';
           // console.log(mailContents);
