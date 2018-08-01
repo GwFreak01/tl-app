@@ -503,7 +503,7 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
       companyEmails[1].forEach(function (email, i, array) {
         console.log('sending to: ', email);
         // console.log('emailList: ', emailList);
-        mailContents.to = email[1];
+        mailContents.to = email;
         mailContents.subject = 'Quarterly Supplier Report';
         // console.log(mailContents);
 
