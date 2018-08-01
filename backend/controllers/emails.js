@@ -514,7 +514,7 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
 
         const mailContents = {
           from: 'bill@tandlautomatics.com',
-          bcc: 'gwfreak01@gmail.com',
+          // bcc: 'gwfreak01@gmail.com',
           text: 'Email Reports from T&L Automatics',
           html: htmlToSend
         };
