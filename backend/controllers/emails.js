@@ -434,7 +434,7 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
 
 
           const emailReplacements = companyEvents;
-
+          console.log('ReadFilecompanyEvents:', emailReplacements);
           handlebars.registerHelper('ifEventBad', function (a, b, options) {
             // console.log('event', a);
             if (a.statusOption === b) {
@@ -462,7 +462,7 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
             console.log('endDate: ', end);
 
             console.log('eventDate', Date.parse(emailReplacements[0].eventDate) <= start);
-            let num = emailReplacements[0]
+            let num = emailReplacements
               .filter(events => Date.parse(events.eventDate) <= start || Date.parse(events.eventDate) >= end)
               .filter(events => events.statusOption === 'Open' || events.statusOption === 'Pending');
             console.log(num, num.length);
@@ -532,7 +532,7 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
           });
 
         });}
-      , 5000);
+      , 2500);
 
 
 
