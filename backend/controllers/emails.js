@@ -252,20 +252,20 @@ exports.sendEmail = (req, res, next) => {
 
     // console.log('replacements: ', emailReplacements);
     handlebars.registerHelper('ifEventBad', function (a,b, options) {
-      console.log('event', a);
+      // console.log('event', a);
       if (a.statusOption === b) {
         return options.fn(this);
       }
     });
     handlebars.registerHelper('ifEventMid', function (a,b, options) {
-      console.log('event', a);
+      // console.log('event', a);
       if (a.statusOption === b) {
         return options.fn(this);
       }
     });
 
     handlebars.registerHelper('ifEventGood', function (a,b, options) {
-      console.log('event', a);
+      // console.log('event', a);
       if (a.statusOption === b) {
         return options.fn(this);
       }
@@ -424,7 +424,7 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
     companyEmails.push(companyEmailsArray);
     companyEvents.push(events.filter(event => event.companyName == company.companyName));
     // companyEmails.push(company.filter(c => c.salesPerson.email));
-    // console.log('companyEmails: ', companyEmails);
+    console.log('companyEmails: ', companyEmails);
     // emailList.push(companyEmails);
     emailList.push(companyEmails);
     eventsList.push(companyEvents);
@@ -436,20 +436,20 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
 
       console.log('replacements: ', emailReplacements);
       handlebars.registerHelper('ifEventBad', function (a,b, options) {
-        console.log('event', a);
+        // console.log('event', a);
         if (a.statusOption === b) {
           return options.fn(this);
         }
       });
       handlebars.registerHelper('ifEventMid', function (a,b, options) {
-        console.log('event', a);
+        // console.log('event', a);
         if (a.statusOption === b) {
           return options.fn(this);
         }
       });
 
       handlebars.registerHelper('ifEventGood', function (a,b, options) {
-        console.log('event', a);
+        // console.log('event', a);
         if (a.statusOption === b) {
           return options.fn(this);
         }
