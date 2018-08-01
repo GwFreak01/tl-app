@@ -393,8 +393,8 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
 
   const companies = req.body.companies;
   const events = req.body.events;
-  let emailListDictionary = {};
-  let eventsListDictionary = {};
+  let emailList = [];
+  let eventsList = [];
 
   // console.log('AllFeedbackCompanies: ', companies);
   // console.log('AllFeedbackEvents: ', events);
@@ -402,8 +402,11 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
 
   companies.forEach((company, index, array) => {
     let companyEmails = [];
+    let companyEvents = [];
     // console.log('forEach: ', company);
 
+    companyEmails.push(company.companyName);
+    companyEvents.push(company.companyName);
     if (company.salesPerson.status) {
       companyEmails.push(company.salesPerson.email);
     }
@@ -416,20 +419,20 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
     if (company.differentPerson.status) {
       companyEmails.push(company.differentPerson.email);
     }
-    const companyEvents = events.filter(event => event.companyName == company.companyName);
+    companyEvents.push(events.filter(event => event.companyName == company.companyName));
     // companyEmails.push(company.filter(c => c.salesPerson.email));
     // console.log('companyEmails: ', companyEmails);
     // emailList.push(companyEmails);
-    emailListDictionary[company.name] = companyEmails;
-    eventsListDictionary[company.name] = companyEvents;
+    emailList.push(companyEmails);
+    eventsList.push(companyEvents);
   });
-  console.log('emailListDictionary: ', emailListDictionary);
-  console.log('eventsList: ', eventsListDictionary);
+  console.log('emailListDictionary: ', emailList);
+  console.log('eventsList: ', eventsList);
 
   return res.status(200).json({
     message: 'Emails sent successfully!',
-    emailListDictionary: emailListDictionary,
-    eventsListDictionary: eventsListDictionary
+    emailList: emailList,
+    eventsList: eventsList
   });
 
 };
