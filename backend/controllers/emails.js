@@ -399,6 +399,7 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
   // console.log('AllFeedbackCompanies: ', companies);
   // console.log('AllFeedbackEvents: ', events);
 
+
   companies.forEach((company, index, array) => {
     const companyEmails = [];
     companyEmails.push(company.filter(c => c.salesPerson.email));
