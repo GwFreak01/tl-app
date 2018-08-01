@@ -446,7 +446,7 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
     if (event[1].length == 0) {
       console.log('%s does not have events', event[0]);
     }
-    else if (event[1].length != 0) {
+    else if (event[1].length != 0 && emailList[1].length != 0) {
       console.log('%s has events: ', event[0]);
       console.log('companyEvents: ', event[1]);
 
