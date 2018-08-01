@@ -402,9 +402,11 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
 
   companies.forEach((company, index, array) => {
     const companyEmails = [];
-    companyEmails.push(company.filter(c => c.salesPerson.email));
-    console.log('companyEmails: ', companyEmails);
-    emailList.push('emailList: ', companyEmails);
+
+    console.log('forEach: ', company);
+    // companyEmails.push(company.filter(c => c.salesPerson.email));
+    // console.log('companyEmails: ', companyEmails);
+    // emailList.push('emailList: ', companyEmails);
 
   });
   return res.status(200).json({
