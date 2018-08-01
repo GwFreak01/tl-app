@@ -431,6 +431,9 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
 
   eventsList.forEach((event, index, array) => {
     console.log(event);
+    if (array.length == 0) {
+      console.log('%s does not have events', event[0]);
+    }
   });
   return res.status(200).json({
     message: 'Emails sent successfully!',
