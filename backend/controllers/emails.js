@@ -520,7 +520,7 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
         };
 
 
-        companyEmails[1].forEach(function (email, i, array) {
+        emailList[1].forEach(function (email, i, array) {
           console.log('sending to: ', email);
           console.log('emailReplacements: ', emailReplacements);
           // console.log('emailList: ', emailList);
