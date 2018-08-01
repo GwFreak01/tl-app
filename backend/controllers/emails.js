@@ -399,13 +399,13 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
   console.log('AllFeedbackCompanies: ', companies);
   console.log('AllFeedbackEvents: ', events);
 
-  // companies.forEach((company, index, array) => {
-  //   const companyEmails = [];
-  //   companyEmails.push(company.filter(c => c.salesPerson.email));
-  //   console.log('companyEmails: ', companyEmails);
-  //   emailList.push('emailList: ', companyEmails);
-  //
-  // });
+  companies.forEach((company, index, array) => {
+    const companyEmails = [];
+    companyEmails.push(company.filter(c => c.salesPerson.email));
+    console.log('companyEmails: ', companyEmails);
+    emailList.push('emailList: ', companyEmails);
+
+  });
   return res.status(200).json({
     message: 'Emails sent successfully!'
   });
