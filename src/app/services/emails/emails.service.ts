@@ -82,7 +82,7 @@ export class EmailsService {
         console.log('AllFeedbackEvents: ', this.events);
         // localStorage.setItem('companies');
         // window.events = this.events;
-        this.http.post<{ message: string }>(BACKEND_URL + '/emailAllCompanies', {companies: this.companies, events: this.events})
+        this.http.post<{ message: string, emailListDictionary: any, eventsListDictionary: any  }>(BACKEND_URL + '/emailAllCompanies', {companies: this.companies, events: this.events})
           .subscribe(response => {
             console.log(response.message);
           });

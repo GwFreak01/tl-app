@@ -389,7 +389,7 @@ exports.sendCompanyRegistration = (req, res, next) => {
 };
 
 exports.sendAllFeedbackEmails = (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
 
   const companies = req.body.companies;
   const events = req.body.events;
@@ -427,7 +427,9 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
   console.log('eventsList: ', eventsListDictionary);
 
   return res.status(200).json({
-    message: 'Emails sent successfully!'
+    message: 'Emails sent successfully!',
+    emailListDictionary: emailListDictionary,
+    eventsListDictionary: eventsListDictionary
   });
 
 };
