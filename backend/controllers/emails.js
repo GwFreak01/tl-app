@@ -406,5 +406,8 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
   //   emailList.push('emailList: ', companyEmails);
   //
   // });
+  return res.status(200).json({
+    message: 'Emails sent successfully!'
+  });
 
 };
