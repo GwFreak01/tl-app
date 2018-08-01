@@ -432,7 +432,7 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
     readHTMLFile(path.join(__dirname, '../models/html_templates/companyReport.html'), function (err, html) {
 
 
-      const emailReplacements = companyEvents;
+      const emailReplacements = companyEvents[1];
 
       console.log('replacements: ', emailReplacements);
       handlebars.registerHelper('ifEventBad', function (a,b, options) {
