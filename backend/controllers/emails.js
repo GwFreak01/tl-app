@@ -403,12 +403,26 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
   companies.forEach((company, index, array) => {
     const companyEmails = [];
 
-    console.log('forEach: ', company);
+    // console.log('forEach: ', company);
+
+    if (company.salesPerson.status) {
+      companyEmails.push(company.salesPerson.email);
+    }
+    if (company.qualityPerson.status) {
+      companyEmails.push(company.qualityPerson.email);
+    }
+    if (company.logisticsPerson.status) {
+      companyEmails.push(company.logisticsPerson.email);
+    }
+    if (company.differentPerson.status) {
+      companyEmails.push(company.differentPerson.email);
+    }
     // companyEmails.push(company.filter(c => c.salesPerson.email));
     // console.log('companyEmails: ', companyEmails);
-    // emailList.push('emailList: ', companyEmails);
+    emailList.push(companyEmails);
 
   });
+  console.log('emailList: ', emailList);
   return res.status(200).json({
     message: 'Emails sent successfully!'
   });
