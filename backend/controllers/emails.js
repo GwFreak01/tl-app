@@ -393,7 +393,7 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
 
   const companies = req.body.companies;
   const events = req.body.events;
-  let emailList = [];
+  let emailListDictionary = {};
   let eventsList = [];
 
   // console.log('AllFeedbackCompanies: ', companies);
@@ -402,7 +402,7 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
 
   companies.forEach((company, index, array) => {
     const companyEmails = [];
-
+    const companyEvents = [];
     // console.log('forEach: ', company);
 
     if (company.salesPerson.status) {
@@ -417,12 +417,18 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
     if (company.differentPerson.status) {
       companyEmails.push(company.differentPerson.email);
     }
+    companyEvents.push(events.filter(event => event.companyName));
     // companyEmails.push(company.filter(c => c.salesPerson.email));
     // console.log('companyEmails: ', companyEmails);
-    emailList.push(companyEmails);
-
+    // emailList.push(companyEmails);
+    emailListDictionary.push({
+      key: company.name,
+      value: companyEmails
+    });
   });
-  console.log('emailList: ', emailList);
+  console.log('emailListDictionary: ', emailListDictionary);
+  console.log('eventsList: ', eventsList);
+
   return res.status(200).json({
     message: 'Emails sent successfully!'
   });
