@@ -555,10 +555,10 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
   //
   //   }
   // });
-  return res.status(200).json({
-    message: 'Emails sent successfully!',
-    emailList: emailList,
-    eventsList: eventsList
-  });
+  // return res.status(200).json({
+  //   message: 'Emails sent successfully!',
+  //   emailList: emailList,
+  //   eventsList: eventsList
+  // });
 
 };
