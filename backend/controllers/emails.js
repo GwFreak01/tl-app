@@ -427,8 +427,11 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
     eventsList.push(companyEvents);
   });
   console.log('emailListDictionary: ', emailList);
-  console.log('eventsList: ', eventsList);
+  // console.log('eventsList: ', eventsList);
 
+  eventsList.forEach((event, index, array) => {
+    console.log(event);
+  });
   return res.status(200).json({
     message: 'Emails sent successfully!',
     emailList: emailList,
