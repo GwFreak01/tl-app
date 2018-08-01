@@ -430,7 +430,8 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
   // console.log('eventsList: ', eventsList);
 
   eventsList.forEach((event, index, array) => {
-    console.log(event);
+    console.log('forEachEvent: ', event);
+    console.log('forEachArray: ', array);
     if (array.length == 0) {
       console.log('%s does not have events', event[0]);
     }
