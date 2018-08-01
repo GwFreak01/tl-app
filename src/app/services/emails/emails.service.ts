@@ -74,19 +74,19 @@ export class EmailsService {
       console.log('AllFeedbackCompanies: ', this.companies);
       // localStorage.setItem('companies');
       // window.events = this.events;
+      this.eventsService.getAllEvents().subscribe(events => {
+        this.events = events;
+      }, err => {
+        console.log(err);
+      } , () => {
+        console.log('AllFeedbackEvents: ', this.events);
+        // localStorage.setItem('companies');
+        // window.events = this.events;
+        this.http.post<{ message: string }>(BACKEND_URL + '/emailAllCompanies', {companies: this.companies, events: this.events});
+      });
     });
 
-    this.eventsService.getAllEvents().subscribe(events => {
-      this.events = events;
-    }, err => {
-      console.log(err);
-    } , () => {
-      console.log('AllFeedbackEvents: ', this.events);
-      // localStorage.setItem('companies');
-      // window.events = this.events;
-    });
 
-    this.http.post<{ message: string }>(BACKEND_URL + '/emailAllCompanies', {companies: this.companies, events: this.events});
 
   }
 
