@@ -25,17 +25,17 @@ const emailQuarterlyJob = new CronJob({
   // cronTime: '*/60 * * * * 0-6',
   // cronTime: '0 0 5 1 1,4,7,10 *',
   // cronTime: '* * */24 * * 0-6',
-  cronTime: '*/5 * * * 0-6',
+  cronTime: '*/300 * * * 0-6',
   onTick: function () {
     console.log('emailJob tick at: ', new Date());
 
-    const companiesList = Company.find({}, function (err, companyDocuments) {
+    const companiesList = Company.find({}).toArray(function (err, companyDocuments) {
       if (err) {
         console.log('Could not query Company db');
       }
       return companyDocuments;
     });
-    const eventsList = Event.find({}, function (err, eventDocuments) {
+    const eventsList = Event.find({}).toArray(function (err, eventDocuments) {
       if (err) {
         console.log('Could not query Event db');
       }
