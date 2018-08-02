@@ -45,7 +45,7 @@ const emailQuarterlyJob = new CronJob({
     // });
 
     // const test = Company.find().sub
-    console.log('companies: ', companiesList);
+    console.log('companies: ', companiesList );
     // console.log('events: ', eventsList);
 
   },
