@@ -530,7 +530,7 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
 
           }
 
-          if (index === emailGroup.length - 1) {
+          if (index === fullCompanyEmailsList.length - 1) {
             // mailContents.transport.close();
             return res.status(200).json({
               message: 'Emails sent successfully!',
