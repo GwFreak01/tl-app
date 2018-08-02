@@ -443,6 +443,9 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
 
 
       const emailReplacements = fullCompanyEventsList[index];
+      const start = new Date();
+      const end = new Date(new Date(start).setMonth(start.getMonth() - 12));
+
       // console.log('emailReplacements: ', emailReplacements);
       console.log('individualCompanyEvents:', emailReplacements);
       handlebars.registerHelper('ifEventBad', function (a, b, options) {
@@ -466,16 +469,14 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
       });
 
       handlebars.registerHelper('ifGreen', function (a, b, options) {
-        const start = new Date();
-        const end = new Date(new Date(start).setMonth(start.getMonth() - 12));
         console.log('startDate: ', start);
         console.log('endDate: ', end);
 
         console.log('eventDate', Date.parse(emailReplacements[0].eventDate) <= start);
-        let num = emailReplacements[0]
+        let num = emailReplacements
           .filter(events => Date.parse(events.eventDate) <= start || Date.parse(events.eventDate) >= end)
           .filter(events => events.statusOption === 'Open' || events.statusOption === 'Pending');
-        console.log(num, num.length);
+        console.log('num: %s \n numLength: %s',num, num.length);
 
         if (num.length < 2) {
           console.log('GREEN');
