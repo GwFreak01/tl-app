@@ -25,11 +25,11 @@ const emailQuarterlyJob = new CronJob({
   // cronTime: '*/60 * * * * 0-6',
   // cronTime: '0 0 5 1 1,4,7,10 *',
   // cronTime: '* * */24 * * 0-6',
-  cronTime: '* * * * *',
+  cronTime: '* * * * * *',
   onTick: function () {
     console.log('emailJob tick at: ', new Date());
 
-    const companiesList = Company.find();
+    const companiesList = Company.find().toObject();
     // const eventsList = Event.find().fetch();
     // const companiesList = Company.find({}, function (err, companyDocuments) {
     //   if (err) {
