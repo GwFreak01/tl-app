@@ -453,7 +453,6 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
         .filter(events => events.statusOption === 'Open' || events.statusOption === 'Pending');
 
       // console.log('emailReplacements: ', emailReplacements);
-      console.log('individualCompanyEvents:', emailReplacements);
       handlebars.registerHelper('ifEventBad', function (a, b, options) {
         // console.log('event', a);
         if (a.statusOption === b) {
@@ -524,6 +523,8 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
 
       // emailList[1].forEach(function (email, i, array) {
       console.log('sending to: ', emailGroup);
+      console.log('individualCompanyEvents:', processedEmailReplacements);
+
       // console.log('emailReplacements: ', emailReplacements);
       // console.log('emailList: ', emailList);
       mailContents.to = emailGroup;
@@ -535,8 +536,8 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
           console.log(err);
 
         } else {
-          console.log(i);
-          console.log('Message sent: %s', emailGroup[0]);
+          // console.log(i);
+          console.log('Message sent: %s %s', info.messageId, emailGroup);
           // Preview only available when sending through an Ethereal account
           // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 
