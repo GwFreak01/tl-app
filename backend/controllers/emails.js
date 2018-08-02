@@ -443,7 +443,7 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
 
 
       const emailReplacements = fullCompanyEventsList[index];
-      console.log('emailReplacements: ', emailReplacements);
+      // console.log('emailReplacements: ', emailReplacements);
       console.log('individualCompanyEvents:', emailReplacements);
       handlebars.registerHelper('ifEventBad', function (a, b, options) {
         // console.log('event', a);
@@ -471,7 +471,7 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
         console.log('startDate: ', start);
         console.log('endDate: ', end);
 
-        console.log('eventDate', Date.parse(emailReplacements.eventDate) <= start);
+        // console.log('eventDate', Date.parse(emailReplacements[0].eventDate) <= start);
         let num = emailReplacements
           .filter(events => Date.parse(events.eventDate) <= start || Date.parse(events.eventDate) >= end)
           .filter(events => events.statusOption === 'Open' || events.statusOption === 'Pending');
