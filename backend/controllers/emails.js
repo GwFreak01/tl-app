@@ -536,7 +536,7 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
 
         } else {
           console.log(i);
-          console.log('Message sent: %s %s', info.messageId, emailGroup);
+          console.log('Message sent: %s', emailGroup);
           // Preview only available when sending through an Ethereal account
           // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 
