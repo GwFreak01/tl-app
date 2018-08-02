@@ -402,13 +402,12 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
 
   companies.forEach((company, index, array) => {
     let partialCompanyEmailsList = [];
-    let partialCompanyEventsList = [];
 
     // console.log('forEach: ', company);
 
     // companyEmails.push(company.companyName);
     // companyEvents.push(company.companyName);
-    partialCompanyEventsList.push(events.filter(event => event.companyName == company.companyName));
+    let partialCompanyEventsList = events.filter(event => event.companyName == company.companyName);
 
     if (company.salesPerson.status) {
       partialCompanyEmailsList.push(company.salesPerson.email);
