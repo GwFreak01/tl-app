@@ -443,6 +443,7 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
 
 
       const emailReplacements = fullCompanyEventsList[index];
+      console.log('emailReplacements: ', emailReplacements);
       console.log('individualCompanyEvents:', emailReplacements);
       handlebars.registerHelper('ifEventBad', function (a, b, options) {
         // console.log('event', a);
