@@ -478,12 +478,12 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
         console.log('startDate: ', start);
         console.log('endDate: ', end);
 
-        try {
-          console.log('eventDate', Date.parse(emailReplacements[0].eventDate) <= start);
-
-        } catch (e) {
-          return;
-        }
+        // try {
+        //   console.log('eventDate', Date.parse(emailReplacements[0].eventDate) <= start);
+        //
+        // } catch (e) {
+        //   return;
+        // }
         // let num = emailReplacements
         //   .filter(events => Date.parse(events.eventDate) <= start && Date.parse(events.eventDate) >= end)
         //   .filter(events => events.statusOption === 'Open' || events.statusOption === 'Pending');
