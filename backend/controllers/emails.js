@@ -446,6 +446,10 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
       const start = new Date();
       const end = new Date(new Date(start).setMonth(start.getMonth() - 12));
 
+      let processedEmailReplacements = emailReplacements
+        .filter(events => Date.parse(events.eventDate) <= start && Date.parse(events.eventDate) >= end)
+        .filter(events => events.statusOption === 'Open' || events.statusOption === 'Pending');
+
       // console.log('emailReplacements: ', emailReplacements);
       console.log('individualCompanyEvents:', emailReplacements);
       handlebars.registerHelper('ifEventBad', function (a, b, options) {
@@ -478,20 +482,20 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
         } catch (e) {
           return;
         }
-        let num = emailReplacements
-          .filter(events => Date.parse(events.eventDate) <= start && Date.parse(events.eventDate) >= end)
-          .filter(events => events.statusOption === 'Open' || events.statusOption === 'Pending');
-        console.log('num: %s \n numLength: %s',num, num.length);
+        // let num = emailReplacements
+        //   .filter(events => Date.parse(events.eventDate) <= start && Date.parse(events.eventDate) >= end)
+        //   .filter(events => events.statusOption === 'Open' || events.statusOption === 'Pending');
+        console.log('num: %s \n numLength: %s',processedEmailReplacements, processedEmailReplacements.length);
 
-        if (num.length < 2) {
+        if (processedEmailReplacements.length < 2) {
           console.log('GREEN');
           return '<font color="#66BB6A"><b>GREEN</b></font>.<br><br>\n' +
             'Thank you for your ongoing support.';
-        } else if (num.length >= 2 || num.length <= 4) {
+        } else if (processedEmailReplacements.length >= 2 || processedEmailReplacements.length <= 4) {
           console.log('YELLOW');
           return '<font color="#FFEE58"><b>YELLOW</b></font>.<br><br>\n' +
             'Please review all corrective actions on past issues and proactively look for common issues.\n';
-        } else if (num.length > 4) {
+        } else if (processedEmailReplacements.length > 4) {
           console.log('RED');
           return '<font color="#EF5350"><b>RED</b></font>.<br><br>\n' +
             'T&L QA will be contacting you to discuss an improvement plan.\n';
@@ -506,7 +510,7 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
 
       const template = handlebars.compile(html);
 
-      const htmlToSend = template({eventItems: emailReplacements});
+      const htmlToSend = template({eventItems: processedEmailReplacements});
 
       const mailContents = {
         from: 'bill@tandlautomatics.com',
@@ -518,7 +522,7 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
 
       // emailList[1].forEach(function (email, i, array) {
         console.log('sending to: ', emailGroup);
-        console.log('emailReplacements: ', emailReplacements);
+        // console.log('emailReplacements: ', emailReplacements);
         // console.log('emailList: ', emailList);
         mailContents.to = emailGroup;
         mailContents.subject = 'Quarterly Supplier Report';
