@@ -439,6 +439,8 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
     if (emailGroup.length == 0) {
       return;
     }
+    console.log('index: ', index);
+
     readHTMLFile(path.join(__dirname, '../models/html_templates/companyReport.html'), function (err, html) {
 
 
