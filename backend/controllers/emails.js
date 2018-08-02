@@ -29,8 +29,12 @@ const emailQuarterlyJob = new CronJob({
   onTick: function () {
     console.log('emailJob tick at: ', new Date());
 
-    const companiesList = Company.find();
-    const eventsList = Event.find();
+    const companiesList = Company.find().then(companyDocuments => {
+      return companyDocuments;
+    });
+    const eventsList = Event.find().then(eventDocuments => {
+      return eventDocuments;
+    });
 
     console.log('companies: ', companiesList);
     console.log('events: ', eventsList);
