@@ -408,6 +408,8 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
 
     // companyEmails.push(company.companyName);
     // companyEvents.push(company.companyName);
+    partialCompanyEventsList.push(events.filter(event => event.companyName == company.companyName));
+
     if (company.salesPerson.status) {
       partialCompanyEmailsList.push(company.salesPerson.email);
     }
@@ -421,7 +423,6 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
       partialCompanyEmailsList.push(company.differentPerson.email);
     }
     fullCompanyEmailsList.push(partialCompanyEmailsList);
-    partialCompanyEventsList.push(events.filter(event => event.companyName == company.companyName));
     // companyEmails.push(company.filter(c => c.salesPerson.email));
     // console.log('companyEmails: ', companyEmails);
     // emailList.push(companyEmails);
