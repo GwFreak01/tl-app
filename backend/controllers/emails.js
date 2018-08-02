@@ -487,7 +487,7 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
         // let num = emailReplacements
         //   .filter(events => Date.parse(events.eventDate) <= start && Date.parse(events.eventDate) >= end)
         //   .filter(events => events.statusOption === 'Open' || events.statusOption === 'Pending');
-        console.log('num: %s \n numLength: %s',processedEmailReplacements, processedEmailReplacements.length);
+        console.log('num: %s \n numLength: %s', processedEmailReplacements, processedEmailReplacements.length);
 
         if (processedEmailReplacements.length < 2) {
           console.log('GREEN');
@@ -523,39 +523,41 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
 
 
       // emailList[1].forEach(function (email, i, array) {
-        console.log('sending to: ', emailGroup);
-        // console.log('emailReplacements: ', emailReplacements);
-        // console.log('emailList: ', emailList);
-        mailContents.to = emailGroup;
-        mailContents.subject = 'Quarterly Supplier Report';
-        // console.log(mailContents);
+      console.log('sending to: ', emailGroup);
+      // console.log('emailReplacements: ', emailReplacements);
+      // console.log('emailList: ', emailList);
+      mailContents.to = emailGroup;
+      mailContents.subject = 'Quarterly Supplier Report';
+      // console.log(mailContents);
 
-        emailClient.sendMail(mailContents, function (err, info) {
-          if (err) {
-            console.log(err);
-            return;
-          } else {
-            console.log(i);
-            console.log('Message sent: %s %s', info.messageId, emailGroup);
-            // Preview only available when sending through an Ethereal account
-            // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+      emailClient.sendMail(mailContents, function (err, info) {
+        if (err) {
+          console.log(err);
 
-          }
+        } else {
+          console.log(i);
+          console.log('Message sent: %s %s', info.messageId, emailGroup);
+          // Preview only available when sending through an Ethereal account
+          // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 
-          if (index === fullCompanyEmailsList.length - 1) {
-            // mailContents.transport.close();
-            return res.status(200).json({
-              message: 'Emails sent successfully!',
-              emailList: fullCompanyEmailsList,
-              eventsList: fullCompanyEventsList
-            });
-          }
-        });
+        }
+
+
+      });
+
+
       // });
 
     });
-
-  })
+    if (index === fullCompanyEmailsList.length - 1) {
+      // mailContents.transport.close();
+      return res.status(200).json({
+        message: 'Emails sent successfully!',
+        emailList: fullCompanyEmailsList,
+        eventsList: fullCompanyEventsList
+      });
+    }
+  });
 
   // eventsList.forEach((event, index, array) => {
   //   console.log('forEachEvent: ', event);
