@@ -29,18 +29,20 @@ const emailQuarterlyJob = new CronJob({
   onTick: function () {
     console.log('emailJob tick at: ', new Date());
 
-    const companiesList = Company.find({}).toArray(function (err, companyDocuments) {
-      if (err) {
-        console.log('Could not query Company db');
-      }
-      return companyDocuments;
-    });
-    const eventsList = Event.find({}).toArray(function (err, eventDocuments) {
-      if (err) {
-        console.log('Could not query Event db');
-      }
-      return eventDocuments;
-    });
+    const companiesList = Company.find().fetch();
+    const eventsList = Event.find().fetch();
+    // const companiesList = Company.find({}).toArray(function (err, companyDocuments) {
+    //   if (err) {
+    //     console.log('Could not query Company db');
+    //   }
+    //   return companyDocuments;
+    // });
+    // const eventsList = Event.find({}).toArray(function (err, eventDocuments) {
+    //   if (err) {
+    //     console.log('Could not query Event db');
+    //   }
+    //   return eventDocuments;
+    // });
 
     // const test = Company.find().sub
     console.log('companies: ', companiesList);
