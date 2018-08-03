@@ -17,6 +17,6 @@ if ng build --prod --build-optimizer; then
 else
 
 # Enable if there is an error
-  echo "fail"
+  exec sh;
 fi
 
