@@ -52,7 +52,7 @@ const emailQuarterlyJob = new CronJob({
         // console.log('companyDocuments: ', companyDocuments);
         eventsList = eventDocuments;
       }).then(() => {
-        console.log('companies: ', eventDocuments);
+        console.log('companies: ', eventsList);
       }
     );
 
