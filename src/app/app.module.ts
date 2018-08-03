@@ -139,6 +139,11 @@ const appRoutes: Routes = [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ErrorComponent, CompanyRegistrationModalComponent, CompanyReportModalComponent]
+  entryComponents: [
+    ErrorComponent,
+    CompanyRegistrationModalComponent,
+    CompanyReportModalComponent,
+    CompanyDeleteModalComponent
+  ]
 })
 export class AppModule { }
