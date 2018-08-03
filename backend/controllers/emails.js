@@ -18,6 +18,8 @@ try {
   console.log("cron pattern not valid");
 }
 
+let companiesList = [];
+let eventsList = [];
 
 const emailQuarterlyJob = new CronJob({
   // seconds, minutes, hours, days of month, months, days of week
@@ -29,19 +31,32 @@ const emailQuarterlyJob = new CronJob({
   onTick: function () {
     console.log('emailJob tick at: ', new Date());
 
-    let companiesList;
 
-      Company.find({},
-      function (err, companyDocuments) {
+    Company.find({},
+    function (err, companyDocuments) {
+      if (err) {
+        console.log('Could not query Company db');
+      }
+      // console.log('companyDocuments: ', companyDocuments);
+      companiesList = companyDocuments;
+      }).then(() => {
+        console.log('companies: ', companiesList);
+      }
+    );
+
+    Event.find({},
+      function (err, eventDocuments) {
         if (err) {
           console.log('Could not query Company db');
         }
         // console.log('companyDocuments: ', companyDocuments);
-        companiesList = companyDocuments;
-        }).then(() => {
-          console.log('companies: ', companiesList);
-        }
-      );
+        eventsList = eventDocuments;
+      }).then(() => {
+        console.log('companies: ', eventDocuments);
+      }
+    );
+
+
     // const eventsList = Event.find().fetch();
     // const companiesList = Company.find({}, function (err, companyDocuments) {
     //   if (err) {
