@@ -11,7 +11,7 @@ import {CompaniesService} from '../../services/companies/companies.service';
 export class CompanyDeleteModalComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<CompanyDeleteModalComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: {},
+              @Inject(MAT_DIALOG_DATA) public data: {companyName: string, companyId: string},
               public companiesService: CompaniesService,
               ) { }
 
