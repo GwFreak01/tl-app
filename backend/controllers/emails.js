@@ -39,9 +39,9 @@ const emailQuarterlyJob = new CronJob({
   // cronTime: '*/60 * * * * 0-6',
 
   // Quarterly CronTime every Jan, April, Jul, Oct 1st at 5 AM on any day
-  // cronTime: '0 0 5 1 1,4,7,10 *',
+  cronTime: '0 0 5 1 1,4,7,10 *',
   // cronTime: '* * */24 * * 0-6',
-  cronTime: '*/60 * * * * *',
+  // cronTime: '*/60 * * * * *',
   onTick: function () {
     console.log('emailJob tick at: ', new Date());
 
