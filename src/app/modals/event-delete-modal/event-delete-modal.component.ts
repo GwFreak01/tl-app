@@ -22,7 +22,7 @@ export class EventDeleteModalComponent implements OnInit {
     console.log('eventId: ', eventId);
     this.eventsService.deleteEvent(eventId);
     this.dialogRef.close('Confirm');
-    alert('Company deleted!!');
+    alert('Event deleted!!');
   }
 
   onCloseCancel() {

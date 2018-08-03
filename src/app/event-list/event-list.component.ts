@@ -6,6 +6,7 @@ import {AuthService} from '../auth/auth.service';
 import {CompanyDeleteModalComponent} from '../modals/company-delete-modal/company-delete-modal.component';
 import {duration} from 'moment';
 import {MatDialog} from '@angular/material';
+import {EventDeleteModalComponent} from '../modals/event-delete-modal/event-delete-modal.component';
 
 @Component({
   selector: 'app-event-list',
@@ -71,7 +72,7 @@ export class EventListComponent implements OnInit, OnDestroy {
 
   onDelete(eventId: string, companyName: string) {
     // console.log('Delete: ', eventId);
-    const dialogRef = this.dialog.open(CompanyDeleteModalComponent, {
+    const dialogRef = this.dialog.open(EventDeleteModalComponent, {
       // height: '400px',
       width: '600px',
       data: {
