@@ -7,10 +7,10 @@
     <!--<strong>{{data}}</strong>-->
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button mat-raised-button type="reset" color="warn" (click)="onCloseCancel()">
+    <button mat-raised-button class="cancelButton" type="reset" color="warn" (click)="onCloseCancel()">
       CANCEL
     </button>
-    <button mat-raised-button type="submit" color="primary" (click)="onCloseConfirm(data.companyId)">
+    <button mat-raised-button class="confirmButton" type="submit" color="primary" (click)="onCloseConfirm(data.companyId)">
       CONFIRM
     </button>
 
