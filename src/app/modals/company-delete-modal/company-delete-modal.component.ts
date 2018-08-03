@@ -21,7 +21,7 @@ export class CompanyDeleteModalComponent implements OnInit {
     // console.log(email);
     this.companiesService.deleteCompany(companyId);
     this.dialogRef.close('Confirm');
-    alert('Company deleted!');
+    alert('Company deleted!!');
   }
 
   onCloseCancel() {
