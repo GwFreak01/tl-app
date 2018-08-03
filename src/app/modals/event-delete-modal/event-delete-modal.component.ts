@@ -12,7 +12,7 @@ import {EventsService} from '../../services/events/events.service';
 export class EventDeleteModalComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<CompanyDeleteModalComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: {companyName: string, companyId: string},
+              @Inject(MAT_DIALOG_DATA) public data:  string,
               public eventsService: EventsService) { }
 
   ngOnInit() {
