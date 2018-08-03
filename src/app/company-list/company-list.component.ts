@@ -17,6 +17,9 @@ import {EventsService} from '../services/events/events.service';
 import {MatDialog, MatTableDataSource} from '@angular/material';
 import {EmailsService} from '../services/emails/emails.service';
 import {CompanyReportModalComponent} from '../modals/company-report-modal/company-report-modal.component';
+import {CompanyRegistrationModalComponent} from '../modals/company-registration-modal/company-registration-modal.component';
+import {duration} from 'moment';
+import {CompanyDeleteModalComponent} from '../modals/company-delete-modal/company-delete-modal.component';
 
 @Component({
   selector: 'app-company-list',
@@ -107,8 +110,20 @@ export class CompanyListComponent implements OnInit, OnDestroy {
     this.editMode.emit('edit');
   }
 
-  onDelete(companyId: string) {
-    this.companiesService.deleteCompany(companyId);
+  onDelete(companyId: string, companyName: string) {
+    const dialogRef = this.dialog.open(CompanyDeleteModalComponent, {
+      // height: '400px',
+      width: '600px',
+      data: {companyName: companyName,
+        companyId: companyId}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      // this.dialogResult = result;
+      duration(500);
+    });
+
   }
 
   getEventTable(company) {
