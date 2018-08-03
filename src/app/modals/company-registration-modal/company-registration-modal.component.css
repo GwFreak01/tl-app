@@ -1,6 +1,6 @@
 mat-dialog-actions {
   display: block;
-  align-content: center;
+  text-align: center;
 }
 
 .cancelButton {
