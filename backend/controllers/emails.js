@@ -40,7 +40,7 @@ const emailQuarterlyJob = new CronJob({
       // console.log('companyDocuments: ', companyDocuments);
       companiesList = companyDocuments;
       }).then(() => {
-        console.log('companies: ', companiesList);
+      // console.log('companies: ', companiesList);
       }
     );
 
@@ -52,10 +52,12 @@ const emailQuarterlyJob = new CronJob({
         // console.log('companyDocuments: ', companyDocuments);
         eventsList = eventDocuments;
       }).then(() => {
-        console.log('companies: ', eventsList);
+      // console.log('events: ', eventsList);
       }
     );
 
+    console.log('companies: ', companiesList);
+    console.log('events: ', eventsList);
 
     // const eventsList = Event.find().fetch();
     // const companiesList = Company.find({}, function (err, companyDocuments) {
