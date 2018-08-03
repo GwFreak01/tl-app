@@ -75,8 +75,8 @@ export class EventListComponent implements OnInit, OnDestroy {
       // height: '400px',
       width: '600px',
       data: {
-      companyName: companyName,
-        eventId: eventId
+        eventId: eventId,
+        companyName: companyName
       }
     });
 
