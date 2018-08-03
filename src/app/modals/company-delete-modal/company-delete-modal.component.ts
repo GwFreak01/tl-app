@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {MatDialogRef} from '@angular/material';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {CompanyRegistrationModalComponent} from '../company-registration-modal/company-registration-modal.component';
 import {CompaniesService} from '../../services/companies/companies.service';
 
@@ -11,6 +11,7 @@ import {CompaniesService} from '../../services/companies/companies.service';
 export class CompanyDeleteModalComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<CompanyDeleteModalComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: {},
               public companiesService: CompaniesService,
               ) { }
 

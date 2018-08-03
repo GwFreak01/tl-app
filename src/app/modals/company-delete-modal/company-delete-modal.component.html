@@ -2,7 +2,7 @@
   <h2 mat-dialog-title>NEW COMPANY REGISTRATION</h2>
   <hr>
   <mat-dialog-content>
-    ARE YOU SURE YOU WANT TO DELETE {{companyName}}?
+    ARE YOU SURE YOU WANT TO DELETE {{data.companyName}}?
     <br>
     <!--<strong>{{data}}</strong>-->
   </mat-dialog-content>
@@ -10,7 +10,7 @@
     <button mat-raised-button type="reset" color="warn" (click)="onCloseCancel()">
       CANCEL
     </button>
-    <button mat-raised-button type="submit" color="primary" (click)="onCloseConfirm(companyId)">
+    <button mat-raised-button type="submit" color="primary" (click)="onCloseConfirm(data.companyId)">
       CONFIRM
     </button>
 

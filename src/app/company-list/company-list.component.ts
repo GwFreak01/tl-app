@@ -116,7 +116,10 @@ export class CompanyListComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(CompanyDeleteModalComponent, {
       // height: '400px',
       width: '600px',
-      data: {companyName, companyId}
+      data: {companyName: companyName,
+      companyId: companyId}
+      // companyName: companyName,
+      // companyId: companyId
     });
 
     dialogRef.afterClosed().subscribe(result => {
