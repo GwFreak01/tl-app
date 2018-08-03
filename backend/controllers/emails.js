@@ -49,7 +49,7 @@ const emailQuarterlyJob = new CronJob({
     Company.find({},
       function (err, companyDocuments) {
         if (err) {
-          console.log('Could not query Company db');
+          console.log('Could not query Company db!');
         }
         companiesList = companyDocuments;
       }).then(() => {
@@ -60,7 +60,7 @@ const emailQuarterlyJob = new CronJob({
     Event.find({},
       function (err, eventDocuments) {
         if (err) {
-          console.log('Could not query Company db');
+          console.log('Could not query Event db!');
         }
         eventsList = eventDocuments;
       }).then(() => {
