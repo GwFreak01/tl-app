@@ -1,0 +1,14 @@
+mat-dialog-actions {
+  display: block;
+  align-content: center;
+}
+
+
+.cancelButton {
+  margin-right: 8px;
+}
+
+.confirmButton {
+  margin-left: 8px;
+}
+
