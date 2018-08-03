@@ -45,7 +45,7 @@ export class CompaniesComponent implements OnInit {
     const dialogRef = this.dialog.open(CompanyRegistrationModalComponent, {
       // height: '400px',
       width: '600px',
-      data: 'This text was passed into the dialog'
+      data: 'This text was passed into the dialog!'
     });
 
     dialogRef.afterClosed().subscribe(result => {
