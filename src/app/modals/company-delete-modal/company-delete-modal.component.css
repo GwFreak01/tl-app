@@ -1,8 +1,13 @@
-mat-dialog-actions {
-  display: block;
-  align-content: center;
+
+h2 {
+  text-align: center;
+
 }
 
+mat-dialog-actions {
+  display: block;
+  text-align: center;
+}
 
 .cancelButton {
   margin-right: 8px;
