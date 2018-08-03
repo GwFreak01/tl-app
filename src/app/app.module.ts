@@ -57,6 +57,7 @@ import { CompanyRegistrationModalComponent } from './modals/company-registration
 import { NewCompanyRegistrationModalComponent } from './modals/new-company-registration-modal/new-company-registration-modal.component';
 import { CompanyReportModalComponent } from './modals/company-report-modal/company-report-modal.component';
 import { CompanyDeleteModalComponent } from './modals/company-delete-modal/company-delete-modal.component';
+import { EventDeleteModalComponent } from './modals/event-delete-modal/event-delete-modal.component';
 
 
 
@@ -119,6 +120,7 @@ const appRoutes: Routes = [
     NewCompanyRegistrationModalComponent,
     CompanyReportModalComponent,
     CompanyDeleteModalComponent,
+    EventDeleteModalComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -143,7 +145,8 @@ const appRoutes: Routes = [
     ErrorComponent,
     CompanyRegistrationModalComponent,
     CompanyReportModalComponent,
-    CompanyDeleteModalComponent
+    CompanyDeleteModalComponent,
+    EventDeleteModalComponent
   ]
 })
 export class AppModule { }

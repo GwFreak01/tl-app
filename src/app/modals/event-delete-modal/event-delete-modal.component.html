@@ -1,0 +1,18 @@
+<div>
+  <h2 mat-dialog-title>DELETE EVENT FOR {{data.companyName}}</h2>
+  <hr>
+  <mat-dialog-content>
+    ARE YOU SURE YOU WANT TO DELETE?
+    <br>
+    <!--<strong>{{data}}</strong>-->
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button class="cancelButton" type="reset" color="warn" (click)="onCloseCancel()">
+      CANCEL
+    </button>
+    <button mat-raised-button class="confirmButton" type="submit" color="primary" (click)="onCloseConfirm(data.companyId)">
+      CONFIRM
+    </button>
+
+  </mat-dialog-actions>
+</div>

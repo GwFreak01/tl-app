@@ -3,6 +3,9 @@ import {Event} from '../../../backend/models/event.model';
 import {Subscription} from 'rxjs';
 import {EventsService} from '../services/events/events.service';
 import {AuthService} from '../auth/auth.service';
+import {CompanyDeleteModalComponent} from '../modals/company-delete-modal/company-delete-modal.component';
+import {duration} from 'moment';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-event-list',
@@ -20,7 +23,8 @@ export class EventListComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
 
   constructor(private eventsService: EventsService,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     this.isLoading = true;
@@ -65,9 +69,21 @@ export class EventListComponent implements OnInit, OnDestroy {
     this.authStatusSub.unsubscribe();
   }
 
-  onDelete(eventId: string) {
-    console.log('Delete: ', eventId);
-    this.eventsService.deleteEvent(eventId);
+  onDelete(eventId: string, companyName: string) {
+    // console.log('Delete: ', eventId);
+    const dialogRef = this.dialog.open(CompanyDeleteModalComponent, {
+      // height: '400px',
+      width: '600px',
+      data: companyName,
+      // companyName: companyName,
+      // companyId: companyId
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      // this.dialogResult = result;
+      duration(500);
+    });
   }
   getColor(status: string) {
     if (status === 'Open') {
