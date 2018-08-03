@@ -235,7 +235,8 @@ const emailQuarterlyJob = new CronJob({
 
 
   },
-  start: true,
+  // start: true,
+  runOnInit: true,
   timezone: 'America/New_York'
 
 });
