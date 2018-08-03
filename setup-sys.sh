@@ -13,10 +13,10 @@ rm -rf tl-app-master
 cd /home/tl/Documents/tl-app/
 
 if ng build --prod --build-optimizer; then
-  echo success
+  echo "success"
 else
 
 # Enable if there is an error
-  exec sh
+  echo "fail"
 fi
 
