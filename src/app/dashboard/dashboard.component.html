@@ -4,55 +4,57 @@
   <mat-grid-list [cols]="2" rowHeight="350px">
 
     <div class="analyticsSection">
-      <mat-grid-tile [colspan]="2">
-        <mat-card class="dashboard-card">
-          <mat-card-header>
-            <mat-card-title>
-              <h1 class="mat-h1"> Analytics</h1>
-              <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu" xPosition="before">
-                <button mat-menu-item>Expand</button>
-                <button mat-menu-item>Remove</button>
-              </mat-menu>
-            </mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="dashboard-card-content analytics-dashboard-card">
-            <form>
-              <div>
-                <mat-label>Q1 End Date: </mat-label>
-                <input
-                  name="Q1Date"
-                  [matDatepicker]="myDatepickerQ1"
-                  [value]="myDatepickerQ1"
-                  #Q1Date
-                >
-                <mat-datepicker-toggle
-                  matSuffix
-                  [for]="myDatepickerQ1"></mat-datepicker-toggle>
-                <mat-datepicker [touchUi]="true" #myDatepickerQ1></mat-datepicker>
-                <!--<br>-->
-                <!--<mat-label>Q2 End Date: </mat-label>-->
-                <!--<input [matDatepicker]="myDatepickerQ2">-->
-                <!--<mat-datepicker-toggle [for]="myDatepickerQ2"></mat-datepicker-toggle>-->
-                <!--<mat-datepicker #myDatepickerQ2></mat-datepicker>-->
-                <!--<br>-->
-                <!--<mat-label>Q3 End Date: </mat-label>-->
-                <!--<input [matDatepicker]="myDatepickerQ3">-->
-                <!--<mat-datepicker-toggle [for]="myDatepickerQ3"></mat-datepicker-toggle>-->
-                <!--<mat-datepicker #myDatepickerQ3></mat-datepicker>-->
-                <!--<br>-->
-                <!--<mat-label>Q4 End Date: </mat-label>-->
-                <!--<input [matDatepicker]="myDatepickerQ4">-->
-                <!--<mat-datepicker-toggle [for]="myDatepickerQ4"></mat-datepicker-toggle>-->
-                <!--<mat-datepicker #myDatepickerQ4></mat-datepicker>-->
-              </div>
-            </form>
-            <button mat-stroked-button="accent" (click)="updateEmailDates(Q1Date)">Update Quarterly Email Dates</button>
-          </mat-card-content>
-        </mat-card>
-      </mat-grid-tile>
+      <app-monthly-reject-charts></app-monthly-reject-charts>
+
+      <!--<mat-grid-tile [colspan]="2">-->
+        <!--<mat-card class="dashboard-card">-->
+          <!--<mat-card-header>-->
+            <!--<mat-card-title>-->
+              <!--<h1 class="mat-h1"> Analytics</h1>-->
+              <!--<button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">-->
+                <!--<mat-icon>more_vert</mat-icon>-->
+              <!--</button>-->
+              <!--<mat-menu #menu="matMenu" xPosition="before">-->
+                <!--<button mat-menu-item>Expand</button>-->
+                <!--<button mat-menu-item>Remove</button>-->
+              <!--</mat-menu>-->
+            <!--</mat-card-title>-->
+          <!--</mat-card-header>-->
+          <!--<mat-card-content class="dashboard-card-content analytics-dashboard-card">-->
+            <!--&lt;!&ndash;<form>&ndash;&gt;-->
+              <!--&lt;!&ndash;<div>&ndash;&gt;-->
+                <!--&lt;!&ndash;<mat-label>Q1 End Date: </mat-label>&ndash;&gt;-->
+                <!--&lt;!&ndash;<input&ndash;&gt;-->
+                  <!--&lt;!&ndash;name="Q1Date"&ndash;&gt;-->
+                  <!--&lt;!&ndash;[matDatepicker]="myDatepickerQ1"&ndash;&gt;-->
+                  <!--&lt;!&ndash;[value]="myDatepickerQ1"&ndash;&gt;-->
+                  <!--&lt;!&ndash;#Q1Date&ndash;&gt;-->
+                <!--&lt;!&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;<mat-datepicker-toggle&ndash;&gt;-->
+                  <!--&lt;!&ndash;matSuffix&ndash;&gt;-->
+                  <!--&lt;!&ndash;[for]="myDatepickerQ1"></mat-datepicker-toggle>&ndash;&gt;-->
+                <!--&lt;!&ndash;<mat-datepicker [touchUi]="true" #myDatepickerQ1></mat-datepicker>&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;<br>&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;<mat-label>Q2 End Date: </mat-label>&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;<input [matDatepicker]="myDatepickerQ2">&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;<mat-datepicker-toggle [for]="myDatepickerQ2"></mat-datepicker-toggle>&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;<mat-datepicker #myDatepickerQ2></mat-datepicker>&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;<br>&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;<mat-label>Q3 End Date: </mat-label>&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;<input [matDatepicker]="myDatepickerQ3">&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;<mat-datepicker-toggle [for]="myDatepickerQ3"></mat-datepicker-toggle>&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;<mat-datepicker #myDatepickerQ3></mat-datepicker>&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;<br>&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;<mat-label>Q4 End Date: </mat-label>&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;<input [matDatepicker]="myDatepickerQ4">&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;<mat-datepicker-toggle [for]="myDatepickerQ4"></mat-datepicker-toggle>&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;<mat-datepicker #myDatepickerQ4></mat-datepicker>&ndash;&gt;&ndash;&gt;-->
+              <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</form>&ndash;&gt;-->
+            <!--&lt;!&ndash;<button mat-stroked-button="accent" (click)="updateEmailDates(Q1Date)">Update Quarterly Email Dates</button>&ndash;&gt;-->
+          <!--</mat-card-content>-->
+        <!--</mat-card>-->
+      <!--</mat-grid-tile>-->
     </div>
     <!--TODO: Dynamically resize grid tile size based on company list size-->
 

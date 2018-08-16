@@ -58,7 +58,8 @@ import { NewCompanyRegistrationModalComponent } from './modals/new-company-regis
 import { CompanyReportModalComponent } from './modals/company-report-modal/company-report-modal.component';
 import { CompanyDeleteModalComponent } from './modals/company-delete-modal/company-delete-modal.component';
 import { EventDeleteModalComponent } from './modals/event-delete-modal/event-delete-modal.component';
-
+import { MonthlyRejectChartsComponent } from './monthly-reject-charts/monthly-reject-charts.component';
+import { ChartModule } from 'angular-highcharts';
 
 
 const appRoutes: Routes = [
@@ -121,6 +122,7 @@ const appRoutes: Routes = [
     CompanyReportModalComponent,
     CompanyDeleteModalComponent,
     EventDeleteModalComponent,
+    MonthlyRejectChartsComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -135,6 +137,7 @@ const appRoutes: Routes = [
     // FormBuilder,
     // Validators
     HttpClientModule,
+    ChartModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

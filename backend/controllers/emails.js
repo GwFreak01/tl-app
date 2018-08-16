@@ -256,14 +256,14 @@ const mailgunOptions = {
 
 // MailGun Config
 
-// const transport = mailgunTransport(mailgunOptions);
+const transport = mailgunTransport(mailgunOptions);
 
 // Local Mail Config
-const transport = {
-  host: '10.220.36.5',
-  port: '25',
-  secure: false, // true for 465, false for other ports
-};
+// const transport = {
+//   host: '10.220.36.5',
+//   port: '25',
+//   secure: false, // true for 465, false for other ports
+// };
 
 
 
