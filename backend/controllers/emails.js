@@ -20,10 +20,10 @@ const mailgunOptions = {
 
 // MailGun Config
 
-// const transport = mailgunTransport(mailgunOptions);
+// let transport = mailgunTransport(mailgunOptions);
 
 // Local Mail Config
-const transport = {
+let transport = {
   host: '10.220.36.5',
   port: '25',
   secure: false, // true for 465, false for other ports
@@ -34,8 +34,17 @@ const transport = {
 
 // const emailClient = nodemailer.createTransport(transport);
 
-const emailClient = nodemailer.createTransport(transport);
+let emailClient = nodemailer.createTransport(transport);
+emailClient.verify(function (error, success) {
+  if (error) {
+    transport = mailgunTransport(mailgunOptions);
+    emailClient = nodemailer.createTransport(transport);
+    console.log('MailGun Server Used');
 
+  } else {
+    console.log('Internal Mail Server Used');
+  }
+});
 const readHTMLFile = function(path, callback) {
   fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
     if (err) {
