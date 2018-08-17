@@ -16,7 +16,7 @@ cp -rf tl-app-master/* /home/tl/Documents/tl-app
 rm -rf tl-app-master
 
 cd /home/tl/Documents/tl-app/
-npm install
+sudo npm install
 if ng build --prod --build-optimizer; then
   echo "success"
 else
