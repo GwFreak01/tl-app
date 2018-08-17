@@ -93,7 +93,7 @@ export class MonthlyRejectChartsComponent implements OnInit {
               const d = new Date(events.eventDate);
               const monthNum = moment().month(d.getMonth()).format('M');
               console.log('Event Date: ', moment().month(d.getMonth()).format('M'));
-              incidentCount[(monthNum - 1)]++;
+              incidentCount[(parseInt(monthNum, 10) - 1)]++;
               console.log('incidentCount: ', incidentCount);
             }
           });
@@ -190,7 +190,8 @@ export class MonthlyRejectChartsComponent implements OnInit {
   }
 
 
-  add() {
-    this.chart.addPoint(Math.floor(Math.random() * 10));
+  printChart() {
+    // this.chart.addPoint(Math.floor(Math.random() * 10));
+    this.chart.print();
   }
 }

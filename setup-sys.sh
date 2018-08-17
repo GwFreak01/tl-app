@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# Local Server Deployment
+# Make sure emails.js mailing server is config to internal mailing server
+# rather than Mailgun (DEV)
+
+#
 killall node
 killall python
 cd /tmp/

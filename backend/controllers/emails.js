@@ -9,6 +9,32 @@ const Event = require('../models/event');
 
 
 const CronJob = require('cron').CronJob;
+const mailgunOptions = {
+  auth: {
+    api_key: process.env.MAILGUN_ACTIVE_API_KEY,
+    domain: process.env.MAILGUN_DOMAIN,
+  }
+};
+
+
+
+// MailGun Config
+
+// const transport = mailgunTransport(mailgunOptions);
+
+// Local Mail Config
+const transport = {
+  host: '10.220.36.5',
+  port: '25',
+  secure: false, // true for 465, false for other ports
+};
+
+
+
+
+// const emailClient = nodemailer.createTransport(transport);
+
+const emailClient = nodemailer.createTransport(transport);
 
 const readHTMLFile = function(path, callback) {
   fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
@@ -245,32 +271,7 @@ emailQuarterlyJob.start();
 // emailQuarterlyJob.timeout();
 
 
-const mailgunOptions = {
-  auth: {
-    api_key: process.env.MAILGUN_ACTIVE_API_KEY,
-    domain: process.env.MAILGUN_DOMAIN,
-  }
-};
 
-
-
-// MailGun Config
-
-const transport = mailgunTransport(mailgunOptions);
-
-// Local Mail Config
-// const transport = {
-//   host: '10.220.36.5',
-//   port: '25',
-//   secure: false, // true for 465, false for other ports
-// };
-
-
-
-
-// const emailClient = nodemailer.createTransport(transport);
-
-const emailClient = nodemailer.createTransport(transport);
 
 emailClient.verify(function (err, success) {
   if (err) {
