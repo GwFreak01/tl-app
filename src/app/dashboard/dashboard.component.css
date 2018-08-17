@@ -20,13 +20,7 @@
 .analytics-dashboard-card {
   text-align: left;
 }
-.companyLabel {
-  position: absolute;
-  width: 50%;
-  left: 0px;
-  margin-top: 350px;
-  text-align: center;
-}
+
 
 .analyticsSection {
   position: absolute;
@@ -36,29 +30,36 @@
   margin-bottom: 30px;
 
 }
-
+.companyLabel {
+  position: absolute;
+  width: 50%;
+  left: 0px;
+  margin-top: 480px;
+  text-align: center;
+}
 .companySection {
   position: absolute;
   width: 50%;
   left: 0px;
-  margin-top: 380px;
+  margin-top: 510px;
   margin-bottom: 30px;
 
 }
+
+
 
 .eventLabel {
   position: absolute;
   width: 50%;
   right: 0px;
-  margin-top: 350px;
+  margin-top: 480px;
   text-align: center;
 }
-
 .eventSection {
   position: absolute;
   width: 50%;
   right: 0;
-  margin-top: 380px;
+  margin-top: 510px;
   margin-bottom: 30px;
 }
 

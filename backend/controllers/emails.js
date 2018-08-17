@@ -85,7 +85,7 @@ const emailQuarterlyJob = new CronJob({
 
       // console.log('forEach: ', company);
 
-      let partialCompanyEventsList = eventsList.filter(event => event.companyName == company.companyName);
+      let partialCompanyEventsList = eventsList.filter(event => event.companyName === company.companyName);
 
       if (company.salesPerson.status) {
         partialCompanyEmailsList.push(company.salesPerson.email);
