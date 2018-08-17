@@ -35,7 +35,7 @@ export class MonthlyRejectChartsComponent implements OnInit {
     'November': '11',
     'December': '12'
   };
-  private chart;
+  public chart;
 
   constructor(public companiesService: CompaniesService,
               private eventsService: EventsService) { }
