@@ -38,6 +38,9 @@ const eventSchema = mongoose.Schema({
   quantityReject: {
     type: Number,
   },
+  weightReject: {
+    type: Number,
+  },
   requiredDate: {
     type: Date,
   },

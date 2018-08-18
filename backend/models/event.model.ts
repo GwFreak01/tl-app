@@ -9,6 +9,7 @@ export interface Event {
   lotNumber: string;
   carNumber: string;
   quantityReject: number;
+  weightReject: number;
   requiredDate: string;
   actualDate: string;
   rootCause: string;

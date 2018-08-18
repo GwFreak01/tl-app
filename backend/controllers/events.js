@@ -4,6 +4,15 @@ const Event = require('../models/event');
 exports.createEvent = (req, res, next) => {
   // console.log('ReqBody: ', req.body);
   if (req.body.formValues.eventType === 'Quality') {
+    let tempQuantityReject;
+    let tempWeightReject;
+    if (req.body.formValues.quantityReject == null) {
+      tempQuantityReject = 0;
+      tempWeightReject = req.body.formValues.weightReject;
+    } else if (req.body.formValues.weightReject == null) {
+      tempQuantityReject = req.body.formValues.quantityReject;
+      tempWeightReject = 0;
+    }
     const qualityEvent = new Event({
       companyName: req.body.formValues.companyName,
       companyId: req.body.company[0]._id,
@@ -14,7 +23,8 @@ exports.createEvent = (req, res, next) => {
       lotNumber: req.body.formValues.lotNumber,
       carNumber: req.body.formValues.carNumber,
       rootCause: req.body.formValues.rootCause,
-      quantityReject: req.body.formValues.quantityReject,
+      quantityReject: tempQuantityReject,
+      weightReject: tempWeightReject,
       statusOption: 'Open',
     });
     // console.log('qualityEvent: ', qualityEvent);

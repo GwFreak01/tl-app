@@ -67,6 +67,13 @@
             matInput
             value="{{event.quantityReject}}" readonly>
         </mat-form-field>
+
+        <mat-form-field class="weightReject" appearance="outline">
+          <mat-label>Weight Rejected (lbs)</mat-label>
+          <input
+            matInput
+            value="{{event.weightReject}}" readonly>
+        </mat-form-field>
       </div>
       <div *ngIf="event.eventType == 'Delivery'">
         <mat-form-field class="fieldRequiredDate" appearance="outline">

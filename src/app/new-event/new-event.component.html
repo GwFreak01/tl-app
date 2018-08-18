@@ -109,7 +109,7 @@
         required>
       <mat-error *ngIf="eventForm.invalid">Please enter a CAR Number</mat-error>
     </mat-form-field>
-    <mat-form-field class="fieldQuantityReject" *ngIf="selectedEventType == 'Quality'" appearance="outline">
+    <mat-form-field class="fieldQuantityReject" *ngIf="event?.eventType == 'Quality'" appearance="outline">
       <mat-label>Quantity Rejected</mat-label>
       <input
         matInput
@@ -121,6 +121,19 @@
         required>
       <mat-error *ngIf="eventForm.invalid">Please enter the rejected quantity</mat-error>
     </mat-form-field>
+
+  <mat-form-field class="fieldMaterialReject" *ngIf="event?.eventType == 'Quality'" appearance="outline">
+    <mat-label>Weight Rejected (lbs)</mat-label>
+    <input
+      matInput
+      type="number"
+      placeholder="Weight Rejected (lbs)"
+      name="weightReject"
+      #weightReject="ngModel"
+      [ngModel]="event?.weightReject"
+      required>
+    <mat-error *ngIf="eventForm.invalid">Please enter the rejected weight</mat-error>
+  </mat-form-field>
 
     <mat-form-field class="fieldRequiredDate" *ngIf="selectedEventType == 'Delivery'" appearance="outline">
       <mat-label>Required Delivery Date</mat-label>
