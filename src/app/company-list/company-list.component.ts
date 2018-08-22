@@ -163,6 +163,25 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   }
 
   printEventLog(companyId: string) {
+    // window.focus();
+    // window.print();
+    let data = document.getElementsByClassName('mat-expanded')[0].innerHTML;
+
+    let newWindow = window.open('', '_blank');
+    newWindow.document.write('<base href="/"><html><head>'+
+      '<link rel="stylesheet" type="text/css" href="print.css"/>'+
+      '</head><body><div><table>' +
+      data +
+      '</table></div></body></html>');
+
+    // newWindow.document.write(data);
+    newWindow.focus();
+    // newWindow.close();
+    // newWindow.print();
+
+    // newWindow.focus();
+
+    // newWindow.print();
 
   }
   sendEmail(companyId: string) {

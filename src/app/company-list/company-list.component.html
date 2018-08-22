@@ -43,29 +43,30 @@
       </table>
     </div>
 
-    <mat-action-row *ngIf="userIsAuthenticated">
+
+    <mat-action-row *ngIf="userIsAuthenticated" class="no-print">
       <button
-        class="deleteButton"
+        class="deleteButton no-print"
         mat-raised-button color="warn"
         (click)="onDelete(company._id, company.companyName)">
         DELETE
       </button>
 
       <button
-        class="printEventLogButton"
+        class="printEventLogButton no-print"
         mat-stroked-button color="accent" (click)="printEventLog(company._id)">
         PRINT LOG
       </button>
 
       <span class="buttonSpace"></span>
       <button
-        class="editCompanyButton"
+        class="editCompanyButton no-print"
         mat-stroked-button color="primary" [routerLink]="['/edit-company', company._id]" (click)="onEditCompany(company._id)">
         EDIT INFO
       </button>
 
       <button
-        class="sendEmailButton"
+        class="sendEmailButton noPrint"
         mat-raised-button color="primary" (click)="sendEmail(company._id)">
         EMAIL REPORT
       </button>

@@ -52,3 +52,11 @@ mat-panel-title {
 .descriptionSpan {
   float: right;
 }
+
+@media print, sendEmailButton
+{
+  .no-print, .no-print *
+  {
+    display: none ;
+  }
+}
