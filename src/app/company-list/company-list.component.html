@@ -46,9 +46,15 @@
     <mat-action-row *ngIf="userIsAuthenticated">
       <button
         class="deleteButton"
-        mat-stroked-button color="warn"
+        mat-raised-button color="warn"
         (click)="onDelete(company._id, company.companyName)">
         DELETE
+      </button>
+
+      <button
+        class="printEventLogButton"
+        mat-stroked-button color="accent" (click)="printEventLog(company._id)">
+        PRINT LOG
       </button>
 
       <span class="buttonSpace"></span>
