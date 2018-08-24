@@ -165,12 +165,16 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   printEventLog(companyId: string) {
     // window.focus();
     // window.print();
+    let companyEvents = this.events.filter(event => event.companyId === companyId);
+
+    console.log('printEventLog: ', companyEvents);
     let data = document.getElementsByClassName('mat-expanded')[0].innerHTML;
 
     let newWindow = window.open('', '_blank');
     newWindow.document.write('<base href="/"><html><head>'+
-      '<link rel="stylesheet" type="text/css" href="print.css"/>'+
-      '</head><body><div><table>' +
+
+      '</head><body>' +
+      '\'<link rel="stylesheet" type="text/css" href="print.css"/>\'+ <div><table>' +
       data +
       '</table></div></body></html>');
 
