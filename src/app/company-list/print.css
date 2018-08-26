@@ -1,7 +1,11 @@
-@media print
-{
-  .no-print, .no-print *
-  {
-    display: none ;
-  }
+/*@media print*/
+/*{*/
+  /*.no-print, .no-print **/
+  /*{*/
+    /*display: none ;*/
+  /*}*/
+/*}*/
+
+.table {
+  font-size: 40px;
 }

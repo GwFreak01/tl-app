@@ -19,6 +19,7 @@ import {EmailsService} from '../services/emails/emails.service';
 import {CompanyReportModalComponent} from '../modals/company-report-modal/company-report-modal.component';
 import {CompanyRegistrationModalComponent} from '../modals/company-registration-modal/company-registration-modal.component';
 import {duration} from 'moment';
+import * as moment from 'moment';
 import {CompanyDeleteModalComponent} from '../modals/company-delete-modal/company-delete-modal.component';
 
 @Component({
@@ -165,23 +166,72 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   printEventLog(companyId: string) {
     // window.focus();
     // window.print();
-    let companyEvents = this.events.filter(event => event.companyId === companyId);
+    const companyEvents = this.events.filter(event => event.companyId === companyId);
+    const associatedCompany = this.companies.filter(company => company._id === companyId);
 
     console.log('printEventLog: ', companyEvents);
-    let data = document.getElementsByClassName('mat-expanded')[0].innerHTML;
+    console.log('printCompanyLog: ', associatedCompany);
+    // let data = document.getElementsByClassName('mat-expanded')[0].innerHTML;
 
-    let newWindow = window.open('', '_blank');
-    newWindow.document.write('<base href="/"><html><head>'+
+    const newWindow = window.open('', '_blank');
+    // newWindow.document.write('<base href="/"><html><head>'+
+    //
+    //   '</head><body>' +
+    //   '\'<link rel="stylesheet" type="text/css" href="print.css"/>\'+ <div><table>' +
+    //   data +
+    //   '</table></div></body></html>');
 
-      '</head><body>' +
-      '\'<link rel="stylesheet" type="text/css" href="print.css"/>\'+ <div><table>' +
-      data +
-      '</table></div></body></html>');
 
-    // newWindow.document.write(data);
+    // newWindow.document.write('<head><base href="/">' +
+    //   '<link type="text/css" href="print.css">' +
+    //   '</head>');
+    newWindow.document.write('<head><style>' +
+      'table {' +
+      'font-size: 30px;' +
+      'border-spacing: 20px;' +
+      'text-align: center;' +
+      'margin: 0 auto;' +
+      '}' +
+      '.eventsHeader {' +
+      'text-align: center;' +
+      '}' +
+      '</style></head>');
+    newWindow.document.write('<body><h1>Company: ');
+    newWindow.document.write(companyEvents[0].companyName);
+    newWindow.document.write('</h1>');
+    newWindow.document.write('<h2>Address: ');
+    newWindow.document.write(associatedCompany[0].companyAddress.street1 + ' ' +
+      (associatedCompany[0].companyAddress.street2 ? associatedCompany[0].companyAddress.street2 : '') + '<br>' +
+      '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp' +
+      associatedCompany[0].companyAddress.city + ', ' +
+      associatedCompany[0].companyAddress.state + ' ' +
+      associatedCompany[0].companyAddress.zipcode + '</h2>');
+
+    newWindow.document.write('<div class="eventsHeader"><h1><u>EVENTS</u></h1></div>');
+
+
+    newWindow.document.write('<table><tr><th>Date</th><th>Type</th><th>CAR #</th><th>Status</th></tr>');
+
+
+    // newWindow.document.write('<tr><td>1/1/2018</td><td>Quality</td><td>234121f</td><td>Open</td></tr>')
+
+    for (let eventIndex = 0; eventIndex <= companyEvents.length - 1; eventIndex++) {
+      newWindow.document.write('<tr><td>');
+      newWindow.document.write(moment(companyEvents[eventIndex].eventDate).format('MMMM Do YYYY'));
+      newWindow.document.write('</td><td>');
+      newWindow.document.write(companyEvents[eventIndex].eventType);
+      newWindow.document.write('</td><td>');
+      newWindow.document.write(companyEvents[eventIndex].carNumber);
+      newWindow.document.write('</td><td>');
+      newWindow.document.write(companyEvents[eventIndex].statusOption);
+      newWindow.document.write('</td></tr>');
+    }
+
+    newWindow.document.write('</table>');
+    newWindow.document.write('</body>');
     newWindow.focus();
-    // newWindow.close();
-    // newWindow.print();
+    newWindow.print();
+    newWindow.close();
 
     // newWindow.focus();
 
