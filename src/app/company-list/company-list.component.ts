@@ -207,7 +207,7 @@ export class CompanyListComponent implements OnInit, OnDestroy {
       associatedCompany[0].companyAddress.state + ' ' +
       associatedCompany[0].companyAddress.zipcode + '</h2>');
 
-    newWindow.document.write('<div class="eventsHeader"><h1><u>EVENTS</u></h1></div>');
+    newWindow.document.write('<div class="eventsHeader"><h1><u>EVENT LOG</u></h1></div>');
 
 
     newWindow.document.write('<table><tr><th>Date</th><th>Type</th><th>CAR #</th><th>Status</th></tr>');
