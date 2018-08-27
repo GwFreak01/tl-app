@@ -4,7 +4,7 @@ mat-card {
 
 .companyListDisplay {
   position: absolute;
-  width: 47%;
+  width: 53%;
   left: 0;
   margin-top: 32px;
 
@@ -18,7 +18,7 @@ mat-card {
 
 .companyFormDisplay {
   position: absolute;
-  width: 47%;
+  width: 42%;
   right: 0;
   margin-top: 48px;
 
