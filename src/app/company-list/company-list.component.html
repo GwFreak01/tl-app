@@ -12,6 +12,14 @@
           <h4 class="panelDescription">
           {{ company.companyAddress.street1}}
           </h4>
+
+          <!--<button-->
+            <!--class="printEventLogButton no-print"-->
+            <!--mat-stroked-button color="accent" (click)="printEventLog(company._id)">-->
+            <!--REQUEST COMPANY INFO UPDATE-->
+          <!--</button>-->
+
+          <!--<button class="updateCompany">UPDATE COMPANY INFO</button>-->
         </div>
       </mat-panel-description>
     </mat-expansion-panel-header>
@@ -52,13 +60,16 @@
         DELETE
       </button>
 
+
+
+      <span class="buttonSpace"></span>
+
       <button
         class="printEventLogButton no-print"
         mat-stroked-button color="accent" (click)="printEventLog(company._id)">
         PRINT LOG
       </button>
 
-      <span class="buttonSpace"></span>
       <button
         class="editCompanyButton no-print"
         mat-stroked-button color="primary" [routerLink]="['/edit-company', company._id]" (click)="onEditCompany(company._id)">
