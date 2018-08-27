@@ -163,6 +163,9 @@ export class CompanyListComponent implements OnInit, OnDestroy {
     }
   }
 
+  requestUpdate(companyId: string) {
+    console.log('Test');
+  }
   printEventLog(companyId: string) {
     // window.focus();
     // window.print();
