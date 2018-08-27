@@ -37,7 +37,7 @@ export class CompanyListComponent implements OnInit, OnDestroy {
 
   // dataSource = new EventDataSource(this.eventsService);
 
-  dataSource: EventsDataSource;
+  // dataSource: EventsDataSource;
   columnsToDisplay = ['eventDate', 'eventType', 'carNumber', 'status'];
   private authStatusSub = new Subscription();
 
@@ -257,18 +257,18 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   }
 }
 
-export class EventsDataSource extends DataSource<any> {
-
-  constructor(private eventsService: EventsService) {
-    super();
-  }
-
-  connect(): Observable<Event[]> {
-    return this.eventsService.getAllEvents();
-  }
-
-  disconnect(): void {
-  }
-
-
-}
+// export class EventsDataSource extends DataSource<any> {
+//
+//   constructor(private eventsService: EventsService) {
+//     super();
+//   }
+//
+//   connect(): Observable<Event[]> {
+//     return this.eventsService.getAllEvents();
+//   }
+//
+//   disconnect(): void {
+//   }
+//
+//
+// }
