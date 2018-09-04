@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AuthData} from './auth-data.model';
-import {Observable, Subject} from 'rxjs';
+import {Observable, Subject, throwError} from 'rxjs';
 import {Router} from '@angular/router';
 
 import {environment} from '../../environments/environment';
@@ -46,28 +46,29 @@ export class AuthService {
       return this.username;
     } else {
       let companyList;
-        this.companiesService.getAllCompanies().subscribe(response => {
-          companyList = response;
-          response.some((company) => {
-            console.log('response company: ', company);
-            if (company.qualityPerson.email === this.username) {
-              this.userCompany = company.companyName;
-              return true;
-            }
-            if (company.salesPerson.email === this.username) {
-              this.userCompany = company.companyName;
-              return true;
-            }
-            if (company.logisticsPerson.email === this.username) {
-              this.userCompany = company.companyName;
-              return true;
-            }
-            if (company.differentPerson.email === this.username) {
-              this.userCompany = company.companyName;
-              return true;
-            }
-          });
-          console.log('this.userCompany: ', this.userCompany);
+
+      this.companiesService.getAllCompanies().subscribe(response => {
+        companyList = response;
+        response.some((company) => {
+          console.log('response company: ', company);
+          if (company.qualityPerson.email === this.username) {
+            this.userCompany = company.companyName;
+            return true;
+          }
+          if (company.salesPerson.email === this.username) {
+            this.userCompany = company.companyName;
+            return true;
+          }
+          if (company.logisticsPerson.email === this.username) {
+            this.userCompany = company.companyName;
+            return true;
+          }
+          if (company.differentPerson.email === this.username) {
+            this.userCompany = company.companyName;
+            return true;
+          }
+        });
+        console.log('this.userCompany: ', this.userCompany);
       });
       return this.userCompany;
     }

@@ -24,6 +24,9 @@ export class ErrorInterceptor implements HttpInterceptor {
         if (error.error.message) {
           errorMessage = error.error.message;
           console.log(errorMessage);
+          if (errorMessage === 'Invalid token') {
+            return;
+          }
         }
         this.dialog.open(ErrorComponent, {
           data: {
