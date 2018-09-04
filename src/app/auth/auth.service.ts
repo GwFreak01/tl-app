@@ -5,6 +5,7 @@ import {Observable, Subject} from 'rxjs';
 import {Router} from '@angular/router';
 
 import {environment} from '../../environments/environment';
+import {Company} from '../../../backend/models/company.model';
 
 const BACKEND_URL = environment.apiUrl + '/user';
 
@@ -97,6 +98,24 @@ export class AuthService {
     }
   }
 
+  createBulkUsers(company: Company) {
+    const emailListUsers = [];
+    if (company.salesPerson.status) {
+      emailListUsers.push(company.salesPerson.email);
+    }
+    if (company.qualityPerson.status) {
+      emailListUsers.push(company.qualityPerson.email);
+    }
+    if (company.logisticsPerson.status) {
+      emailListUsers.push(company.logisticsPerson.email);
+    }
+    if (company.differentPerson.status) {
+      emailListUsers.push(company.differentPerson.email);
+    }
+    console.log('createBulkUsers: ', company);
+    console.log('emailListUsers: ', emailListUsers);
+
+  }
   logout() {
     this.token = null;
     this.username = null;

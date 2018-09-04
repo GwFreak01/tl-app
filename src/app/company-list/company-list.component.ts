@@ -164,7 +164,13 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   }
 
   requestUpdate(companyId: string) {
-    console.log('Test');
+    const associatedCompany = this.companies.filter(company => company._id === companyId);
+    // let emailList = [];
+    // for (let i = 0; i <= 4; i++) {
+    //   if
+    // }
+    // console.log(associatedCompany);
+    this.authService.createBulkUsers(associatedCompany[0]);
   }
   printEventLog(companyId: string) {
     // window.focus();
