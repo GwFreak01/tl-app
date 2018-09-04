@@ -3,13 +3,15 @@
 
   <button class="addButton"
           mat-raised-button
-          color="primary" (click)="onAddButtonSelect()" >
+          color="primary" (click)="onAddButtonSelect()"
+          *ngIf="(associatedUserCompany === 'tl_admin')">
     ADD NEW EVENT
   </button>
   <button class="emailbutton"
           mat-raised-button
           type="submit"
-          color="primary" (click)="onSendAllFeedback()">
+          color="primary" (click)="onSendAllFeedback()"
+          *ngIf="(associatedUserCompany === 'tl_admin')">
     SEND ALL FEEDBACK
   </button>
   <!--<button class="emailButton"-->

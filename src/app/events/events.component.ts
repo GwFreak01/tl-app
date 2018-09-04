@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {EmailsService} from '../services/emails/emails.service';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-events',
@@ -9,9 +10,14 @@ import {EmailsService} from '../services/emails/emails.service';
 export class EventsComponent implements OnInit {
   addButtonSelect = false;
 
-  constructor(private emailsService: EmailsService) { }
+  associatedCompanyName: string;
+  associatedUserCompany: string;
+  constructor(private emailsService: EmailsService,
+              private authService: AuthService) { }
 
   ngOnInit() {
+    this.associatedUserCompany = this.authService.getUsername();
+    this.associatedCompanyName = this.authService.getUserCompany();
   }
 
   onAddButtonSelect() {

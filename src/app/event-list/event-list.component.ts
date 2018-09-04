@@ -19,7 +19,8 @@ export class EventListComponent implements OnInit, OnDestroy {
   isLoading = false;
   private eventsSub: Subscription;
   private authStatusSub = new Subscription();
-
+  associatedCompanyName: string;
+  associatedUserCompany: string;
 
   userIsAuthenticated = false;
 
@@ -29,12 +30,16 @@ export class EventListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoading = true;
+    this.associatedUserCompany = this.authService.getUsername();
+    this.associatedCompanyName = this.authService.getUserCompany();
     this.userIsAuthenticated = this.authService.getIsAuth();
     console.log('EventList.userIsAuthenticated: ', this.userIsAuthenticated);
     this.authStatusSub = this.authService.getAuthStatusListener()
       .subscribe(isAuthenticated => {
         // console.log('EventList.Ath: ', isAuthenticated);
         this.userIsAuthenticated = isAuthenticated;
+        this.associatedUserCompany = this.authService.getUsername();
+        this.associatedCompanyName = this.authService.getUserCompany();
       });
     this.eventsService.getEvents();
     this.eventsSub = this.eventsService.getEventUpdateListener()
