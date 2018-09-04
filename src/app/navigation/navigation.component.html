@@ -14,7 +14,7 @@
 
           <a mat-button routerLink="/dashboard" routerLinkActive="mat-accent" *ngIf="app.localStorageItem('username') =='tl_admin'">DASHBOARD</a>
           <br *ngIf="app.localStorageItem('username') =='tl_admin'">
-          <a mat-button routerLink="/companies" routerLinkActive="mat-accent" *ngIf="app.localStorageItem('username') =='tl_admin'">COMPANIES</a>
+          <a mat-button routerLink="/companies" routerLinkActive="mat-accent">COMPANIES</a>
           <br *ngIf="app.localStorageItem('username') =='tl_admin'">
           <a mat-button routerLink="/events" routerLinkActive="mat-accent">EVENTS</a>
           <br *ngIf="app.localStorageItem('username') =='tl_admin'">

@@ -1,8 +1,13 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
 
 <mat-accordion *ngIf="companies.length > 0 && !isLoading">
-  <mat-expansion-panel *ngFor="let company of companies">
-    <mat-expansion-panel-header>
+  <mat-expansion-panel *ngFor="let company of companies" >
+    <mat-expansion-panel-header
+      *ngIf="(associatedUserCompany === 'tl_admin') ||
+        (associatedUserCompany === company.salesPerson.email) ||
+        (associatedUserCompany === company.qualityPerson.email) ||
+        (associatedUserCompany === company.logisticsPerson.email) ||
+        (associatedUserCompany === company.differentPerson.email)">
       <mat-panel-title>
         <h3> {{ company.companyName}} </h3>
       </mat-panel-title>
@@ -10,20 +15,19 @@
 
         <div class="descriptionSpan">
           <h4 class="panelDescription">
-          {{ company.companyAddress.street1}}
+            {{ company.companyAddress.street1}}
           </h4>
 
           <!--<button-->
-            <!--class="printEventLogButton no-print"-->
-            <!--mat-stroked-button color="accent" (click)="printEventLog(company._id)">-->
-            <!--REQUEST COMPANY INFO UPDATE-->
+          <!--class="printEventLogButton no-print"-->
+          <!--mat-stroked-button color="accent" (click)="printEventLog(company._id)">-->
+          <!--REQUEST COMPANY INFO UPDATE-->
           <!--</button>-->
 
           <!--<button class="updateCompany">UPDATE COMPANY INFO</button>-->
         </div>
       </mat-panel-description>
     </mat-expansion-panel-header>
-
     <div class="eventsTable" >
       <table mat-table [dataSource]="getEventTable(company)">
         <ng-container matColumnDef="eventDate">
@@ -50,19 +54,19 @@
 
       </table>
     </div>
-
-
     <mat-action-row *ngIf="userIsAuthenticated" class="no-print">
       <button
         class="deleteButton no-print"
         mat-raised-button color="warn"
-        (click)="onDelete(company._id, company.companyName)">
+        (click)="onDelete(company._id, company.companyName)"
+        *ngIf="(associatedUserCompany === 'tl_admin')">
         DELETE
       </button>
 
       <button
         class="requestUpdateButton"
-        mat-stroked-button color="primary" (click)="requestUpdate(company._id)">
+        mat-stroked-button color="primary" (click)="requestUpdate(company._id)"
+        *ngIf="(associatedUserCompany === 'tl_admin')">
         REQUEST UPDATE
       </button>
 
@@ -84,11 +88,11 @@
 
       <button
         class="sendEmailButton noPrint"
-        mat-raised-button color="primary" (click)="sendEmail(company._id)">
+        mat-raised-button color="primary" (click)="sendEmail(company._id)"
+        *ngIf="(associatedUserCompany === 'tl_admin')">
         EMAIL REPORT
       </button>
     </mat-action-row>
-
   </mat-expansion-panel>
 
 </mat-accordion>

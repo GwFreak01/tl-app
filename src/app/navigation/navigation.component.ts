@@ -28,6 +28,8 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   private _mobileQueryListener: () => void;
   loggedInStatus = true;
+  associatedCompanyName: string;
+  associatedUserCompany: string;
 
   accountType = false;
   constructor(changeDetectorRef: ChangeDetectorRef,
@@ -41,6 +43,8 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.associatedUserCompany = this.authService.getUsername();
+    this.associatedCompanyName = this.authService.getUserCompany();
     this.userIsAuthenticated = this.authService.getIsAuth();
     console.log(this.mobileQuery);
     if (this.mobileQuery.matches === false) {

@@ -32,6 +32,8 @@ export class CompanyListComponent implements OnInit, OnDestroy {
 
   @Output() editMode: EventEmitter<string> =  new EventEmitter<string>();
 
+  associatedCompanyName: string;
+  associatedUserCompany: string;
   isLoading = false;
   userIsAuthenticated = false;
 
@@ -58,6 +60,8 @@ export class CompanyListComponent implements OnInit, OnDestroy {
 
     this.isLoading = true;
     this.eventsService.getEvents();
+    this.associatedUserCompany = this.authService.getUsername();
+    this.associatedCompanyName = this.authService.getUserCompany();
     this.eventsSub = this.eventsService.getEventUpdateListener()
       .subscribe((events: Event[]) => {
         this.isLoading = false;
@@ -86,8 +90,10 @@ export class CompanyListComponent implements OnInit, OnDestroy {
             }
             return 0;
           });
-
+        console.log('Current associatedUserCompany: ', this.associatedUserCompany);
+        console.log('Current associatedCompanyName: ', this.associatedCompanyName);
       });
+
     this.userIsAuthenticated = this.authService.getIsAuth();
     console.log('CompanyList.userIsAuthenicated: ', this.userIsAuthenticated);
 
@@ -95,6 +101,10 @@ export class CompanyListComponent implements OnInit, OnDestroy {
       .subscribe(isAuthenticated => {
         console.log('CompanyList.Auth: ', isAuthenticated);
         this.userIsAuthenticated = isAuthenticated;
+        this.associatedUserCompany = this.authService.getUsername();
+        this.associatedCompanyName = this.authService.getUserCompany();
+        console.log('Current associatedUserCompany: ', this.associatedUserCompany);
+        console.log('Current associatedCompanyName: ', this.associatedCompanyName);
       });
     // console.log('DataSource: ', this.dataSource);
 

@@ -4,14 +4,16 @@
   <button class="addButton"
           mat-raised-button
           color="primary"
-          (click)="onAddButtonSelect()" >
+          (click)="onAddButtonSelect()"
+          *ngIf="(associatedUserCompany === 'tl_admin')">
     ADD NEW COMPANY
   </button>
 
   <button class="emailbutton"
           mat-raised-button
           type="submit"
-          color="primary" (click)="onSendCompanyRegistration()">
+          color="primary" (click)="onSendCompanyRegistration()"
+          *ngIf="(associatedUserCompany === 'tl_admin')">
     SEND COMPANY REGISTRATION
   </button>
   <!--<mat-form-field class="example-full-width" appearance="outline">-->
