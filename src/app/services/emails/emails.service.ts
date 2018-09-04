@@ -106,5 +106,11 @@ export class EmailsService {
     if (company.differentPerson.status) {
       emailListUsers.push(company.differentPerson.email);
     }
+
+    this.http.post<{ message: string }>(BACKEND_URL + '/requestCompanyUpdate', emailListUsers)
+      .subscribe(response => {
+        console.log(response.message);
+      });
+
   }
 }

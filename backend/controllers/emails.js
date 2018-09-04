@@ -622,3 +622,9 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
   });
 
 };
+
+exports.sendCompanyUpdate = (req, res, next) => {
+  res.status(201).json({
+    message: 'Requested Company Updates'
+  })
+}
