@@ -41,9 +41,30 @@ export class AuthService {
       email: sanitizedEmail,
       password: user.password
     };
+    console.log(authData);
     return this.http.post(BACKEND_URL + '/create-user', authData);
   }
 
+  createBulkUsers(company: Company) {
+    const emailListUsers = [];
+    if (company.salesPerson.status) {
+      emailListUsers.push(company.salesPerson.email);
+    }
+    if (company.qualityPerson.status) {
+      emailListUsers.push(company.qualityPerson.email);
+    }
+    if (company.logisticsPerson.status) {
+      emailListUsers.push(company.logisticsPerson.email);
+    }
+    if (company.differentPerson.status) {
+      emailListUsers.push(company.differentPerson.email);
+    }
+    console.log('createBulkUsers: ', company);
+    console.log('emailListUsers: ', emailListUsers);
+    this.http.post(BACKEND_URL + '/create-bulk-users', emailListUsers).subscribe((response) => {
+      console.log(response);
+    });
+  }
   loginUser(username: string, password: string) {
     const sanitizedUsername = username.trim().toLowerCase();
     const authData: AuthData = {
@@ -98,24 +119,6 @@ export class AuthService {
     }
   }
 
-  createBulkUsers(company: Company) {
-    const emailListUsers = [];
-    if (company.salesPerson.status) {
-      emailListUsers.push(company.salesPerson.email);
-    }
-    if (company.qualityPerson.status) {
-      emailListUsers.push(company.qualityPerson.email);
-    }
-    if (company.logisticsPerson.status) {
-      emailListUsers.push(company.logisticsPerson.email);
-    }
-    if (company.differentPerson.status) {
-      emailListUsers.push(company.differentPerson.email);
-    }
-    console.log('createBulkUsers: ', company);
-    console.log('emailListUsers: ', emailListUsers);
-
-  }
   logout() {
     this.token = null;
     this.username = null;

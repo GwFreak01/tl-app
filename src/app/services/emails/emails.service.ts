@@ -90,9 +90,21 @@ export class EmailsService {
           });
       });
     });
-
-
-
   }
 
+  requestCompanyUpdate(company: Company) {
+    const emailListUsers = [];
+    if (company.salesPerson.status) {
+      emailListUsers.push(company.salesPerson.email);
+    }
+    if (company.qualityPerson.status) {
+      emailListUsers.push(company.qualityPerson.email);
+    }
+    if (company.logisticsPerson.status) {
+      emailListUsers.push(company.logisticsPerson.email);
+    }
+    if (company.differentPerson.status) {
+      emailListUsers.push(company.differentPerson.email);
+    }
+  }
 }

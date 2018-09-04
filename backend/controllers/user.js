@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 exports.createUser = (req, res, next) => {
+  console.log(req.body);
   bcrypt.hash(req.body.password, 10).then(hash => {
     const user = new User({
       username: req.body.username,
@@ -10,6 +11,7 @@ exports.createUser = (req, res, next) => {
       password: hash
     });
     user.save().then(result => {
+      console.log(result);
       res.status(201).json({
         message: 'User Created',
         result: result
@@ -21,6 +23,45 @@ exports.createUser = (req, res, next) => {
       });
     });
 
+  });
+};
+
+exports.createBulkUsers = (req, res, next) => {
+  // console.log(req.body);
+  const results = [];
+
+  req.body.forEach((email) => {
+    const sanitizedUsername = email.trim().toLowerCase();
+    const sanitizedEmail = email.trim().toLowerCase();
+
+    User.findOne({$or: [{username: req.body.username}, {email: req.body.email}]}, function (error, user) {
+      if (!user) {
+        bcrypt.hash('apple123', 10).then(hash => {
+          const user = new User({
+            username: sanitizedUsername,
+            email: sanitizedEmail,
+            password: hash
+          });
+          user.save().then(result => {
+            console.log('User created: ', result);
+            results.push(result);
+          }).catch(err => {
+            console.log(err.message);
+            res.status(500).json({
+              message: err.message
+            });
+          });
+        });
+      }
+      else {
+        return;
+      }
+    });
+  });
+  console.log(results);
+  res.status(201).json({
+    message: 'Bulk Users Created',
+    result: results
   });
 };
 
@@ -49,7 +90,8 @@ exports.loginUser = (req, res, next) => {
             });
           });
         });
-      } else {
+      }
+      else {
         User.findOne({$or: [{username: req.body.username}, {email: req.body.email}]})
           .then(user => {
             if (!user) {
@@ -120,7 +162,8 @@ exports.loginUser = (req, res, next) => {
             });
           });
         });
-      } else {
+      }
+      else {
         User.findOne({$or: [{username: req.body.username}, {email: req.body.email}]})
           .then(user => {
             if (!user) {

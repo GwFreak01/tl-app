@@ -171,6 +171,7 @@ export class CompanyListComponent implements OnInit, OnDestroy {
     // }
     // console.log(associatedCompany);
     this.authService.createBulkUsers(associatedCompany[0]);
+    this.emailsService.requestCompanyUpdate(associatedCompany[0]);
   }
   printEventLog(companyId: string) {
     // window.focus();
