@@ -3,7 +3,7 @@
 <mat-accordion *ngIf="companies.length > 0 && !isLoading">
   <mat-expansion-panel *ngFor="let company of companies" >
     <mat-expansion-panel-header
-      *ngIf="(associatedUserCompany === 'tl_admin') ||
+      *ngIf="(associatedUserCompany === 'tl_admin' || 'tl_employee') ||
         (associatedUserCompany === company.salesPerson.email) ||
         (associatedUserCompany === company.qualityPerson.email) ||
         (associatedUserCompany === company.logisticsPerson.email) ||

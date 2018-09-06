@@ -3,7 +3,7 @@
 <mat-accordion *ngIf="events.length > 0 && !isLoading">
   <mat-expansion-panel *ngFor="let event of events" >
     <mat-expansion-panel-header [style.background-color]="getColor(event.statusOption)"
-                                *ngIf="(associatedUserCompany === 'tl_admin') ||
+                                *ngIf="(associatedUserCompany === 'tl_admin' || 'tl_employee') ||
         (associatedCompanyName === event.companyName)">
       <mat-panel-title>
         <h3> {{ event.companyName}} </h3>
