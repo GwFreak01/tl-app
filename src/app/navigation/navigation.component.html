@@ -18,8 +18,8 @@
           <br *ngIf="app.localStorageItem('username') =='tl_admin'">
           <a mat-button routerLink="/events" routerLinkActive="mat-accent">EVENTS</a>
           <br *ngIf="app.localStorageItem('username') =='tl_admin'">
-          <a mat-button routerLink="/analytics" routerLinkActive="mat-accent" *ngIf="app.localStorageItem('username') =='tl_admin'">ANALYTICS</a>
-          <br *ngIf="app.localStorageItem('username') =='tl_admin'">
+          <!--<a mat-button routerLink="/analytics" routerLinkActive="mat-accent" *ngIf="app.localStorageItem('username') =='tl_admin'">ANALYTICS</a>-->
+          <!--<br *ngIf="app.localStorageItem('username') =='tl_admin'">-->
           <a mat-button routerLink="/create-user" routerLinkActive="mat-accent" *ngIf="app.localStorageItem('username') =='tl_admin'">CREATE USER</a>
           <br *ngIf="app.localStorageItem('username') =='tl_admin'">
           <a mat-button routerLink="/user-settings" routerLinkActive="mat-accent" *ngIf="app.localStorageItem('username') =='tl_admin'">USER SETTINGS</a>
