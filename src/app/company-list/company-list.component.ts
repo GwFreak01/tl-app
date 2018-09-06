@@ -207,7 +207,7 @@ export class CompanyListComponent implements OnInit, OnDestroy {
     //   '</head>');
     newWindow.document.write('<head><style>' +
       'table {' +
-      'font-size: 30px;' +
+      'font-size: 20px;' +
       'border-spacing: 20px;' +
       'text-align: center;' +
       'margin: 0 auto;' +
