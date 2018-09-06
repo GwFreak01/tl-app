@@ -11,9 +11,9 @@
 killall node
 killall python
 
-mate-terminal --geometry=100x24+20+20 --zoom=1 --hide-menubar -e 'sh /home/tl/Documents/tl-app/Backend.sh' &
-mate-terminal --geometry=100x24+20+400 --zoom=1 --hide-menubar -e 'sh /home/tl/Documents/tl-app/Frontend.sh' &
-mate-terminal --geometry=100x24+20+400 --zoom=1 --hide-menubar -e 'sh /home/tl/Documents/tl-app/BackupDB.sh' &
+mate-terminal --geometry=50x24+20+20 --zoom=1 --hide-menubar -e 'sh /home/tl/Documents/tl-app/Backend.sh' &
+mate-terminal --geometry=50x24+20+400 --zoom=1 --hide-menubar -e 'sh /home/tl/Documents/tl-app/Frontend.sh' &
+mate-terminal --geometry=50x24+200+300 --zoom=1 --hide-menubar -e 'sh /home/tl/Documents/tl-app/BackupDB.sh' &
 
 
 
