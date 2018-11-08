@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AuthData} from './auth-data.model';
-import {Observable, Subject} from 'rxjs';
+import {Observable, Subject, throwError} from 'rxjs';
 import {Router} from '@angular/router';
 
 import {environment} from '../../environments/environment';
+import {Company} from '../../../backend/models/company.model';
+import {CompaniesService} from '../services/companies/companies.service';
 
 const BACKEND_URL = environment.apiUrl + '/user';
 
@@ -15,11 +17,14 @@ const BACKEND_URL = environment.apiUrl + '/user';
 export class AuthService {
   private token: string;
   private username: string;
+  private userCompany: string;
   private authStatusListener = new Subject<boolean>();
   private isAuthenticated = false;
   private tokenTimer: any;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient,
+              private router: Router,
+              private companiesService: CompaniesService) { }
 
   getToken() {
     return this.token;
@@ -32,6 +37,43 @@ export class AuthService {
     return this.authStatusListener.asObservable();
   }
 
+  getUsername() {
+    return this.username;
+  }
+
+  getUserCompany() {
+    if (this.username === ('tl_admin' || 'tl_employee')) {
+      return this.username;
+    } else {
+      let companyList;
+
+      this.companiesService.getAllCompanies().subscribe(response => {
+        companyList = response;
+        response.some((company) => {
+          console.log('response company: ', company);
+          if (company.qualityPerson.email === this.username) {
+            this.userCompany = company.companyName;
+            return true;
+          }
+          if (company.salesPerson.email === this.username) {
+            this.userCompany = company.companyName;
+            return true;
+          }
+          if (company.logisticsPerson.email === this.username) {
+            this.userCompany = company.companyName;
+            return true;
+          }
+          if (company.differentPerson.email === this.username) {
+            this.userCompany = company.companyName;
+            return true;
+          }
+        });
+        console.log('this.userCompany: ', this.userCompany);
+      });
+      return this.userCompany;
+    }
+  }
+
   createUser(user) {
     const sanitizedUsername = user.username.trim().toLowerCase();
     const sanitizedEmail = user.email.trim().toLowerCase();
@@ -40,9 +82,30 @@ export class AuthService {
       email: sanitizedEmail,
       password: user.password
     };
+    console.log(authData);
     return this.http.post(BACKEND_URL + '/create-user', authData);
   }
 
+  createBulkUsers(company: Company) {
+    const emailListUsers = [];
+    if (company.salesPerson.status) {
+      emailListUsers.push(company.salesPerson.email);
+    }
+    if (company.qualityPerson.status) {
+      emailListUsers.push(company.qualityPerson.email);
+    }
+    if (company.logisticsPerson.status) {
+      emailListUsers.push(company.logisticsPerson.email);
+    }
+    if (company.differentPerson.status) {
+      emailListUsers.push(company.differentPerson.email);
+    }
+    console.log('createBulkUsers: ', company);
+    console.log('emailListUsers: ', emailListUsers);
+    this.http.post(BACKEND_URL + '/create-bulk-users', emailListUsers).subscribe((response) => {
+      console.log(response);
+    });
+  }
   loginUser(username: string, password: string) {
     const sanitizedUsername = username.trim().toLowerCase();
     const authData: AuthData = {
@@ -55,17 +118,18 @@ export class AuthService {
         // console.log(response.message);
         const token = response.token;
         this.token = token;
-        this.username = username;
+        // this.username = username;
         if (token) {
           const expiresInDuration = response.expiresIn;
           // console.log(expiresInDuration);
           this.setAuthTimer(expiresInDuration);
           this.isAuthenticated = true;
+          this.username = response.username;
           this.authStatusListener.next(true);
           const now = new Date();
           const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
           console.log(expirationDate);
-          this.saveAuthData(token, username, expirationDate);
+          this.saveAuthData(token, this.username, expirationDate);
           this.router.navigate(['/companies']);
         } else {
           console.log('loginService Fail');

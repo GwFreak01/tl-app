@@ -40,6 +40,11 @@ table {
   margin-right: 16px;
 }
 
+.requestUpdateButton {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
 mat-panel-description {
   text-align: right;
 

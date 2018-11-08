@@ -408,10 +408,7 @@ exports.sendEmail = (req, res, next) => {
         }
       });
     });
-
   });
-
-
 };
 
 exports.sendCompanyRegistration = (req, res, next) => {
@@ -622,3 +619,47 @@ exports.sendAllFeedbackEmails = (req, res, next) => {
   });
 
 };
+
+exports.sendCompanyUpdate = (req, res, next) => {
+  const emailList = req.body;
+  readHTMLFile(path.join(__dirname, '../models/html_templates/updateCompanyInfo.html'), function (err, html) {
+    const template = handlebars.compile(html);
+    const htmlToSend = template();
+
+    const mailContents = {
+      from: 'bill@tandlautomatics.com',
+      // bcc: 'gwfreak01@gmail.com',
+      text: 'Company Profile Update Request from T&L Automatics',
+      html: htmlToSend
+    };
+
+    emailList.forEach(function (email, i, array) {
+      mailContents.to = email;
+      mailContents.subject = 'Company Profile Update Request';
+      // console.log(mailContents);
+
+      emailClient.sendMail(mailContents, function (err, info) {
+        if (err) {
+          console.log(err);
+          return;
+        } else {
+          console.log(i);
+          console.log('Message sent: %s %s', info.messageId, i);
+          // Preview only available when sending through an Ethereal account
+          // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+        }
+
+        if (i === emailList.length - 1) {
+          // mailContents.transport.close();
+          return res.status(200).json({
+            message: 'Emails sent successfully!'
+          });
+        }
+      });
+    });
+  });
+  // res.status(201).json({
+  //   message: 'Requested Company Updates'
+  // });
+}

@@ -76,7 +76,8 @@ export class NewCompanyComponent implements OnInit, OnDestroy {
   certList = [
     {label: 'ISO9001', value: 'ISO9001'},
     {label: 'ISO14001', value: 'ISO14001'},
-    {label: 'TS16949', value: 'TS16949'},
+ /* {label: 'TS16949', value: 'TS16949'},    <-- Changed to IATF 16949 - per Kate's suggestion   */
+    {label: 'IATF 16949', value: 'IATF 16949'},
     {label: 'Other', value: 'Other'},
     {label: 'None', value: 'None'}
   ];

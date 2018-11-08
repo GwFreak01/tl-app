@@ -3,6 +3,7 @@ import {Subject} from 'rxjs';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {CompanyRegistrationModalComponent} from '../modals/company-registration-modal/company-registration-modal.component';
 import {duration} from 'moment';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-companies',
@@ -13,17 +14,21 @@ export class CompaniesComponent implements OnInit {
 
   @Input() modifyOption: EventEmitter<string> = new EventEmitter<string>();
   // hideForm = new Subject<o>();
-
+  associatedCompanyName: string;
+  associatedUserCompany: string;
   addButtonSelect = false;
   editButtonSelect = false;
 
   dialogResult = '';
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog,
+              private authService: AuthService) {
 
   }
 
   ngOnInit() {
     // this.addButtonSelect = false;
+    this.associatedUserCompany = this.authService.getUsername();
+    this.associatedCompanyName = this.authService.getUserCompany();
   }
 
   onAddButtonSelect() {

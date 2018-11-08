@@ -32,12 +32,14 @@ export class CompanyListComponent implements OnInit, OnDestroy {
 
   @Output() editMode: EventEmitter<string> =  new EventEmitter<string>();
 
+  associatedCompanyName: string;
+  associatedUserCompany: string;
   isLoading = false;
   userIsAuthenticated = false;
 
   // dataSource = new EventDataSource(this.eventsService);
 
-  dataSource: EventsDataSource;
+  // dataSource: EventsDataSource;
   columnsToDisplay = ['eventDate', 'eventType', 'carNumber', 'status'];
   private authStatusSub = new Subscription();
 
@@ -58,6 +60,8 @@ export class CompanyListComponent implements OnInit, OnDestroy {
 
     this.isLoading = true;
     this.eventsService.getEvents();
+    this.associatedUserCompany = this.authService.getUsername();
+    this.associatedCompanyName = this.authService.getUserCompany();
     this.eventsSub = this.eventsService.getEventUpdateListener()
       .subscribe((events: Event[]) => {
         this.isLoading = false;
@@ -86,8 +90,10 @@ export class CompanyListComponent implements OnInit, OnDestroy {
             }
             return 0;
           });
-
+        console.log('Current associatedUserCompany: ', this.associatedUserCompany);
+        console.log('Current associatedCompanyName: ', this.associatedCompanyName);
       });
+
     this.userIsAuthenticated = this.authService.getIsAuth();
     console.log('CompanyList.userIsAuthenicated: ', this.userIsAuthenticated);
 
@@ -95,6 +101,10 @@ export class CompanyListComponent implements OnInit, OnDestroy {
       .subscribe(isAuthenticated => {
         console.log('CompanyList.Auth: ', isAuthenticated);
         this.userIsAuthenticated = isAuthenticated;
+        this.associatedUserCompany = this.authService.getUsername();
+        this.associatedCompanyName = this.authService.getUserCompany();
+        console.log('Current associatedUserCompany: ', this.associatedUserCompany);
+        console.log('Current associatedCompanyName: ', this.associatedCompanyName);
       });
     // console.log('DataSource: ', this.dataSource);
 
@@ -163,6 +173,16 @@ export class CompanyListComponent implements OnInit, OnDestroy {
     }
   }
 
+  requestUpdate(companyId: string) {
+    const associatedCompany = this.companies.filter(company => company._id === companyId);
+    // let emailList = [];
+    // for (let i = 0; i <= 4; i++) {
+    //   if
+    // }
+    // console.log(associatedCompany);
+    this.authService.createBulkUsers(associatedCompany[0]);
+    this.emailsService.requestCompanyUpdate(associatedCompany[0]);
+  }
   printEventLog(companyId: string) {
     // window.focus();
     // window.print();
@@ -187,7 +207,7 @@ export class CompanyListComponent implements OnInit, OnDestroy {
     //   '</head>');
     newWindow.document.write('<head><style>' +
       'table {' +
-      'font-size: 30px;' +
+      'font-size: 20px;' +
       'border-spacing: 20px;' +
       'text-align: center;' +
       'margin: 0 auto;' +
@@ -257,18 +277,18 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   }
 }
 
-export class EventsDataSource extends DataSource<any> {
-
-  constructor(private eventsService: EventsService) {
-    super();
-  }
-
-  connect(): Observable<Event[]> {
-    return this.eventsService.getAllEvents();
-  }
-
-  disconnect(): void {
-  }
-
-
-}
+// export class EventsDataSource extends DataSource<any> {
+//
+//   constructor(private eventsService: EventsService) {
+//     super();
+//   }
+//
+//   connect(): Observable<Event[]> {
+//     return this.eventsService.getAllEvents();
+//   }
+//
+//   disconnect(): void {
+//   }
+//
+//
+// }

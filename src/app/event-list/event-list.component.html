@@ -2,7 +2,9 @@
 
 <mat-accordion *ngIf="events.length > 0 && !isLoading">
   <mat-expansion-panel *ngFor="let event of events" >
-    <mat-expansion-panel-header [style.background-color]="getColor(event.statusOption)">
+    <mat-expansion-panel-header [style.background-color]="getColor(event.statusOption)"
+                                *ngIf="(associatedUserCompany === 'tl_admin' || 'tl_employee') ||
+        (associatedCompanyName === event.companyName)">
       <mat-panel-title>
         <h3> {{ event.companyName}} </h3>
       </mat-panel-title>
@@ -111,14 +113,16 @@
       <button
         class="deleteEventButton"
         mat-stroked-button color="warn"
-        (click)="onDelete(event._id, event.companyName)">
+        (click)="onDelete(event._id, event.companyName)"
+        *ngIf="(associatedUserCompany === 'tl_admin')">
         DELETE
       </button>
       <span class="buttonSpace"></span>
 
       <button
         class="editCompanyButton"
-        mat-raised-button color="primary" [routerLink]="['/edit-event', event._id]">
+        mat-raised-button color="primary" [routerLink]="['/edit-event', event._id]"
+        *ngIf="(associatedUserCompany === 'tl_admin')">
         EDIT
       </button>
     </mat-action-row>
