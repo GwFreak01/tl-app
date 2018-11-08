@@ -192,6 +192,21 @@ export class MonthlyRejectChartsComponent implements OnInit {
 
   printChart() {
     // this.chart.addPoint(Math.floor(Math.random() * 10));
-    this.chart.print();
+    // this.chart.print();
+
+
+    const newWindow = window.open('', '_blank');
+    newWindow.document.write('<head><style>' +
+      '@media print{@page {size: landscape;} }' +
+      '.highcharts-container {' +
+      'width: 50%;}' +
+      '</style></head>');
+    newWindow.document.write('<div class="chartContainer">' +
+      document.getElementsByClassName('highcharts-container')[0].innerHTML +
+      '</div>');
+    newWindow.focus();
+    newWindow.print();
+    newWindow.close();
+
   }
 }
