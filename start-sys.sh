@@ -12,7 +12,7 @@ killall node
 killall python
 
 mate-terminal --geometry=75x24+20+40 --zoom=1 --hide-menubar -e 'sh /home/tl/Documents/tl-app/Backend.sh' &
-mate-terminal --geometry=75x12+20+440 --zoom=1 --hide-menubar -e 'sh /home/tl/Documents/tl-app/Frontend.sh' &
+# mate-terminal --geometry=75x12+20+440 --zoom=1 --hide-menubar -e 'sh /home/tl/Documents/tl-app/Frontend.sh' & # deprecated for lighttpd
 mate-terminal --geometry=40x12+700+200 --zoom=1 --hide-menubar -e 'sh /home/tl/Documents/tl-app/BackupDB.sh' &
 
 
